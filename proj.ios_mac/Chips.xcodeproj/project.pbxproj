@@ -138,6 +138,10 @@
 		B3F767931CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767881CF2FE9E00F03CCE /* TileMicrophone.cpp */; };
 		B3F767941CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F7678A1CF2FE9E00F03CCE /* TileSoundEmitter.cpp */; };
 		B3F767951CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F7678A1CF2FE9E00F03CCE /* TileSoundEmitter.cpp */; };
+		B3F767A31CF3453D00F03CCE /* Preloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767981CF3453D00F03CCE /* Preloader.cpp */; };
+		B3F767A41CF3453D00F03CCE /* Preloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767981CF3453D00F03CCE /* Preloader.cpp */; };
+		B3F767B01CF34FF700F03CCE /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */; };
+		B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -311,6 +315,10 @@
 		B3F767891CF2FE9E00F03CCE /* TileMicrophone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileMicrophone.h; sourceTree = "<group>"; };
 		B3F7678A1CF2FE9E00F03CCE /* TileSoundEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TileSoundEmitter.cpp; sourceTree = "<group>"; };
 		B3F7678B1CF2FE9E00F03CCE /* TileSoundEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileSoundEmitter.h; sourceTree = "<group>"; };
+		B3F767981CF3453D00F03CCE /* Preloader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Preloader.cpp; sourceTree = "<group>"; };
+		B3F767991CF3453D00F03CCE /* Preloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preloader.h; sourceTree = "<group>"; };
+		B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
+		B3F767AF1CF34FF700F03CCE /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -455,6 +463,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B3F767AD1CF34FF700F03CCE /* Views */,
+				B3F767971CF3453D00F03CCE /* Preloader */,
 				B3F767801CF2FE9E00F03CCE /* Tiled */,
 				B3F0A3321CE2081E006E152B /* Utils */,
 				B3F0A32D1CE2081E006E152B /* LevelData */,
@@ -629,6 +639,24 @@
 			path = Tiled;
 			sourceTree = "<group>";
 		};
+		B3F767971CF3453D00F03CCE /* Preloader */ = {
+			isa = PBXGroup;
+			children = (
+				B3F767981CF3453D00F03CCE /* Preloader.cpp */,
+				B3F767991CF3453D00F03CCE /* Preloader.h */,
+			);
+			path = Preloader;
+			sourceTree = "<group>";
+		};
+		B3F767AD1CF34FF700F03CCE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */,
+				B3F767AF1CF34FF700F03CCE /* LoadingScene.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -788,6 +816,7 @@
 				B3F7678E1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */,
 				B30555C21CE3454D006E5546 /* Bomb.cpp in Sources */,
 				B3F0A3471CE2081E006E152B /* Date.cpp in Sources */,
+				B3F767A31CF3453D00F03CCE /* Preloader.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				B3F0A3541CE2376E006E152B /* Level.cpp in Sources */,
 				B30555C81CE3454D006E5546 /* CloneMachine.cpp in Sources */,
@@ -795,6 +824,7 @@
 				B30555921CE3418C006E5546 /* LevelObject.cpp in Sources */,
 				B3F0A3241CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */,
 				B30555DA1CE3454D006E5546 /* Slide.cpp in Sources */,
+				B3F767B01CF34FF700F03CCE /* LoadingScene.cpp in Sources */,
 				B3F767921CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */,
 				B30555E21CE3454D006E5546 /* Water.cpp in Sources */,
 				B3F767941CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */,
@@ -850,6 +880,7 @@
 				B3F0A34E1CE2081E006E152B /* MD5.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B30555DD1CE3454D006E5546 /* Socket.cpp in Sources */,
+				B3F767A41CF3453D00F03CCE /* Preloader.cpp in Sources */,
 				B30555DF1CE3454D006E5546 /* SwitchWall.cpp in Sources */,
 				B3F0A3441CE2081E006E152B /* BinaryReader.cpp in Sources */,
 				B30555CF1CE3454D006E5546 /* Exit.cpp in Sources */,
@@ -861,6 +892,7 @@
 				B30555881CE333E2006E5546 /* Inventory.cpp in Sources */,
 				B3F0A3251CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */,
 				B3F767931CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */,
+				B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */,
 				B30555931CE3418C006E5546 /* LevelObject.cpp in Sources */,
 				B30555CD1CE3454D006E5546 /* Door.cpp in Sources */,
 			);
