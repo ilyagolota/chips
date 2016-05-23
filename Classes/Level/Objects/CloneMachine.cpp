@@ -1,0 +1,62 @@
+#include "CloneMachine.h"
+#include "Level/Level.h"
+#include "Level/Creature.h"
+
+CloneMachine* CloneMachine::create(const cocos2d::Vec2& coordinate)
+{
+	auto instance = new CloneMachine(coordinate);
+    instance->autorelease();
+    return instance;
+}
+
+CloneMachine::CloneMachine(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+{
+    _working = false;
+}
+
+void CloneMachine::performCloning()
+{
+    // Now creature can leave cloner and it will be cloned in `beforeLeave` method.
+    _working = true;
+}
+
+bool CloneMachine::isEnterableBy(const Creature* creature, Direction direction) const
+{
+    return false;
+}
+
+bool CloneMachine::isEscapableBy(const Creature* creature, Direction direction) const
+{
+    return _working;
+}
+
+void CloneMachine::beforeLeave(Creature* creature)
+{
+    _working = false;
+
+    auto clonedCreature = Creature::create(creature->getType());
+    clonedCreature->setDirection(creature->getDirection());
+	clonedCreature->setCoordinate(_coordinate);
+    _level->addCreature(clonedCreature);
+    
+    //_sprites[0]->runAction();
+    
+    //clonedCreature->setLocalZOrder();
+    //clonedCreature->getSprite()->runAction();
+    //TODO: animation
+}
+
+void CloneMachine::reset()
+{
+    _working = false;
+}
+    
+void CloneMachine::buildNodes()
+{
+
+}
+
+void CloneMachine::destroyNodes()
+{
+
+}
