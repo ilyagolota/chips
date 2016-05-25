@@ -1,6 +1,5 @@
 #include "Inventory.h"
 
-const int Inventory::SECRET_VALUE = 0xA3AB755A;
 const std::string Inventory::ITEM_COUNT_CHANGED = "ITEM_COUNT_CHANGED";
 
 Inventory* Inventory::create()
@@ -19,7 +18,7 @@ int Inventory::getItemCount(TileType itemType)
     }
     else
     {
-        return iter->second ^ SECRET_VALUE;
+        return iter->second.getValue();
     }
 }
 
@@ -30,15 +29,15 @@ void Inventory::setItemCount(TileType itemType, int count)
     {
         if (count != 0)
         {
-            _itemCount[itemType] = count ^ SECRET_VALUE;
+            _itemCount[itemType].setValue(count);
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(ITEM_COUNT_CHANGED);
         }
     }
     else
     {
-        if (iter->second != count)
+        if (iter->second.getValue() != count)
         {
-            iter->second = count ^ SECRET_VALUE;
+            iter->second.setValue(count);
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(ITEM_COUNT_CHANGED);
         }
     }

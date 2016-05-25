@@ -282,6 +282,7 @@
 		B30555BB1CE3454D006E5546 /* Teleport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teleport.h; sourceTree = "<group>"; };
 		B30555BC1CE3454D006E5546 /* Water.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Water.cpp; sourceTree = "<group>"; };
 		B30555BD1CE3454D006E5546 /* Water.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Water.h; sourceTree = "<group>"; };
+		B3E3EF4B1CF4A9BF001C01DE /* Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protected.h; sourceTree = "<group>"; };
 		B3F0A31F1CE1F1B7006E152B /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
 		B3F0A3221CE1F202006E152B /* ChipsChallengeGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChipsChallengeGame.cpp; sourceTree = "<group>"; };
 		B3F0A3231CE1F202006E152B /* ChipsChallengeGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipsChallengeGame.h; sourceTree = "<group>"; };
@@ -589,6 +590,7 @@
 		B3F0A3321CE2081E006E152B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B3E3EF4B1CF4A9BF001C01DE /* Protected.h */,
 				B3F0A3331CE2081E006E152B /* BinaryReader.cpp */,
 				B3F0A3341CE2081E006E152B /* BinaryReader.h */,
 				B3F0A3351CE2081E006E152B /* BinaryWriter.cpp */,

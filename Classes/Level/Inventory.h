@@ -2,14 +2,13 @@
 #define _CHIPS_CHALLENGE_INVENTORY_H_
 
 #include <cocos2d.h>
+#include <Utils/Protected.h>
 #include <LevelData/TileType.h>
 
 class Inventory : public cocos2d::Ref
 {
 private:
-    static const int SECRET_VALUE;
-    
-    std::map<TileType, int> _itemCount;
+    std::map<TileType, Protected<int>> _itemCount;
     
 public:
     static const std::string ITEM_COUNT_CHANGED;
