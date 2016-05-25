@@ -4,17 +4,19 @@
 #include <cocos2d.h>
 
 class Preloader;
+class ChipsChallengeGame;
 
 class LoadingScene : public cocos2d::Scene
 {
 private:
-    static LoadingScene* create(Preloader *preloader);
-    
+    ChipsChallengeGame* _game;
     cocos2d::ProgressTimer* _progressBar;
     Preloader* _preloader;
     
 public:
-    LoadingScene(Preloader *preloader);
+    static LoadingScene* create(ChipsChallengeGame* game, Preloader *preloader);
+    
+    LoadingScene(ChipsChallengeGame* game, Preloader *preloader);
     virtual ~LoadingScene();
     
 protected:

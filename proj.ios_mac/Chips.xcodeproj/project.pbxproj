@@ -22,8 +22,6 @@
 		46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
-		46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
-		46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -142,6 +140,12 @@
 		B3F767A41CF3453D00F03CCE /* Preloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767981CF3453D00F03CCE /* Preloader.cpp */; };
 		B3F767B01CF34FF700F03CCE /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */; };
 		B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */; };
+		B3FCB0921CF59CC4003B3C9E /* sheets in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0911CF59CC4003B3C9E /* sheets */; };
+		B3FCB0931CF59CC4003B3C9E /* sheets in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0911CF59CC4003B3C9E /* sheets */; };
+		B3FCB0961CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */; };
+		B3FCB0971CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */; };
+		B3FCB0991CF5B51A003B3C9E /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0981CF5B51A003B3C9E /* animations.plist */; };
+		B3FCB09A1CF5B51A003B3C9E /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0981CF5B51A003B3C9E /* animations.plist */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -197,8 +201,6 @@
 		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
-		46880B8719C43A87006E1F66 /* HelloWorldScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloWorldScene.h; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -320,6 +322,10 @@
 		B3F767991CF3453D00F03CCE /* Preloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preloader.h; sourceTree = "<group>"; };
 		B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
 		B3F767AF1CF34FF700F03CCE /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
+		B3FCB0911CF59CC4003B3C9E /* sheets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sheets; path = ../../chips/Resources/sheets; sourceTree = "<group>"; };
+		B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LoadLevelListTask.cpp; path = ../../../chips/Classes/LevelData/LoadLevelListTask.cpp; sourceTree = "<group>"; };
+		B3FCB0951CF5A04C003B3C9E /* LoadLevelListTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadLevelListTask.h; path = ../../../chips/Classes/LevelData/LoadLevelListTask.h; sourceTree = "<group>"; };
+		B3FCB0981CF5B51A003B3C9E /* animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = animations.plist; path = ../../chips/Resources/animations.plist; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -450,9 +456,11 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B3FCB0911CF59CC4003B3C9E /* sheets */,
 				B3F0A31F1CE1F1B7006E152B /* levels */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
+				B3FCB0981CF5B51A003B3C9E /* animations.plist */,
 				46880B7619C43A67006E1F66 /* CloseNormal.png */,
 				46880B7719C43A67006E1F66 /* CloseSelected.png */,
 				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
@@ -472,8 +480,6 @@
 				B3F0A3511CE2373A006E152B /* Level */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
-				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
 				B3F0A3221CE1F202006E152B /* ChipsChallengeGame.cpp */,
 				B3F0A3231CE1F202006E152B /* ChipsChallengeGame.h */,
 			);
@@ -578,6 +584,8 @@
 		B3F0A32D1CE2081E006E152B /* LevelData */ = {
 			isa = PBXGroup;
 			children = (
+				B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */,
+				B3FCB0951CF5A04C003B3C9E /* LoadLevelListTask.h */,
 				B3F0A32E1CE2081E006E152B /* LevelData.cpp */,
 				B3F0A32F1CE2081E006E152B /* LevelData.h */,
 				B3F0A3301CE2081E006E152B /* LevelBundle.cpp */,
@@ -759,6 +767,7 @@
 				5087E77F17EB970100C73F5D /* Default@2x.png in Resources */,
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
+				B3FCB0991CF5B51A003B3C9E /* animations.plist in Resources */,
 				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
@@ -774,6 +783,7 @@
 				B3F0A3201CE1F1B7006E152B /* levels in Resources */,
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
+				B3FCB0921CF59CC4003B3C9E /* sheets in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
 				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
@@ -787,8 +797,10 @@
 			files = (
 				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
+				B3FCB0931CF59CC4003B3C9E /* sheets in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
 				B3F0A3211CE1F1B7006E152B /* levels in Resources */,
+				B3FCB09A1CF5B51A003B3C9E /* animations.plist in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
@@ -807,12 +819,12 @@
 				B30555D41CE3454D006E5546 /* HintButton.cpp in Sources */,
 				B3F0A34B1CE2081E006E152B /* HttpUtility.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				B3FCB0961CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */,
 				B30555DE1CE3454D006E5546 /* SwitchWall.cpp in Sources */,
 				B30555BE1CE3454D006E5546 /* Beartrap.cpp in Sources */,
 				B305558C1CE339DC006E5546 /* Creature.cpp in Sources */,
 				B3F0A33F1CE2081E006E152B /* LevelData.cpp in Sources */,
 				B3F7678C1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */,
-				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B30555C01CE3454D006E5546 /* BlueWall.cpp in Sources */,
 				B30555D61CE3454D006E5546 /* Ice.cpp in Sources */,
 				B3F7678E1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */,
@@ -857,6 +869,7 @@
 				B30555D11CE3454D006E5546 /* Fire.cpp in Sources */,
 				B3F0A3481CE2081E006E152B /* Date.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				B3FCB0971CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */,
 				B30555C51CE3454D006E5546 /* Burglar.cpp in Sources */,
 				B30555BF1CE3454D006E5546 /* Beartrap.cpp in Sources */,
 				B3F0A3551CE2376E006E152B /* Level.cpp in Sources */,
@@ -880,7 +893,6 @@
 				B30555D51CE3454D006E5546 /* HintButton.cpp in Sources */,
 				B30555E11CE3454D006E5546 /* Teleport.cpp in Sources */,
 				B3F0A34E1CE2081E006E152B /* MD5.cpp in Sources */,
-				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				B30555DD1CE3454D006E5546 /* Socket.cpp in Sources */,
 				B3F767A41CF3453D00F03CCE /* Preloader.cpp in Sources */,
 				B30555DF1CE3454D006E5546 /* SwitchWall.cpp in Sources */,

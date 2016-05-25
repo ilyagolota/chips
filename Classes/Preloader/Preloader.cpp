@@ -34,7 +34,7 @@ size_t Preloader::getTotal() const
 void Preloader::process()
 {
     double startTime = _getCurrentTime();
-    float maxDuration = 0.5 * cocos2d::Director::getInstance()->getAnimationInterval();
+    float maxDuration = 0.25 * cocos2d::Director::getInstance()->getAnimationInterval();
     
     while (_loaded < _tasks.size())
     {

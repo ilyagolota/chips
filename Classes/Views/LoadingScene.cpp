@@ -1,24 +1,30 @@
 #include "LoadingScene.h"
-#include "Preloader.h"
+#include <Preloader/Preloader.h>
+#include "ChipsChallengeGame.h"
 
 using namespace cocos2d;
 
-LoadingScene* LoadingScene::create(Preloader *preloader)
+LoadingScene* LoadingScene::create(ChipsChallengeGame* game, Preloader *preloader)
 {
-    auto instance = new LoadingScene(preloader);
+    auto instance = new LoadingScene(game, preloader);
     instance->autorelease();
     return instance;
 }
 
-LoadingScene::LoadingScene(Preloader *preloader)
+LoadingScene::LoadingScene(ChipsChallengeGame* game, Preloader *preloader)
 {
+    _game = game;
+    _game->retain();
+    
     _preloader = preloader;
     _preloader->retain();
+    
     _build();
 }
 
 LoadingScene::~LoadingScene()
 {
+    _game->release();
     _preloader->release();
 }
 
@@ -27,10 +33,10 @@ void LoadingScene::_build()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    auto background = Sprite::create("background.png");
-    background->setAnchorPoint(Vec2::ZERO);
-    background->setPosition(Vec2::ZERO);
-    addChild(background);
+    //auto background = Sprite::create("background.png");
+    //background->setAnchorPoint(Vec2::ZERO);
+    //background->setPosition(Vec2::ZERO);
+    //addChild(background);
     
     _progressBar = ProgressTimer::create(Sprite::create("HelloWorld.png"));
     _progressBar->setAnchorPoint(Vec2(0, 0));

@@ -1,5 +1,8 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include <Preloader/Preloader.h>
+#include <LevelData/LoadLevelListTask.h>
+#include "ChipsChallengeGame.h"
+#include "LoadingScene.h"
 
 USING_NS_CC;
 
@@ -74,11 +77,26 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
-
-    // run
-    director->runWithScene(scene);
+    auto game = ChipsChallengeGame::create();
+    
+    auto preloader = Preloader::create();
+    
+    preloader->addTask(LoadTextureTask::create("sheets/creatures.png"));
+    preloader->addTask(LoadSpriteSheetTask::create("sheets/creatures.plist"));
+    preloader->addTask(LoadTextureTask::create("sheets/tiles-1.png"));
+    preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-1.plist"));
+    preloader->addTask(LoadAnimationsTask::create("animations.plist"));
+    
+    std::vector<char> hash(16);
+    memcpy(&hash[0], "\x93<\x02\xdf\x89I/\xed\x9d\xf9\0\x89\xc5#\xf6T", 16);
+    preloader->addTask(LoadLevelListTask::create(game->getLevelBundle(), "levels/cclp1.dat", hash));
+    memcpy(&hash[0], "\n\x8e\xae\x8c/\fh\xc2/\xae\xfa\x90+\xf3\xc9\xc7", 16);
+    preloader->addTask(LoadLevelListTask::create(game->getLevelBundle(), "levels/cclp2.dat", hash));
+    memcpy(&hash[0], " k\xfe!\xea\x95\xf0\xe3\x8b\xb6Y/\x9bz(\x16", 16);
+    preloader->addTask(LoadLevelListTask::create(game->getLevelBundle(), "levels/cclp3.dat", hash));
+    
+    auto loadingScene = LoadingScene::create(game, preloader);
+    director->runWithScene(loadingScene);
 
     return true;
 }
