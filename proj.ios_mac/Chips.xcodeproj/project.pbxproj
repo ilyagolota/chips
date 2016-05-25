@@ -104,6 +104,8 @@
 		B30555E11CE3454D006E5546 /* Teleport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555BA1CE3454D006E5546 /* Teleport.cpp */; };
 		B30555E21CE3454D006E5546 /* Water.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555BC1CE3454D006E5546 /* Water.cpp */; };
 		B30555E31CE3454D006E5546 /* Water.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555BC1CE3454D006E5546 /* Water.cpp */; };
+		B3BBF9341CF5E6A000A76097 /* PacksScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3BBF9321CF5E6A000A76097 /* PacksScene.cpp */; };
+		B3BBF9351CF5E6A000A76097 /* PacksScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3BBF9321CF5E6A000A76097 /* PacksScene.cpp */; };
 		B3F0A3201CE1F1B7006E152B /* levels in Resources */ = {isa = PBXBuildFile; fileRef = B3F0A31F1CE1F1B7006E152B /* levels */; };
 		B3F0A3211CE1F1B7006E152B /* levels in Resources */ = {isa = PBXBuildFile; fileRef = B3F0A31F1CE1F1B7006E152B /* levels */; };
 		B3F0A3241CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3221CE1F202006E152B /* ChipsChallengeGame.cpp */; };
@@ -284,6 +286,8 @@
 		B30555BB1CE3454D006E5546 /* Teleport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Teleport.h; sourceTree = "<group>"; };
 		B30555BC1CE3454D006E5546 /* Water.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Water.cpp; sourceTree = "<group>"; };
 		B30555BD1CE3454D006E5546 /* Water.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Water.h; sourceTree = "<group>"; };
+		B3BBF9321CF5E6A000A76097 /* PacksScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PacksScene.cpp; path = ../../../chips/Classes/Views/PacksScene.cpp; sourceTree = "<group>"; };
+		B3BBF9331CF5E6A000A76097 /* PacksScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PacksScene.h; path = ../../../chips/Classes/Views/PacksScene.h; sourceTree = "<group>"; };
 		B3E3EF4B1CF4A9BF001C01DE /* Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protected.h; sourceTree = "<group>"; };
 		B3F0A31F1CE1F1B7006E152B /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
 		B3F0A3221CE1F202006E152B /* ChipsChallengeGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChipsChallengeGame.cpp; sourceTree = "<group>"; };
@@ -661,6 +665,8 @@
 		B3F767AD1CF34FF700F03CCE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3BBF9321CF5E6A000A76097 /* PacksScene.cpp */,
+				B3BBF9331CF5E6A000A76097 /* PacksScene.h */,
 				B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */,
 				B3F767AF1CF34FF700F03CCE /* LoadingScene.h */,
 			);
@@ -851,6 +857,7 @@
 				B3F767901CF2FE9E00F03CCE /* TiledSoundEnvironment.cpp in Sources */,
 				B30555871CE333E2006E5546 /* Inventory.cpp in Sources */,
 				B3F0A3491CE2081E006E152B /* HashAlgorithm.cpp in Sources */,
+				B3BBF9341CF5E6A000A76097 /* PacksScene.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				B30555DC1CE3454D006E5546 /* Socket.cpp in Sources */,
 				B30555D21CE3454D006E5546 /* HiddenWall.cpp in Sources */,
@@ -873,6 +880,7 @@
 				B30555C51CE3454D006E5546 /* Burglar.cpp in Sources */,
 				B30555BF1CE3454D006E5546 /* Beartrap.cpp in Sources */,
 				B3F0A3551CE2376E006E152B /* Level.cpp in Sources */,
+				B3BBF9351CF5E6A000A76097 /* PacksScene.cpp in Sources */,
 				B3F7678D1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */,
 				B3F7678F1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */,
 				B3F0A3421CE2081E006E152B /* LevelBundle.cpp in Sources */,

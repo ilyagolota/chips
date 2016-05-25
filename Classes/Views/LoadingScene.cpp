@@ -1,5 +1,6 @@
 #include "LoadingScene.h"
 #include <Preloader/Preloader.h>
+#include "PacksScene.h"
 #include "ChipsChallengeGame.h"
 
 using namespace cocos2d;
@@ -59,5 +60,6 @@ void LoadingScene::_update(float dt)
     if (_preloader->isComplete())
     {
         cocos2d::Director::getInstance()->getScheduler()->unscheduleAllForTarget(this);
+        cocos2d::Director::getInstance()->pushScene(PacksScene::create(_game));
     }
 }
