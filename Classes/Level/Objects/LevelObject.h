@@ -32,8 +32,8 @@ public:
     virtual void reset();
 
 protected:
-    virtual void buildNodes();
-    virtual void destroyNodes();
+    virtual void build();
+    virtual void destroy();
     
 };
 

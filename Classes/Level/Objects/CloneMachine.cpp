@@ -51,12 +51,12 @@ void CloneMachine::reset()
     _working = false;
 }
     
-void CloneMachine::buildNodes()
+void CloneMachine::build()
 {
 
 }
 
-void CloneMachine::destroyNodes()
+void CloneMachine::destroy()
 {
 
 }

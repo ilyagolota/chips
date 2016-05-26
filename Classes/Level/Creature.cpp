@@ -9,6 +9,7 @@
 #include "Tiled/TiledPhysicsWorld.h"
 #include "Tiled/TiledProjector.h"
 #include "Tiled/TiledSoundEnvironment.h"
+#include "Tiled/TileSoundEmitter.h"
 
 #include "Level.h"
 #include "Item.h"
@@ -69,6 +70,8 @@ Creature::Creature(CreatureType type)
     _sprite = cocos2d::Sprite::create();
     _sprite->setAnchorPoint(cocos2d::Point::ZERO);
     _sprite->retain();
+    
+    _soundEmitter = nullptr;
 }
 
 Creature::~Creature()
@@ -125,9 +128,10 @@ void Creature::setCoordinate(const cocos2d::Vec2 &coordinate)
 {
     _coordinate = coordinate;
     _turnsToNextMove = 0;
-    
-    _sprite->setPosition(_level->getProjector()->coordinateToPoint(coordinate));
-	_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(coordinate));
+    if (_level != nullptr)
+    {
+        _updatePosition();
+    }
 }
 
 Direction Creature::getDirection() const
@@ -166,9 +170,9 @@ void Creature::setLevel(Level* level)
         _level = level;
         if (_level != nullptr)
         {
-            _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
-            _sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
             _level->getStage()->addChild(_sprite);
+            _updatePosition();
+            _updateAnimation(_turnsToNextMove != 0, _direction);
             
             if (_soundEmitter != nullptr)
             {
@@ -202,8 +206,7 @@ void Creature::onTurn(float dt)
         if (_turnsToNextMove == 0)
         {
             _sprite->stopAllActionsByTag(MOVE_ACTION_TAG);
-            _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
-            _sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
+            _updatePosition();
             
             auto object = _level->getObjectAt(_coordinate);
             if (object != nullptr)
@@ -441,8 +444,22 @@ void Creature::_move()
     }*/
 }
 
+void Creature::_updatePosition()
+{
+    _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+    _sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::FRONT_Z_ORDER);
+    
+    if (_soundEmitter != nullptr)
+    {
+        _soundEmitter->setCoordinate(_coordinate);
+    }
+}
+
 void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
 {
+    _sprite->setSpriteFrame("chip-stay-north-0004.png");
+    return;
+    
     bool force = (_sprite->getTexture() == nullptr);
     switch (_type)
     {

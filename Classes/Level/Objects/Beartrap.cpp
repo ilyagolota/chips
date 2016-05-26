@@ -52,12 +52,12 @@ void Beartrap::reset()
 {
 }
 
-void Beartrap::buildNodes()
+void Beartrap::build()
 {
 
 }
 
-void Beartrap::destroyNodes()
+void Beartrap::destroy()
 {
 
 }

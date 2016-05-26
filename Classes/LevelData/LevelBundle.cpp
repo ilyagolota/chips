@@ -106,7 +106,6 @@ LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
     for (int fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++)
     {
         std::vector<TileType> layer(LevelData::LAYER_SIZE);
-        
         short size = reader.readInt16();
         for (short i = 0, k = 0; i < size; i++)
         {
@@ -128,6 +127,7 @@ LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
                 i += 2;
             }
         }
+        level->getLayers().push_back(std::move(layer));
     }
     
     size_t position = reader.getBaseStream().tellg();

@@ -128,6 +128,8 @@
 		B3F0A34E1CE2081E006E152B /* MD5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A33D1CE2081E006E152B /* MD5.cpp */; };
 		B3F0A3541CE2376E006E152B /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3521CE2376E006E152B /* Level.cpp */; };
 		B3F0A3551CE2376E006E152B /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3521CE2376E006E152B /* Level.cpp */; };
+		B3F310641CF700B900B9EC92 /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F310621CF700B900B9EC92 /* LevelScene.cpp */; };
+		B3F310651CF700B900B9EC92 /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F310621CF700B900B9EC92 /* LevelScene.cpp */; };
 		B3F7678C1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767821CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp */; };
 		B3F7678D1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767821CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp */; };
 		B3F7678E1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767841CF2FE9E00F03CCE /* TiledProjector.cpp */; };
@@ -311,6 +313,8 @@
 		B3F0A3501CE21A42006E152B /* TileType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileType.h; sourceTree = "<group>"; };
 		B3F0A3521CE2376E006E152B /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Level.cpp; sourceTree = "<group>"; };
 		B3F0A3531CE2376E006E152B /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
+		B3F310621CF700B900B9EC92 /* LevelScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelScene.cpp; path = ../../../chips/Classes/Views/LevelScene.cpp; sourceTree = "<group>"; };
+		B3F310631CF700B900B9EC92 /* LevelScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelScene.h; path = ../../../chips/Classes/Views/LevelScene.h; sourceTree = "<group>"; };
 		B3F767811CF2FE9E00F03CCE /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
 		B3F767821CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TiledPhysicsWorld.cpp; sourceTree = "<group>"; };
 		B3F767831CF2FE9E00F03CCE /* TiledPhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledPhysicsWorld.h; sourceTree = "<group>"; };
@@ -665,6 +669,8 @@
 		B3F767AD1CF34FF700F03CCE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3F310621CF700B900B9EC92 /* LevelScene.cpp */,
+				B3F310631CF700B900B9EC92 /* LevelScene.h */,
 				B3BBF9321CF5E6A000A76097 /* PacksScene.cpp */,
 				B3BBF9331CF5E6A000A76097 /* PacksScene.h */,
 				B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */,
@@ -855,6 +861,7 @@
 				B30555CA1CE3454D006E5546 /* Dirt.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				B3F767901CF2FE9E00F03CCE /* TiledSoundEnvironment.cpp in Sources */,
+				B3F310641CF700B900B9EC92 /* LevelScene.cpp in Sources */,
 				B30555871CE333E2006E5546 /* Inventory.cpp in Sources */,
 				B3F0A3491CE2081E006E152B /* HashAlgorithm.cpp in Sources */,
 				B3BBF9341CF5E6A000A76097 /* PacksScene.cpp in Sources */,
@@ -917,6 +924,7 @@
 				B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */,
 				B30555931CE3418C006E5546 /* LevelObject.cpp in Sources */,
 				B30555CD1CE3454D006E5546 /* Door.cpp in Sources */,
+				B3F310651CF700B900B9EC92 /* LevelScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

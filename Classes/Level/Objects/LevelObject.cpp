@@ -21,12 +21,12 @@ void LevelObject::setLevel(Level* level)
     {
         if (_level != nullptr)
         {
-            this->destroyNodes();
+            this->destroy();
         }
         _level = level;
         if (_level != nullptr)
         {
-            this->buildNodes();
+            this->build();
         }
     }
 }
@@ -69,8 +69,8 @@ void LevelObject::afterLeave(Creature* creature)
 void LevelObject::reset()
 { }
 
-void LevelObject::buildNodes()
+void LevelObject::build()
 { }
 
-void LevelObject::destroyNodes()
+void LevelObject::destroy()
 { }

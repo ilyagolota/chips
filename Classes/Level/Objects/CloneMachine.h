@@ -23,8 +23,8 @@ public:
     void reset() override;
     
 protected:
-    void buildNodes() override;
-    void destroyNodes() override;
+    void build() override;
+    void destroy() override;
 };
 
 #endif

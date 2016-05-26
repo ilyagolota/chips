@@ -69,6 +69,7 @@ public:
 private:
     void _tryMoveNext();
     void _move();
+    void _updatePosition();
 	void _updateAnimation(bool wasModing, Direction wasDirection);
 };
 

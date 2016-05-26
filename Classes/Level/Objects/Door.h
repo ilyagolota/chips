@@ -27,8 +27,8 @@ public:
 	std::string& getColorName() const;
 
 protected:
-    void buildNodes() override;
-    void destroyNodes() override;
+    void buildNodes();
+    void destroyNodes();
 };
 
 #endif

@@ -16,7 +16,7 @@ class Creature;
 
 struct LevelWire;
 
-class Level
+class Level : public cocos2d::Ref
 {
 private:
     LevelData* _levelData;
@@ -26,6 +26,8 @@ private:
     TiledPhysicsWorld* _physicsWorld;
     TiledSoundEnvironment* _soundEnvironment;
     TiledProjector* _projector;
+    
+    float _timeMultiplier;
     
     std::vector<LevelObject*> _objects;
     std::vector<Item*> _items;
@@ -51,12 +53,14 @@ public:
     const LevelData* getLevelData() const;
     void start(LevelData* levelData);
     void restart();
+    void makeTurn(float dt);
     
     cocos2d::Node* getStage() const;
     TiledPhysicsWorld* getPhysicsWorld() const;
     TiledSoundEnvironment* getSoundEnvironment() const;
     TiledProjector* getProjector() const;
     Inventory* getInventory() const;
+    float getTurnDuration();
     
     void addObject(LevelObject* object);
     LevelObject* getObjectAt(const cocos2d::Vec2& coordinate) const;

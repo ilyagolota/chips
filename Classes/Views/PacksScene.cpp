@@ -1,6 +1,7 @@
 #include "PacksScene.h"
 #include <LevelData/LevelBundle.h>
 #include "ChipsChallengeGame.h"
+#include "LevelScene.h"
 
 PacksScene* PacksScene::create(ChipsChallengeGame* game)
 {
@@ -60,7 +61,7 @@ void PacksScene::_build()
         {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {
-                
+                cocos2d::Director::getInstance()->pushScene(LevelScene::create(_game, 0, 2));
             }
         });
         x += buttonWidth;

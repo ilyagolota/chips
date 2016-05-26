@@ -17,8 +17,8 @@ public:
     void afterEnter(Creature* creature) override;
     
 protected:
-    void buildNodes() override;
-    void destroyNodes() override;
+    void build() override;
+    void destroy() override;
 };
 
 #endif

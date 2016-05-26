@@ -223,5 +223,22 @@
 			<string>chip-walk-east-0006.png</string>
 		</array>
 	</dict>
+	<key>water</key>
+	<dict>
+		<key>delay</key>
+		<real>0.12</real>
+		<key>frames</key>
+		<array>
+			<string>water-0001.png</string>
+			<string>water-0002.png</string>
+			<string>water-0003.png</string>
+			<string>water-0004.png</string>
+			<string>water-0005.png</string>
+			<string>water-0006.png</string>
+			<string>water-0007.png</string>
+			<string>water-0008.png</string>
+			<string>water-0009.png</string>
+		</array>
+	</dict>
 </dict>
 </plist>

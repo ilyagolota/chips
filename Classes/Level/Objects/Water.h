@@ -7,11 +7,16 @@
 class Water : public LevelObject
 {
 private:
+    cocos2d::Sprite* _waterSprite;
     
 public:
     static Water* create(const cocos2d::Vec2& coordinate);
     
     Water(const cocos2d::Vec2& coordinate);
+    virtual ~Water();
+    
+    void build() override;
+    void destroy() override;
 };
 
 #endif

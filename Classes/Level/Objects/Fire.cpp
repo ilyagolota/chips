@@ -28,12 +28,12 @@ void Fire::afterEnter(Creature *creature)
     }
 }
 
-void Fire::buildNodes()
+void Fire::build()
 {
 
 }
 
-void Fire::destroyNodes()
+void Fire::destroy()
 {
 
 }
