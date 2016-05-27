@@ -130,6 +130,8 @@
 		B3F0A3551CE2376E006E152B /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3521CE2376E006E152B /* Level.cpp */; };
 		B3F310641CF700B900B9EC92 /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F310621CF700B900B9EC92 /* LevelScene.cpp */; };
 		B3F310651CF700B900B9EC92 /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F310621CF700B900B9EC92 /* LevelScene.cpp */; };
+		B3F310691CF7417900B9EC92 /* SmartControlLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F310671CF7417900B9EC92 /* SmartControlLayer.cpp */; };
+		B3F3106A1CF7417900B9EC92 /* SmartControlLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F310671CF7417900B9EC92 /* SmartControlLayer.cpp */; };
 		B3F7678C1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767821CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp */; };
 		B3F7678D1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767821CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp */; };
 		B3F7678E1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767841CF2FE9E00F03CCE /* TiledProjector.cpp */; };
@@ -315,6 +317,8 @@
 		B3F0A3531CE2376E006E152B /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		B3F310621CF700B900B9EC92 /* LevelScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelScene.cpp; path = ../../../chips/Classes/Views/LevelScene.cpp; sourceTree = "<group>"; };
 		B3F310631CF700B900B9EC92 /* LevelScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelScene.h; path = ../../../chips/Classes/Views/LevelScene.h; sourceTree = "<group>"; };
+		B3F310671CF7417900B9EC92 /* SmartControlLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SmartControlLayer.cpp; sourceTree = "<group>"; };
+		B3F310681CF7417900B9EC92 /* SmartControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartControlLayer.h; sourceTree = "<group>"; };
 		B3F767811CF2FE9E00F03CCE /* Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Direction.h; sourceTree = "<group>"; };
 		B3F767821CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TiledPhysicsWorld.cpp; sourceTree = "<group>"; };
 		B3F767831CF2FE9E00F03CCE /* TiledPhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledPhysicsWorld.h; sourceTree = "<group>"; };
@@ -639,6 +643,16 @@
 			path = Level;
 			sourceTree = "<group>";
 		};
+		B3F310661CF7417900B9EC92 /* LevelScene */ = {
+			isa = PBXGroup;
+			children = (
+				B3F310671CF7417900B9EC92 /* SmartControlLayer.cpp */,
+				B3F310681CF7417900B9EC92 /* SmartControlLayer.h */,
+			);
+			name = LevelScene;
+			path = ../../../chips/Classes/Views/LevelScene;
+			sourceTree = "<group>";
+		};
 		B3F767801CF2FE9E00F03CCE /* Tiled */ = {
 			isa = PBXGroup;
 			children = (
@@ -669,6 +683,7 @@
 		B3F767AD1CF34FF700F03CCE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3F310661CF7417900B9EC92 /* LevelScene */,
 				B3F310621CF700B900B9EC92 /* LevelScene.cpp */,
 				B3F310631CF700B900B9EC92 /* LevelScene.h */,
 				B3BBF9321CF5E6A000A76097 /* PacksScene.cpp */,
@@ -872,6 +887,7 @@
 				B30555E01CE3454D006E5546 /* Teleport.cpp in Sources */,
 				B30555C41CE3454D006E5546 /* Burglar.cpp in Sources */,
 				B3F0A3451CE2081E006E152B /* BinaryWriter.cpp in Sources */,
+				B3F310691CF7417900B9EC92 /* SmartControlLayer.cpp in Sources */,
 				B30555C61CE3454D006E5546 /* Button.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -916,6 +932,7 @@
 				B30555C91CE3454D006E5546 /* CloneMachine.cpp in Sources */,
 				B3F767951CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */,
 				B305558D1CE339DC006E5546 /* Creature.cpp in Sources */,
+				B3F3106A1CF7417900B9EC92 /* SmartControlLayer.cpp in Sources */,
 				B3F0A34C1CE2081E006E152B /* HttpUtility.cpp in Sources */,
 				B3F0A3401CE2081E006E152B /* LevelData.cpp in Sources */,
 				B30555881CE333E2006E5546 /* Inventory.cpp in Sources */,

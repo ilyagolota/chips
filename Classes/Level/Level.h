@@ -68,6 +68,7 @@ public:
     Item* getItemAt(const cocos2d::Vec2& coordinate) const;
     void addCreature(Creature* creature);
     void removeCreature(Creature* creature);
+    const cocos2d::Vector<Creature*>& getCreatures() const;
     Creature* getCreatureAt(const cocos2d::Vec2& coordinate) const;
 	Creature* getPlayerCreature() const;
 

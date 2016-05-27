@@ -223,6 +223,12 @@ void Level::removeCreature(Creature* creature)
     }
 }
 
+
+const cocos2d::Vector<Creature*>& Level::getCreatures() const
+{
+    return _creatures;
+}
+
 Creature* Level::getCreatureAt(const cocos2d::Vec2& coordinate) const
 {
     for (auto creature : _creatures)

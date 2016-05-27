@@ -45,8 +45,8 @@ void TiledProjector::clear()
 cocos2d::Vec2 TiledProjector::coordinateToPoint(const cocos2d::Vec2& coordinate)
 {
     cocos2d::Vec2 point;
-    point.x = 0.5f * _tileSize.width * (coordinate.y - coordinate.x - 1);
-    point.y = -0.5f * _tileSize.height * (coordinate.y + coordinate.x);
+    point.x = 0.5f * _tileSize.width * (coordinate.y - coordinate.x) - 0.5f * _tileSize.width;
+    point.y = -0.5f * _tileSize.height * (coordinate.y + coordinate.x) - _tileSize.height;
     return point;
 }
 
@@ -109,7 +109,7 @@ int TiledProjector::coordinateToZOrder(const cocos2d::Vec2& coordinate)
 cocos2d::Vec2 TiledProjector::pointToCoordinate(const cocos2d::Vec2& point)
 {
     cocos2d::Point coordinate;
-    coordinate.x = std::floor(point.x / _tileSize.width - point.y / _tileSize.height);
-    coordinate.y = std::floor(-point.y / _tileSize.height - point.x / _tileSize.width);
+    coordinate.x = -1.0f - std::floor(point.y / _tileSize.height - point.x / _tileSize.width);
+    coordinate.y = -1.0f - std::floor(point.y / _tileSize.height + point.x / _tileSize.width);
     return coordinate;
 }

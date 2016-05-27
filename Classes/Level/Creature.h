@@ -49,7 +49,7 @@ public:
     
     Creature(CreatureType type);
     ~Creature();
-    void move();
+    void move(Direction direction);
     bool isMoving() const;
     int getTurnsToNextMove() const;
     int getTurnsPerMove() const;
@@ -64,11 +64,11 @@ public:
     void onTurn(float dt);
     void update(float dt);
     void touch(Direction direction);
-    bool canMove() const;
+    bool canMove(Direction direction) const;
     
 private:
     void _tryMoveNext();
-    void _move();
+    void _move(Direction direction);
     void _updatePosition();
 	void _updateAnimation(bool wasModing, Direction wasDirection);
 };

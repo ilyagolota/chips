@@ -15,6 +15,8 @@ public:
     Water(const cocos2d::Vec2& coordinate);
     virtual ~Water();
     
+    bool hasDrawnBlock() const;
+    
     void build() override;
     void destroy() override;
 };

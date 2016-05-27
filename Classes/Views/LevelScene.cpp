@@ -3,6 +3,7 @@
 #include <ChipsChallengeGame.h>
 #include <Level/Level.h>
 #include <Level/Creature.h>
+#include "LevelScene/SmartControlLayer.h"
 #include "PacksScene.h"
 
 LevelScene* LevelScene::create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex)
@@ -27,9 +28,12 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     _stage = cocos2d::Node::create();
     addChild(_stage);
     
-	_level = Level::create(_stage);
-	_level->retain();
+    _level = Level::create(_stage);
+    _level->retain();
     
+    _controlLayer = SmartControlLayer::create(_level);
+    addChild(_controlLayer);
+	
 	_level->makeTurn(0);
 	director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(Level::makeTurn), _level, _level->getTurnDuration(), CC_REPEAT_FOREVER, 0, false);
     director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), this, 0, CC_REPEAT_FOREVER, 0, false);
@@ -41,8 +45,6 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
 	_keyboardListener->onKeyPressed = CC_CALLBACK_2(LevelScene::_keyPressedCallback, this);
 	_keyboardListener->onKeyReleased = CC_CALLBACK_2(LevelScene::_keyReleasedCallback, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
-
-	director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(LevelScene::_updateCallback), this, 0, CC_REPEAT_FOREVER, 0, false);
 
 	auto center = cocos2d::NotificationCenter::getInstance();
 	center->addObserver(this, CC_CALLFUNCO_SELECTOR(LevelScene::_playerStateChangedCallback), PlayerState::CHIPS_COLLECTED_CHANGED, _level->getPlayerState());
@@ -91,41 +93,6 @@ void LevelScene::_loadLevel()
     _level->start(levelInfo);
 }
 /*
-Direction LevelScene::getSelectedDirection()
-{
-    Direction keyboardDir = Direction::NONE;
-	if (_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW)] ||
-		_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_A)])
-	{
-		keyboardDir = Direction::WEST;
-	}
-	else if (_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW)] ||
-		_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_D)])
-	{
-		keyboardDir = Direction::EAST;
-	}
-	else if (_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW)] ||
-		_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_W)])
-	{
-		keyboardDir = Direction::NORTH;
-	}
-	else if (_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW)] ||
-		_keys[static_cast<int>(cocos2d::EventKeyboard::KeyCode::KEY_S)])
-	{
-		keyboardDir = Direction::SOUTH;
-	}
-    
-    if (keyboardDir == Direction::NONE)
-    {
-        return _controlLayer->getSelectedDirection();
-    }
-    else
-    {
-        _controlLayer->cancel();
-        return keyboardDir;
-    }
-}
-
 void LevelScene::showPauseMenu()
 {
 	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();

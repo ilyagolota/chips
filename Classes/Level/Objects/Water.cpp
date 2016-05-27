@@ -23,6 +23,11 @@ Water::~Water()
     _waterSprite->release();
 }
 
+bool Water::hasDrawnBlock() const
+{
+    return false;
+}
+
 void Water::build()
 {
     std::vector<int> f;

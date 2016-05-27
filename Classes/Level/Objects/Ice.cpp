@@ -19,40 +19,38 @@ void Ice::afterEnter(Creature* creature)
 {
     if (creature->getType() != CreatureType::CHIP || _level->getInventory()->getItemCount(TileType::BOOTS_ICE) <= 0)
     {
-        Direction wasDirection = creature->getDirection();
         Direction direction;
         switch (_type)
         {
             case TileType::ICE:
-                direction = wasDirection;
+                direction = creature->getDirection();
                 break;
             case TileType::ICE_WALL_NORTH_EAST:
-                direction = (wasDirection == Direction::SOUTH) ? Direction::EAST : Direction::NORTH;
+                direction = (creature->getDirection() == Direction::SOUTH) ? Direction::EAST : Direction::NORTH;
                 break;
             case TileType::ICE_WALL_SOUTH_EAST:
-                direction = (wasDirection == Direction::NORTH) ? Direction::EAST : Direction::SOUTH;
+                direction = (creature->getDirection() == Direction::NORTH) ? Direction::EAST : Direction::SOUTH;
                 break;
             case TileType::ICE_WALL_NORTH_WEST:
-                direction = (wasDirection == Direction::SOUTH) ? Direction::WEST : Direction::NORTH;
+                direction = (creature->getDirection() == Direction::SOUTH) ? Direction::WEST : Direction::NORTH;
                 break;
             case TileType::ICE_WALL_SOUTH_WEST:
-                direction = (wasDirection == Direction::NORTH) ? Direction::WEST : Direction::SOUTH;
+                direction = (creature->getDirection() == Direction::NORTH) ? Direction::WEST : Direction::SOUTH;
                 break;
             default:
                 break;
         }
         
-        creature->setDirection(direction);
-        if (creature->canMove())
+        if (creature->canMove(direction))
         {
-            creature->move();
+            creature->move(direction);
         }
         else
         {
-            creature->setDirection(inverse(wasDirection));
-            if (creature->canMove())
+            Direction back = inverse(creature->getDirection());
+            if (creature->canMove(back))
             {
-                creature->move();
+                creature->move(back);
             }
         }
     }

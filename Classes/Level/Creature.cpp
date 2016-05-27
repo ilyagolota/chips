@@ -79,11 +79,11 @@ Creature::~Creature()
     _sprite->release();
 }
 
-void Creature::move()
+void Creature::move(Direction direction)
 {
-    if (canMove())
+    if (canMove(direction))
     {
-        _move();
+        _move(direction);
     }
 }
 
@@ -241,10 +241,8 @@ void Creature::onTurn(float dt)
     _updateAnimation(wasMoving, wasDirection);
 }
 
-bool Creature::canMove() const
+bool Creature::canMove(Direction direction) const
 {
-    Direction direction = _direction;
-    
     int physicsLayerMask = (_type == CreatureType::CHIP) ? 0x01 : ((_type == CreatureType::BLOCK) ? 0x02 : 0x04);
     if (_level->getPhysicsWorld()->rayCast(_coordinate, _direction, physicsLayerMask))
     {
@@ -278,8 +276,7 @@ bool Creature::canMove() const
         {
             if (_type == CreatureType::CHIP)
             {
-                frontCreature->setDirection(_direction);
-                return frontCreature->canMove();
+                return frontCreature->canMove(_direction);
             }
         }
         else if (frontCreature->_type == CreatureType::CHIP)
@@ -310,9 +307,9 @@ void Creature::_tryMoveNext()
         if (controlDirection != Direction::NONE)
         {
             _direction = controlDirection;
-            if (canMove())
+            if (canMove(direction))
             {
-                _move();
+                _move(direction);
             }
         }*/
     }
@@ -340,10 +337,9 @@ void Creature::_tryMoveNext()
         
 			for (size_t i = 0; i < dirCount; i++)
 			{
-				_direction = dirs[i];
-				if (canMove())
+				if (canMove(dirs[i]))
 				{
-					_move();
+					_move(dirs[i]);
 					break;
 				}
 			}
@@ -351,19 +347,19 @@ void Creature::_tryMoveNext()
     }
     else if (_type == CreatureType::WALKER || _type == CreatureType::BLOB)
     {
-        if (_type == CreatureType::WALKER && canMove())
+        if (_type == CreatureType::WALKER && canMove(_direction))
         {
-            _move();
+            _move(_direction);
         }
         else
         {
             Direction dirs[4];
             size_t dirCount = 0;
             
-            for (int direction = 0; direction < 4; direction++)
+            for (int dirIndex = 0; dirIndex < 4; dirIndex++)
             {
-                _direction = static_cast<Direction>(direction);
-                if (canMove())
+                Direction direction = static_cast<Direction>(dirIndex);
+                if (canMove(direction))
                 {
                     dirs[dirCount++] = _direction;
                 }
@@ -371,50 +367,50 @@ void Creature::_tryMoveNext()
             
             if (dirCount > 0)
             {
-                _direction = dirs[std::rand() % dirCount];
-                _move();
+                _move(dirs[std::rand() % dirCount]);
             }
         }
     }
     else
     {
+        Direction direction = _direction;
         if (_type == CreatureType::BUG)
         {
-            _direction = turnLeft(_direction);
+            direction = turnLeft(direction);
         }
         else if (_type == CreatureType::PARAMECIUM)
         {
-            _direction = turnRight(_direction);
+            direction = turnRight(direction);
         }
         
-        if (!canMove())
+        if (!canMove(direction))
         {
-            auto initialDirection = _direction;
+            auto initialDirection = direction;
             for (;;)
             {
                 if (_type == CreatureType::FIREBALL || _type == CreatureType::BUG)
                 {
-                    _direction = turnRight(_direction);
+                    direction = turnRight(direction);
                 }
                 else if (_type == CreatureType::GLIDER || _type == CreatureType::PARAMECIUM)
                 {
-                    _direction = turnLeft(_direction);
+                    direction = turnLeft(direction);
                 }
                 else if (_type == CreatureType::BALL)
                 {
-                    _direction = inverse(_direction);
+                    direction = inverse(direction);
                 }
                 else if (_type == CreatureType::TANK)
                 { }
                 
-                if (_direction == initialDirection)
+                if (direction == initialDirection)
                 {
                     break;
                 }
                 
-                if (canMove())
+                if (canMove(direction))
                 {
-                    _move();
+                    _move(direction);
                     break;
                 }
             }
@@ -422,7 +418,7 @@ void Creature::_tryMoveNext()
     }
 }
 
-void Creature::_move()
+void Creature::_move(Direction direction)
 {
     /*if (direction != Direction::NONE)
     {

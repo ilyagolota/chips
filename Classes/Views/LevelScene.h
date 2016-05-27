@@ -5,7 +5,7 @@
 
 class ChipsChallengeGame;
 class Level;
-class ControlLayer;
+class SmartControlLayer;
 
 class LevelScene : public cocos2d::Scene
 {
@@ -17,6 +17,7 @@ protected:
     bool _paused;
 
     cocos2d::Node* _stage;
+    SmartControlLayer* _controlLayer;
     
     //ControlLayer* _controlLayer;
     
