@@ -36,22 +36,6 @@ namespace std
 	}
 }
 
-static Direction reflectForAnimation(Direction direction)
-{
-	if (direction == Direction::WEST)
-	{
-		return Direction::NORTH;
-	}
-	else if (direction == Direction::SOUTH)
-	{
-		return Direction::EAST;
-	}
-	else
-	{
-		return direction;
-	}
-}
-
 Creature* Creature::create(CreatureType type)
 {
     auto instance = new Creature(type);
@@ -468,11 +452,24 @@ void Creature::_updatePosition()
 
 void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
 {
-    _sprite->setSpriteFrame("chip-stay-north-0004.png");
-    return;
-    
     bool force = (_sprite->getTexture() == nullptr);
-    switch (_type)
+    
+	Direction animatedDirection;
+	if (_direction == Direction::SOUTH)
+	{
+		animatedDirection = Direction::EAST;
+	}
+	else if (_direction == Direction::NORTH)
+	{
+		animatedDirection = Direction::WEST;
+	}
+	else
+	{
+		animatedDirection = _direction;
+	}
+
+	
+	switch (_type)
     {
         case CreatureType::BLOCK:
             if (force)
@@ -495,9 +492,9 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
             break;
             
         case CreatureType::GLIDER:
-			if (force || reflectForAnimation(_direction) != reflectForAnimation(wasDirection))
+			if (force || (_direction != wasDirection && _direction != inverse(wasDirection)))
             {
-				std::string spriteFrameName = std::to_string(_type) + "-" + std::to_string(reflectForAnimation(_direction)) + ".png";
+				std::string spriteFrameName = std::to_string(_type) + "-" + std::to_string(animatedDirection) + ".png";
 				auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
                 _sprite->setSpriteFrame(spriteFrame);
             }
@@ -507,12 +504,12 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
         case CreatureType::TANK:
         case CreatureType::BALL:
         case CreatureType::WALKER:
-			if (force || wasMoving != isMoving() || reflectForAnimation(_direction) != reflectForAnimation(wasDirection))
+			if (force || wasMoving != isMoving() || (_direction != wasDirection && _direction != inverse(wasDirection)))
             {
                 _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
                 if (isMoving())
                 {
-					auto animationName = std::to_string(_type) + "-walk-" + std::to_string(reflectForAnimation(_direction));
+					auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
                     auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
                     auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
                     action->setTag(ANIMATE_ACTION_TAG);
@@ -520,7 +517,7 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
                 }
                 else
                 {
-					auto spriteFrameName = std::to_string(_type) + "-stay-" + std::to_string(reflectForAnimation(_direction)) + ".png";
+					auto spriteFrameName = std::to_string(_type) + "-stay-" + std::to_string(animatedDirection) + ".png";
                     auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
                     _sprite->setSpriteFrame(spriteFrame);
                 }
@@ -532,7 +529,7 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
         case CreatureType::PARAMECIUM:
             if (force)
             {
-				auto animationName = std::to_string(_type) + "-walk-" + std::to_string(reflectForAnimation(_direction));
+				auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
                 auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
                 auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
                 action->setTag(ANIMATE_ACTION_TAG);
@@ -546,7 +543,7 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
                 _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
                 if (isMoving())
                 {
-					auto animationName = std::to_string(_type) + "-walk-" + std::to_string(reflectForAnimation(_direction));
+					auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
                     auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
                     auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
                     action->setTag(ANIMATE_ACTION_TAG);
@@ -554,7 +551,7 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
                 }
                 else
                 {
-					auto animationName = std::to_string(_type) + "-stay-" + std::to_string(reflectForAnimation(_direction));
+					auto animationName = std::to_string(_type) + "-stay-" + std::to_string(animatedDirection);
                     auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
                     auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
                     action->setTag(ANIMATE_ACTION_TAG);
@@ -568,15 +565,15 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
     {
         if (_type != CreatureType::BLOCK && _type != CreatureType::BLOB)
         {
-            if (_direction == Direction::NORTH || _direction == Direction::EAST)
+            if (_direction == Direction::NORTH || _direction == Direction::SOUTH)
             {
-                _sprite->setAnchorPoint(cocos2d::Vec2(0, 0));
-                _sprite->setScaleX(1);
+                _sprite->setAnchorPoint(cocos2d::Vec2(1, 0));
+                _sprite->setScaleX(-1);
             }
             else
             {
-                _sprite->setAnchorPoint(cocos2d::Vec2(0, 1));
-                _sprite->setScaleX(-1);
+                _sprite->setAnchorPoint(cocos2d::Vec2(0, 0));
+                _sprite->setScaleX(1);
             }
         }
     }
