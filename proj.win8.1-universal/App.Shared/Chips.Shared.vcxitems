@@ -17,7 +17,50 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\ChipsChallengeGame.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelBundle.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelData.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LoadLevelListTask.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Creature.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Inventory.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Item.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Level.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Beartrap.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\BlueWall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Bomb.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Burglar.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Button.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\CloneMachine.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Dirt.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Door.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Exit.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Fire.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\HiddenWall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\HintButton.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Ice.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\LevelObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\PopupWall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Slide.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Socket.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\SwitchWall.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Teleport.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Water.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Preloader\Preloader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TiledPhysicsWorld.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TiledProjector.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TiledSoundEnvironment.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileMicrophone.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileSoundEmitter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryReader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryWriter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\Date.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HashAlgorithm.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HttpUtility.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\MD5.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\SmartControlLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LoadingScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\PacksScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)App.xaml.cpp">
       <DependentUpon>$(MSBuildThisFileDirectory)App.xaml</DependentUpon>
     </ClCompile>
@@ -27,7 +70,53 @@
       <DependentUpon>$(MSBuildThisFileDirectory)OpenGLESPage.xaml</DependentUpon>
     </ClCompile>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\ChipsChallengeGame.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelBundle.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelData.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LoadLevelListTask.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\TileType.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Creature.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Inventory.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Item.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Level.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Beartrap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\BlueWall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Bomb.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Burglar.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Button.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\CloneMachine.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Dirt.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Door.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Exit.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Fire.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\HiddenWall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\HintButton.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Ice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\LevelObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\PopupWall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Slide.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Socket.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\SwitchWall.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Teleport.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Water.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Preloader\Preloader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\Direction.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TiledPhysicsWorld.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TiledProjector.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TiledSoundEnvironment.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileMicrophone.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileSoundEmitter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryReader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryWriter.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\Date.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HashAlgorithm.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HttpUtility.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\MD5.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\Protected.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\SmartControlLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LoadingScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\PacksScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)App.xaml.h">
       <DependentUpon>$(MSBuildThisFileDirectory)App.xaml</DependentUpon>
     </ClInclude>

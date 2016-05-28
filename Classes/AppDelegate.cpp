@@ -1,8 +1,8 @@
 #include "AppDelegate.h"
 #include <Preloader/Preloader.h>
 #include <LevelData/LoadLevelListTask.h>
+#include <Views/LoadingScene.h>
 #include "ChipsChallengeGame.h"
-#include "LoadingScene.h"
 
 USING_NS_CC;
 
@@ -57,20 +57,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
-    Size frameSize = glview->getFrameSize();
-    if (frameSize.height > mediumResolutionSize.height)
-    {        
+	glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+    /*Size frameSize = glview->getFrameSize();
+	if (frameSize.height > mediumResolutionSize.height)
+    {
         director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height, largeResolutionSize.width / designResolutionSize.width));
     }
     else if (frameSize.height > smallResolutionSize.height)
-    {        
+    {
         director->setContentScaleFactor(MIN(mediumResolutionSize.height / designResolutionSize.height, mediumResolutionSize.width / designResolutionSize.width));
     }
     else
     {        
         director->setContentScaleFactor(MIN(smallResolutionSize.height / designResolutionSize.height, smallResolutionSize.width / designResolutionSize.width));
-    }
+    }*/
 
     register_all_packages();
 
