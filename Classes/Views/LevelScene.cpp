@@ -33,6 +33,7 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     
     _controlLayer = SmartControlLayer::create(_level);
     addChild(_controlLayer);
+	_level->setPlayerControl(_controlLayer);
 	
 	_level->makeTurn(0);
 	director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(Level::makeTurn), _level, _level->getTurnDuration(), CC_REPEAT_FOREVER, 0, false);

@@ -1,9 +1,10 @@
 #include "Level.h"
 
 #include <LevelData/LevelData.h>
-#include "Tiled/TiledPhysicsWorld.h"
-#include "Tiled/TiledSoundEnvironment.h"
-#include "Tiled/TiledProjector.h"
+#include <Tiled/TiledPhysicsWorld.h>
+#include <Tiled/TiledSoundEnvironment.h>
+#include <Tiled/TiledProjector.h>
+#include "IPlayerControl.h"
 #include "Inventory.h"
 #include "Creature.h"
 #include "Objects/LevelObject.h"
@@ -55,6 +56,8 @@ Level::Level(cocos2d::Node* stage)
     
     _projector = TiledProjector::create(cocos2d::Size(180, 128), levelSize, _physicsWorld);
     _projector->retain();
+
+	_playerControl = nullptr;
     
     _objects.resize(levelSize.width * levelSize.height);
     _items.resize(levelSize.width * levelSize.height);
@@ -138,6 +141,16 @@ Inventory* Level::getInventory() const
 float Level::getTurnDuration()
 {
     return 0.2f * _timeMultiplier;
+}
+
+IPlayerControl* Level::getPlayerControl()
+{
+	return _playerControl;
+}
+
+void Level::setPlayerControl(IPlayerControl* playerControl)
+{
+	_playerControl = playerControl;
 }
 
 void Level::addObject(LevelObject* object)
@@ -653,6 +666,8 @@ void Level::_buildFloor(const cocos2d::Vec2& coordinate)
 
 void Level::_buildWall(const cocos2d::Vec2& coordinate)
 {
+	_physicsWorld->setBody(coordinate, TileBody::OUTER_BOX, 7);
+
     int mask = 0;
     for (int dirIndex = 0; dirIndex < 4; dirIndex++)
     {
@@ -694,7 +709,7 @@ void Level::_buildWall(const cocos2d::Vec2& coordinate)
     }
     
     char spriteFrameName[14];
-    sprintf(spriteFrameName, "wall-%04d.png", mask);
+    sprintf(spriteFrameName, "wall-%04d.png", mask + 1);
     
     auto wallSprite = cocos2d::Sprite::createWithSpriteFrameName(spriteFrameName);
     wallSprite->setAnchorPoint(cocos2d::Vec2::ZERO);

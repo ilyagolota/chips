@@ -3,7 +3,7 @@
 
 #include <cocos2d.h>
 #include <vector>
-#include "LevelData/TileType.h"
+#include <LevelData/TileType.h>
 
 class LevelData;
 class TiledPhysicsWorld;
@@ -13,7 +13,7 @@ class Inventory;
 class LevelObject;
 class Item;
 class Creature;
-
+class IPlayerControl;
 struct LevelWire;
 
 class Level : public cocos2d::Ref
@@ -26,6 +26,7 @@ private:
     TiledPhysicsWorld* _physicsWorld;
     TiledSoundEnvironment* _soundEnvironment;
     TiledProjector* _projector;
+	IPlayerControl* _playerControl;
     
     float _timeMultiplier;
     
@@ -61,6 +62,8 @@ public:
     TiledProjector* getProjector() const;
     Inventory* getInventory() const;
     float getTurnDuration();
+	IPlayerControl* getPlayerControl();
+	void setPlayerControl(IPlayerControl* playerControl);
     
     void addObject(LevelObject* object);
     LevelObject* getObjectAt(const cocos2d::Vec2& coordinate) const;

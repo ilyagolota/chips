@@ -3,10 +3,11 @@
 
 #include <cocos2d.h>
 #include <Tiled/Direction.h>
+#include <Level/IPlayerControl.h>
 
 class Level;
 
-class SmartControlLayer : public cocos2d::Layer
+class SmartControlLayer : public cocos2d::Layer, public IPlayerControl
 {
 private:
     Level* _level;
@@ -21,8 +22,8 @@ public:
 	SmartControlLayer(Level* level);
     virtual ~SmartControlLayer();
 
-    bool isPressed();
-    Direction getSelectedDirection();
+	bool isPressed() override;
+    Direction getSelectedDirection() override;
     
     bool onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event) override;
     void onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event) override;

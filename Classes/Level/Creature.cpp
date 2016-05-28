@@ -2,16 +2,15 @@
 
 #include <cocos2d.h>
 
-#include "LevelData/TileType.h"
-#include "LevelData/LevelData.h"
-
-#include "Tiled/Direction.h"
-#include "Tiled/TiledPhysicsWorld.h"
-#include "Tiled/TiledProjector.h"
-#include "Tiled/TiledSoundEnvironment.h"
-#include "Tiled/TileSoundEmitter.h"
-
+#include <LevelData/TileType.h>
+#include <LevelData/LevelData.h>
+#include <Tiled/Direction.h>
+#include <Tiled/TiledPhysicsWorld.h>
+#include <Tiled/TiledProjector.h>
+#include <Tiled/TiledSoundEnvironment.h>
+#include <Tiled/TileSoundEmitter.h>
 #include "Level.h"
+#include "IPlayerControl.h"
 #include "Item.h"
 #include "Objects/LevelObject.h"
 
@@ -244,7 +243,7 @@ void Creature::onTurn(float dt)
 bool Creature::canMove(Direction direction) const
 {
     int physicsLayerMask = (_type == CreatureType::CHIP) ? 0x01 : ((_type == CreatureType::BLOCK) ? 0x02 : 0x04);
-    if (_level->getPhysicsWorld()->rayCast(_coordinate, _direction, physicsLayerMask))
+    if (_level->getPhysicsWorld()->rayCast(_coordinate, direction, physicsLayerMask))
     {
         return false;
     }
@@ -255,7 +254,7 @@ bool Creature::canMove(Direction direction) const
         return false;
     }
     
-    auto nextCoordinate = _coordinate + toVec2(_direction);
+    auto nextCoordinate = _coordinate + toVec2(direction);
     
     auto frontObject = _level->getObjectAt(nextCoordinate);
     if (frontObject != nullptr && !frontObject->isEnterableBy(this, direction))
@@ -276,7 +275,7 @@ bool Creature::canMove(Direction direction) const
         {
             if (_type == CreatureType::CHIP)
             {
-                return frontCreature->canMove(_direction);
+                return frontCreature->canMove(direction);
             }
         }
         else if (frontCreature->_type == CreatureType::CHIP)
@@ -303,6 +302,15 @@ void Creature::_tryMoveNext()
 {
     if (_type == CreatureType::CHIP)
     {
+		if (_level->getPlayerControl()->isPressed())
+		{
+			auto direction = _level->getPlayerControl()->getSelectedDirection();
+			if (canMove(direction))
+			{
+				_move(direction);
+			}
+		}
+
         /*auto controlDirection = _level->getController()->getSelectedDirection();
         if (controlDirection != Direction::NONE)
         {
@@ -420,24 +428,31 @@ void Creature::_tryMoveNext()
 
 void Creature::_move(Direction direction)
 {
-    /*if (direction != Direction::NONE)
-    {
-        _leftTileAt(_coordinate);
-        _coordinate += directionToVec2(direction);
-        _turnsToNextMove = getTurnsPerMove();
-        
-        auto wasDirection = _direction;
-        _direction = direction;
-        _movedToTileAt(_coordinate);
-        
-        _setAnimationState(WALK, wasDirection != _direction);
-        
-        float duration = _turnsToNextMove * _level->getTurnDuration();
-        auto targetPosition = _level->getScene()->getTiledMap()->getLayer(1)->coordinateToPosition(_coordinate);
-        auto moveAction = cocos2d::MoveTo::create(duration, targetPosition);
-        moveAction->setTag(MOVE_ACTION_TAG);
-        _sprite->runAction(moveAction);
-    }*/
+	_direction = direction;
+	auto object = _level->getObjectAt(_coordinate);
+	if (object != nullptr)
+	{
+		object->beforeLeave(this);
+	}
+
+	_coordinate += toVec2(direction);
+	auto frontObject = _level->getObjectAt(_coordinate);
+	if (frontObject != nullptr)
+	{
+		frontObject->beforeEnter(this);
+	}
+
+	_turnsToNextMove = getTurnsPerMove();
+
+	float duration = _turnsToNextMove * _level->getTurnDuration();
+	auto targetPosition = _level->getProjector()->coordinateToPoint(_coordinate);
+	if (_direction == Direction::SOUTH || _direction == Direction::EAST)
+	{
+		_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::FRONT_Z_ORDER);
+	}
+	auto moveAction = cocos2d::MoveTo::create(duration, targetPosition);
+	moveAction->setTag(MOVE_ACTION_TAG);
+	_sprite->runAction(moveAction);
 }
 
 void Creature::_updatePosition()

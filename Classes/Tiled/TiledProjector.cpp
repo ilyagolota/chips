@@ -45,7 +45,7 @@ void TiledProjector::clear()
 cocos2d::Vec2 TiledProjector::coordinateToPoint(const cocos2d::Vec2& coordinate)
 {
     cocos2d::Vec2 point;
-    point.x = 0.5f * _tileSize.width * (coordinate.y - coordinate.x) - 0.5f * _tileSize.width;
+    point.x = -0.5f * _tileSize.width * (coordinate.y - coordinate.x) - 0.5f * _tileSize.width;
     point.y = -0.5f * _tileSize.height * (coordinate.y + coordinate.x) - _tileSize.height;
     return point;
 }
