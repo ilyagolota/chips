@@ -52,7 +52,7 @@
 		<key>bug-walk-west</key>
 		<dict>
 			<key>delay</key>
-			<real>0.12</real>
+			<real>0.06</real>
 			<key>frames</key>
 			<array>
 				<string>bug-walk-west-0001.png</string>
@@ -66,7 +66,7 @@
 		<key>bug-walk-east</key>
 		<dict>
 			<key>delay</key>
-			<real>0.12</real>
+			<real>0.06</real>
 			<key>frames</key>
 			<array>
 				<string>bug-walk-east-0001.png</string>
@@ -188,7 +188,7 @@
 		<key>chip-walk-east</key>
 		<dict>
 			<key>delay</key>
-			<real>0.12</real>
+			<real>0.06</real>
 			<key>frames</key>
 			<array>
 				<string>chip-walk-west-0001.png</string>
@@ -214,7 +214,7 @@
 		<key>chip-walk-west</key>
 		<dict>
 			<key>delay</key>
-			<real>0.12</real>
+			<real>0.06</real>
 			<key>frames</key>
 			<array>
 				<string>chip-walk-west-0001.png</string>

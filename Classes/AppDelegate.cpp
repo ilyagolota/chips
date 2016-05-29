@@ -78,10 +78,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     auto preloader = Preloader::create();
     
-    preloader->addTask(LoadTextureTask::create("sheets/creatures.png"));
     preloader->addTask(LoadSpriteSheetTask::create("sheets/creatures.plist"));
-    preloader->addTask(LoadTextureTask::create("sheets/tiles-1.png"));
     preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-1.plist"));
+	preloader->addTask(LoadSpriteSheetTask::create("sheets/walls-02.plist"));
     preloader->addTask(LoadAnimationsTask::create("animations.plist"));
     
     std::vector<char> hash(16);

@@ -375,8 +375,12 @@ void Creature::_tryMoveNext()
             direction = turnRight(direction);
         }
         
-        if (!canMove(direction))
-        {
+		if (canMove(direction))
+		{
+			_move(direction);
+		}
+		else
+		{
             auto initialDirection = direction;
             for (;;)
             {
@@ -468,7 +472,6 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
 		animatedDirection = _direction;
 	}
 
-	
 	switch (_type)
     {
         case CreatureType::BLOCK:

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plist version="1.0">
+  <dict>
+    <key>metadata</key>
+    <dict>
+      <key>version</key>
+      <string>2.0.0</string>
+      <key>size</key>
+      <string>{1024,1024}</string>
+      <key>format</key>
+      <integer>3</integer>
+      <key>name</key>
+      <string>walls-01.png</string>
+    </dict>
+    <key>frames</key>
+    <dict>
+      <key>wall-0002.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{0,0},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0003.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{0,215},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0004.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{0,430},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0006.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{0,645},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0007.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{181,0},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0008.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{362,0},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0010.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{543,0},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0011.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{724,0},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0012.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{181,215},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0014.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{181,430},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0015.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{181,645},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0016.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,214}</string>
+        <key>spriteOffset</key>
+        <string>{0,-7}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,14},{180,214}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{362,215},{180,214}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0001.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,200}</string>
+        <key>spriteOffset</key>
+        <string>{0,-14}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,28},{180,200}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{543,215},{180,200}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0005.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,200}</string>
+        <key>spriteOffset</key>
+        <string>{0,-14}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,28},{180,200}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{724,215},{180,200}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0009.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,200}</string>
+        <key>spriteOffset</key>
+        <string>{0,-14}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,28},{180,200}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{362,430},{180,200}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>wall-0013.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{180,200}</string>
+        <key>spriteOffset</key>
+        <string>{0,-14}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,228}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,28},{180,200}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{362,631},{180,200}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+    </dict>
+  </dict>
+</plist>
