@@ -37,7 +37,7 @@ TileBody TiledPhysicsWorld::getBody(const cocos2d::Vec2& coordinate, int layerMa
         {
             if (((layerMask >> layerIndex) & 1) != 0)
             {
-                int layerOffset = (layerIndex << 8);
+                int layerOffset = layerIndex * 8;
                 body |= static_cast<TileBody>((_bodies[index] & (0xff << layerOffset)) >> layerOffset);
             }
         }
@@ -54,9 +54,9 @@ void TiledPhysicsWorld::setBody(const cocos2d::Vec2& coordinate, TileBody body, 
         {
             if (((layerMask >> layerIndex) & 1) != 0)
             {
-                int layerOffset = (layerIndex << 8);
-                _bodies[index] = (_bodies[index] & ~(0xff << layerOffset));
-                _bodies[index] |= static_cast<int>(body) << (1 << layerOffset);
+                int layerOffset = layerIndex * 8;
+                _bodies[index] = _bodies[index] & ~(0xffu << layerOffset);
+                _bodies[index] |= static_cast<int>(body) << layerOffset;
             }
         }
     }
@@ -80,7 +80,7 @@ bool TiledPhysicsWorld::rayCast(const cocos2d::Vec2& origin, Direction direction
     {
         if (((layerMask >> layerIndex) & 1) != 0)
         {
-            unsigned int body = _bodies[originIndex] >> (layerIndex << 8);
+            unsigned int body = _bodies[originIndex] >> (layerIndex * 8);
             if ((body & outDirectionMask) != 0)
             {
                 return true;

@@ -153,9 +153,9 @@ void Creature::setLevel(Level* level)
         _level = level;
         if (_level != nullptr)
         {
-            _level->getStage()->addChild(_sprite);
             _updatePosition();
             _updateAnimation(_turnsToNextMove != 0, _direction);
+            _level->getStage()->addChild(_sprite);
             
             if (_soundEmitter != nullptr)
             {

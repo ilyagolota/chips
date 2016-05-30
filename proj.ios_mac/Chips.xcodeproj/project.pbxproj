@@ -334,6 +334,7 @@
 		B3F767991CF3453D00F03CCE /* Preloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preloader.h; sourceTree = "<group>"; };
 		B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
 		B3F767AF1CF34FF700F03CCE /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
+		B3F9E5601CFC4DB000BF2D5D /* IPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPlayerControl.h; sourceTree = "<group>"; };
 		B3FCB0911CF59CC4003B3C9E /* sheets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sheets; path = ../../chips/Resources/sheets; sourceTree = "<group>"; };
 		B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LoadLevelListTask.cpp; path = ../../../chips/Classes/LevelData/LoadLevelListTask.cpp; sourceTree = "<group>"; };
 		B3FCB0951CF5A04C003B3C9E /* LoadLevelListTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadLevelListTask.h; path = ../../../chips/Classes/LevelData/LoadLevelListTask.h; sourceTree = "<group>"; };
@@ -631,6 +632,7 @@
 			isa = PBXGroup;
 			children = (
 				B305558F1CE34164006E5546 /* Objects */,
+				B3F9E5601CFC4DB000BF2D5D /* IPlayerControl.h */,
 				B305558A1CE339DC006E5546 /* Creature.cpp */,
 				B305558B1CE339DC006E5546 /* Creature.h */,
 				B30555851CE333E2006E5546 /* Inventory.cpp */,
