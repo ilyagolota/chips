@@ -15,6 +15,8 @@ public:
     
     Ice(const cocos2d::Vec2& coordinate, TileType type);
     
+	bool isEnterableBy(const Creature* creature, Direction direction) const override;
+	bool isEscapableBy(const Creature* creature, Direction direction) const override;
     void afterEnter(Creature* creature) override;
 };
 

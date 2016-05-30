@@ -247,9 +247,9 @@
         <key>spriteSize</key>
         <string>{165,76}</string>
         <key>spriteOffset</key>
-        <string>{0.5,26}</string>
+        <string>{0.5,20}</string>
         <key>spriteSourceSize</key>
-        <string>{180,170}</string>
+        <string>{180,158}</string>
         <key>spriteSourceColorRect</key>
         <string>{{8,21},{165,76}}</string>
         <key>spriteTrimmed</key>
@@ -266,9 +266,9 @@
         <key>spriteSize</key>
         <string>{165,57}</string>
         <key>spriteOffset</key>
-        <string>{-0.5,-31.5}</string>
+        <string>{-0.5,-37.5}</string>
         <key>spriteSourceSize</key>
-        <string>{180,170}</string>
+        <string>{180,158}</string>
         <key>spriteSourceColorRect</key>
         <string>{{7,88},{165,57}}</string>
         <key>spriteTrimmed</key>
@@ -285,9 +285,9 @@
         <key>spriteSize</key>
         <string>{74,102}</string>
         <key>spriteOffset</key>
-        <string>{34,-17}</string>
+        <string>{34,-23}</string>
         <key>spriteSourceSize</key>
-        <string>{180,170}</string>
+        <string>{180,158}</string>
         <key>spriteSourceColorRect</key>
         <string>{{87,51},{74,102}}</string>
         <key>spriteTrimmed</key>
@@ -304,9 +304,9 @@
         <key>spriteSize</key>
         <string>{74,82}</string>
         <key>spriteOffset</key>
-        <string>{-34,-27}</string>
+        <string>{-34,-33}</string>
         <key>spriteSourceSize</key>
-        <string>{180,170}</string>
+        <string>{180,158}</string>
         <key>spriteSourceColorRect</key>
         <string>{{19,71},{74,82}}</string>
         <key>spriteTrimmed</key>
@@ -323,9 +323,9 @@
         <key>spriteSize</key>
         <string>{75,59}</string>
         <key>spriteOffset</key>
-        <string>{33.5,23.5}</string>
+        <string>{33.5,17.5}</string>
         <key>spriteSourceSize</key>
-        <string>{180,170}</string>
+        <string>{180,158}</string>
         <key>spriteSourceColorRect</key>
         <string>{{86,32},{75,59}}</string>
         <key>spriteTrimmed</key>
@@ -342,9 +342,9 @@
         <key>spriteSize</key>
         <string>{75,58}</string>
         <key>spriteOffset</key>
-        <string>{-33.5,24}</string>
+        <string>{-33.5,18}</string>
         <key>spriteSourceSize</key>
-        <string>{180,170}</string>
+        <string>{180,158}</string>
         <key>spriteSourceColorRect</key>
         <string>{{19,32},{75,58}}</string>
         <key>spriteTrimmed</key>

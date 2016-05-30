@@ -20,7 +20,7 @@ Ice::Ice(const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordinat
     sprite->setLocalZOrder(0);
     addNode(sprite);
     
-    if (_type == TileType::ICE_WALL_NORTH_EAST)
+	if (_type == TileType::ICE_WALL_SOUTH_WEST)
     {
         auto northWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north.png");
         northWall->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -34,7 +34,7 @@ Ice::Ice(const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordinat
         eastWall->setLocalZOrder(Level::FRONT_Z_ORDER);
         addNode(eastWall);
     }
-    else if (_type == TileType::ICE_WALL_SOUTH_EAST)
+	else if (_type == TileType::ICE_WALL_NORTH_WEST)
     {
         auto wall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-south-east.png");
         wall->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -42,7 +42,7 @@ Ice::Ice(const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordinat
         wall->setLocalZOrder(Level::WALL_Z_ORDER);
         addNode(wall);
     }
-    else if (_type == TileType::ICE_WALL_NORTH_WEST)
+	else if (_type == TileType::ICE_WALL_SOUTH_EAST)
     {
         auto wall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north-west.png");
         wall->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -50,7 +50,7 @@ Ice::Ice(const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordinat
         wall->setLocalZOrder(Level::BACK_Z_ORDER);
         addNode(wall);
     }
-    else if (_type == TileType::ICE_WALL_SOUTH_WEST)
+	else if (_type == TileType::ICE_WALL_NORTH_EAST)
     {
         auto westWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-west.png");
         westWall->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -64,6 +64,40 @@ Ice::Ice(const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordinat
         southWall->setLocalZOrder(Level::FRONT_Z_ORDER);
         addNode(southWall);
     }
+}
+
+bool Ice::isEnterableBy(const Creature* creature, Direction direction) const
+{
+	switch (_type)
+	{
+		case TileType::ICE_WALL_NORTH_EAST:
+			return direction == Direction::SOUTH || direction == Direction::WEST;
+		case TileType::ICE_WALL_SOUTH_EAST:
+			return direction == Direction::NORTH || direction == Direction::WEST;
+		case TileType::ICE_WALL_NORTH_WEST:
+			return direction == Direction::SOUTH || direction == Direction::EAST;
+		case TileType::ICE_WALL_SOUTH_WEST:
+			return direction == Direction::NORTH || direction == Direction::EAST;
+		default:
+			return true;
+	}
+}
+
+bool Ice::isEscapableBy(const Creature* creature, Direction direction) const
+{
+	switch (_type)
+	{
+		case TileType::ICE_WALL_NORTH_EAST:
+			return direction == Direction::NORTH || direction == Direction::EAST;
+		case TileType::ICE_WALL_SOUTH_EAST:
+			return direction == Direction::SOUTH || direction == Direction::EAST;
+		case TileType::ICE_WALL_NORTH_WEST:
+			return direction == Direction::NORTH || direction == Direction::WEST;
+		case TileType::ICE_WALL_SOUTH_WEST:
+			return direction == Direction::SOUTH || direction == Direction::WEST;
+		default:
+			return true;
+	}
 }
 
 void Ice::afterEnter(Creature* creature)
