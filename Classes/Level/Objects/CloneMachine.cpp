@@ -50,13 +50,3 @@ void CloneMachine::reset()
 {
     _working = false;
 }
-    
-void CloneMachine::build()
-{
-
-}
-
-void CloneMachine::destroy()
-{
-
-}

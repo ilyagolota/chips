@@ -27,13 +27,3 @@ void Fire::afterEnter(Creature *creature)
         
     }
 }
-
-void Fire::build()
-{
-
-}
-
-void Fire::destroy()
-{
-
-}

@@ -660,7 +660,7 @@ void Level::_buildFloor(const cocos2d::Vec2& coordinate)
     auto floorSprite = cocos2d::Sprite::createWithSpriteFrameName("floor.png");
     floorSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
 	floorSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
-    floorSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * FRONT_Z_ORDER);
+    floorSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * Z_ORDER_PER_TILE);
     _stage->addChild(floorSprite);
 }
 
@@ -715,7 +715,7 @@ void Level::_buildWall(const cocos2d::Vec2& coordinate)
     auto wallSprite = cocos2d::Sprite::createWithSpriteFrameName(spriteFrameName);
     wallSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
     wallSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
-    wallSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * FRONT_Z_ORDER + WALL_Z_ORDER);
+    wallSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * Z_ORDER_PER_TILE + WALL_Z_ORDER);
     _stage->addChild(wallSprite);
 }
 
@@ -726,7 +726,7 @@ void Level::_buildGravel(const cocos2d::Vec2& coordinate)
 	auto gravelSprite = cocos2d::Sprite::createWithSpriteFrameName("gravel.png");
 	gravelSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
 	gravelSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
-	gravelSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * FRONT_Z_ORDER);
+	gravelSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * Z_ORDER_PER_TILE);
 	_stage->addChild(gravelSprite);
 }
 

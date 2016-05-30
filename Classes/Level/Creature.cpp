@@ -436,7 +436,7 @@ void Creature::_move(Direction direction)
 	auto targetPosition = _level->getProjector()->coordinateToPoint(_coordinate);
 	if (_direction == Direction::SOUTH || _direction == Direction::EAST)
 	{
-		_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::FRONT_Z_ORDER);
+		_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE);
 	}
 	auto moveAction = cocos2d::MoveTo::create(duration, targetPosition);
 	moveAction->setTag(MOVE_ACTION_TAG);
@@ -446,7 +446,7 @@ void Creature::_move(Direction direction)
 void Creature::_updatePosition()
 {
     _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
-    _sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::FRONT_Z_ORDER);
+    _sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE);
     
     if (_soundEmitter != nullptr)
     {

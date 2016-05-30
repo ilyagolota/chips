@@ -51,13 +51,3 @@ void Beartrap::afterEnter(Creature* creature)
 void Beartrap::reset()
 {
 }
-
-void Beartrap::build()
-{
-
-}
-
-void Beartrap::destroy()
-{
-
-}

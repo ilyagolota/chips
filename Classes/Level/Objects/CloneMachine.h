@@ -21,10 +21,6 @@ public:
     
     void beforeLeave(Creature* creature) override;
     void reset() override;
-    
-protected:
-    void build() override;
-    void destroy() override;
 };
 
 #endif

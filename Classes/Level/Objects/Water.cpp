@@ -11,33 +11,22 @@ Water* Water::create(const cocos2d::Vec2& coordinate)
 
 Water::Water(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
 {
-    _waterSprite = cocos2d::Sprite::create();
-    _waterSprite->retain();
+    auto sprite = cocos2d::Sprite::create();
+    sprite->setAnchorPoint(cocos2d::Vec2::ZERO);
+    sprite->setPosition(cocos2d::Vec2::ZERO);
+    sprite->setLocalZOrder(0);
     
     auto animation = cocos2d::AnimationCache::getInstance()->getAnimation("water");
-    _waterSprite->runAction(cocos2d::RepeatForever::create(cocos2d::Animate::create(animation)));
+    sprite->runAction(cocos2d::RepeatForever::create(cocos2d::Animate::create(animation)));
+    
+    addNode(sprite);
 }
 
 Water::~Water()
 {
-    _waterSprite->release();
 }
 
 bool Water::hasDrawnBlock() const
 {
     return false;
-}
-
-void Water::build()
-{
-    std::vector<int> f;
-    
-    _waterSprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
-    _waterSprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::FRONT_Z_ORDER);
-    _level->getStage()->addChild(_waterSprite);
-}
-
-void Water::destroy()
-{
-    _level->getStage()->removeChild(_waterSprite);
 }

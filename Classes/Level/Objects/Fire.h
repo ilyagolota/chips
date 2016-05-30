@@ -15,10 +15,6 @@ public:
     
     bool isEnterableBy(const Creature* creature, Direction direction) const override;
     void afterEnter(Creature* creature) override;
-    
-protected:
-    void build() override;
-    void destroy() override;
 };
 
 #endif

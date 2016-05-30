@@ -38,11 +38,12 @@ private:
 public:
     enum
     {
-        BACKGROUND_Z_ORDER,
+        BACK_Z_ORDER,
         CREATURE_SMALL_Z_ORDER,
         CREATURE_MEDIUM_Z_ORDER,
         CREATURE_BIG_Z_ORDER,
         WALL_Z_ORDER,
+        Z_ORDER_PER_TILE,
         FRONT_Z_ORDER,
     };
     
