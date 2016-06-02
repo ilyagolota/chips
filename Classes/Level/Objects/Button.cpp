@@ -84,7 +84,7 @@ void Button::afterEnter(Creature* creature)
     }
 }
 
-void Button::beforeLeave(Creature* creature)
+void Button::beforeEscape(Creature* creature)
 {
     CC_UNUSED_PARAM(creature);
     

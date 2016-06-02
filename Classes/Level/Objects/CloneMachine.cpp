@@ -16,7 +16,7 @@ CloneMachine::CloneMachine(const cocos2d::Vec2& coordinate) : LevelObject(coordi
 
 void CloneMachine::performCloning()
 {
-    // Now creature can leave cloner and it will be cloned in `beforeLeave` method.
+    // Now creature can leave cloner and it will be cloned in `beforeEscape` method.
     _working = true;
 }
 
@@ -30,7 +30,7 @@ bool CloneMachine::isEscapableBy(const Creature* creature, Direction direction) 
     return _working;
 }
 
-void CloneMachine::beforeLeave(Creature* creature)
+void CloneMachine::beforeEscape(Creature* creature)
 {
     _working = false;
 

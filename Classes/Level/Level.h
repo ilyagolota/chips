@@ -52,7 +52,7 @@ public:
     Level(cocos2d::Node* stage);
     ~Level();
     
-    const LevelData* getLevelData() const;
+    LevelData* getLevelData() const;
     void start(LevelData* levelData);
     void restart();
     void makeTurn(float dt);

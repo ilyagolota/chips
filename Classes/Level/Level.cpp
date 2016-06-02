@@ -72,7 +72,7 @@ Level::~Level()
     _projector->release();
 }
 
-const LevelData* Level::getLevelData() const
+LevelData* Level::getLevelData() const
 {
     return _levelData;
 }

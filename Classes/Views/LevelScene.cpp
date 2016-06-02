@@ -1,6 +1,7 @@
 #include "LevelScene.h"
 #include <cocos2d.h>
 #include <ChipsChallengeGame.h>
+#include <Tiled/TiledProjector.h>
 #include <Level/Level.h>
 #include <Level/Creature.h>
 #include "LevelScene/SmartControlLayer.h"
@@ -82,9 +83,15 @@ void LevelScene::update(float dt)
     {
         auto playerBounds = playerCreature->getSprite()->getBoundingBox();
         auto playerCenter = playerBounds.origin + playerBounds.size * 0.5f;
+
+        auto playerPosition = playerCreature->getSprite()->getPosition();
+        auto playerLastPosition = _level->getProjector()->coordinateToPoint(playerCreature->getCoordinate() - toVec2(playerCreature->getDirection()));
+        auto playerNextPosition = _level->getProjector()->coordinateToPoint(playerCreature->getCoordinate());
+        auto t = (playerPosition.x - playerLastPosition.x) / (playerNextPosition.x - playerLastPosition.x);
+        auto stabilization = cocos2d::Vec2(0, playerPosition.y - (playerNextPosition.y * t + playerLastPosition.y * (1.0f - t)));
         
         auto winSize = cocos2d::Director::getInstance()->getWinSize();
-        _stage->setPosition(-playerCenter + winSize * 0.5f);
+        _stage->setPosition(-playerCenter + winSize * 0.5f + stabilization);
     }
 }
 

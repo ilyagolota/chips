@@ -82,12 +82,12 @@ void LevelObject::afterEnter(Creature* creature)
     CC_UNUSED_PARAM(creature);
 }
 
-void LevelObject::beforeLeave(Creature* creature)
+void LevelObject::beforeEscape(Creature* creature)
 {
     CC_UNUSED_PARAM(creature);
 }
 
-void LevelObject::afterLeave(Creature* creature)
+void LevelObject::afterEscape(Creature* creature)
 {
     CC_UNUSED_PARAM(creature);
 }

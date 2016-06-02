@@ -162,6 +162,12 @@ void Creature::setLevel(Level* level)
                 _level->getSoundEnvironment()->addEmitter(_soundEmitter);
             }
             
+            auto escapedObject = _level->getObjectAt(_coordinate - toVec2(_direction));
+            if (escapedObject != nullptr)
+            {
+                escapedObject->afterEscape(this);
+            }
+            
             auto object = _level->getObjectAt(_coordinate);
             if (object != nullptr)
             {
@@ -420,7 +426,7 @@ void Creature::_move(Direction direction)
 	auto object = _level->getObjectAt(_coordinate);
 	if (object != nullptr)
 	{
-		object->beforeLeave(this);
+		object->beforeEscape(this);
 	}
 
 	_coordinate += toVec2(direction);
@@ -505,6 +511,26 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
 
         case CreatureType::BUG:
         case CreatureType::TANK:
+            if (force || wasMoving != isMoving() || (_direction != wasDirection && _direction != inverse(wasDirection)))
+            {
+                _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
+                if (isMoving())
+                {
+                    auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
+                    auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
+                    auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
+                    action->setTag(ANIMATE_ACTION_TAG);
+                    _sprite->runAction(action);
+                }
+                else
+                {
+                    auto spriteFrameName = std::to_string(_type) + "-stay-" + std::to_string(animatedDirection) + ".png";
+                    auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
+                    _sprite->setSpriteFrame(spriteFrame);
+                }
+            }
+            break;
+            
         case CreatureType::BALL:
         case CreatureType::WALKER:
 			if (force || wasMoving != isMoving() || (_direction != wasDirection && _direction != inverse(wasDirection)))
@@ -520,7 +546,7 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
                 }
                 else
                 {
-					auto spriteFrameName = std::to_string(_type) + "-stay-" + std::to_string(animatedDirection) + ".png";
+					auto spriteFrameName = std::to_string(_type) + "-stay.png";
                     auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
                     _sprite->setSpriteFrame(spriteFrame);
                 }

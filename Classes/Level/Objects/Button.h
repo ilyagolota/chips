@@ -16,7 +16,7 @@ public:
 	Button(const cocos2d::Vec2& coordinate, TileType type);
 
     void afterEnter(Creature* creature) override;
-    void beforeLeave(Creature* creature) override;
+    void beforeEscape(Creature* creature) override;
     
     std::string& getColorName();
     

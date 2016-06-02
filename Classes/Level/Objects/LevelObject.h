@@ -32,8 +32,8 @@ public:
     
     virtual void beforeEnter(Creature* creature);
     virtual void afterEnter(Creature* creature);
-    virtual void beforeLeave(Creature* creature);
-    virtual void afterLeave(Creature* creature);
+    virtual void beforeEscape(Creature* creature);
+    virtual void afterEscape(Creature* creature);
     virtual void reset();
 
 protected:

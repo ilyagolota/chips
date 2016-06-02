@@ -19,7 +19,7 @@ public:
     bool isEnterableBy(const Creature* creature, Direction direction) const override;
     bool isEscapableBy(const Creature* creature, Direction direction) const override;
     
-    void beforeLeave(Creature* creature) override;
+    void beforeEscape(Creature* creature) override;
     void reset() override;
 };
 

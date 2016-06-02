@@ -12,7 +12,7 @@ Beartrap::Beartrap(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
 {
     _open = false;
     
-    _sprite = cocos2d::Sprite::createWithSpriteFrameName("floor.png");
+    /*_sprite = cocos2d::Sprite::createWithSpriteFrameName("floor.png");
     _sprite->setPosition(cocos2d::Vec2::ZERO);
     _sprite->setAnchorPoint(cocos2d::Vec2::ZERO);
     _sprite->retain();
@@ -20,7 +20,7 @@ Beartrap::Beartrap(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
     auto holeSprite = cocos2d::Sprite::createWithSpriteFrameName("beartrap.png");
     holeSprite->setPosition(cocos2d::Vec2::ZERO);
     holeSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _sprite->addChild(holeSprite);
+    _sprite->addChild(holeSprite);*/
 }
 
 bool Beartrap::isOpen() const
