@@ -225,6 +225,18 @@
 				<string>chip-walk-west-0006.png</string>
 			</array>
 		</dict>
+		<key>teleport</key>
+		<dict>
+			<key>delay</key>
+			<real>0.12</real>
+			<key>frames</key>
+			<array>
+				<string>teleport-0001.png</string>
+				<string>teleport-0002.png</string>
+				<string>teleport-0003.png</string>
+				<string>teleport-0004.png</string>
+			</array>
+		</dict>
 		<key>water</key>
 		<dict>
 			<key>delay</key>

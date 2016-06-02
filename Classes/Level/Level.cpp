@@ -669,41 +669,42 @@ void Level::_buildWall(const cocos2d::Vec2& coordinate)
 
     int mask = 0;
     for (int dirIndex = 0; dirIndex < 4; dirIndex++)
-    {
-        auto neighborCoordinate = coordinate + toVec2(static_cast<Direction>(dirIndex));
-        auto index = _coordinateToIndex(neighborCoordinate);
-        
-        bool hasNeighborWall = false;
-        for (auto& layer : _levelData->getLayers())
-        {
-            switch (layer[index])
-            {
-                case TileType::WALL:
-                case TileType::DOOR_BLUE:
-                case TileType::DOOR_GREEN:
-                case TileType::DOOR_YELLOW:
-                case TileType::DOOR_RED:
-                case TileType::SWITCH_WALL_CLOSED:
-                case TileType::SWITCH_WALL_OPEN:
-                case TileType::BLUE_WALL_REAL:
-                case TileType::BLUE_WALL_FAKE:
-                case TileType::HIDDEN_WALL_TEMP:
-                case TileType::HIDDEN_WALL_PERM:
-                case TileType::HIDDEN_WALL_PERM_1:
-                case TileType::HIDDEN_WALL_PERM_2:
-                case TileType::HIDDEN_WALL_PERM_3:
+	{
+		bool hasNeighborWall = false;
+		auto neighborCoordinate = coordinate + toVec2(static_cast<Direction>(dirIndex));
+		if (neighborCoordinate.x >= 0 && neighborCoordinate.y >= 0 && neighborCoordinate.x < _levelData->getWidth() && neighborCoordinate.y < _levelData->getHeight())
+		{
+			auto index = _coordinateToIndex(neighborCoordinate);
+			for (auto& layer : _levelData->getLayers())
+			{
+				switch (layer[index])
+				{
+				case TileType::WALL:
+				case TileType::DOOR_BLUE:
+				case TileType::DOOR_GREEN:
+				case TileType::DOOR_YELLOW:
+				case TileType::DOOR_RED:
+				case TileType::SWITCH_WALL_CLOSED:
+				case TileType::SWITCH_WALL_OPEN:
+				case TileType::BLUE_WALL_REAL:
+				case TileType::BLUE_WALL_FAKE:
+				case TileType::HIDDEN_WALL_TEMP:
+				case TileType::HIDDEN_WALL_PERM:
+				case TileType::HIDDEN_WALL_PERM_1:
+				case TileType::HIDDEN_WALL_PERM_2:
+				case TileType::HIDDEN_WALL_PERM_3:
 				case TileType::SOCKET:
-                    hasNeighborWall = true;
-                    break;
-                    
-                default:
-                    break;
-            }
+					hasNeighborWall = true;
+					break;
+
+				default:
+					break;
+				}
+			}
             
             if (hasNeighborWall)
             {
                 mask |= (1 << dirIndex);
-                break;
             }
         }
     }

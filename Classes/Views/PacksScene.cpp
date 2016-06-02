@@ -61,7 +61,7 @@ void PacksScene::_build()
         {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {
-                cocos2d::Director::getInstance()->pushScene(LevelScene::create(_game, 0, 0));
+                cocos2d::Director::getInstance()->pushScene(LevelScene::create(_game, 0, 26));
             }
         });
         x += buttonWidth;

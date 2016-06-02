@@ -108,6 +108,8 @@ void LevelObject::addNode(cocos2d::Node* node)
     }
     if (_level != nullptr)
     {
+		node->setLocalZOrder(node->getLocalZOrder() + Level::Z_ORDER_PER_TILE * _level->getProjector()->coordinateToZOrder(_coordinate));
+		node->setPosition(node->getPosition() + _level->getProjector()->coordinateToPoint(_coordinate));
         _level->getStage()->addChild(node);
     }
 }
