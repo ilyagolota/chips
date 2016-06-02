@@ -177,8 +177,7 @@ void Creature::setLevel(Level* level)
             auto item = _level->getItemAt(_coordinate);
             if (item != nullptr)
             {
-                // if (item->can
-                //item->afterEnter(creature);
+                item->pick(this);
             }
         }
     }
@@ -201,6 +200,12 @@ void Creature::onTurn(float dt)
             if (object != nullptr)
             {
                 object->afterEnter(this);
+            }
+            
+            auto item = _level->getItemAt(_coordinate);
+            if (item != nullptr)
+            {
+                item->pick(this);
             }
         }
     }
@@ -252,11 +257,11 @@ bool Creature::canMove(Direction direction) const
         return false;
     }
     
-    /*auto targetItem = _level->getItemAt(nextCoordinate);
+    auto targetItem = _level->getItemAt(nextCoordinate);
     if (targetItem != nullptr && !targetItem->isPickableBy(this))
     {
         return false;
-    }*/
+    }
     
     auto frontCreature = _level->getCreatureAt(nextCoordinate);
     if (frontCreature != nullptr)
@@ -435,7 +440,7 @@ void Creature::_move(Direction direction)
 	{
 		frontObject->beforeEnter(this);
 	}
-
+    
 	_turnsToNextMove = getTurnsPerMove();
 
 	float duration = _turnsToNextMove * _level->getTurnDuration();

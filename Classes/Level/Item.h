@@ -5,6 +5,7 @@
 #include "LevelData/TileType.h"
 
 class Level;
+class Creature;
 
 class Item : public cocos2d::Ref
 {
@@ -13,6 +14,7 @@ private:
     TileType _type;
     cocos2d::Sprite* _sprite;
     cocos2d::Vec2 _coordinate;
+    bool _picked;
     
 public:
     static Item* create(const cocos2d::Vec2& coordinate, TileType type);
@@ -21,6 +23,11 @@ public:
     cocos2d::Vec2 getCoordinate() const;
     Level* getLevel() const;
     void setLevel(Level* level);
+    bool isPickableBy(const Creature* creature) const;
+    void pick(Creature* creature);
+    
+protected:
+    std::string& _getSpriteFrameName() const;
 };
 
 #endif

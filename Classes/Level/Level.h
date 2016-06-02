@@ -39,6 +39,7 @@ public:
     enum
     {
         BACK_Z_ORDER,
+        ITEM_Z_ORDER,
         CREATURE_SMALL_Z_ORDER,
         CREATURE_MEDIUM_Z_ORDER,
         CREATURE_BIG_Z_ORDER,

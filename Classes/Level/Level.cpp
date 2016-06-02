@@ -188,9 +188,10 @@ LevelObject* Level::getObjectAt(const cocos2d::Vec2& coordinate) const
 
 void Level::addItem(Item* item)
 {
-    size_t index = _coordinateToIndex(item->getCoordinate());
-    if (index < _items.size())
+    auto coordinate = item->getCoordinate();
+    if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _levelData->getWidth() && coordinate.y < _levelData->getHeight())
     {
+        size_t index = _coordinateToIndex(coordinate);
         auto existingItem = _items[index];
         if (existingItem != nullptr)
         {
@@ -205,15 +206,12 @@ void Level::addItem(Item* item)
 
 Item* Level::getItemAt(const cocos2d::Vec2& coordinate) const
 {
-	if (coordinate.x < 0 || coordinate.y < 0 || coordinate.x >= _levelData->getWidth() || coordinate.y >= _levelData->getHeight())
+	if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _levelData->getWidth() && coordinate.y < _levelData->getHeight())
 	{
-		return nullptr;
+        size_t index = _coordinateToIndex(coordinate);
+        return _items[index];
 	}
-	else
-	{
-		size_t index = _coordinateToIndex(coordinate);
-		return _items[index];
-	}
+    return nullptr;
 }
 
 void Level::addCreature(Creature* creature)
@@ -371,6 +369,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             
         case TileType::IC_CHIP:
             addItem(Item::create(coordinate, tileType));
+            return false;
             break;
             
         case TileType::WATER:
