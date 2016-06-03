@@ -13,6 +13,7 @@ private:
 	Level* _level;
     TileType _type;
     cocos2d::Sprite* _sprite;
+	cocos2d::Sprite* _highlight;
     cocos2d::Vec2 _coordinate;
     bool _picked;
     
@@ -20,6 +21,7 @@ public:
     static Item* create(const cocos2d::Vec2& coordinate, TileType type);
     
     Item(const cocos2d::Vec2& coordinate, TileType type);
+	~Item();
     cocos2d::Vec2 getCoordinate() const;
     Level* getLevel() const;
     void setLevel(Level* level);

@@ -37,6 +37,11 @@ cocos2d::Size TiledProjector::getMapSize() const
     return _mapSize;
 }
 
+cocos2d::Size TiledProjector::getTileSize() const
+{
+	return _tileSize;
+}
+
 void TiledProjector::clear()
 {
     std::fill(_zOrderMap.begin(), _zOrderMap.end(), UNKNOWN_DEPTH);

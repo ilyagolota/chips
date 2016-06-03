@@ -23,6 +23,7 @@ public:
     TiledProjector(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, TiledPhysicsWorld* physicsWorld);
     ~TiledProjector();
     cocos2d::Size getMapSize() const;
+	cocos2d::Size getTileSize() const;
     void clear();
     cocos2d::Vec2 coordinateToPoint(const cocos2d::Vec2& coordinate);
     int coordinateToZOrder(const cocos2d::Vec2& coordinate);
