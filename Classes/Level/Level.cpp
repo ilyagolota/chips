@@ -40,7 +40,7 @@ Level::Level(cocos2d::Node* stage)
 {
     _stage = stage;
     _levelData = nullptr;
-    _timeMultiplier = 1.3f;
+    _timeMultiplier = 1.5f;
     
     _inventory = Inventory::create();
     _inventory->retain();

@@ -20,8 +20,10 @@ public:
     void beforeEnter(Creature* creature) override;
     void afterEnter(Creature* creature) override;
     void beforeEscape(Creature* creature) override;
-
+    void reset() override;
+    
 protected:
+    Teleport* _findTargetTeleport(Creature* creature);
 	void _setDrawAsTwoParts();
 	void _setDrawAsSinglePart();
 };

@@ -40,10 +40,8 @@ protected:
     int _animationState;
     
 public:
-    const int SLIDE_FLAG = 0x01;
-    const int RELEASE_FLAG = 0x02;
-    const int MOVE_ACTION_TAG = 2005;
-    const int ANIMATE_ACTION_TAG = 2006;
+    static const int MOVE_ACTION_TAG = 2005;
+    static const int ANIMATE_ACTION_TAG = 2006;
     
     static Creature* create(CreatureType type);
     
@@ -53,6 +51,8 @@ public:
     bool isMoving() const;
     int getTurnsToNextMove() const;
     int getTurnsPerMove() const;
+    int getZOrderDelta() const;
+    int getPhysicsLayerMask() const;
     cocos2d::Sprite *getSprite() const;
     CreatureType getType() const;
     cocos2d::Vec2 getCoordinate() const;

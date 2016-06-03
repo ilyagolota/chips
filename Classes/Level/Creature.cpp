@@ -92,6 +92,38 @@ int Creature::getTurnsPerMove() const
     }
 }
 
+int Creature::getZOrderDelta() const
+{
+    if (_type == CreatureType::CHIP)
+    {
+        return Level::CREATURE_SMALL_Z_ORDER;
+    }
+    else if (_type == CreatureType::BLOCK)
+    {
+        return Level::CREATURE_BIG_Z_ORDER;
+    }
+    else
+    {
+        return Level::CREATURE_MEDIUM_Z_ORDER;
+    }
+}
+
+int Creature::getPhysicsLayerMask() const
+{
+    if (_type == CreatureType::CHIP)
+    {
+        return 0x01;
+    }
+    else if (_type == CreatureType::BLOCK)
+    {
+        return 0x02;
+    }
+    else
+    {
+        return 0x04;
+    }
+}
+
 cocos2d::Sprite *Creature::getSprite() const
 {
     return _sprite;
@@ -227,7 +259,8 @@ void Creature::onTurn(float dt)
         }
     }
     
-    if (_turnsToNextMove == 0)
+    // Creature can be moved by LevelObject in `afterEnter` method.
+    if (!isMoving())
     {
         _tryMoveNext();
     }
@@ -237,7 +270,7 @@ void Creature::onTurn(float dt)
 
 bool Creature::canMove(Direction direction) const
 {
-    int physicsLayerMask = (_type == CreatureType::CHIP) ? 0x01 : ((_type == CreatureType::BLOCK) ? 0x02 : 0x04);
+    int physicsLayerMask = getPhysicsLayerMask();
     if (_level->getPhysicsWorld()->rayCast(_coordinate, direction, physicsLayerMask))
     {
         return false;
@@ -305,16 +338,6 @@ void Creature::_tryMoveNext()
 				_move(direction);
 			}
 		}
-
-        /*auto controlDirection = _level->getController()->getSelectedDirection();
-        if (controlDirection != Direction::NONE)
-        {
-            _direction = controlDirection;
-            if (canMove(direction))
-            {
-                _move(direction);
-            }
-        }*/
     }
     else if (_type == CreatureType::TEETH)
     {
@@ -427,37 +450,41 @@ void Creature::_tryMoveNext()
 
 void Creature::_move(Direction direction)
 {
-	_direction = direction;
-	auto object = _level->getObjectAt(_coordinate);
+    _turnsToNextMove = getTurnsPerMove();
+    _direction = direction;
+    _coordinate += toVec2(direction);
+    
+    float duration = _turnsToNextMove * _level->getTurnDuration();
+    
+    if (_direction == Direction::SOUTH || _direction == Direction::EAST)
+    {
+        auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE + getZOrderDelta();
+        _sprite->setLocalZOrder(zOrder);
+    }
+    
+    auto moveAction = cocos2d::MoveTo::create(duration, _level->getProjector()->coordinateToPoint(_coordinate));
+    moveAction->setTag(MOVE_ACTION_TAG);
+    _sprite->runAction(moveAction);
+    
+	auto object = _level->getObjectAt(_coordinate - toVec2(direction));
 	if (object != nullptr)
 	{
 		object->beforeEscape(this);
 	}
 
-	_coordinate += toVec2(direction);
 	auto frontObject = _level->getObjectAt(_coordinate);
 	if (frontObject != nullptr)
 	{
 		frontObject->beforeEnter(this);
 	}
-    
-	_turnsToNextMove = getTurnsPerMove();
-
-	float duration = _turnsToNextMove * _level->getTurnDuration();
-	auto targetPosition = _level->getProjector()->coordinateToPoint(_coordinate);
-	if (_direction == Direction::SOUTH || _direction == Direction::EAST)
-	{
-		_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE);
-	}
-	auto moveAction = cocos2d::MoveTo::create(duration, targetPosition);
-	moveAction->setTag(MOVE_ACTION_TAG);
-	_sprite->runAction(moveAction);
 }
 
 void Creature::_updatePosition()
 {
     _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
-    _sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE);
+    
+    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE + getZOrderDelta();
+    _sprite->setLocalZOrder(zOrder);
     
     if (_soundEmitter != nullptr)
     {

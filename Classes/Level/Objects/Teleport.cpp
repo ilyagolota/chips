@@ -35,24 +35,112 @@ Teleport::Teleport(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
 void Teleport::beforeEnter(Creature* creature)
 {
 	auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
+    
 	creature->getSprite()->runAction(cocos2d::Sequence::create(
-		cocos2d::DelayTime::create(0.75f * duration),
-		cocos2d::CallFunc::create([this, creature]() {
-			_setDrawAsTwoParts();
-			auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE;
-			creature->getSprite()->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
+		cocos2d::DelayTime::create(0.51f * duration),
+		cocos2d::CallFunc::create([this, creature, duration]() {
+			auto creatureSprite = creature->getSprite();
+        
+			auto thisPosition = _level->getProjector()->coordinateToPoint(_coordinate);
+            auto action = cocos2d::Sequence::create(
+
+                // Move creature to the top of teleport
+                cocos2d::MoveTo::create(0.14f * duration, thisPosition),
+          
+                // Split teleport sprite to two parts and change creature z order
+                cocos2d::CallFunc::create([this, creatureSprite]() {
+                    _setDrawAsTwoParts();
+                    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE;
+                    creatureSprite->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
+                }),
+      
+                // Move creature down and fade it out
+                cocos2d::Spawn::create(
+                    cocos2d::FadeTo::create(0.35f * duration, 0),
+                    cocos2d::MoveTo::create(0.35f * duration, thisPosition + BOTTOM_POSITION),
+                    nullptr
+                ),
+                nullptr
+            );
+        
+            // Override default moving trajectory
+            creatureSprite->stopActionByTag(Creature::MOVE_ACTION_TAG);
+            action->setTag(Creature::MOVE_ACTION_TAG);
+            creatureSprite->runAction(action);
 		}),
-		cocos2d::Spawn::create(
-			cocos2d::FadeTo::create(0.25f * duration, 0),
-			cocos2d::MoveBy::create(0.25f * duration, BOTTOM_POSITION),
-			nullptr
-		),
 		nullptr)
 	);
 }
 
 void Teleport::afterEnter(Creature* creature)
 {
+    auto targetTeleport = _findTargetTeleport(creature);
+    if (targetTeleport != nullptr)
+    {
+        creature->setCoordinate(targetTeleport->getCoordinate());
+        creature->move(creature->getDirection());
+        
+        if (this != targetTeleport)
+        {
+            _setDrawAsSinglePart();
+            targetTeleport->_setDrawAsTwoParts();
+        }
+    }
+    
+    auto creatureSprite = creature->getSprite();
+    creatureSprite->setPosition(_level->getProjector()->coordinateToPoint(targetTeleport->_coordinate) + BOTTOM_POSITION);
+    auto zOrder = _level->getProjector()->coordinateToZOrder(targetTeleport->_coordinate) * Level::Z_ORDER_PER_TILE;
+    creatureSprite->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
+}
+
+void Teleport::beforeEscape(Creature* creature)
+{
+	_setDrawAsTwoParts();
+    auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
+    
+    auto creatureSprite = creature->getSprite();
+    
+    // Override back creature z order changed by creature movement.
+    auto storedZOrder = creatureSprite->getLocalZOrder();
+    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE;
+    creatureSprite->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
+    
+    auto destination = _level->getProjector()->coordinateToPoint(_coordinate + toVec2(creature->getDirection()));
+    
+    auto action = cocos2d::Sequence::create(
+        // Move creature to the top of teleport and fade it in
+        cocos2d::Spawn::create(
+             cocos2d::FadeTo::create(0.35f * duration, 255),
+             cocos2d::MoveTo::create(0.35f * duration, _level->getProjector()->coordinateToPoint(_coordinate)),
+             nullptr
+        ),
+         
+        // Join teleport sprites and restore creature z order
+        cocos2d::CallFunc::create([this, creature, storedZOrder]() {
+            _setDrawAsSinglePart();
+            creature->getSprite()->setLocalZOrder(storedZOrder);
+        }),
+
+        // Move creature to it's destination
+        cocos2d::MoveTo::create(0.65f * duration, destination),
+
+        nullptr
+    );
+	
+    // Override default moving trajectory
+    creatureSprite->stopActionByTag(Creature::MOVE_ACTION_TAG);
+    action->setTag(Creature::MOVE_ACTION_TAG);
+    creatureSprite->runAction(action);
+}
+
+void Teleport::reset()
+{
+    _setDrawAsSinglePart();
+}
+
+Teleport* Teleport::_findTargetTeleport(Creature* creature)
+{
+    Teleport* targetTeleport = nullptr;
     long x = _coordinate.x;
     long y = _coordinate.y;
     do
@@ -68,48 +156,19 @@ void Teleport::afterEnter(Creature* creature)
             y = _level->getLevelData()->getHeight() - 1;
         }
         
-        if (dynamic_cast<Teleport*>(_level->getObjectAt(cocos2d::Vec2(x, y))) != nullptr)
+        auto teleport = dynamic_cast<Teleport*>(_level->getObjectAt(cocos2d::Vec2(x, y)));
+        if (teleport != nullptr)
         {
-            creature->setCoordinate(cocos2d::Vec2(x, y));
+            creature->setCoordinate(teleport->getCoordinate());
             if (creature->canMove(creature->getDirection()))
             {
-                creature->move(creature->getDirection());
+                targetTeleport = teleport;
                 break;
             }
         }
     } while (x != _coordinate.x || y != _coordinate.y);
-
-    creature->getSprite()->setPosition(creature->getSprite()->getPosition() + BOTTOM_POSITION);
-	creature->getSprite()->setLocalZOrder(_level->getProjector()->coordinateToZOrder(cocos2d::Vec2(x, y)) * Level::Z_ORDER_PER_TILE + 1);
-
-	if (x != _coordinate.x && y != _coordinate.y)
-	{
-		_setDrawAsSinglePart();
-	}
-}
-
-void Teleport::beforeEscape(Creature* creature)
-{
-	_setDrawAsTwoParts();
-
-	auto creatureZOrder = creature->getSprite()->getLocalZOrder();
-
-	auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE;
-	creature->getSprite()->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
-
-    auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
-	creature->getSprite()->runAction(cocos2d::Sequence::create(
-		cocos2d::Spawn::create(
-			cocos2d::FadeTo::create(0.25f * duration, 255),
-			cocos2d::MoveBy::create(0.25f * duration, -BOTTOM_POSITION),
-			nullptr
-		),
-		cocos2d::CallFunc::create([this, creature, creatureZOrder]() {
-			creature->getSprite()->setLocalZOrder(creatureZOrder);
-			_setDrawAsSinglePart();
-		}),
-		nullptr
-	));
+    
+    return targetTeleport;
 }
 
 void Teleport::_setDrawAsTwoParts()
