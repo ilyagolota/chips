@@ -25,7 +25,7 @@ Item::Item(const cocos2d::Vec2& coordinate, TileType type)
 
 	_highlight = cocos2d::Sprite::createWithSpriteFrameName("highlight.png");
 	_highlight->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	_highlight->setPosition((cocos2d::Vec2(_sprite->getContentSize()) - cocos2d::Vec2(0, 12)) * 0.5f);
+	_highlight->setPosition(cocos2d::Vec2(_sprite->getContentSize()) * 0.5f);
 	_highlight->setLocalZOrder(-1);
 	_highlight->runAction(cocos2d::RepeatForever::create(
 		cocos2d::Sequence::create(

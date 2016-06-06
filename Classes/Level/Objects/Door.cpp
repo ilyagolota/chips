@@ -15,6 +15,12 @@ Door::Door(const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordin
 {
     _type = type;
     _open = false;
+
+	_floor = cocos2d::Sprite::createWithSpriteFrameName("floor-" + getColorName() + "-ew.png");
+	_floor->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_floor->setPosition(cocos2d::Vec2(0, -12));
+	_floor->setLocalZOrder(Level::BACK_Z_ORDER);
+	addNode(_floor);
 }
 
 void Door::reset()

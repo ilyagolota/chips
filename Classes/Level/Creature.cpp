@@ -270,33 +270,43 @@ void Creature::onTurn(float dt)
 
 bool Creature::canMove(Direction direction) const
 {
-    int physicsLayerMask = getPhysicsLayerMask();
-    if (_level->getPhysicsWorld()->rayCast(_coordinate, direction, physicsLayerMask))
-    {
-        return false;
-    }
+	int mask = getPhysicsLayerMask();
+	auto physicsWorld = _level->getPhysicsWorld();
+	
+	if ((physicsWorld->getBody(_coordinate, mask) & (TileBody::INNER_NORTH_SIDE << direction)) != TileBody::EMPTY)
+	{
+		return false;
+	}
+	auto currentObject = _level->getObjectAt(_coordinate);
+	if (currentObject != nullptr && !currentObject->isEscapableBy(this, direction))
+	{
+		return false;
+	}
+
+	auto targetCoordinate = _coordinate + toVec2(direction);
+	auto frontObject = _level->getObjectAt(targetCoordinate);
+	if ((physicsWorld->getBody(targetCoordinate, mask) & (TileBody::OUTER_NORTH_SIDE << direction)) != TileBody::EMPTY)
+	{
+		if (frontObject == nullptr || !frontObject->isOpenableBy(this, direction))
+		{
+			return false;
+		}
+	}
+	else
+	{
+		if (frontObject != nullptr && !frontObject->isEnterableBy(this, direction))
+		{
+			return false;
+		}
+	}
     
-    auto currentObject = _level->getObjectAt(_coordinate);
-    if (currentObject != nullptr && !currentObject->isEscapableBy(this, direction))
-    {
-        return false;
-    }
-    
-    auto nextCoordinate = _coordinate + toVec2(direction);
-    
-    auto frontObject = _level->getObjectAt(nextCoordinate);
-    if (frontObject != nullptr && !frontObject->isEnterableBy(this, direction))
-    {
-        return false;
-    }
-    
-    auto targetItem = _level->getItemAt(nextCoordinate);
+	auto targetItem = _level->getItemAt(targetCoordinate);
     if (targetItem != nullptr && !targetItem->isPickableBy(this))
     {
         return false;
     }
     
-    auto frontCreature = _level->getCreatureAt(nextCoordinate);
+	auto frontCreature = _level->getCreatureAt(targetCoordinate);
     if (frontCreature != nullptr)
     {
         if (frontCreature->_type == CreatureType::BLOCK)
