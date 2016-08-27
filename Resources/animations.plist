@@ -179,24 +179,26 @@
 			<real>0.24</real>
 			<key>frames</key>
 			<array>
-				<string>chip-stay-west-0001.png</string>
-				<string>chip-stay-west-0002.png</string>
-				<string>chip-stay-west-0003.png</string>
-				<string>chip-stay-west-0004.png</string>
+				<string>chip-stay-east-0001.png</string>
+				<string>chip-stay-east-0002.png</string>
+				<string>chip-stay-east-0003.png</string>
+				<string>chip-stay-east-0004.png</string>
+				<string>chip-stay-east-0003.png</string>
+				<string>chip-stay-east-0002.png</string>
 			</array>
 		</dict>
 		<key>chip-walk-east</key>
 		<dict>
 			<key>delay</key>
-			<real>0.06</real>
+			<real>0.08</real>
 			<key>frames</key>
 			<array>
-				<string>chip-walk-west-0001.png</string>
-				<string>chip-walk-west-0002.png</string>
-				<string>chip-walk-west-0003.png</string>
-				<string>chip-walk-west-0004.png</string>
-				<string>chip-walk-west-0005.png</string>
-				<string>chip-walk-west-0006.png</string>
+				<string>chip-walk-east-0001.png</string>
+				<string>chip-walk-east-0002.png</string>
+				<string>chip-walk-east-0003.png</string>
+				<string>chip-walk-east-0004.png</string>
+				<string>chip-walk-east-0005.png</string>
+				<string>chip-walk-east-0006.png</string>
 			</array>
 		</dict>
 		<key>chip-stay-west</key>
@@ -209,12 +211,14 @@
 				<string>chip-stay-west-0002.png</string>
 				<string>chip-stay-west-0003.png</string>
 				<string>chip-stay-west-0004.png</string>
+				<string>chip-stay-west-0003.png</string>
+				<string>chip-stay-west-0002.png</string>
 			</array>
 		</dict>
 		<key>chip-walk-west</key>
 		<dict>
 			<key>delay</key>
-			<real>0.06</real>
+			<real>0.08</real>
 			<key>frames</key>
 			<array>
 				<string>chip-walk-west-0001.png</string>
