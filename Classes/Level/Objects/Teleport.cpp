@@ -50,7 +50,7 @@ void Teleport::beforeEnter(Creature* creature)
                 // Split teleport sprite to two parts and change creature z order
                 cocos2d::CallFunc::create([this, creatureSprite]() {
                     _setDrawAsTwoParts();
-                    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE;
+                    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate);
                     creatureSprite->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
                 }),
       
@@ -89,7 +89,7 @@ void Teleport::afterEnter(Creature* creature)
     
     auto creatureSprite = creature->getSprite();
     creatureSprite->setPosition(_level->getProjector()->coordinateToPoint(targetTeleport->_coordinate) + BOTTOM_POSITION);
-    auto zOrder = _level->getProjector()->coordinateToZOrder(targetTeleport->_coordinate) * Level::Z_ORDER_PER_TILE;
+    auto zOrder = _level->getProjector()->coordinateToZOrder(targetTeleport->_coordinate);
     creatureSprite->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
 }
 
@@ -102,7 +102,7 @@ void Teleport::beforeEscape(Creature* creature)
     
     // Override back creature z order changed by creature movement.
     auto storedZOrder = creatureSprite->getLocalZOrder();
-    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE;
+    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate);
     creatureSprite->setLocalZOrder(zOrder + Level::CREATURE_SMALL_Z_ORDER);
     
     auto destination = _level->getProjector()->coordinateToPoint(_coordinate + toVec2(creature->getDirection()));

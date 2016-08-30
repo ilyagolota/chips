@@ -54,7 +54,7 @@ Level::Level(cocos2d::Node* stage)
     _soundEnvironment->setPhysicsLayerMask(1);
     _soundEnvironment->retain();
     
-    _projector = TiledProjector::create(cocos2d::Size(180, 128), levelSize, _physicsWorld);
+    _projector = TiledProjector::create(cocos2d::Size(180, 128), levelSize, Z_ORDER_PER_TILE, _physicsWorld);
     _projector->retain();
 
 	_playerControl = nullptr;
@@ -257,6 +257,52 @@ Creature* Level::getPlayerCreature() const
 	return _playerCreature;
 }
 
+int Level::getWallShape(const cocos2d::Vec2& coordinate) const
+{
+	int mask = 0;
+	for (int dirIndex = 0; dirIndex < 4; dirIndex++)
+	{
+		bool hasNeighborWall = false;
+		auto neighborCoordinate = coordinate + toVec2(static_cast<Direction>(dirIndex));
+		if (neighborCoordinate.x >= 0 && neighborCoordinate.y >= 0 && neighborCoordinate.x < _levelData->getWidth() && neighborCoordinate.y < _levelData->getHeight())
+		{
+			auto index = _coordinateToIndex(neighborCoordinate);
+			for (auto& layer : _levelData->getLayers())
+			{
+				switch (layer[index])
+				{
+				case TileType::WALL:
+				case TileType::DOOR_BLUE:
+				case TileType::DOOR_GREEN:
+				case TileType::DOOR_YELLOW:
+				case TileType::DOOR_RED:
+				case TileType::SWITCH_WALL_CLOSED:
+				case TileType::SWITCH_WALL_OPEN:
+				case TileType::BLUE_WALL_REAL:
+				case TileType::BLUE_WALL_FAKE:
+				case TileType::HIDDEN_WALL_TEMP:
+				case TileType::HIDDEN_WALL_PERM:
+				case TileType::HIDDEN_WALL_PERM_1:
+				case TileType::HIDDEN_WALL_PERM_2:
+				case TileType::HIDDEN_WALL_PERM_3:
+				case TileType::SOCKET:
+					hasNeighborWall = true;
+					break;
+
+				default:
+					break;
+				}
+			}
+
+			if (hasNeighborWall)
+			{
+				mask |= (1 << dirIndex);
+			}
+		}
+	}
+	return mask;
+}
+
 void Level::_rebuild()
 {
     _stage->removeAllChildren();
@@ -417,7 +463,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
         case TileType::DOOR_RED:
         case TileType::DOOR_GREEN:
         case TileType::DOOR_YELLOW:
-            addObject(Door::create(coordinate, tileType));
+            addObject(Door::create(this, coordinate, tileType));
             break;
             
         case TileType::ICE_WALL_SOUTH_EAST:
@@ -659,7 +705,7 @@ void Level::_buildFloor(const cocos2d::Vec2& coordinate)
     auto floorSprite = cocos2d::Sprite::createWithSpriteFrameName("floor.png");
     floorSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
 	floorSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
-    floorSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * Z_ORDER_PER_TILE);
+    floorSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate));
     _stage->addChild(floorSprite);
 }
 
@@ -667,55 +713,14 @@ void Level::_buildWall(const cocos2d::Vec2& coordinate)
 {
 	_physicsWorld->setBody(coordinate, TileBody::OUTER_BOX, 7);
 
-    int mask = 0;
-    for (int dirIndex = 0; dirIndex < 4; dirIndex++)
-	{
-		bool hasNeighborWall = false;
-		auto neighborCoordinate = coordinate + toVec2(static_cast<Direction>(dirIndex));
-		if (neighborCoordinate.x >= 0 && neighborCoordinate.y >= 0 && neighborCoordinate.x < _levelData->getWidth() && neighborCoordinate.y < _levelData->getHeight())
-		{
-			auto index = _coordinateToIndex(neighborCoordinate);
-			for (auto& layer : _levelData->getLayers())
-			{
-				switch (layer[index])
-				{
-				case TileType::WALL:
-				case TileType::DOOR_BLUE:
-				case TileType::DOOR_GREEN:
-				case TileType::DOOR_YELLOW:
-				case TileType::DOOR_RED:
-				case TileType::SWITCH_WALL_CLOSED:
-				case TileType::SWITCH_WALL_OPEN:
-				case TileType::BLUE_WALL_REAL:
-				case TileType::BLUE_WALL_FAKE:
-				case TileType::HIDDEN_WALL_TEMP:
-				case TileType::HIDDEN_WALL_PERM:
-				case TileType::HIDDEN_WALL_PERM_1:
-				case TileType::HIDDEN_WALL_PERM_2:
-				case TileType::HIDDEN_WALL_PERM_3:
-				case TileType::SOCKET:
-					hasNeighborWall = true;
-					break;
-
-				default:
-					break;
-				}
-			}
-            
-            if (hasNeighborWall)
-            {
-                mask |= (1 << dirIndex);
-            }
-        }
-    }
-    
+	int shape = getWallShape(coordinate);
     char spriteFrameName[14];
-    sprintf(spriteFrameName, "wall-%04d.png", mask + 1);
+    sprintf(spriteFrameName, "wall-%04d.png", shape + 1);
     
     auto wallSprite = cocos2d::Sprite::createWithSpriteFrameName(spriteFrameName);
     wallSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
     wallSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
-    wallSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * Z_ORDER_PER_TILE + WALL_Z_ORDER);
+    wallSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) + WALL_Z_ORDER);
     _stage->addChild(wallSprite);
 }
 
@@ -726,7 +731,7 @@ void Level::_buildGravel(const cocos2d::Vec2& coordinate)
 	auto gravelSprite = cocos2d::Sprite::createWithSpriteFrameName("gravel.png");
 	gravelSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
 	gravelSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
-	gravelSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate) * Z_ORDER_PER_TILE);
+	gravelSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate));
 	_stage->addChild(gravelSprite);
 }
 

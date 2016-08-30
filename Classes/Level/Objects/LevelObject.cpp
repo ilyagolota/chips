@@ -41,13 +41,13 @@ void LevelObject::setLevel(Level* level)
         {
             if (_mainNode != nullptr)
             {
-                _mainNode->setLocalZOrder(_mainNode->getLocalZOrder() + Level::Z_ORDER_PER_TILE * _level->getProjector()->coordinateToZOrder(_coordinate));
+                _mainNode->setLocalZOrder(_mainNode->getLocalZOrder() + _level->getProjector()->coordinateToZOrder(_coordinate));
                 _mainNode->setPosition(_mainNode->getPosition() + _level->getProjector()->coordinateToPoint(_coordinate));
                 _level->getStage()->addChild(_mainNode);
                 
                 for (auto node : _additionalNodes)
                 {
-                    node->setLocalZOrder(node->getLocalZOrder() + Level::Z_ORDER_PER_TILE * _level->getProjector()->coordinateToZOrder(_coordinate));
+                    node->setLocalZOrder(node->getLocalZOrder() + _level->getProjector()->coordinateToZOrder(_coordinate));
                     node->setPosition(node->getPosition() + _level->getProjector()->coordinateToPoint(_coordinate));
                     _level->getStage()->addChild(node);
                 }
@@ -108,7 +108,7 @@ void LevelObject::addNode(cocos2d::Node* node)
     }
     if (_level != nullptr)
     {
-		node->setLocalZOrder(node->getLocalZOrder() + Level::Z_ORDER_PER_TILE * _level->getProjector()->coordinateToZOrder(_coordinate));
+		node->setLocalZOrder(node->getLocalZOrder() + _level->getProjector()->coordinateToZOrder(_coordinate));
 		node->setPosition(node->getPosition() + _level->getProjector()->coordinateToPoint(_coordinate));
         _level->getStage()->addChild(node);
     }

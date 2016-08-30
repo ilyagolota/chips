@@ -2,6 +2,7 @@
 #define _CHIPS_CHALLENGE_DOOR_H_
 
 #include <cocos2d.h>
+#include "AudioEngine.h"
 #include "LevelData/TileType.h"
 #include "LevelObject.h"
 
@@ -12,11 +13,12 @@ private:
 	TileType _type;
 	cocos2d::Sprite* _floor;
 	cocos2d::Sprite* _door;
+	cocos2d::Sprite* _cover;
 
 public:
-    static Door* create(const cocos2d::Vec2& coordinate, TileType type);
+	static Door* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
-    Door(const cocos2d::Vec2& coordinate, TileType type);
+	Door(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
     bool isOpenableBy(const Creature *creature, Direction direction) const override;
     
@@ -27,10 +29,6 @@ public:
     
 	TileType getKeyType() const;
 	std::string& getColorName() const;
-
-protected:
-    void buildNodes();
-    void destroyNodes();
 };
 
 #endif

@@ -14,13 +14,14 @@ private:
     
     cocos2d::Size _tileSize;
     cocos2d::Size _mapSize;
+	int _tileDepth;
     std::vector<int> _zOrderMap;
     TiledPhysicsWorld* _physicsWorld;
     
 public:
-    static TiledProjector* create(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, TiledPhysicsWorld* physicsWorld);
+	static TiledProjector* create(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, int tileDepth, TiledPhysicsWorld* physicsWorld);
     
-    TiledProjector(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, TiledPhysicsWorld* physicsWorld);
+    TiledProjector(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, int tileDepth, TiledPhysicsWorld* physicsWorld);
     ~TiledProjector();
     cocos2d::Size getMapSize() const;
 	cocos2d::Size getTileSize() const;

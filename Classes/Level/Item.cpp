@@ -64,7 +64,7 @@ void Item::setLevel(Level* level)
         if (_level != nullptr)
         {
             _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
-            _sprite->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE + Level::ITEM_Z_ORDER);
+            _sprite->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::ITEM_Z_ORDER);
             _level->getStage()->addChild(_sprite);
         }
     }
@@ -93,7 +93,7 @@ void Item::pick(Creature* creature)
 		bonusSprite->setPosition(_sprite->getPosition() + cocos2d::Vec2(0.5f * _sprite->getContentSize().width, 128));
 		bonusSprite->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
 		bonusSprite->setOpacity(192);
-		bonusSprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE + Level::WALL_Z_ORDER);
+		bonusSprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
 		_level->getStage()->addChild(bonusSprite);
 
         auto duration = 1.2f * _level->getTurnDuration();

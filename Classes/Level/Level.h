@@ -77,6 +77,8 @@ public:
     Creature* getCreatureAt(const cocos2d::Vec2& coordinate) const;
 	Creature* getPlayerCreature() const;
 
+	int getWallShape(const cocos2d::Vec2& coordinate) const;
+
 protected:
     void _rebuild();
     void _reset();

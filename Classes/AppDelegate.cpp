@@ -80,7 +80,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     preloader->addTask(LoadSpriteSheetTask::create("sheets/creatures.plist"));
     preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-1.plist"));
-	preloader->addTask(LoadSpriteSheetTask::create("sheets/walls-02.plist"));
+	preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-2.plist"));
+	preloader->addTask(LoadSpriteSheetTask::create("sheets/walls-01.plist"));
     preloader->addTask(LoadAnimationsTask::create("animations.plist"));
     
     std::vector<char> hash(16);
@@ -97,18 +98,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     return true;
 }
 
-// This function will be called when the app is inactive. When comes a phone call,it's be invoked too
-void AppDelegate::applicationDidEnterBackground() {
+void AppDelegate::applicationDidEnterBackground()
+{
     Director::getInstance()->stopAnimation();
-
-    // if you use SimpleAudioEngine, it must be pause
-    // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+	cocos2d::experimental::AudioEngine::pauseAll();
 }
 
-// this function will be called when the app is active again
-void AppDelegate::applicationWillEnterForeground() {
+void AppDelegate::applicationWillEnterForeground()
+{
     Director::getInstance()->startAnimation();
-
-    // if you use SimpleAudioEngine, it must resume here
-    // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+	cocos2d::experimental::AudioEngine::resumeAll();
 }

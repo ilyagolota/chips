@@ -468,7 +468,7 @@ void Creature::_move(Direction direction)
     
     if (_direction == Direction::SOUTH || _direction == Direction::EAST)
     {
-        auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE + getZOrderDelta();
+        auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) + getZOrderDelta();
         _sprite->setLocalZOrder(zOrder);
     }
     
@@ -493,7 +493,7 @@ void Creature::_updatePosition()
 {
     _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
     
-    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) * Level::Z_ORDER_PER_TILE + getZOrderDelta();
+    auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate) + getZOrderDelta();
     _sprite->setLocalZOrder(zOrder);
     
     if (_soundEmitter != nullptr)

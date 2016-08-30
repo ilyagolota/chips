@@ -4,17 +4,18 @@
 
 const int TiledProjector::UNKNOWN_DEPTH = -1;
 
-TiledProjector* TiledProjector::create(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, TiledPhysicsWorld* physicsWorld)
+TiledProjector* TiledProjector::create(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, int tileDepth, TiledPhysicsWorld* physicsWorld)
 {
-    auto instance = new TiledProjector(tileSize, mapSize, physicsWorld);
+    auto instance = new TiledProjector(tileSize, mapSize, tileDepth, physicsWorld);
     instance->autorelease();
     return instance;
 }
 
-TiledProjector::TiledProjector(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, TiledPhysicsWorld* physicsWorld)
+TiledProjector::TiledProjector(const cocos2d::Size& tileSize, const cocos2d::Size& mapSize, int tileDepth, TiledPhysicsWorld* physicsWorld)
 {
     _tileSize = tileSize;
     _mapSize = mapSize;
+	_tileDepth = tileDepth;
     _zOrderMap.resize(std::floor(_mapSize.width * _mapSize.height));
     
     _physicsWorld = physicsWorld;
@@ -106,9 +107,9 @@ int TiledProjector::coordinateToZOrder(const cocos2d::Vec2& coordinate)
             }
         }
         
-        _zOrderMap[index] = zOrder;
+		_zOrderMap[index] = zOrder;
     }
-    return _zOrderMap[index];
+    return _zOrderMap[index] * _tileDepth;
 }
 
 cocos2d::Vec2 TiledProjector::pointToCoordinate(const cocos2d::Vec2& point)
