@@ -103,7 +103,7 @@ std::string& Door::getColorName() const
 {
     static std::string __names[] = { "blue", "red", "green", "yellow" };
 	size_t index = static_cast<size_t>(_type) - static_cast<size_t>(TileType::DOOR_BLUE);
-    if (index < 0 || index >= 4)
+    if (index >= 4)
     {
         index = 0;
     }

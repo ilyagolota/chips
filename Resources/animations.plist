@@ -145,10 +145,10 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>teeth-walk-east.png</string>
-				<string>teeth-walk-east.png</string>
-				<string>teeth-walk-east.png</string>
-				<string>teeth-walk-east.png</string>
+				<string>teeth-walk-east-0001.png</string>
+				<string>teeth-walk-east-0002.png</string>
+				<string>teeth-walk-east-0003.png</string>
+				<string>teeth-walk-east-0004.png</string>
 			</array>
 		</dict>
 		<key>walker-walk-east</key>

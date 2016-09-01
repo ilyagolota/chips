@@ -7,8 +7,9 @@ Preloader* Preloader::create()
     return instance;
 }
 
-Preloader::Preloader()
-: _loaded(0)
+Preloader::Preloader():
+    _loaded(0),
+    _hasActiveTask(false)
 { }
 
 void Preloader::addTask(Task* task)
@@ -33,18 +34,20 @@ size_t Preloader::getTotal() const
 
 void Preloader::process()
 {
-    double startTime = _getCurrentTime();
-    float maxDuration = 0.25 * cocos2d::Director::getInstance()->getAnimationInterval();
-    
-    while (_loaded < _tasks.size())
+    if (_loaded < _tasks.size())
     {
-        _tasks.at(_loaded)->exec();
-        _loaded++;
+        auto task = _tasks.at(_loaded);
         
-        double now = _getCurrentTime();
-        if (now - startTime >= maxDuration)
+        if (!_hasActiveTask)
         {
-            break;
+            task->exec();
+            _hasActiveTask = true;
+        }
+    
+        if (task->isCompleted())
+        {
+            _hasActiveTask = false;
+            _loaded++;
         }
     }
 }
@@ -76,6 +79,7 @@ LoadTextureTask::LoadTextureTask(const std::string& filename)
 void LoadTextureTask::exec()
 {
     cocos2d::Director::getInstance()->getTextureCache()->addImage(_filename);
+    _completed = true;
 }
 
 LoadSpriteSheetTask* LoadSpriteSheetTask::create(const std::string& filename)
@@ -92,6 +96,7 @@ LoadSpriteSheetTask::LoadSpriteSheetTask(const std::string& filename)
 void LoadSpriteSheetTask::exec()
 {
     cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile(_filename);
+    _completed = true;
 }
 
 LoadAnimationsTask* LoadAnimationsTask::create(const std::string& filename)
@@ -108,4 +113,26 @@ LoadAnimationsTask::LoadAnimationsTask(const std::string& filename)
 void LoadAnimationsTask::exec()
 {
     cocos2d::AnimationCache::getInstance()->addAnimationsWithFile(_filename);
+    _completed = true;
+}
+
+LoadSoundTask* LoadSoundTask::create(const std::string& filename)
+{
+    auto instance = new LoadSoundTask(filename);
+    instance->autorelease();
+    return instance;
+}
+
+LoadSoundTask::LoadSoundTask(const std::string& filename)
+: _filename(filename)
+{ }
+
+void LoadSoundTask::exec()
+{
+    cocos2d::experimental::AudioEngine::preload(_filename, std::bind(&LoadSoundTask::_onLoad, this, std::placeholders::_1));
+}
+
+void LoadSoundTask::_onLoad(bool loaded)
+{
+    _completed = true;
 }
