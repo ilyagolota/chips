@@ -83,13 +83,13 @@ void TiledSoundEnvironment::update(float dt)
 std::vector<int> TiledSoundEnvironment::_buildDistanceMap() const
 {
     auto maxDistance = _microphone->getMaxDistance();
-    size_t mapSize = (maxDistance * 2 - 1) * (maxDistance * 2 - 1);
+    size_t mapSize = (maxDistance * 2 + 1) * (maxDistance * 2 + 1);
     std::vector<int> distanceMap(mapSize);
     std::fill(distanceMap.begin(), distanceMap.end(), maxDistance + 1);
     
     auto microphoneCoordinate = _microphone->getCoordinate();
     int startX = microphoneCoordinate.x - maxDistance;
-    int startY = microphoneCoordinate.x - maxDistance;
+    int startY = microphoneCoordinate.y - maxDistance;
     int endX = microphoneCoordinate.x + maxDistance + 1;
     int endY = microphoneCoordinate.y + maxDistance + 1;
     
@@ -111,7 +111,7 @@ std::vector<int> TiledSoundEnvironment::_buildDistanceMap() const
                 }
                 
                 int nextTileIndex = (nextCoordinate.x - startX) + (endX - startX) * (nextCoordinate.y - startY);
-                if (distanceMap[nextTileIndex] >= 0)
+                if (distanceMap[nextTileIndex] < distance)
                 {
                     continue;
                 }

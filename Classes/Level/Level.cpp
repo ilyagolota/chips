@@ -3,6 +3,7 @@
 #include <LevelData/LevelData.h>
 #include <Tiled/TiledPhysicsWorld.h>
 #include <Tiled/TiledSoundEnvironment.h>
+#include <Tiled/TileMicrophone.h>
 #include <Tiled/TiledProjector.h>
 #include "IPlayerControl.h"
 #include "Inventory.h"
@@ -111,6 +112,12 @@ void Level::makeTurn(float dt)
             creature->onTurn(dt);
         }
     }
+
+	if (_playerCreature != nullptr)
+	{
+		_soundEnvironment->getMicrophone()->setCoordinate(_playerCreature->getCoordinate());
+	}
+	_soundEnvironment->update(dt);
 }
 
 cocos2d::Node* Level::getStage() const

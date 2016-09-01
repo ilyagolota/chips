@@ -69,7 +69,7 @@ bool TiledPhysicsWorld::rayCast(const cocos2d::Vec2& origin, Direction direction
         return false;
     }
     
-    if (origin.x < 0 && origin.y >= 0 && origin.x >= _width && origin.y >= _height)
+    if (origin.x < 0 || origin.y < 0 || origin.x >= _width || origin.y >= _height)
     {
         return true;
     }
@@ -89,7 +89,7 @@ bool TiledPhysicsWorld::rayCast(const cocos2d::Vec2& origin, Direction direction
     }
     
     auto target = origin + toVec2(direction);
-    if (target.x < 0 && target.y >= 0 && target.x >= _width && target.y >= _height)
+    if (target.x < 0 || target.y < 0 || target.x >= _width || target.y >= _height)
     {
         return true;
     }
