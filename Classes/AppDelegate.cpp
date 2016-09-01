@@ -78,11 +78,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     auto preloader = Preloader::create();
     
+    //auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
+    //preloader->pushTask(std::bind(static_cast<void(cocos2d::SpriteFrameCache::*)(const std::string&)>(&cocos2d::SpriteFrameCache::addSpriteFramesWithFile), spriteFrameCache, "sheets/creatures.plist"));
+    
     preloader->addTask(LoadSpriteSheetTask::create("sheets/creatures.plist"));
     preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-1.plist"));
 	preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-2.plist"));
 	preloader->addTask(LoadSpriteSheetTask::create("sheets/walls-01.plist"));
     preloader->addTask(LoadAnimationsTask::create("animations.plist"));
+    
+    preloader->addTask(LoadSoundTask::create("sounds/door.mp3"));
     
     std::vector<char> hash(16);
     memcpy(&hash[0], "\x93<\x02\xdf\x89I/\xed\x9d\xf9\0\x89\xc5#\xf6T", 16);

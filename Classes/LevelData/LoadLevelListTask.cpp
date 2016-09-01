@@ -17,4 +17,5 @@ LoadLevelListTask::LoadLevelListTask(LevelBundle* levelBundle, const std::string
 void LoadLevelListTask::exec()
 {
     _levelBundle->preloadLevelPack(_filename, _hash);
+    _completed = true;
 }
