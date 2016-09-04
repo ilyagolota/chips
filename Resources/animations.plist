@@ -80,7 +80,7 @@
 		<key>fireball-walk-west</key>
 		<dict>
 			<key>delay</key>
-			<real>0.12</real>
+			<real>0.06</real>
 			<key>frames</key>
 			<array>
 				<string>fireball-walk-west-0001.png</string>
@@ -94,7 +94,7 @@
 		<key>fireball-walk-east</key>
 		<dict>
 			<key>delay</key>
-			<real>0.12</real>
+			<real>0.06</real>
 			<key>frames</key>
 			<array>
 				<string>fireball-walk-east-0001.png</string>
@@ -111,9 +111,9 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>tank-stay-south.png</string>
-				<string>tank-walk-south-0002.png</string>
-				<string>tank-walk-south-0003.png</string>
+				<string>tank-stay-west.png</string>
+				<string>tank-walk-west-0002.png</string>
+				<string>tank-walk-west-0003.png</string>
 			</array>
 		</dict>
 		<key>tank-walk-east</key>
@@ -148,7 +148,7 @@
 				<string>teeth-walk-east-0001.png</string>
 				<string>teeth-walk-east-0002.png</string>
 				<string>teeth-walk-east-0003.png</string>
-				<string>teeth-walk-east-0004.png</string>
+				<string>teeth-walk-east-0002.png</string>
 			</array>
 		</dict>
 		<key>walker-walk-east</key>

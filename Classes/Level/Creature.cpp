@@ -598,8 +598,9 @@ void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
         case CreatureType::FIREBALL:
         case CreatureType::TEETH:
         case CreatureType::PARAMECIUM:
-            if (force)
+			if (force || (_direction != wasDirection && _direction != inverse(wasDirection)))
             {
+				_sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
 				auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
                 auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
                 auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));

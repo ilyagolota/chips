@@ -18,6 +18,7 @@
     </ApplicationDefinition>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\ChipsChallengeGame.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Common\Highscores.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelBundle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LoadLevelListTask.cpp" />
@@ -53,7 +54,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileSoundEmitter.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryReader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryWriter.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\Date.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HashAlgorithm.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HttpUtility.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\MD5.cpp" />
@@ -71,6 +71,7 @@
     </ClCompile>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\AppDelegate.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\ChipsChallengeGame.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Common\Highscores.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelBundle.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LoadLevelListTask.h" />
@@ -109,7 +110,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileSoundEmitter.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryReader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\BinaryWriter.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\Date.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HashAlgorithm.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\HttpUtility.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Utils\MD5.h" />
