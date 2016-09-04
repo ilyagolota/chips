@@ -11,9 +11,9 @@ private:
     bool _open;
     
 public:
-	static SwitchWall* create(const cocos2d::Vec2& coordinate, bool initiallyOpen);
+	static SwitchWall* create(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
     
-	SwitchWall(const cocos2d::Vec2& coordinate, bool initiallyOpen);
+	SwitchWall(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
     bool isOpen();
     void open();
     void close();

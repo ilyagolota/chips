@@ -6,12 +6,10 @@
 
 class Dirt : public LevelObject
 {
-private:
-    
 public:
-    static Dirt* create(const cocos2d::Vec2& coordinate);
+	static Dirt* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    Dirt(const cocos2d::Vec2& coordinate);
+	Dirt(Level* level, const cocos2d::Vec2& coordinate);
 };
 
 #endif

@@ -7,17 +7,19 @@
 
 class Ice : public LevelObject
 {
-private:
-    TileType _type;
-    
 public:
-    static Ice* create(const cocos2d::Vec2& coordinate, TileType type);
+	static Ice* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
-    Ice(const cocos2d::Vec2& coordinate, TileType type);
-    
+	Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type);
 	bool isEnterableBy(const Creature* creature, Direction direction) const override;
 	bool isEscapableBy(const Creature* creature, Direction direction) const override;
     void afterEnter(Creature* creature) override;
+
+private:
+    TileType _type;
+	cocos2d::Sprite* _sprite;
+	cocos2d::Sprite* _frontWall;
+	cocos2d::Sprite* _backWall;
 };
 
 #endif

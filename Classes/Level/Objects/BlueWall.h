@@ -5,6 +5,7 @@
 #include "LevelObject.h"
 
 class Creature;
+class Level;
 
 class BlueWall : public LevelObject
 {
@@ -13,9 +14,9 @@ private:
 	bool _known;
 
 public:
-	static BlueWall* create(const cocos2d::Vec2& coordinate, bool fake);
+	static BlueWall* create(Level* level, const cocos2d::Vec2& coordinate, bool fake);
     
-    BlueWall(const cocos2d::Vec2& coordinate, bool fake);
+	BlueWall(Level* level, const cocos2d::Vec2& coordinate, bool fake);
 };
 
 #endif

@@ -11,9 +11,9 @@ private:
 	TileType _type;
 
 public:
-    static Button* create(const cocos2d::Vec2& coordinate, TileType type);
+	static Button* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
-	Button(const cocos2d::Vec2& coordinate, TileType type);
+	Button(Level* level, const cocos2d::Vec2& coordinate, TileType type);
 
     void afterEnter(Creature* creature) override;
     void beforeEscape(Creature* creature) override;

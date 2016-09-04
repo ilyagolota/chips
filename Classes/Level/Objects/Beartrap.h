@@ -4,6 +4,8 @@
 #include <cocos2d.h>
 #include "LevelObject.h"
 
+class Level;
+
 class Beartrap : public LevelObject
 {
 private:
@@ -11,9 +13,9 @@ private:
     cocos2d::Sprite* _sprite;
     
 public:
-    static Beartrap* create(const cocos2d::Vec2& coordinate);
+    static Beartrap* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    Beartrap(const cocos2d::Vec2& coordinate);
+	Beartrap(Level* level, const cocos2d::Vec2& coordinate);
     
     bool isOpen() const;
     void setOpen(bool open);

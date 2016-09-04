@@ -6,20 +6,19 @@
 
 const cocos2d::Vec2 Teleport::BOTTOM_POSITION = cocos2d::Vec2(0, -120);
 
-Teleport* Teleport::create(const cocos2d::Vec2& coordinate)
+Teleport* Teleport::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-    auto instance = new Teleport(coordinate);
+    auto instance = new Teleport(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-Teleport::Teleport(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+Teleport::Teleport(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
 	_backPart = cocos2d::Sprite::createWithSpriteFrameName("hole.png");
 	_backPart->setAnchorPoint(cocos2d::Vec2::ZERO);
 	_backPart->setLocalZOrder(Level::BACK_Z_ORDER);
 	_backPart->setPosition(cocos2d::Vec2(0, -12));
-	addNode(_backPart);
 
 	auto abuseSprite = cocos2d::Sprite::create();
 	abuseSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -173,23 +172,23 @@ Teleport* Teleport::_findTargetTeleport(Creature* creature)
 
 void Teleport::_setDrawAsTwoParts()
 {
-	if (_frontPart == nullptr)
-	{
-		_backPart->setSpriteFrame("hole-back.png");
-		_frontPart = cocos2d::Sprite::createWithSpriteFrameName("hole-front.png");
-		_frontPart->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontPart->setLocalZOrder(Level::WALL_Z_ORDER);
-		_frontPart->setPosition(cocos2d::Vec2(0, -12));
-		addNode(_frontPart);
-	}
+	//if (_frontPart == nullptr)
+	//{
+	//	_backPart->setSpriteFrame("hole-back.png");
+	//	_frontPart = cocos2d::Sprite::createWithSpriteFrameName("hole-front.png");
+	//	_frontPart->setAnchorPoint(cocos2d::Vec2::ZERO);
+	//	_frontPart->setLocalZOrder(Level::WALL_Z_ORDER);
+	//	_frontPart->setPosition(cocos2d::Vec2(0, -12));
+	//	addNode(_frontPart);
+	//}
 }
 
 void Teleport::_setDrawAsSinglePart()
 {
-	if (_frontPart != nullptr)
-	{
-		_backPart->setSpriteFrame("hole.png");
-		removeNode(_frontPart);
-		_frontPart = nullptr;
-	}
+	//if (_frontPart != nullptr)
+	//{
+	//	_backPart->setSpriteFrame("hole.png");
+	//	removeNode(_frontPart);
+	//	_frontPart = nullptr;
+	//}
 }

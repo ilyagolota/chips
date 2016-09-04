@@ -5,15 +5,18 @@
 #include "LevelObject.h"
 #include "LevelData/TileType.h"
 
+class Level;
+
 class Slide : public LevelObject
-{
-private:
-    TileType _type;
-    
+{   
 public:
-	static Slide* create(const cocos2d::Vec2& coordinate, TileType tileType);
-    
-    Slide(const cocos2d::Vec2& coordinate, TileType tileType);
+	static Slide* create(Level* level, const cocos2d::Vec2& coordinate, TileType tileType);
+	Slide(Level* level, const cocos2d::Vec2& coordinate, TileType tileType);
+	void afterEnter(Creature* creature) override;
+
+private:
+	TileType _type;
+	cocos2d::Sprite* _floor;
 };
 
 #endif

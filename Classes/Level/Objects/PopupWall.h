@@ -6,12 +6,10 @@
 
 class PopupWall : public LevelObject
 {
-private:
-    
 public:
-    static PopupWall* create(const cocos2d::Vec2& coordinate);
+	static PopupWall* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    PopupWall(const cocos2d::Vec2& coordinate);
+	PopupWall(Level* level, const cocos2d::Vec2& coordinate);
 };
 
 #endif

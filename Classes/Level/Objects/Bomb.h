@@ -10,9 +10,9 @@ private:
 	bool _exploded;
 
 public:
-    static Bomb* create(const cocos2d::Vec2& coordinate);
+	static Bomb* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    Bomb(const cocos2d::Vec2& coordinate);
+	Bomb(Level* level, const cocos2d::Vec2& coordinate);
 };
 
 #endif

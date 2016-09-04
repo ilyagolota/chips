@@ -166,6 +166,310 @@
         <key>aliases</key>
         <array />
       </dict>
+      <key>way-green-front-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,123}</string>
+        <key>spriteOffset</key>
+        <string>{-12.5,-8.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,17},{155,123}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{524,0},{155,123}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-red-front-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,123}</string>
+        <key>spriteOffset</key>
+        <string>{-12.5,-8.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,17},{155,123}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{680,0},{155,123}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-blue-front-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,123}</string>
+        <key>spriteOffset</key>
+        <string>{-12.5,-8.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,17},{155,123}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{836,0},{155,123}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-yellow-front-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,123}</string>
+        <key>spriteOffset</key>
+        <string>{-12.5,-8.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,17},{155,123}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{131,181},{155,123}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-yellow-front-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,122}</string>
+        <key>spriteOffset</key>
+        <string>{12.5,-9}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{25,18},{155,122}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{131,305},{155,122}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-red-front-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,122}</string>
+        <key>spriteOffset</key>
+        <string>{12.5,-9}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{25,18},{155,122}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{131,428},{155,122}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-green-front-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,122}</string>
+        <key>spriteOffset</key>
+        <string>{12.5,-9}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{25,18},{155,122}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{131,551},{155,122}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-blue-front-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{155,122}</string>
+        <key>spriteOffset</key>
+        <string>{12.5,-9}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{25,18},{155,122}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{131,674},{155,122}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-red-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{-13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{131,797},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-red-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{26,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{131,908},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-blue-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{26,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{287,181},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-green-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{-13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{442,181},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-green-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{26,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{597,181},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-blue-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{-13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{752,181},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-yellow-ns.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{-13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{287,292},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>way-yellow-ew.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{154,110}</string>
+        <key>spriteOffset</key>
+        <string>{13,15}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{26,0},{154,110}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{442,292},{154,110}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
     </dict>
   </dict>
 </plist>

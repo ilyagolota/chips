@@ -5,14 +5,14 @@
 #include "Beartrap.h"
 #include "CloneMachine.h"
 
-Button* Button::create(const cocos2d::Vec2& coordinate, TileType type)
+Button* Button::create(Level* level, const cocos2d::Vec2& coordinate, TileType type)
 {
-	auto instance = new Button(coordinate, type);
+	auto instance = new Button(level, coordinate, type);
     instance->autorelease();
     return instance;
 }
 
-Button::Button(const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordinate)
+Button::Button(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelObject(level, coordinate)
 {
 	_type = type;
 }

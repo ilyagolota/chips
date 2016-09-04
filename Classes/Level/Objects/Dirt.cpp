@@ -1,13 +1,13 @@
 #include "Dirt.h"
 #include "Level/Level.h"
 
-Dirt* Dirt::create(const cocos2d::Vec2& coordinate)
+Dirt* Dirt::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-	auto instance = new Dirt(coordinate);
+	auto instance = new Dirt(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-Dirt::Dirt(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+Dirt::Dirt(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
 }

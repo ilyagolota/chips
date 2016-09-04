@@ -10,10 +10,9 @@ private:
     bool _open;
     
 public:
-    static Socket* create(const cocos2d::Vec2& coordinate);
+	static Socket* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    Socket(const cocos2d::Vec2& coordinate);
-    
+	Socket(Level* level, const cocos2d::Vec2& coordinate);
     bool isOpenableBy(const Creature* creature, Direction direction) const override;
 };
 

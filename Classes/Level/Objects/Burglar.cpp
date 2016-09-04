@@ -1,12 +1,12 @@
 #include "Burglar.h"
 
-Burglar* Burglar::create(const cocos2d::Vec2& coordinate)
+Burglar* Burglar::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-    auto instance = new Burglar(coordinate);
+    auto instance = new Burglar(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-Burglar::Burglar(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+Burglar::Burglar(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
 }

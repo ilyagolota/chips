@@ -9,9 +9,9 @@ class Burglar : public LevelObject
 private:
     
 public:
-    static Burglar* create(const cocos2d::Vec2& coordinate);
+	static Burglar* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    Burglar(const cocos2d::Vec2& coordinate);
+	Burglar(Level* level, const cocos2d::Vec2& coordinate);
 };
 
 #endif

@@ -1,13 +1,13 @@
 #include "Bomb.h"
 
-Bomb* Bomb::create(const cocos2d::Vec2& coordinate)
+Bomb* Bomb::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-	auto instance = new Bomb(coordinate);
+	auto instance = new Bomb(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-Bomb::Bomb(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+Bomb::Bomb(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
 	_exploded = false;
 }

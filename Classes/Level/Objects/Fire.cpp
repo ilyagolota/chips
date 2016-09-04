@@ -4,14 +4,14 @@
 #include "Level/Creature.h"
 #include "Level/Inventory.h"
 
-Fire* Fire::create(const cocos2d::Vec2& coordinate)
+Fire* Fire::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-	auto instance = new Fire(coordinate);
+	auto instance = new Fire(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-Fire::Fire(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+Fire::Fire(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
 }
 

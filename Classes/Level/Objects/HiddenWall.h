@@ -6,14 +6,14 @@
 
 class HiddenWall : public LevelObject
 {
+public:
+	static HiddenWall* create(Level* level, const cocos2d::Vec2& coordinate, bool permanent);
+    
+	HiddenWall(Level* level, const cocos2d::Vec2& coordinate, bool permanent);
+
 private:
 	bool _permanent;
 	bool _known;
-
-public:
-    static HiddenWall* create(const cocos2d::Vec2& coordinate, bool permanent);
-    
-	HiddenWall(const cocos2d::Vec2& coordinate, bool permanent);
 };
 
 #endif

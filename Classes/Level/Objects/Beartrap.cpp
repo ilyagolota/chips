@@ -1,14 +1,14 @@
 #include "Beartrap.h"
-#include "Level/Creature.h"
+#include <Level/Creature.h>
 
-Beartrap* Beartrap::create(const cocos2d::Vec2& coordinate)
+Beartrap* Beartrap::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-    auto instance = new Beartrap(coordinate);
+    auto instance = new Beartrap(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-Beartrap::Beartrap(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+Beartrap::Beartrap(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
     _open = false;
     

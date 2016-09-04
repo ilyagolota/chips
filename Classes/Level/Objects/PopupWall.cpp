@@ -1,12 +1,12 @@
 #include "PopupWall.h"
 
-PopupWall* PopupWall::create(const cocos2d::Vec2& coordinate)
+PopupWall* PopupWall::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-    auto instance = new PopupWall(coordinate);
+    auto instance = new PopupWall(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-PopupWall::PopupWall(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+PopupWall::PopupWall(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
 }

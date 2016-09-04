@@ -5,14 +5,14 @@
 #include "Level/Inventory.h"
 #include "Level/Creature.h"
 
-Socket* Socket::create(const cocos2d::Vec2& coordinate)
+Socket* Socket::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-    auto instance = new Socket(coordinate);
+    auto instance = new Socket(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-Socket::Socket(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+Socket::Socket(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
     _open = false;
 }

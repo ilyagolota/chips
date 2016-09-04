@@ -1,13 +1,13 @@
 #include "SwitchWall.h"
 
-SwitchWall* SwitchWall::create(const cocos2d::Vec2& coordinate, bool initiallyOpen)
+SwitchWall* SwitchWall::create(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen)
 {
-    auto instance = new SwitchWall(coordinate, initiallyOpen);
+    auto instance = new SwitchWall(level, coordinate, initiallyOpen);
     instance->autorelease();
     return instance;
 }
 
-SwitchWall::SwitchWall(const cocos2d::Vec2& coordinate, bool initiallyOpen) : LevelObject(coordinate)
+SwitchWall::SwitchWall(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen) : LevelObject(level, coordinate)
 {
     _open = _initiallyOpen = initiallyOpen;
 

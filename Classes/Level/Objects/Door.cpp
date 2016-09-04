@@ -12,9 +12,8 @@ Door* Door::create(Level* level, const cocos2d::Vec2& coordinate, TileType type)
     return instance;
 }
 
-Door::Door(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelObject(coordinate)
+Door::Door(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelObject(level, coordinate)
 {
-	_level = level;
     _type = type;
     _open = false;
 

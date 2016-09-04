@@ -9,9 +9,11 @@ class HintButton : public LevelObject
 private:
     
 public:
-    static HintButton* create(const cocos2d::Vec2& coordinate);
-    
-    HintButton(const cocos2d::Vec2& coordinate);
+	static HintButton* create(Level* level, const cocos2d::Vec2& coordinate);
+	HintButton(Level* level, const cocos2d::Vec2& coordinate);
+
+private:
+	cocos2d::Sprite* _floor;
 };
 
 #endif

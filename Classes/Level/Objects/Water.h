@@ -6,15 +6,16 @@
 
 class Water : public LevelObject
 {
-private:
-    
 public:
-    static Water* create(const cocos2d::Vec2& coordinate);
+	static Water* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    Water(const cocos2d::Vec2& coordinate);
+    Water(Level* level, const cocos2d::Vec2& coordinate);
     virtual ~Water();
     
     bool hasDrawnBlock() const;
+
+private:
+	cocos2d::Sprite* _sprite;
 };
 
 #endif

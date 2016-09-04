@@ -2,14 +2,14 @@
 #include "Level/Level.h"
 #include "Level/Creature.h"
 
-CloneMachine* CloneMachine::create(const cocos2d::Vec2& coordinate)
+CloneMachine* CloneMachine::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-	auto instance = new CloneMachine(coordinate);
+	auto instance = new CloneMachine(level, coordinate);
     instance->autorelease();
     return instance;
 }
 
-CloneMachine::CloneMachine(const cocos2d::Vec2& coordinate) : LevelObject(coordinate)
+CloneMachine::CloneMachine(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
     _working = false;
 }

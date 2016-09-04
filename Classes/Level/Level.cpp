@@ -170,11 +170,9 @@ void Level::addObject(LevelObject* object)
         {
             if (existingObject != nullptr)
             {
-                existingObject->setLevel(nullptr);
                 existingObject->release();
             }
             _objects[index] = object;
-            object->setLevel(this);
             object->retain();
         }
     }
@@ -426,15 +424,15 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::WATER:
-            addObject(Water::create(coordinate));
+            addObject(Water::create(this, coordinate));
             break;
             
         case TileType::FIRE:
-            addObject(Fire::create(coordinate));
+			addObject(Fire::create(this, coordinate));
             break;
             
         case TileType::HIDDEN_WALL_PERM:
-            addObject(HiddenWall::create(coordinate, true));
+			addObject(HiddenWall::create(this, coordinate, true));
             break;
             
         case TileType::WALL_NORTH:
@@ -445,25 +443,25 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::DIRT:
-            addObject(Dirt::create(coordinate));
+			addObject(Dirt::create(this, coordinate));
             break;
             
         case TileType::ICE:
-            addObject(Ice::create(coordinate, tileType));
+			addObject(Ice::create(this, coordinate, tileType));
             break;
             
         case TileType::SLIDE_SOUTH:
-            addObject(Slide::create(coordinate, tileType));
+            addObject(Slide::create(this, coordinate, tileType));
             break;
             
         case TileType::SLIDE_NORTH:
         case TileType::SLIDE_EAST:
         case TileType::SLIDE_WEST:
-            addObject(Slide::create(coordinate, tileType));
+            addObject(Slide::create(this, coordinate, tileType));
             break;
             
         case TileType::EXIT:
-            addObject(Exit::create(coordinate));
+			addObject(Exit::create(this, coordinate));
             break;
             
         case TileType::DOOR_BLUE:
@@ -477,54 +475,54 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
         case TileType::ICE_WALL_SOUTH_WEST:
         case TileType::ICE_WALL_NORTH_WEST:
         case TileType::ICE_WALL_NORTH_EAST:
-            addObject(Ice::create(coordinate, tileType));
+			addObject(Ice::create(this, coordinate, tileType));
             break;
             
         case TileType::BLUE_WALL_FAKE:
         case TileType::BLUE_WALL_REAL:
-            addObject(BlueWall::create(coordinate, (tileType == TileType::BLUE_WALL_REAL)));
+			addObject(BlueWall::create(this, coordinate, (tileType == TileType::BLUE_WALL_REAL)));
             break;
             
         case TileType::OVERLAY_BUFFER:
             return false;
             
         case TileType::BURGLAR:
-            addObject(Burglar::create(coordinate));
+			addObject(Burglar::create(this, coordinate));
             break;
             
         case TileType::SOCKET:
-            addObject(Socket::create(coordinate));
+			addObject(Socket::create(this, coordinate));
             break;
             
         case TileType::BUTTON_GREEN:
         case TileType::BUTTON_RED:
-            addObject(Button::create(coordinate, tileType));
+			addObject(Button::create(this, coordinate, tileType));
             break;
             
         case TileType::SWITCH_WALL_CLOSED:
         case TileType::SWITCH_WALL_OPEN:
-            addObject(SwitchWall::create(coordinate, (tileType == TileType::SWITCH_WALL_OPEN)));
+			addObject(SwitchWall::create(this, coordinate, (tileType == TileType::SWITCH_WALL_OPEN)));
             break;
             
         case TileType::BUTTON_BROWN:
         case TileType::BUTTON_BLUE:
-            addObject(Button::create(coordinate, tileType));
+			addObject(Button::create(this, coordinate, tileType));
             break;
             
         case TileType::TELEPORT:
-            addObject(Teleport::create(coordinate));
+			addObject(Teleport::create(this, coordinate));
             break;
             
         case TileType::BOMB:
-            addObject(Bomb::create(coordinate));
+			addObject(Bomb::create(this, coordinate));
             break;
             
         case TileType::BEARTRAP:
-            addObject(Beartrap::create(coordinate));
+			addObject(Beartrap::create(this, coordinate));
             break;
             
         case TileType::HIDDEN_WALL_TEMP:
-            addObject(HiddenWall::create(coordinate, false));
+			addObject(HiddenWall::create(this, coordinate, false));
             break;
             
         case TileType::GRAVEL:
@@ -532,11 +530,11 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::POPUP_WALL:
-            addObject(PopupWall::create(coordinate));
+			addObject(PopupWall::create(this, coordinate));
             break;
             
         case TileType::HINT_BUTTON:
-            addObject(HintButton::create(coordinate));
+            addObject(HintButton::create(this, coordinate));
             break;
             
         case TileType::WALL_SOUTH_EAST:
@@ -544,22 +542,22 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::CLONE_MACHINE:
-            addObject(CloneMachine::create(coordinate));
+			addObject(CloneMachine::create(this, coordinate));
             break;
             
         case TileType::SLIDE_RANDOM:
-            addObject(Slide::create(coordinate, tileType));
+            addObject(Slide::create(this, coordinate, tileType));
             break;
             
         case TileType::HIDDEN_WALL_PERM_1:
         case TileType::HIDDEN_WALL_PERM_2:
         case TileType::HIDDEN_WALL_PERM_3:
-            addObject(HiddenWall::create(coordinate, true));
+			addObject(HiddenWall::create(this, coordinate, true));
             break;
             
         case TileType::EXIT_EXTRA_1:
         case TileType::EXIT_EXTRA_2:
-            addObject(Exit::create(coordinate));
+			addObject(Exit::create(this, coordinate));
             break;
             
         case TileType::KEY_BLUE:

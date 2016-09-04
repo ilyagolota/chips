@@ -8,13 +8,6 @@
 
 class Door : public LevelObject
 {
-private:
-    bool _open;
-	TileType _type;
-	cocos2d::Sprite* _floor;
-	cocos2d::Sprite* _door;
-	cocos2d::Sprite* _cover;
-
 public:
 	static Door* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
@@ -29,6 +22,13 @@ public:
     
 	TileType getKeyType() const;
 	std::string& getColorName() const;
+
+private:
+	bool _open;
+	TileType _type;
+	cocos2d::Sprite* _floor;
+	cocos2d::Sprite* _door;
+	cocos2d::Sprite* _cover;
 };
 
 #endif

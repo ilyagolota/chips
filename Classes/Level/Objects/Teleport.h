@@ -13,10 +13,9 @@ private:
 	cocos2d::Sprite* _frontPart;
 
 public:
-    static Teleport* create(const cocos2d::Vec2& coordinate);
+	static Teleport* create(Level* level, const cocos2d::Vec2& coordinate);
     
-    Teleport(const cocos2d::Vec2& coordinate);
-    
+	Teleport(Level* level, const cocos2d::Vec2& coordinate);
     void beforeEnter(Creature* creature) override;
     void afterEnter(Creature* creature) override;
     void beforeEscape(Creature* creature) override;

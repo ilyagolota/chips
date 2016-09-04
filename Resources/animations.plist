@@ -258,6 +258,54 @@
 				<string>water-0009.png</string>
 			</array>
 		</dict>
+		<key>slide-north</key>
+		<dict>
+			<key>delay</key>
+			<real>0.12</real>
+			<key>frames</key>
+			<array>
+				<string>slide-north-0001.png</string>
+				<string>slide-north-0002.png</string>
+				<string>slide-north-0003.png</string>
+				<string>slide-north-0004.png</string>
+			</array>
+		</dict>
+		<key>slide-south</key>
+		<dict>
+			<key>delay</key>
+			<real>0.12</real>
+			<key>frames</key>
+			<array>
+				<string>slide-south-0001.png</string>
+				<string>slide-south-0002.png</string>
+				<string>slide-south-0003.png</string>
+				<string>slide-south-0004.png</string>
+			</array>
+		</dict>
+		<key>slide-east</key>
+		<dict>
+			<key>delay</key>
+			<real>0.12</real>
+			<key>frames</key>
+			<array>
+				<string>slide-east-0001.png</string>
+				<string>slide-east-0002.png</string>
+				<string>slide-east-0003.png</string>
+				<string>slide-east-0004.png</string>
+			</array>
+		</dict>
+		<key>slide-west</key>
+		<dict>
+			<key>delay</key>
+			<real>0.12</real>
+			<key>frames</key>
+			<array>
+				<string>slide-west-0001.png</string>
+				<string>slide-west-0002.png</string>
+				<string>slide-west-0003.png</string>
+				<string>slide-west-0004.png</string>
+			</array>
+		</dict>
 	</dict>
 </dict>
 </plist>
