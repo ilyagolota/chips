@@ -2,6 +2,7 @@
 #include <Tiled/TiledProjector.h>
 #include <Level/Level.h>
 #include <Level/Creature.h>
+#include <Level/Inventory.h>
 
 Slide* Slide::create(Level* level, const cocos2d::Vec2& coordinate, TileType tileType)
 {
@@ -47,6 +48,29 @@ Slide::Slide(Level* level, const cocos2d::Vec2& coordinate, TileType tileType) :
 	_floor->runAction(cocos2d::RepeatForever::create(cocos2d::Animate::create(animation)));
 }
 
+void Slide::beforeEnter(Creature *creature)
+{
+    if (creature->getType() != CreatureType::CHIP || _level->getInventory()->getItemCount(TileType::BOOTS_SLIDE) <= 0)
+    {
+        creature->getSprite()->stopAllActionsByTag(Creature::CHANGE_STATE_ACTION_TAG);
+        
+        if (creature->getState() != CreatureState::SLIDING)
+        {
+            auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
+            auto action = cocos2d::Sequence::create(
+                cocos2d::DelayTime::create(0.5f * duration),
+                cocos2d::CallFunc::create([this, creature]() {
+                    creature->setState(CreatureState::SLIDING);
+                    creature->updateAnimation();
+                }),
+                nullptr
+            );
+            action->setTag(Creature::CHANGE_STATE_ACTION_TAG);
+            creature->getSprite()->runAction(action);
+        }
+    }
+}
+
 void Slide::afterEnter(Creature* creature)
 {
 	Direction direction;
@@ -76,4 +100,22 @@ void Slide::afterEnter(Creature* creature)
 	{
 		creature->move(direction);
 	}
+}
+
+void Slide::beforeEscape(Creature *creature)
+{
+    if (creature->getState() == CreatureState::SLIDING)
+    {
+        auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
+        auto action = cocos2d::Sequence::create(
+            cocos2d::DelayTime::create(0.5f * duration),
+            cocos2d::CallFunc::create([this, creature]() {
+                creature->setState(CreatureState::NORMAL);
+                creature->updateAnimation();
+            }),
+            nullptr
+        );
+        action->setTag(Creature::CHANGE_STATE_ACTION_TAG);
+        creature->getSprite()->runAction(action);
+    }
 }

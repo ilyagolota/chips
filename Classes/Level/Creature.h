@@ -22,6 +22,13 @@ enum class CreatureType
     CHIP,
 };
 
+enum class CreatureState
+{
+    NORMAL,
+    SLIDING,
+    SWIMMING,
+};
+
 namespace std
 {
 	string &to_string(CreatureType type);
@@ -29,19 +36,10 @@ namespace std
 
 class Creature : public cocos2d::Ref
 {
-protected:
-    Level* _level;
-    cocos2d::Vec2 _coordinate;
-    Direction _direction;
-    CreatureType _type;
-    int _turnsToNextMove;
-    cocos2d::Sprite* _sprite;
-    TileSoundEmitter* _soundEmitter;
-    int _animationState;
-    
 public:
     static const int MOVE_ACTION_TAG = 2005;
     static const int ANIMATE_ACTION_TAG = 2006;
+    static const int CHANGE_STATE_ACTION_TAG = 2007;
     
     static Creature* create(CreatureType type);
     
@@ -59,18 +57,37 @@ public:
     void setCoordinate(const cocos2d::Vec2& coordinate);
     Direction getDirection() const;
     void setDirection(Direction value);
+    CreatureState getState() const;
+    void setState(CreatureState state);
     Level* getLevel() const;
     void setLevel(Level* level);
     void onTurn(float dt);
     void update(float dt);
     void touch(Direction direction);
     bool canMove(Direction direction) const;
+    void updateAnimation();
     
 private:
     void _tryMoveNext();
     void _move(Direction direction);
     void _updatePosition();
-	void _updateAnimation(bool wasModing, Direction wasDirection);
+    void _applyAnimationParams();
+    void _updateAnimation();
+    void _updateFlip();
+
+    Level* _level;
+    cocos2d::Vec2 _coordinate;
+    Direction _direction;
+    CreatureState _state;
+    int _turnsToNextMove;
+    CreatureType _type;
+    cocos2d::Sprite* _sprite;
+    TileSoundEmitter* _soundEmitter;
+    
+    Direction _animatedDirection;
+    CreatureState _animatedState;
+    bool _animatedMoving;
+    bool _animatedFlipped;
 };
 
 #endif

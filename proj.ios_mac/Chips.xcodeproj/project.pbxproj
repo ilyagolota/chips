@@ -118,8 +118,6 @@
 		B3F0A3441CE2081E006E152B /* BinaryReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3331CE2081E006E152B /* BinaryReader.cpp */; };
 		B3F0A3451CE2081E006E152B /* BinaryWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3351CE2081E006E152B /* BinaryWriter.cpp */; };
 		B3F0A3461CE2081E006E152B /* BinaryWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3351CE2081E006E152B /* BinaryWriter.cpp */; };
-		B3F0A3471CE2081E006E152B /* Date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3371CE2081E006E152B /* Date.cpp */; };
-		B3F0A3481CE2081E006E152B /* Date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3371CE2081E006E152B /* Date.cpp */; };
 		B3F0A3491CE2081E006E152B /* HashAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3391CE2081E006E152B /* HashAlgorithm.cpp */; };
 		B3F0A34A1CE2081E006E152B /* HashAlgorithm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3391CE2081E006E152B /* HashAlgorithm.cpp */; };
 		B3F0A34B1CE2081E006E152B /* HttpUtility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A33B1CE2081E006E152B /* HttpUtility.cpp */; };
@@ -155,9 +153,12 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		D431B61F1D75A1880090FBAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D431B61E1D75A1880090FBAF /* CoreText.framework */; };
+		D431B6231D75A2B00090FBAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D431B61E1D75A1880090FBAF /* CoreText.framework */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
+		D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
@@ -191,6 +192,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A07A4C241783777C0073F6A7;
 			remoteInfo = "cocos2dx iOS";
+		};
+		D431B6211D75A1880090FBAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 507B40FD1C31BDD30067B53E;
+			remoteInfo = "libcocos2d tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -304,8 +312,6 @@
 		B3F0A3341CE2081E006E152B /* BinaryReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryReader.h; sourceTree = "<group>"; };
 		B3F0A3351CE2081E006E152B /* BinaryWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryWriter.cpp; sourceTree = "<group>"; };
 		B3F0A3361CE2081E006E152B /* BinaryWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryWriter.h; sourceTree = "<group>"; };
-		B3F0A3371CE2081E006E152B /* Date.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Date.cpp; sourceTree = "<group>"; };
-		B3F0A3381CE2081E006E152B /* Date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Date.h; sourceTree = "<group>"; };
 		B3F0A3391CE2081E006E152B /* HashAlgorithm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HashAlgorithm.cpp; sourceTree = "<group>"; };
 		B3F0A33A1CE2081E006E152B /* HashAlgorithm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashAlgorithm.h; sourceTree = "<group>"; };
 		B3F0A33B1CE2081E006E152B /* HttpUtility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpUtility.cpp; sourceTree = "<group>"; };
@@ -342,9 +348,12 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D431B61E1D75A1880090FBAF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = ../../../../iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Highscores.cpp; path = Common/Highscores.cpp; sourceTree = "<group>"; };
+		D4559F9E1D7D7A16008FCEF7 /* Highscores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Highscores.h; path = Common/Highscores.h; sourceTree = "<group>"; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -355,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D431B61F1D75A1880090FBAF /* CoreText.framework in Frameworks */,
 				ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
@@ -387,6 +397,7 @@
 				5087E76917EB910900C73F5D /* OpenAL.framework in Frameworks */,
 				5087E76A17EB910900C73F5D /* AVFoundation.framework in Frameworks */,
 				5087E76B17EB910900C73F5D /* AudioToolbox.framework in Frameworks */,
+				D431B6231D75A2B00090FBAF /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +433,7 @@
 			children = (
 				1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */,
 				1AC6FB07180E9839004C840B /* libcocos2d iOS.a */,
+				D431B6221D75A1880090FBAF /* libcocos2d tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -443,6 +455,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D431B61E1D75A1880090FBAF /* CoreText.framework */,
 				ED545A7D1B68A1FA00C3958E /* libiconv.dylib */,
 				ED545A7B1B68A1F400C3958E /* libiconv.dylib */,
 				8262943D1AAF051F00CB7CF7 /* Security.framework */,
@@ -485,6 +498,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D449E88F1D7970C10045D09A /* Common */,
 				B3F767AD1CF34FF700F03CCE /* Views */,
 				B3F767971CF3453D00F03CCE /* Preloader */,
 				B3F767801CF2FE9E00F03CCE /* Tiled */,
@@ -616,8 +630,6 @@
 				B3F0A3341CE2081E006E152B /* BinaryReader.h */,
 				B3F0A3351CE2081E006E152B /* BinaryWriter.cpp */,
 				B3F0A3361CE2081E006E152B /* BinaryWriter.h */,
-				B3F0A3371CE2081E006E152B /* Date.cpp */,
-				B3F0A3381CE2081E006E152B /* Date.h */,
 				B3F0A3391CE2081E006E152B /* HashAlgorithm.cpp */,
 				B3F0A33A1CE2081E006E152B /* HashAlgorithm.h */,
 				B3F0A33B1CE2081E006E152B /* HttpUtility.cpp */,
@@ -694,6 +706,15 @@
 				B3F767AF1CF34FF700F03CCE /* LoadingScene.h */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D449E88F1D7970C10045D09A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */,
+				D4559F9E1D7D7A16008FCEF7 /* Highscores.h */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -784,6 +805,13 @@
 			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D431B6221D75A1880090FBAF /* libcocos2d tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcocos2d tvOS.a";
+			remoteRef = D431B6211D75A1880090FBAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -858,7 +886,6 @@
 				B30555D61CE3454D006E5546 /* Ice.cpp in Sources */,
 				B3F7678E1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */,
 				B30555C21CE3454D006E5546 /* Bomb.cpp in Sources */,
-				B3F0A3471CE2081E006E152B /* Date.cpp in Sources */,
 				B3F767A31CF3453D00F03CCE /* Preloader.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				B3F0A3541CE2376E006E152B /* Level.cpp in Sources */,
@@ -874,6 +901,7 @@
 				B30555961CE34295006E5546 /* Item.cpp in Sources */,
 				B3F0A3411CE2081E006E152B /* LevelBundle.cpp in Sources */,
 				B3F0A3431CE2081E006E152B /* BinaryReader.cpp in Sources */,
+				D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */,
 				B30555CE1CE3454D006E5546 /* Exit.cpp in Sources */,
 				B30555CA1CE3454D006E5546 /* Dirt.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -899,7 +927,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30555D11CE3454D006E5546 /* Fire.cpp in Sources */,
-				B3F0A3481CE2081E006E152B /* Date.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B3FCB0971CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */,
 				B30555C51CE3454D006E5546 /* Burglar.cpp in Sources */,
@@ -1042,6 +1069,10 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../../../../iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1075,6 +1106,10 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../../../../iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = mac/Prefix.pch;

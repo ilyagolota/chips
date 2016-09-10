@@ -47,8 +47,11 @@ Creature::Creature(CreatureType type)
 {
     _level = nullptr;
     _type = type;
+    
     _direction = Direction::NORTH;
+    _state = CreatureState::NORMAL;
     _coordinate = cocos2d::Vec2::ZERO;
+    _turnsToNextMove = 0;
     
     _sprite = cocos2d::Sprite::create();
     _sprite->setAnchorPoint(cocos2d::Point::ZERO);
@@ -158,9 +161,20 @@ void Creature::setDirection(Direction value)
 {
     if (_direction != value)
     {
-		auto wasDirection = _direction;
-        _direction = value;
-		_updateAnimation(_turnsToNextMove != 0, wasDirection);
+		_direction = value;
+    }
+}
+
+CreatureState Creature::getState() const
+{
+    return _state;
+}
+
+void Creature::setState(CreatureState state)
+{
+    if (_state != state)
+    {
+        _state = state;
     }
 }
 
@@ -186,8 +200,11 @@ void Creature::setLevel(Level* level)
         if (_level != nullptr)
         {
             _updatePosition();
-            _updateAnimation(_turnsToNextMove != 0, _direction);
             _level->getStage()->addChild(_sprite);
+            
+            _applyAnimationParams();
+            _updateAnimation();
+            _updateFlip();
             
             if (_soundEmitter != nullptr)
             {
@@ -217,9 +234,6 @@ void Creature::setLevel(Level* level)
 
 void Creature::onTurn(float dt)
 {
-    auto wasMoving = (_turnsToNextMove > 0);
-    auto wasDirection = _direction;
-    
     if (_turnsToNextMove > 0)
     {
         _turnsToNextMove -= 1;
@@ -265,7 +279,7 @@ void Creature::onTurn(float dt)
         _tryMoveNext();
     }
     
-    _updateAnimation(wasMoving, wasDirection);
+    updateAnimation();
 }
 
 bool Creature::canMove(Direction direction) const
@@ -334,6 +348,21 @@ bool Creature::canMove(Direction direction) const
     }
     
     return true;
+}
+
+void Creature::updateAnimation()
+{
+    Direction wasAnimatedDirection = _animatedDirection;
+    CreatureState wasAnimatedState = _animatedState;
+    bool wasAnimatedMoving = _animatedMoving;
+    
+    _applyAnimationParams();
+    if (_animatedDirection != wasAnimatedDirection || _animatedState != wasAnimatedState || _animatedMoving != wasAnimatedMoving)
+    {
+        _updateAnimation();
+    }
+    
+    _updateFlip();
 }
 
 void Creature::_tryMoveNext()
@@ -502,151 +531,115 @@ void Creature::_updatePosition()
     }
 }
 
-void Creature::_updateAnimation(bool wasMoving, Direction wasDirection)
+void Creature::_applyAnimationParams()
 {
-    bool force = (_sprite->getTexture() == nullptr);
-    
-	Direction animatedDirection;
-	if (_direction == Direction::SOUTH)
-	{
-		animatedDirection = Direction::EAST;
-	}
-	else if (_direction == Direction::NORTH)
-	{
-		animatedDirection = Direction::WEST;
-	}
-	else
-	{
-		animatedDirection = _direction;
-	}
-
-	switch (_type)
+    if (_type == CreatureType::BLOCK || _type == CreatureType::BLOB)
     {
-        case CreatureType::BLOCK:
-            if (force)
-            {
-				std::string spriteFrameName = "block.png";
-				auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
-                _sprite->setSpriteFrame(spriteFrame);
-            }
-            break;
-            
-        case CreatureType::BLOB:
-            if (force)
-            {
-				std::string animationName = std::to_string(_type);
-                auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
-                auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
-                action->setTag(ANIMATE_ACTION_TAG);
-                _sprite->runAction(action);
-            }
-            break;
-            
-        case CreatureType::GLIDER:
-			if (force || (_direction != wasDirection && _direction != inverse(wasDirection)))
-            {
-				std::string spriteFrameName = std::to_string(_type) + "-" + std::to_string(animatedDirection) + ".png";
-				auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
-                _sprite->setSpriteFrame(spriteFrame);
-            }
-            break;
-
-        case CreatureType::BUG:
-        case CreatureType::TANK:
-            if (force || wasMoving != isMoving() || (_direction != wasDirection && _direction != inverse(wasDirection)))
-            {
-                _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
-                if (isMoving())
-                {
-                    auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
-                    auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
-                    auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
-                    action->setTag(ANIMATE_ACTION_TAG);
-                    _sprite->runAction(action);
-                }
-                else
-                {
-                    auto spriteFrameName = std::to_string(_type) + "-stay-" + std::to_string(animatedDirection) + ".png";
-                    auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
-                    _sprite->setSpriteFrame(spriteFrame);
-                }
-            }
-            break;
-            
-        case CreatureType::BALL:
-        case CreatureType::WALKER:
-			if (force || wasMoving != isMoving() || (_direction != wasDirection && _direction != inverse(wasDirection)))
-            {
-                _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
-                if (isMoving())
-                {
-					auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
-                    auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
-                    auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
-                    action->setTag(ANIMATE_ACTION_TAG);
-                    _sprite->runAction(action);
-                }
-                else
-                {
-					auto spriteFrameName = std::to_string(_type) + "-stay.png";
-                    auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
-                    _sprite->setSpriteFrame(spriteFrame);
-                }
-            }
-            break;
-            
-        case CreatureType::FIREBALL:
-        case CreatureType::TEETH:
-        case CreatureType::PARAMECIUM:
-			if (force || (_direction != wasDirection && _direction != inverse(wasDirection)))
-            {
-				_sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
-				auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
-                auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
-                auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
-                action->setTag(ANIMATE_ACTION_TAG);
-                _sprite->runAction(action);
-            }
-            break;
-            
-        case CreatureType::CHIP:
-            if (force || wasMoving != isMoving() || (_direction != wasDirection && _direction != inverse(wasDirection)))
-            {
-                _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
-                if (isMoving())
-                {
-					auto animationName = std::to_string(_type) + "-walk-" + std::to_string(animatedDirection);
-                    auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
-                    auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
-                    action->setTag(ANIMATE_ACTION_TAG);
-                    _sprite->runAction(action);
-                }
-                else
-                {
-					auto animationName = std::to_string(_type) + "-stay-" + std::to_string(animatedDirection);
-                    auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
-                    auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
-                    action->setTag(ANIMATE_ACTION_TAG);
-                    _sprite->runAction(action);
-                }
-            }
-            break;
+        // This creature is not rotatable.
+        _animatedDirection = Direction::EAST;
+        _animatedFlipped = false;
+    }
+    else
+    {
+        // There are animations only for east/west directions and north/south are mirrored.
+        if (_direction == Direction::SOUTH || _direction == Direction::NORTH)
+        {
+            _animatedDirection = (_direction == Direction::SOUTH) ? Direction::EAST : Direction::WEST;
+            _animatedFlipped = true;
+        }
+        else
+        {
+            _animatedDirection = _direction;
+            _animatedFlipped = false;
+        }
+        
+        // Paramecium has same animation for move front or back.
+        if (_type == CreatureType::PARAMECIUM)
+        {
+            _animatedDirection = Direction::EAST;
+        }
     }
     
-    if (_direction != wasDirection)
+    if (_type == CreatureType::BLOCK || _type == CreatureType::BLOB || _type == CreatureType::GLIDER || _type == CreatureType::FIREBALL)
     {
-        if (_type != CreatureType::BLOCK && _type != CreatureType::BLOB)
+        // This creature has the same animation for standing and moving.
+        _animatedMoving = false;
+    }
+    else
+    {
+        _animatedMoving = (_turnsToNextMove > 0);
+    }
+    
+    if (_state == CreatureState::SLIDING)
+    {
+        // Sliding creature doesn't move the legs.
+        _animatedMoving = false;
+    }
+    else if (_state == CreatureState::SWIMMING)
+    {
+        if (_type == CreatureType::CHIP)
         {
-            if (_direction == Direction::NORTH || _direction == Direction::SOUTH)
-            {
-                _sprite->setAnchorPoint(cocos2d::Vec2(1, 0));
-                _sprite->setScaleX(-1);
-            }
-            else
-            {
-                _sprite->setAnchorPoint(cocos2d::Vec2(0, 0));
-                _sprite->setScaleX(1);
-            }
+            // Swimming chip has the same animation for standing and moving.
+            _animatedMoving = false;
         }
+        else
+        {
+            // Only chip has special swimming animation.
+            _animatedState = CreatureState::NORMAL;
+        }
+    }
+}
+
+void Creature::_updateAnimation()
+{
+    if (_animatedMoving)
+    {
+        auto animationName = std::to_string(_type) + "-walk-" + std::to_string(_animatedDirection);
+        auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
+        auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
+        action->setTag(ANIMATE_ACTION_TAG);
+        _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
+        _sprite->runAction(action);
+    }
+    else
+    {
+        bool hasStaticAnimation = (_type == CreatureType::BLOCK
+           || _type == CreatureType::GLIDER
+           || _type == CreatureType::BUG
+           || _type == CreatureType::PARAMECIUM
+           || _type == CreatureType::BALL
+           || _type == CreatureType::WALKER
+           || _type == CreatureType::TANK);
+        
+        if (hasStaticAnimation)
+        {
+            // Take the first frame from move animation.
+            auto spriteFrameName = std::to_string(_type) + "-walk-" + std::to_string(_animatedDirection) + "-0001.png";
+            auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
+            _sprite->setSpriteFrame(spriteFrame);
+        }
+        else
+        {
+            auto animationName = std::to_string(_type) + (_state == CreatureState::SWIMMING ? "-swim-" : "-stay-") + std::to_string(_animatedDirection);
+            auto animation = cocos2d::AnimationCache::getInstance()->getAnimation(animationName);
+            auto action = cocos2d::RepeatForever::create(cocos2d::Animate::create(animation));
+            action->setTag(ANIMATE_ACTION_TAG);
+            _sprite->stopAllActionsByTag(ANIMATE_ACTION_TAG);
+            _sprite->runAction(action);
+        }
+    }
+}
+
+void Creature::_updateFlip()
+{
+    if (_animatedFlipped)
+    {
+        _sprite->setAnchorPoint(cocos2d::Vec2(1, 0));
+        _sprite->setScaleX(-1);
+    }
+    else
+    {
+        _sprite->setAnchorPoint(cocos2d::Vec2(0, 0));
+        _sprite->setScaleX(1);
     }
 }
