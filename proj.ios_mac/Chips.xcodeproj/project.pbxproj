@@ -146,8 +146,6 @@
 		B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */; };
 		B3FCB0921CF59CC4003B3C9E /* sheets in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0911CF59CC4003B3C9E /* sheets */; };
 		B3FCB0931CF59CC4003B3C9E /* sheets in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0911CF59CC4003B3C9E /* sheets */; };
-		B3FCB0961CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */; };
-		B3FCB0971CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */; };
 		B3FCB0991CF5B51A003B3C9E /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0981CF5B51A003B3C9E /* animations.plist */; };
 		B3FCB09A1CF5B51A003B3C9E /* animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3FCB0981CF5B51A003B3C9E /* animations.plist */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
@@ -342,8 +340,6 @@
 		B3F767AF1CF34FF700F03CCE /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
 		B3F9E5601CFC4DB000BF2D5D /* IPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPlayerControl.h; sourceTree = "<group>"; };
 		B3FCB0911CF59CC4003B3C9E /* sheets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sheets; path = ../../chips/Resources/sheets; sourceTree = "<group>"; };
-		B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LoadLevelListTask.cpp; path = ../../../chips/Classes/LevelData/LoadLevelListTask.cpp; sourceTree = "<group>"; };
-		B3FCB0951CF5A04C003B3C9E /* LoadLevelListTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadLevelListTask.h; path = ../../../chips/Classes/LevelData/LoadLevelListTask.h; sourceTree = "<group>"; };
 		B3FCB0981CF5B51A003B3C9E /* animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = animations.plist; path = ../../chips/Resources/animations.plist; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -611,8 +607,6 @@
 		B3F0A32D1CE2081E006E152B /* LevelData */ = {
 			isa = PBXGroup;
 			children = (
-				B3FCB0941CF5A04C003B3C9E /* LoadLevelListTask.cpp */,
-				B3FCB0951CF5A04C003B3C9E /* LoadLevelListTask.h */,
 				B3F0A32E1CE2081E006E152B /* LevelData.cpp */,
 				B3F0A32F1CE2081E006E152B /* LevelData.h */,
 				B3F0A3301CE2081E006E152B /* LevelBundle.cpp */,
@@ -876,7 +870,6 @@
 				B30555D41CE3454D006E5546 /* HintButton.cpp in Sources */,
 				B3F0A34B1CE2081E006E152B /* HttpUtility.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
-				B3FCB0961CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */,
 				B30555DE1CE3454D006E5546 /* SwitchWall.cpp in Sources */,
 				B30555BE1CE3454D006E5546 /* Beartrap.cpp in Sources */,
 				B305558C1CE339DC006E5546 /* Creature.cpp in Sources */,
@@ -928,7 +921,6 @@
 			files = (
 				B30555D11CE3454D006E5546 /* Fire.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
-				B3FCB0971CF5A04C003B3C9E /* LoadLevelListTask.cpp in Sources */,
 				B30555C51CE3454D006E5546 /* Burglar.cpp in Sources */,
 				B30555BF1CE3454D006E5546 /* Beartrap.cpp in Sources */,
 				B3F0A3551CE2376E006E152B /* Level.cpp in Sources */,

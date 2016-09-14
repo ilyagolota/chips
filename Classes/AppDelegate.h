@@ -9,6 +9,8 @@
 
 The reason for implement as private inheritance is to hide some interface call by Director.
 */
+class ChipsChallengeGame;
+
 class  AppDelegate : private cocos2d::Application
 {
 public:
@@ -35,7 +37,12 @@ public:
     @param  the pointer of the application
     */
     virtual void applicationWillEnterForeground();
+    
+private:
+    std::function<void()> _loadSpriteSheet(const std::string& filename);
+    std::function<void()> _loadAnimations(const std::string& filename);
+    std::function<void(const std::function<void()>&)> _loadSound(const std::string& filename);
+    std::function<void()> _loadLevelPack(ChipsChallengeGame* game, const std::string& filename, const std::vector<char>& hash);
 };
 
 #endif // _APP_DELEGATE_H_
-

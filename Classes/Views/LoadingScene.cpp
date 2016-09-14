@@ -51,7 +51,7 @@ void LoadingScene::_build()
 
 void LoadingScene::_update(float dt)
 {
-    _preloader->process();
+    _preloader->update(dt);
     
     size_t loaded = _preloader->getLoaded();
     size_t total = _preloader->getTotal();

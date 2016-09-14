@@ -12,9 +12,18 @@ Preloader::Preloader():
     _hasActiveTask(false)
 { }
 
-void Preloader::addTask(Task* task)
+void Preloader::addTask(const std::function<void()>& task)
 {
-    _tasks.pushBack(task);
+    _asyncTasks.push_back([task](const std::function<void()>& callback)
+    {
+        task();
+        callback();
+    });
+}
+
+void Preloader::addTask(const std::function<void(const std::function<void()>&)>& asyncTask)
+{
+    _asyncTasks.push_back(asyncTask);
 }
 
 bool Preloader::isComplete() const
@@ -29,110 +38,20 @@ size_t Preloader::getLoaded() const
 
 size_t Preloader::getTotal() const
 {
-    return _tasks.size();
+    return _asyncTasks.size();
 }
 
-void Preloader::process()
+void Preloader::update(float /*dt*/)
 {
-    if (_loaded < _tasks.size())
+    if (_loaded < _asyncTasks.size())
     {
-        auto task = _tasks.at(_loaded);
-        
         if (!_hasActiveTask)
         {
-            task->exec();
             _hasActiveTask = true;
-        }
-    
-        if (task->isCompleted())
-        {
-            _hasActiveTask = false;
-            _loaded++;
+            _asyncTasks[_loaded]([this] () {
+                _hasActiveTask = false;
+                _loaded++;
+            });
         }
     }
-}
-
-double Preloader::_getCurrentTime()
-{
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
-    timeb buffer;
-    ftime(&buffer);
-    return (double)buffer.time + buffer.millitm * 0.001;
-#else
-    timeval buffer;
-    gettimeofday(&buffer, NULL);
-    return (double)buffer.tv_sec + buffer.tv_usec * 0.000001;
-#endif
-}
-
-LoadTextureTask* LoadTextureTask::create(const std::string& filename)
-{
-    auto instance = new LoadTextureTask(filename);
-    instance->autorelease();
-    return instance;
-}
-
-LoadTextureTask::LoadTextureTask(const std::string& filename)
-: _filename(filename)
-{ }
-
-void LoadTextureTask::exec()
-{
-    cocos2d::Director::getInstance()->getTextureCache()->addImage(_filename);
-    _completed = true;
-}
-
-LoadSpriteSheetTask* LoadSpriteSheetTask::create(const std::string& filename)
-{
-    auto instance = new LoadSpriteSheetTask(filename);
-    instance->autorelease();
-    return instance;
-}
-
-LoadSpriteSheetTask::LoadSpriteSheetTask(const std::string& filename)
-: _filename(filename)
-{ }
-
-void LoadSpriteSheetTask::exec()
-{
-    cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile(_filename);
-    _completed = true;
-}
-
-LoadAnimationsTask* LoadAnimationsTask::create(const std::string& filename)
-{
-    auto instance = new LoadAnimationsTask(filename);
-    instance->autorelease();
-    return instance;
-}
-
-LoadAnimationsTask::LoadAnimationsTask(const std::string& filename)
-: _filename(filename)
-{ }
-
-void LoadAnimationsTask::exec()
-{
-    cocos2d::AnimationCache::getInstance()->addAnimationsWithFile(_filename);
-    _completed = true;
-}
-
-LoadSoundTask* LoadSoundTask::create(const std::string& filename)
-{
-    auto instance = new LoadSoundTask(filename);
-    instance->autorelease();
-    return instance;
-}
-
-LoadSoundTask::LoadSoundTask(const std::string& filename)
-: _filename(filename)
-{ }
-
-void LoadSoundTask::exec()
-{
-    cocos2d::experimental::AudioEngine::preload(_filename, std::bind(&LoadSoundTask::_onLoad, this, std::placeholders::_1));
-}
-
-void LoadSoundTask::_onLoad(bool loaded)
-{
-    _completed = true;
 }

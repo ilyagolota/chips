@@ -1,6 +1,5 @@
 #include "AppDelegate.h"
 #include <Preloader/Preloader.h>
-#include <LevelData/LoadLevelListTask.h>
 #include <Views/LoadingScene.h>
 #include "ChipsChallengeGame.h"
 
@@ -73,29 +72,23 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }*/
 
     register_all_packages();
+    
+    const char* hash1 = "\x93<\x02\xdf\x89I/\xed\x9d\xf9\0\x89\xc5#\xf6T";
+    const char* hash2 = "\n\x8e\xae\x8c/\fh\xc2/\xae\xfa\x90+\xf3\xc9\xc7";
+    const char* hash3 = " k\xfe!\xea\x95\xf0\xe3\x8b\xb6Y/\x9bz(\x16";
 
     auto game = ChipsChallengeGame::create();
     
     auto preloader = Preloader::create();
-    
-    //auto spriteFrameCache = cocos2d::SpriteFrameCache::getInstance();
-    //preloader->pushTask(std::bind(static_cast<void(cocos2d::SpriteFrameCache::*)(const std::string&)>(&cocos2d::SpriteFrameCache::addSpriteFramesWithFile), spriteFrameCache, "sheets/creatures.plist"));
-    
-    preloader->addTask(LoadSpriteSheetTask::create("sheets/creatures.plist"));
-    preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-1.plist"));
-	preloader->addTask(LoadSpriteSheetTask::create("sheets/tiles-2.plist"));
-	preloader->addTask(LoadSpriteSheetTask::create("sheets/walls-01.plist"));
-    preloader->addTask(LoadAnimationsTask::create("animations.plist"));
-    
-    preloader->addTask(LoadSoundTask::create("sounds/door.mp3"));
-    
-    std::vector<char> hash(16);
-    memcpy(&hash[0], "\x93<\x02\xdf\x89I/\xed\x9d\xf9\0\x89\xc5#\xf6T", 16);
-    preloader->addTask(LoadLevelListTask::create(game->getLevelBundle(), "levels/cclp1.dat", hash));
-    memcpy(&hash[0], "\n\x8e\xae\x8c/\fh\xc2/\xae\xfa\x90+\xf3\xc9\xc7", 16);
-    preloader->addTask(LoadLevelListTask::create(game->getLevelBundle(), "levels/cclp2.dat", hash));
-    memcpy(&hash[0], " k\xfe!\xea\x95\xf0\xe3\x8b\xb6Y/\x9bz(\x16", 16);
-    preloader->addTask(LoadLevelListTask::create(game->getLevelBundle(), "levels/cclp3.dat", hash));
+    preloader->addTask(_loadSpriteSheet("sheets/creatures.plist"));
+    preloader->addTask(_loadSpriteSheet("sheets/tiles-1.plist"));
+	preloader->addTask(_loadSpriteSheet("sheets/tiles-2.plist"));
+	preloader->addTask(_loadSpriteSheet("sheets/walls-01.plist"));
+    preloader->addTask(_loadAnimations("animations.plist"));
+    preloader->addTask(_loadSound("sounds/door.mp3"));
+    preloader->addTask(_loadLevelPack(game, "levels/cclp1.dat", std::vector<char>(hash1, hash1 + 16)));
+    preloader->addTask(_loadLevelPack(game, "levels/cclp2.dat", std::vector<char>(hash2, hash2 + 16)));
+    preloader->addTask(_loadLevelPack(game, "levels/cclp3.dat", std::vector<char>(hash3, hash3 + 16)));
     
     auto loadingScene = LoadingScene::create(game, preloader);
     director->runWithScene(loadingScene);
@@ -113,4 +106,39 @@ void AppDelegate::applicationWillEnterForeground()
 {
     Director::getInstance()->startAnimation();
 	cocos2d::experimental::AudioEngine::resumeAll();
+}
+
+std::function<void()> AppDelegate::_loadSpriteSheet(const std::string& filename)
+{
+    return [filename]()
+    {
+        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile(filename);
+    };
+}
+
+std::function<void()> AppDelegate::_loadAnimations(const std::string& filename)
+{
+    return [filename]()
+    {
+        cocos2d::AnimationCache::getInstance()->addAnimationsWithFile(filename);
+    };
+}
+
+std::function<void(const std::function<void()>&)> AppDelegate::_loadSound(const std::string& filename)
+{
+    return [filename](const std::function<void()>& callback)
+    {
+        cocos2d::experimental::AudioEngine::preload(filename, [callback](bool /*success*/)
+        {
+            callback();
+        });
+    };
+}
+
+std::function<void()> AppDelegate::_loadLevelPack(ChipsChallengeGame* game, const std::string& filename, const std::vector<char>& hash)
+{
+    return [game, filename, hash]()
+    {
+        game->getLevelBundle()->preloadLevelPack(filename, hash);
+    };
 }
