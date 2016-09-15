@@ -14,7 +14,7 @@
     </dict>
     <key>frames</key>
     <dict>
-      <key>fireball-walk-west-0004.png</key>
+      <key>fireball-stay-west-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{165,154}</string>
@@ -33,7 +33,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-east-0004.png</key>
+      <key>fireball-stay-east-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{165,152}</string>
@@ -52,7 +52,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-west-0005.png</key>
+      <key>fireball-stay-west-0005.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{156,157}</string>
@@ -71,7 +71,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-west-0003.png</key>
+      <key>fireball-stay-west-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{158,153}</string>
@@ -90,7 +90,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-east-0005.png</key>
+      <key>fireball-stay-east-0005.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{156,155}</string>
@@ -109,7 +109,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-west-0006.png</key>
+      <key>fireball-stay-west-0006.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{161,144}</string>
@@ -128,7 +128,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-east-0001.png</key>
+      <key>fireball-stay-east-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{157,147}</string>
@@ -147,7 +147,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-east-0006.png</key>
+      <key>fireball-stay-east-0006.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{157,146}</string>
@@ -166,7 +166,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-east-0003.png</key>
+      <key>fireball-stay-east-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{161,142}</string>
@@ -185,7 +185,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-west-0001.png</key>
+      <key>fireball-stay-west-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{157,146}</string>
@@ -204,7 +204,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-west-0002.png</key>
+      <key>fireball-stay-west-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{156,146}</string>
@@ -223,7 +223,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>fireball-walk-east-0002.png</key>
+      <key>fireball-stay-east-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{157,143}</string>
@@ -261,7 +261,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>tank-stay-west.png</key>
+      <key>tank-walk-west-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{138,126}</string>
@@ -337,7 +337,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>tank-stay-east.png</key>
+      <key>tank-walk-east-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{138,119}</string>
@@ -356,7 +356,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>walker-stay.png</key>
+      <key>walker-walk-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{118,102}</string>
@@ -413,7 +413,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>glider-east.png</key>
+      <key>glider-walk-east-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{114,93}</string>
@@ -432,7 +432,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>ball-stay.png</key>
+      <key>ball-walk-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{103,102}</string>
@@ -508,7 +508,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>glider-west.png</key>
+      <key>glider-walk-west-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{114,83}</string>
@@ -793,7 +793,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-walk-0003.png</key>
+      <key>paramecium-stay-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{98,78}</string>
@@ -869,7 +869,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-walk-0002.png</key>
+      <key>paramecium-stay-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{97,78}</string>
@@ -888,7 +888,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-stay.png</key>
+      <key>paramecium-stay-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{97,78}</string>

@@ -4,7 +4,6 @@
 #include <Tiled/TiledProjector.h>
 #include <Level/Level.h>
 #include <Level/Creature.h>
-#include "LevelScene/SmartControlLayer.h"
 #include "PacksScene.h"
 
 LevelScene* LevelScene::create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex)
@@ -17,6 +16,7 @@ LevelScene* LevelScene::create(ChipsChallengeGame* game, size_t packIndex, size_
 LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex)
 {
     auto director = cocos2d::Director::getInstance();
+	auto winSize = director->getWinSize();
     
     _game = game;
     _game->retain();
@@ -28,10 +28,19 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
 
     _stage = cocos2d::Node::create();
     addChild(_stage);
+
+	_level = Level::create(_stage);
+	_level->retain();
+
+	_topNode = cocos2d::Node::create();
+	addChild(_topNode);
     
-    _level = Level::create(_stage);
-    _level->retain();
-    
+  
+	_inventoryPanel = InventoryPanel::create(_level->getInventory());
+	_inventoryPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
+	_inventoryPanel->setPosition(cocos2d::Vec2(0.5f * winSize.width, 8));
+	addChild(_inventoryPanel);
+
     _controlLayer = SmartControlLayer::create(_level);
     addChild(_controlLayer);
 	_level->setPlayerControl(_controlLayer);
@@ -93,13 +102,48 @@ void LevelScene::update(float dt)
         auto winSize = cocos2d::Director::getInstance()->getWinSize();
         _stage->setPosition(-playerCenter + winSize * 0.5f + stabilization);
     }
+
+	/*if (_titleNode)
+	if (_controlLayer->isPressed())
+	{
+
+	}*/
 }
 
 void LevelScene::_loadLevel()
 {
     auto levelInfo = _game->getLevelBundle()->readLevelData(_packIndex, _levelIndex);
     _level->start(levelInfo);
+	_showTitle();
 }
+
+void LevelScene::_showTitle()
+{
+	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
+
+	auto titleLabel = cocos2d::Label::create(_level->getLevelData()->getTitle(), "fonts/Marker Felt.ttf", 16, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
+
+	auto titlePanel = cocos2d::extension::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
+	titlePanel->setContentSize(cocos2d::Size(360, titleLabel->getContentSize().height + 46));
+	titlePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
+
+	titleLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+	titleLabel->setPosition(cocos2d::Vec2(titlePanel->getContentSize()) * 0.5f);
+	titlePanel->addChild(titleLabel);
+
+	_topNode->addChild(titlePanel);
+
+	titlePanel->runAction(cocos2d::Sequence::create(
+		cocos2d::DelayTime::create(0.5f),
+		cocos2d::FadeOut::create(0.5f),
+		cocos2d::CallFuncN::create([](cocos2d::Node* titlePanel)
+		{
+			titlePanel->removeFromParentAndCleanup(true);
+		}),
+		nullptr
+	));
+}
+
 /*
 void LevelScene::showPauseMenu()
 {

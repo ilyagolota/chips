@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plist version="1.0">
+  <dict>
+    <key>metadata</key>
+    <dict>
+      <key>version</key>
+      <string>2.0.0</string>
+      <key>size</key>
+      <string>{1024,1024}</string>
+      <key>format</key>
+      <integer>3</integer>
+      <key>name</key>
+      <string>ui.png</string>
+    </dict>
+    <key>frames</key>
+    <dict>
+      <key>ui-panel-black-transparent.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{71,71}</string>
+        <key>spriteOffset</key>
+        <string>{0,0}</string>
+        <key>spriteSourceSize</key>
+        <string>{71,71}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{71,71}}</string>
+        <key>spriteTrimmed</key>
+        <false />
+        <key>textureRect</key>
+        <string>{{0,0},{71,71}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>ui-inventory-cell.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{70,68}</string>
+        <key>spriteOffset</key>
+        <string>{0,0}</string>
+        <key>spriteSourceSize</key>
+        <string>{70,68}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{70,68}}</string>
+        <key>spriteTrimmed</key>
+        <false />
+        <key>textureRect</key>
+        <string>{{72,0},{70,68}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+    </dict>
+  </dict>
+</plist>

@@ -77,32 +77,32 @@
 				<string>bug-walk-east-0006.png</string>
 			</array>
 		</dict>
-		<key>fireball-walk-west</key>
+		<key>fireball-stay-west</key>
 		<dict>
 			<key>delay</key>
 			<real>0.06</real>
 			<key>frames</key>
 			<array>
-				<string>fireball-walk-west-0001.png</string>
-				<string>fireball-walk-west-0002.png</string>
-				<string>fireball-walk-west-0003.png</string>
-				<string>fireball-walk-west-0004.png</string>
-				<string>fireball-walk-west-0005.png</string>
-				<string>fireball-walk-west-0006.png</string>
+				<string>fireball-stay-west-0001.png</string>
+				<string>fireball-stay-west-0002.png</string>
+				<string>fireball-stay-west-0003.png</string>
+				<string>fireball-stay-west-0004.png</string>
+				<string>fireball-stay-west-0005.png</string>
+				<string>fireball-stay-west-0006.png</string>
 			</array>
 		</dict>
-		<key>fireball-walk-east</key>
+		<key>fireball-stay-east</key>
 		<dict>
 			<key>delay</key>
 			<real>0.06</real>
 			<key>frames</key>
 			<array>
-				<string>fireball-walk-east-0001.png</string>
-				<string>fireball-walk-east-0002.png</string>
-				<string>fireball-walk-east-0003.png</string>
-				<string>fireball-walk-east-0004.png</string>
-				<string>fireball-walk-east-0005.png</string>
-				<string>fireball-walk-east-0006.png</string>
+				<string>fireball-stay-east-0001.png</string>
+				<string>fireball-stay-east-0002.png</string>
+				<string>fireball-stay-east-0003.png</string>
+				<string>fireball-stay-east-0004.png</string>
+				<string>fireball-stay-east-0005.png</string>
+				<string>fireball-stay-east-0006.png</string>
 			</array>
 		</dict>
 		<key>tank-walk-west</key>

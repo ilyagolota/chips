@@ -7,9 +7,10 @@
 #include <cocos2d.h>
 #include "AudioEngine.h"
 
+#include "TileSoundEmitter.h"
+#include "TileMicrophone.h"
+
 class TiledPhysicsWorld;
-class TileSoundEmitter;
-class TileMicrophone;
 
 class TiledSoundEnvironment : public cocos2d::Ref
 {

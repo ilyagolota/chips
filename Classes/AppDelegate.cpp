@@ -80,12 +80,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto game = ChipsChallengeGame::create();
     
     auto preloader = Preloader::create();
+	preloader->addTask(_loadSpriteSheet("sheets/ui.plist"));
     preloader->addTask(_loadSpriteSheet("sheets/creatures.plist"));
     preloader->addTask(_loadSpriteSheet("sheets/tiles-1.plist"));
 	preloader->addTask(_loadSpriteSheet("sheets/tiles-2.plist"));
 	preloader->addTask(_loadSpriteSheet("sheets/walls-01.plist"));
     preloader->addTask(_loadAnimations("animations.plist"));
     preloader->addTask(_loadSound("sounds/door.mp3"));
+	preloader->addTask(_loadSound("sounds/water.mp3"));
     preloader->addTask(_loadLevelPack(game, "levels/cclp1.dat", std::vector<char>(hash1, hash1 + 16)));
     preloader->addTask(_loadLevelPack(game, "levels/cclp2.dat", std::vector<char>(hash2, hash2 + 16)));
     preloader->addTask(_loadLevelPack(game, "levels/cclp3.dat", std::vector<char>(hash3, hash3 + 16)));

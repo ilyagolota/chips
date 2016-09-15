@@ -112,7 +112,8 @@ void Ice::beforeEnter(Creature *creature)
             auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
             auto action = cocos2d::Sequence::create(
                 cocos2d::DelayTime::create(0.5f * duration),
-                cocos2d::CallFunc::create([this, creature]() {
+                cocos2d::CallFunc::create([this, creature]()
+			    {
                     creature->setState(CreatureState::SLIDING);
                     creature->updateAnimation();
                 }),
@@ -172,7 +173,8 @@ void Ice::beforeEscape(Creature *creature)
         auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
         auto action = cocos2d::Sequence::create(
             cocos2d::DelayTime::create(0.5f * duration),
-            cocos2d::CallFunc::create([this, creature]() {
+            cocos2d::CallFunc::create([this, creature]()
+			{
                 creature->setState(CreatureState::NORMAL);
                 creature->updateAnimation();
             }),

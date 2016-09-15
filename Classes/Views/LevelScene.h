@@ -2,14 +2,28 @@
 #define  _CHIPS_CHALLENGE_LEVEL_SCENE_H_
 
 #include <cocos2d.h>
+#include "LevelScene/InventoryPanel.h"
+#include "LevelScene/SmartControlLayer.h"
 
 class ChipsChallengeGame;
 class Level;
-class SmartControlLayer;
 
 class LevelScene : public cocos2d::Scene
 {
+public:
+	static LevelScene* create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
+
+	LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
+	virtual ~LevelScene() override;
+
+	void onEnter() override;
+	void update(float dt) override;
+
 protected:
+	void _loadLevel();
+
+	void _showTitle();
+
     ChipsChallengeGame* _game;
     Level *_level;
     size_t _packIndex;
@@ -19,6 +33,8 @@ protected:
     cocos2d::Node* _stage;
     SmartControlLayer* _controlLayer;
     
+	cocos2d::Node* _titleNode;
+
     //ControlLayer* _controlLayer;
     
     cocos2d::Label *_chipsLabel;
@@ -30,18 +46,11 @@ protected:
     cocos2d::Node *_topNode;
     cocos2d::Layer *_preloaderLayer;
     cocos2d::Layer *_fadeLayer;
+
+	InventoryPanel* _inventoryPanel;
     
     //cocos2d::EventListenerKeyboard *_keyboardListener;
     //char _keys[256];
-    
-public:
-    static LevelScene* create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
-    
-    LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
-    virtual ~LevelScene() override;
-	
-    void onEnter() override;
-    void update(float dt) override;
     
     /*TiledMap* getTiledMap();
     Direction getSelectedDirection();
@@ -56,8 +65,6 @@ public:
 	void levelFailed(const std::string& message);*/
 
 private:
-    void _loadLevel();
-	
 	/*
 	void _start();
 

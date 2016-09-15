@@ -1,7 +1,5 @@
 #include "TiledSoundEnvironment.h"
 #include "TiledPhysicsWorld.h"
-#include "TileSoundEmitter.h"
-#include "TileMicrophone.h"
 
 TiledSoundEnvironment* TiledSoundEnvironment::create(TiledPhysicsWorld* physicsWorld)
 {
