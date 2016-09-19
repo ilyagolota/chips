@@ -72,6 +72,11 @@ LevelPack::LevelPack(const std::string& filename, const std::vector<char>& hash)
     stream.close();
 }
 
+const std::vector<LevelPackEntry>& LevelPack::getEntries() const
+{
+    return _entries;
+}
+
 LevelConfig* LevelPack::readLevelConfig(size_t entryIndex)
 {
     auto path = cocos2d::FileUtils::getInstance()->fullPathForFilename(_filename);

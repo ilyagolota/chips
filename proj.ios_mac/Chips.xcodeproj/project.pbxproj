@@ -156,6 +156,10 @@
 		D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */; };
 		D4626CA71D903227003C812E /* LevelConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CA21D903227003C812E /* LevelConfig.cpp */; };
 		D4626CA81D903227003C812E /* LevelPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CA41D903227003C812E /* LevelPack.cpp */; };
+		D4626CAD1D903D61003C812E /* TransitionAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAB1D903D61003C812E /* TransitionAnimation.cpp */; };
+		D4626CAE1D903D61003C812E /* TransitionAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAB1D903D61003C812E /* TransitionAnimation.cpp */; };
+		D4626CB11D903E07003C812E /* LevelListScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAF1D903E07003C812E /* LevelListScene.cpp */; };
+		D4626CB21D903E07003C812E /* LevelListScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAF1D903E07003C812E /* LevelListScene.cpp */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
@@ -351,6 +355,10 @@
 		D4626CA41D903227003C812E /* LevelPack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelPack.cpp; sourceTree = "<group>"; };
 		D4626CA51D903227003C812E /* LevelPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelPack.h; sourceTree = "<group>"; };
 		D4626CA61D903227003C812E /* TileType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileType.h; sourceTree = "<group>"; };
+		D4626CAB1D903D61003C812E /* TransitionAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TransitionAnimation.cpp; path = Extensions/TransitionAnimation.cpp; sourceTree = "<group>"; };
+		D4626CAC1D903D61003C812E /* TransitionAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionAnimation.h; path = Extensions/TransitionAnimation.h; sourceTree = "<group>"; };
+		D4626CAF1D903E07003C812E /* LevelListScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelListScene.cpp; sourceTree = "<group>"; };
+		D4626CB01D903E07003C812E /* LevelListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelListScene.h; sourceTree = "<group>"; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -686,6 +694,7 @@
 		B3F767AD1CF34FF700F03CCE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D4626CAA1D903D3F003C812E /* Extensions */,
 				B3F310661CF7417900B9EC92 /* LevelScene */,
 				B3F310621CF700B900B9EC92 /* LevelScene.cpp */,
 				B3F310631CF700B900B9EC92 /* LevelScene.h */,
@@ -693,6 +702,8 @@
 				B3BBF9331CF5E6A000A76097 /* PacksScene.h */,
 				B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */,
 				B3F767AF1CF34FF700F03CCE /* LoadingScene.h */,
+				D4626CAF1D903E07003C812E /* LevelListScene.cpp */,
+				D4626CB01D903E07003C812E /* LevelListScene.h */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -704,6 +715,15 @@
 				D4559F9E1D7D7A16008FCEF7 /* Highscores.h */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		D4626CAA1D903D3F003C812E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D4626CAB1D903D61003C812E /* TransitionAnimation.cpp */,
+				D4626CAC1D903D61003C812E /* TransitionAnimation.h */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -887,6 +907,7 @@
 				B3F767921CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */,
 				B30555E21CE3454D006E5546 /* Water.cpp in Sources */,
 				B3F767941CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */,
+				D4626CAD1D903D61003C812E /* TransitionAnimation.cpp in Sources */,
 				B30555961CE34295006E5546 /* Item.cpp in Sources */,
 				B3F0A3431CE2081E006E152B /* BinaryReader.cpp in Sources */,
 				D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */,
@@ -896,6 +917,7 @@
 				B3F767901CF2FE9E00F03CCE /* TiledSoundEnvironment.cpp in Sources */,
 				B3F310641CF700B900B9EC92 /* LevelScene.cpp in Sources */,
 				B30555871CE333E2006E5546 /* Inventory.cpp in Sources */,
+				D4626CB11D903E07003C812E /* LevelListScene.cpp in Sources */,
 				B3F0A3491CE2081E006E152B /* HashAlgorithm.cpp in Sources */,
 				D4626CA81D903227003C812E /* LevelPack.cpp in Sources */,
 				B3BBF9341CF5E6A000A76097 /* PacksScene.cpp in Sources */,
@@ -946,11 +968,13 @@
 				B3F0A3441CE2081E006E152B /* BinaryReader.cpp in Sources */,
 				B30555CF1CE3454D006E5546 /* Exit.cpp in Sources */,
 				B30555C91CE3454D006E5546 /* CloneMachine.cpp in Sources */,
+				D4626CAE1D903D61003C812E /* TransitionAnimation.cpp in Sources */,
 				B3F767951CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */,
 				B305558D1CE339DC006E5546 /* Creature.cpp in Sources */,
 				B3F3106A1CF7417900B9EC92 /* SmartControlLayer.cpp in Sources */,
 				B3F0A34C1CE2081E006E152B /* HttpUtility.cpp in Sources */,
 				B30555881CE333E2006E5546 /* Inventory.cpp in Sources */,
+				D4626CB21D903E07003C812E /* LevelListScene.cpp in Sources */,
 				B3F0A3251CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */,
 				B3F767931CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */,
 				B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */,

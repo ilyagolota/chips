@@ -1,6 +1,7 @@
 #include "PacksScene.h"
 #include "ChipsChallengeGame.h"
-#include "LevelScene.h"
+#include "LevelListScene.h"
+#include "Extensions/TransitionAnimation.h"
 
 PacksScene* PacksScene::create(ChipsChallengeGame* game)
 {
@@ -60,7 +61,8 @@ void PacksScene::_build()
         {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
             {
-                cocos2d::Director::getInstance()->pushScene(LevelScene::create(_game, 0, 0));
+                auto scene = LevelListScene::create(_game, 0, 0);
+                cocos2d::Director::getInstance()->pushScene(TransitionAnimation::create(0.5f, scene));
             }
         });
         x += buttonWidth;
