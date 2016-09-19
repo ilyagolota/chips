@@ -4,8 +4,7 @@
 #include <cocos2d.h>
 #include <Tiled/Direction.h>
 #include <Level/IPlayerControl.h>
-
-class Level;
+#include <Level/Level.h>
 
 class SmartControlLayer : public cocos2d::Layer, public IPlayerControl
 {

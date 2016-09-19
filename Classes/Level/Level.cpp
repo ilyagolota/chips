@@ -1,13 +1,6 @@
 #include "Level.h"
 
-#include <LevelData/LevelData.h>
-#include <Tiled/TiledPhysicsWorld.h>
-#include <Tiled/TiledSoundEnvironment.h>
-#include <Tiled/TileMicrophone.h>
-#include <Tiled/TiledProjector.h>
 #include "IPlayerControl.h"
-#include "Inventory.h"
-#include "Creature.h"
 #include "Objects/LevelObject.h"
 #include "Objects/Beartrap.h"
 #include "Objects/BlueWall.h"
@@ -40,7 +33,7 @@ Level* Level::create(cocos2d::Node* stage)
 Level::Level(cocos2d::Node* stage)
 {
     _stage = stage;
-    _levelData = nullptr;
+    _config = nullptr;
     _timeMultiplier = 1.5f;
     
     _inventory = Inventory::create();
@@ -73,21 +66,21 @@ Level::~Level()
     _projector->release();
 }
 
-LevelData* Level::getLevelData() const
+LevelConfig* Level::getConfig() const
 {
-    return _levelData;
+    return _config;
 }
 
-void Level::start(LevelData* levelData)
+void Level::start(LevelConfig* config)
 {
-    if (_levelData != levelData)
+    if (_config != config)
     {
-        if (_levelData != nullptr)
+        if (_config != nullptr)
         {
-            _levelData->release();
+            _config->release();
         }
-        _levelData = levelData;
-        _levelData->retain();
+        _config = config;
+        _config->retain();
         _rebuild();
     }
     _reset();
@@ -194,7 +187,7 @@ LevelObject* Level::getObjectAt(const cocos2d::Vec2& coordinate) const
 void Level::addItem(Item* item)
 {
     auto coordinate = item->getCoordinate();
-    if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _levelData->getWidth() && coordinate.y < _levelData->getHeight())
+    if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _config->getWidth() && coordinate.y < _config->getHeight())
     {
         size_t index = _coordinateToIndex(coordinate);
         auto existingItem = _items[index];
@@ -211,7 +204,7 @@ void Level::addItem(Item* item)
 
 Item* Level::getItemAt(const cocos2d::Vec2& coordinate) const
 {
-	if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _levelData->getWidth() && coordinate.y < _levelData->getHeight())
+	if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _config->getWidth() && coordinate.y < _config->getHeight())
 	{
         size_t index = _coordinateToIndex(coordinate);
         return _items[index];
@@ -269,10 +262,10 @@ int Level::getWallShape(const cocos2d::Vec2& coordinate) const
 	{
 		bool hasNeighborWall = false;
 		auto neighborCoordinate = coordinate + toVec2(static_cast<Direction>(dirIndex));
-		if (neighborCoordinate.x >= 0 && neighborCoordinate.y >= 0 && neighborCoordinate.x < _levelData->getWidth() && neighborCoordinate.y < _levelData->getHeight())
+		if (neighborCoordinate.x >= 0 && neighborCoordinate.y >= 0 && neighborCoordinate.x < _config->getWidth() && neighborCoordinate.y < _config->getHeight())
 		{
 			auto index = _coordinateToIndex(neighborCoordinate);
-			for (auto& layer : _levelData->getLayers())
+			for (auto& layer : _config->getLayers())
 			{
 				switch (layer[index])
 				{
@@ -317,9 +310,9 @@ void Level::_rebuild()
     
     _creatures.clear();
     
-    auto& layers = _levelData->getLayers();
-    size_t width = _levelData->getWidth();
-    size_t tileCount = _levelData->getWidth() * _levelData->getHeight();
+    auto& layers = _config->getLayers();
+    size_t width = _config->getWidth();
+    size_t tileCount = _config->getWidth() * _config->getHeight();
     cocos2d::Vec2 coordinate;
     for (size_t i = 0; i < tileCount; i++)
     {
@@ -360,9 +353,9 @@ void Level::_rebuild()
 
 void Level::_reset()
 {
-    auto& layers = _levelData->getLayers();
-    size_t width = _levelData->getWidth();
-    size_t tileCount = width * _levelData->getHeight();
+    auto& layers = _config->getLayers();
+    size_t width = _config->getWidth();
+    size_t tileCount = width * _config->getHeight();
     cocos2d::Vec2 coordinate;
     
     _creatures.clear();
@@ -742,5 +735,5 @@ void Level::_buildGravel(const cocos2d::Vec2& coordinate)
 
 size_t Level::_coordinateToIndex(const cocos2d::Vec2& coordinate) const
 {
-    return coordinate.x + coordinate.y * _levelData->getWidth();
+    return coordinate.x + coordinate.y * _config->getWidth();
 }

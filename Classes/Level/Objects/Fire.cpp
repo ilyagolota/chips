@@ -1,8 +1,5 @@
 #include "Fire.h"
-#include "LevelData/TileType.h"
-#include "Level/Level.h"
-#include "Level/Creature.h"
-#include "Level/Inventory.h"
+#include <Level/Level.h>
 
 Fire* Fire::create(Level* level, const cocos2d::Vec2& coordinate)
 {

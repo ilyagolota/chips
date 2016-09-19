@@ -2,13 +2,6 @@
 
 #include <cocos2d.h>
 
-#include <LevelData/TileType.h>
-#include <LevelData/LevelData.h>
-#include <Tiled/Direction.h>
-#include <Tiled/TiledPhysicsWorld.h>
-#include <Tiled/TiledProjector.h>
-#include <Tiled/TiledSoundEnvironment.h>
-#include <Tiled/TileSoundEmitter.h>
 #include "Level.h"
 #include "IPlayerControl.h"
 #include "Item.h"

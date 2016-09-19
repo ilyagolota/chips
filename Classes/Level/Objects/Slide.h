@@ -3,7 +3,7 @@
 
 #include <cocos2d.h>
 #include "LevelObject.h"
-#include "LevelData/TileType.h"
+#include <Level/TileType.h>
 
 class Level;
 

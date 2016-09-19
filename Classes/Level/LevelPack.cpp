@@ -1,18 +1,22 @@
 #include <fstream>
+
+#include "LevelPack.h"
 #include <Utils/BinaryReader.h>
 #include <Utils/MD5.h>
-#include "LevelBundle.h"
 
-LevelBundle* LevelBundle::create()
+LevelPack* LevelPack::create(const std::string& filename, const std::vector<char>& hash)
 {
-    auto instance = new LevelBundle();
+    auto instance = new LevelPack(filename, hash);
     instance->autorelease();
     return instance;
 }
 
-void LevelBundle::preloadLevelPack(const std::string& filename, const std::vector<char>& hash)
+LevelPack::LevelPack(const std::string& filename, const std::vector<char>& hash)
 {
-    auto path = cocos2d::FileUtils::getInstance()->fullPathForFilename(filename);
+    _filename = filename;
+    _hash = hash;
+    
+    auto path = cocos2d::FileUtils::getInstance()->fullPathForFilename(_filename);
     std::fstream stream(path, std::ios::binary | std::ios::in);
     utils::BinaryReader reader(&stream);
     
@@ -21,16 +25,12 @@ void LevelBundle::preloadLevelPack(const std::string& filename, const std::vecto
     
     size_t totalLevelCount = static_cast<size_t>(reader.readInt16());
     
-    LevelPack levelPack;
-    levelPack.filename = filename;
-    levelPack.hash = hash;
-    levelPack.levelInfo.reserve(totalLevelCount);
-    
+    _entries.reserve(totalLevelCount);
     for (int levelIndex = 0; levelIndex < totalLevelCount; levelIndex++)
     {
-        LevelInfo levelInfo;
-        levelInfo.size = reader.readUInt16();
-        levelInfo.offset = reader.getBaseStream().tellg();
+        LevelPackEntry entry;
+        entry.size = reader.readUInt16();
+        entry.offset = reader.getBaseStream().tellg();
         
         struct
         {
@@ -48,11 +48,10 @@ void LevelBundle::preloadLevelPack(const std::string& filename, const std::vecto
             reader.getBaseStream().seekg(layerSize, std::ios::cur);
         }
         
-        while (reader.getBaseStream().tellg() < levelInfo.offset + levelInfo.size)
+        while (reader.getBaseStream().tellg() < entry.offset + entry.size)
         {
             unsigned int fieldType = reader.readUInt8();
             unsigned int fieldSize = reader.readUInt8();
-            
             if (fieldType != 3)
             {
                 reader.getBaseStream().seekg(fieldSize, std::ios::cur);
@@ -61,51 +60,47 @@ void LevelBundle::preloadLevelPack(const std::string& filename, const std::vecto
             {
                 std::string title(fieldSize, '\0');
                 reader.read(&title[0], fieldSize);
-                levelInfo.title = title;
+                entry.title = title;
                 break;
             }
         }
         
-        reader.getBaseStream().seekg(levelInfo.offset + levelInfo.size, std::ios::beg);
-        levelPack.levelInfo.push_back(std::move(levelInfo));
+        reader.getBaseStream().seekg(entry.offset + entry.size, std::ios::beg);
+        _entries.push_back(std::move(entry));
     }
-    
-    _levelPacks.push_back(std::move(levelPack));
     
     stream.close();
 }
 
-LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
+LevelConfig* LevelPack::readLevelConfig(size_t entryIndex)
 {
-    auto& levelPack = _levelPacks[packIndex];
-    
-    auto path = cocos2d::FileUtils::getInstance()->fullPathForFilename(levelPack.filename);
+    auto path = cocos2d::FileUtils::getInstance()->fullPathForFilename(_filename);
     std::fstream stream(path, std::ios::binary | std::ios::in);
     
     utils::MD5 md5;
     md5.update(&stream);
     
-    if (md5.getDigest() != levelPack.hash)
+    if (md5.getDigest() != _hash)
     {
         throw std::runtime_error("Level pack is corrupted");
     }
     
-    auto& levelInfo = levelPack.levelInfo[index];
-    stream.seekg(levelInfo.offset, std::ios::beg);
+    auto& entry = _entries[entryIndex];
+    stream.seekg(entry.offset, std::ios::beg);
     
     utils::BinaryReader reader(&stream);
-    auto* level = LevelData::create();
+    auto* levelConfig = LevelConfig::create();
     
-    level->setNumber(reader.readUInt16());
-    level->setTime(reader.readUInt16());
-    level->setChipsRequired(reader.readUInt16());
+    levelConfig->setNumber(reader.readUInt16());
+    levelConfig->setTime(reader.readUInt16());
+    levelConfig->setChipsRequired(reader.readUInt16());
     
     int fieldCount = reader.readUInt16();
     CC_UNUSED_PARAM(fieldCount);
     
     for (int fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++)
     {
-        std::vector<TileType> layer(LevelData::LAYER_SIZE);
+        std::vector<TileType> layer(LevelConfig::LAYER_SIZE);
         short size = reader.readInt16();
         for (short i = 0, k = 0; i < size; i++)
         {
@@ -127,7 +122,7 @@ LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
                 i += 2;
             }
         }
-        level->getLayers().push_back(std::move(layer));
+        levelConfig->getLayers().push_back(std::move(layer));
     }
     
     size_t position = reader.getBaseStream().tellg();
@@ -140,17 +135,17 @@ LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
         
         if (fieldType == 1)
         {
-            level->setTime(reader.readUInt16());
+            levelConfig->setTime(reader.readUInt16());
         }
         else if (fieldType == 2)
         {
-            level->setChipsRequired(reader.readUInt16());
+            levelConfig->setChipsRequired(reader.readUInt16());
         }
         else if (fieldType == 3)
         {
             std::string title(fieldSize, '\0');
             reader.read(&title[0], fieldSize);
-            level->setTitle(title);
+            levelConfig->setTitle(title);
         }
         else if (fieldType == 4)
         {
@@ -164,7 +159,7 @@ LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
                 LevelWire wire;
                 wire.startCoordinate = cocos2d::Vec2(wireData[0], wireData[1]);
                 wire.endCoordinate = cocos2d::Vec2(wireData[2], wireData[3]);
-                level->getWires().push_back(wire);
+                levelConfig->getWires().push_back(wire);
             }
         }
         else if (fieldType == 5)
@@ -178,20 +173,20 @@ LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
                 LevelWire wire;
                 wire.startCoordinate = cocos2d::Vec2(wireData[0], wireData[1]);
                 wire.endCoordinate = cocos2d::Vec2(wireData[2], wireData[3]);
-                level->getWires().push_back(wire);
+                levelConfig->getWires().push_back(wire);
             }
         }
         else if (fieldType == 6)
         {
             std::string password(fieldSize, '\0');
             reader.read(&password[0], fieldSize);
-            level->setPassword(password);
+            levelConfig->setPassword(password);
         }
         else if (fieldType == 7)
         {
             std::string hint(fieldSize, '\0');
             reader.read(&hint[0], fieldSize);
-            level->setHint(hint);
+            levelConfig->setHint(hint);
         }
         else if (fieldType == 10)
         {
@@ -206,10 +201,5 @@ LevelData* LevelBundle::readLevelData(size_t packIndex, size_t index)
     
     stream.close();
     
-    return level;
-}
-
-const std::vector<LevelPack>& LevelBundle::getLevelPacks() const
-{
-    return _levelPacks;
+    return levelConfig;
 }

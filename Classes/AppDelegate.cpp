@@ -141,6 +141,6 @@ std::function<void()> AppDelegate::_loadLevelPack(ChipsChallengeGame* game, cons
 {
     return [game, filename, hash]()
     {
-        game->getLevelBundle()->preloadLevelPack(filename, hash);
+        game->getLevelPacks().pushBack(LevelPack::create(filename, hash));
     };
 }

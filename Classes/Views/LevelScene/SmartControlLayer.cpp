@@ -1,10 +1,6 @@
 #include "SmartControlLayer.h"
 #include <cmath>
 #include <Tiled/TiledProjector.h>
-#include <LevelData/TileType.h>
-#include <Level/Level.h>
-#include <Level/Creature.h>
-#include <Level/Inventory.h>
 #include <Level/Objects/Fire.h>
 #include <Level/Objects/Water.h>
 

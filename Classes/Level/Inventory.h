@@ -3,7 +3,7 @@
 
 #include <cocos2d.h>
 #include <Utils/Protected.h>
-#include <LevelData/TileType.h>
+#include <Level/TileType.h>
 
 class Inventory : public cocos2d::Ref
 {

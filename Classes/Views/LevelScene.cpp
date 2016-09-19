@@ -112,8 +112,8 @@ void LevelScene::update(float dt)
 
 void LevelScene::_loadLevel()
 {
-    auto levelInfo = _game->getLevelBundle()->readLevelData(_packIndex, _levelIndex);
-    _level->start(levelInfo);
+    auto levelConfig = _game->getLevelPack(_packIndex)->readLevelConfig(_levelIndex);
+    _level->start(levelConfig);
 	_showTitle();
 }
 
@@ -121,9 +121,9 @@ void LevelScene::_showTitle()
 {
 	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
 
-	auto titleLabel = cocos2d::Label::create(_level->getLevelData()->getTitle(), "fonts/Marker Felt.ttf", 16, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
+	auto titleLabel = cocos2d::Label::createWithTTF(_level->getConfig()->getTitle(), "fonts/Marker Felt.ttf", 16, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
 
-	auto titlePanel = cocos2d::extension::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
+    auto titlePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
 	titlePanel->setContentSize(cocos2d::Size(360, titleLabel->getContentSize().height + 46));
 	titlePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
 

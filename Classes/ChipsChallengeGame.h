@@ -2,20 +2,21 @@
 #define _CHIPS_CHALLENGE_GAME_H_
 
 #include <cocos2d.h>
-#include <LevelData/LevelBundle.h>
+#include <Level/LevelPack.h>
 
 class ChipsChallengeGame : public cocos2d::Ref
 {
-private:
-    LevelBundle* _levelBundle;
-    
 public:
     static ChipsChallengeGame* create();
     
     ChipsChallengeGame();
     virtual ~ChipsChallengeGame();
     
-    LevelBundle* getLevelBundle();
+    cocos2d::Vector<LevelPack*>& getLevelPacks();
+    LevelPack* getLevelPack(size_t i);
+    
+private:
+    cocos2d::Vector<LevelPack*> _levelPacks;
 };
 
 #endif

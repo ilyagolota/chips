@@ -1,7 +1,5 @@
 #include "Button.h"
-#include "LevelData/LevelData.h"
-#include "Level/Level.h"
-#include "Level/Creature.h"
+#include <Level/Level.h>
 #include "Beartrap.h"
 #include "CloneMachine.h"
 
@@ -53,7 +51,7 @@ void Button::afterEnter(Creature* creature)
     else
     {
         const LevelWire* thisWire = nullptr;
-        for (auto& wire : _level->getLevelData()->getWires())
+        for (auto& wire : _level->getConfig()->getWires())
         {
             if (wire.startCoordinate == _coordinate)
             {
@@ -91,7 +89,7 @@ void Button::beforeEscape(Creature* creature)
     if (_type == TileType::BUTTON_BROWN)
     {
         const LevelWire* thisWire = nullptr;
-        for (auto& wire : _level->getLevelData()->getWires())
+        for (auto& wire : _level->getConfig()->getWires())
         {
             if (wire.startCoordinate == _coordinate)
             {

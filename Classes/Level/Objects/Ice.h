@@ -3,7 +3,7 @@
 
 #include <cocos2d.h>
 #include "LevelObject.h"
-#include "LevelData/TileType.h"
+#include "TileType.h"
 
 class Ice : public LevelObject
 {
@@ -18,11 +18,11 @@ public:
     void beforeEscape(Creature* creature) override;
 
 private:
-    
     TileType _type;
 	cocos2d::Sprite* _sprite;
 	cocos2d::Sprite* _frontWall;
 	cocos2d::Sprite* _backWall;
+    
 };
 
 #endif

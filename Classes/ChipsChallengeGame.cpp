@@ -8,17 +8,17 @@ ChipsChallengeGame* ChipsChallengeGame::create()
 }
 
 ChipsChallengeGame::ChipsChallengeGame()
-{
-    _levelBundle = LevelBundle::create();
-    _levelBundle->retain();
-}
+{ }
 
 ChipsChallengeGame::~ChipsChallengeGame()
+{ }
+
+cocos2d::Vector<LevelPack*>& ChipsChallengeGame::getLevelPacks()
 {
-    _levelBundle->release();
+    return _levelPacks;
 }
 
-LevelBundle* ChipsChallengeGame::getLevelBundle()
+LevelPack* ChipsChallengeGame::getLevelPack(size_t i)
 {
-    return _levelBundle;
+    return _levelPacks.at(i);
 }

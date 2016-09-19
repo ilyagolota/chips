@@ -2,7 +2,7 @@
 #define _CHIPS_CHALLENGE_ITEM_H_
 
 #include <cocos2d.h>
-#include "LevelData/TileType.h"
+#include "TileType.h"
 
 class Level;
 class Creature;

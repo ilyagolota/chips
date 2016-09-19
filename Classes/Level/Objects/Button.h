@@ -2,8 +2,8 @@
 #define _CHIPS_CHALLENGE_BUTTON_H_
 
 #include <cocos2d.h>
+#include <Level/TileType.h>
 #include "LevelObject.h"
-#include "LevelData/TileType.h"
 
 class Button : public LevelObject
 {

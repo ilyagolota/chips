@@ -1,6 +1,5 @@
 #include <ui/CocosGUI.h>
 #include <Level/Level.h>
-#include <Level/Inventory.h>
 
 #include "InventoryPanel.h"
 

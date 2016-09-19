@@ -1,9 +1,5 @@
 #include "Socket.h"
-#include "LevelData/TileType.h"
-#include "LevelData/LevelData.h"
-#include "Level/Level.h"
-#include "Level/Inventory.h"
-#include "Level/Creature.h"
+#include <Level/Level.h>
 
 Socket* Socket::create(Level* level, const cocos2d::Vec2& coordinate)
 {
@@ -22,7 +18,7 @@ bool Socket::isOpenableBy(const Creature* creature, Direction direction) const
     if (creature->getType() == CreatureType::CHIP)
     {
         auto inventory = _level->getInventory();
-        return (_level->getLevelData()->getChipsRequired() <= inventory->getItemCount(TileType::IC_CHIP));
+        return (_level->getConfig()->getChipsRequired() <= inventory->getItemCount(TileType::IC_CHIP));
     }
     else
     {

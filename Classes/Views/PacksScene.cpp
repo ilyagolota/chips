@@ -1,5 +1,4 @@
 #include "PacksScene.h"
-#include <LevelData/LevelBundle.h>
 #include "ChipsChallengeGame.h"
 #include "LevelScene.h"
 
@@ -47,12 +46,12 @@ void PacksScene::_build()
     
     _buttonsNode = cocos2d::Node::create();
     _buttonsNode->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    _buttonsNode->setContentSize(cocos2d::Size(winSize.width - buttonWidth * _game->getLevelBundle()->getLevelPacks().size(), winSize.height));
+    _buttonsNode->setContentSize(cocos2d::Size(winSize.width - buttonWidth * _game->getLevelPacks().size(), winSize.height));
     _buttonsNode->setPosition(cocos2d::Vec2(0.5f * winSize.width, 0.5f * winSize.height));
     addChild(_buttonsNode);
     
-    float x = 0.5f * (_buttonsNode->getContentSize().width - buttonWidth * (_game->getLevelBundle()->getLevelPacks().size() - 1));
-	for (auto pack : _game->getLevelBundle()->getLevelPacks())
+    float x = 0.5f * (_buttonsNode->getContentSize().width - buttonWidth * (_game->getLevelPacks().size() - 1));
+	for (auto pack : _game->getLevelPacks())
 	{
         auto button = cocos2d::ui::Button::create("CloseSelected.png");
         button->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));

@@ -2,9 +2,9 @@
 #define _CHIPS_CHALLENGE_SMART_INVENTORY_PANEL_H_
 
 #include <cocos2d.h>
-#include <LevelData/TileType.h>
 
-class Inventory;
+#include <Level/TileType.h>
+#include <Level/Inventory.h>
 
 class InventoryPanel : public cocos2d::Node
 {

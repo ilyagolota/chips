@@ -1,8 +1,5 @@
 #include "Teleport.h"
-#include <LevelData/LevelData.h>
-#include <Tiled/TiledProjector.h>
 #include <Level/Level.h>
-#include <Level/Creature.h>
 
 const cocos2d::Vec2 Teleport::BOTTOM_POSITION = cocos2d::Vec2(0, -120);
 
@@ -147,12 +144,12 @@ Teleport* Teleport::_findTargetTeleport(Creature* creature)
         x--;
         if (x < 0)
         {
-            x = _level->getLevelData()->getWidth() - 1;
+            x = _level->getConfig()->getWidth() - 1;
             y--;
         }
         if (y < 0)
         {
-            y = _level->getLevelData()->getHeight() - 1;
+            y = _level->getConfig()->getHeight() - 1;
         }
         
         auto teleport = dynamic_cast<Teleport*>(_level->getObjectAt(cocos2d::Vec2(x, y)));

@@ -110,10 +110,6 @@
 		B3F0A3211CE1F1B7006E152B /* levels in Resources */ = {isa = PBXBuildFile; fileRef = B3F0A31F1CE1F1B7006E152B /* levels */; };
 		B3F0A3241CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3221CE1F202006E152B /* ChipsChallengeGame.cpp */; };
 		B3F0A3251CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3221CE1F202006E152B /* ChipsChallengeGame.cpp */; };
-		B3F0A33F1CE2081E006E152B /* LevelData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A32E1CE2081E006E152B /* LevelData.cpp */; };
-		B3F0A3401CE2081E006E152B /* LevelData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A32E1CE2081E006E152B /* LevelData.cpp */; };
-		B3F0A3411CE2081E006E152B /* LevelBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3301CE2081E006E152B /* LevelBundle.cpp */; };
-		B3F0A3421CE2081E006E152B /* LevelBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3301CE2081E006E152B /* LevelBundle.cpp */; };
 		B3F0A3431CE2081E006E152B /* BinaryReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3331CE2081E006E152B /* BinaryReader.cpp */; };
 		B3F0A3441CE2081E006E152B /* BinaryReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3331CE2081E006E152B /* BinaryReader.cpp */; };
 		B3F0A3451CE2081E006E152B /* BinaryWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3F0A3351CE2081E006E152B /* BinaryWriter.cpp */; };
@@ -158,6 +154,8 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */; };
+		D4626CA71D903227003C812E /* LevelConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CA21D903227003C812E /* LevelConfig.cpp */; };
+		D4626CA81D903227003C812E /* LevelPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CA41D903227003C812E /* LevelPack.cpp */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
@@ -303,10 +301,6 @@
 		B3F0A31F1CE1F1B7006E152B /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
 		B3F0A3221CE1F202006E152B /* ChipsChallengeGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChipsChallengeGame.cpp; sourceTree = "<group>"; };
 		B3F0A3231CE1F202006E152B /* ChipsChallengeGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChipsChallengeGame.h; sourceTree = "<group>"; };
-		B3F0A32E1CE2081E006E152B /* LevelData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelData.cpp; sourceTree = "<group>"; };
-		B3F0A32F1CE2081E006E152B /* LevelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelData.h; sourceTree = "<group>"; };
-		B3F0A3301CE2081E006E152B /* LevelBundle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelBundle.cpp; sourceTree = "<group>"; };
-		B3F0A3311CE2081E006E152B /* LevelBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelBundle.h; sourceTree = "<group>"; };
 		B3F0A3331CE2081E006E152B /* BinaryReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryReader.cpp; sourceTree = "<group>"; };
 		B3F0A3341CE2081E006E152B /* BinaryReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryReader.h; sourceTree = "<group>"; };
 		B3F0A3351CE2081E006E152B /* BinaryWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BinaryWriter.cpp; sourceTree = "<group>"; };
@@ -317,7 +311,6 @@
 		B3F0A33C1CE2081E006E152B /* HttpUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtility.h; sourceTree = "<group>"; };
 		B3F0A33D1CE2081E006E152B /* MD5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MD5.cpp; sourceTree = "<group>"; };
 		B3F0A33E1CE2081E006E152B /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
-		B3F0A3501CE21A42006E152B /* TileType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileType.h; sourceTree = "<group>"; };
 		B3F0A3521CE2376E006E152B /* Level.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Level.cpp; sourceTree = "<group>"; };
 		B3F0A3531CE2376E006E152B /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		B3F310621CF700B900B9EC92 /* LevelScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelScene.cpp; path = ../../../chips/Classes/Views/LevelScene.cpp; sourceTree = "<group>"; };
@@ -353,6 +346,11 @@
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Highscores.cpp; path = Common/Highscores.cpp; sourceTree = "<group>"; };
 		D4559F9E1D7D7A16008FCEF7 /* Highscores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Highscores.h; path = Common/Highscores.h; sourceTree = "<group>"; };
+		D4626CA21D903227003C812E /* LevelConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelConfig.cpp; sourceTree = "<group>"; };
+		D4626CA31D903227003C812E /* LevelConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelConfig.h; sourceTree = "<group>"; };
+		D4626CA41D903227003C812E /* LevelPack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelPack.cpp; sourceTree = "<group>"; };
+		D4626CA51D903227003C812E /* LevelPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelPack.h; sourceTree = "<group>"; };
+		D4626CA61D903227003C812E /* TileType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileType.h; sourceTree = "<group>"; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -502,7 +500,6 @@
 				B3F767971CF3453D00F03CCE /* Preloader */,
 				B3F767801CF2FE9E00F03CCE /* Tiled */,
 				B3F0A3321CE2081E006E152B /* Utils */,
-				B3F0A32D1CE2081E006E152B /* LevelData */,
 				B3F0A3511CE2373A006E152B /* Level */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
@@ -607,18 +604,6 @@
 			path = Objects;
 			sourceTree = "<group>";
 		};
-		B3F0A32D1CE2081E006E152B /* LevelData */ = {
-			isa = PBXGroup;
-			children = (
-				B3F0A32E1CE2081E006E152B /* LevelData.cpp */,
-				B3F0A32F1CE2081E006E152B /* LevelData.h */,
-				B3F0A3301CE2081E006E152B /* LevelBundle.cpp */,
-				B3F0A3311CE2081E006E152B /* LevelBundle.h */,
-				B3F0A3501CE21A42006E152B /* TileType.h */,
-			);
-			path = LevelData;
-			sourceTree = "<group>";
-		};
 		B3F0A3321CE2081E006E152B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,6 +626,11 @@
 			isa = PBXGroup;
 			children = (
 				B305558F1CE34164006E5546 /* Objects */,
+				D4626CA21D903227003C812E /* LevelConfig.cpp */,
+				D4626CA31D903227003C812E /* LevelConfig.h */,
+				D4626CA41D903227003C812E /* LevelPack.cpp */,
+				D4626CA51D903227003C812E /* LevelPack.h */,
+				D4626CA61D903227003C812E /* TileType.h */,
 				B3F9E5601CFC4DB000BF2D5D /* IPlayerControl.h */,
 				B305558A1CE339DC006E5546 /* Creature.cpp */,
 				B305558B1CE339DC006E5546 /* Creature.h */,
@@ -879,7 +869,6 @@
 				B30555DE1CE3454D006E5546 /* SwitchWall.cpp in Sources */,
 				B30555BE1CE3454D006E5546 /* Beartrap.cpp in Sources */,
 				B305558C1CE339DC006E5546 /* Creature.cpp in Sources */,
-				B3F0A33F1CE2081E006E152B /* LevelData.cpp in Sources */,
 				B3F7678C1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */,
 				B30555C01CE3454D006E5546 /* BlueWall.cpp in Sources */,
 				B30555D61CE3454D006E5546 /* Ice.cpp in Sources */,
@@ -892,13 +881,13 @@
 				B3F0A34D1CE2081E006E152B /* MD5.cpp in Sources */,
 				B30555921CE3418C006E5546 /* LevelObject.cpp in Sources */,
 				B3F0A3241CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */,
+				D4626CA71D903227003C812E /* LevelConfig.cpp in Sources */,
 				B30555DA1CE3454D006E5546 /* Slide.cpp in Sources */,
 				B3F767B01CF34FF700F03CCE /* LoadingScene.cpp in Sources */,
 				B3F767921CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */,
 				B30555E21CE3454D006E5546 /* Water.cpp in Sources */,
 				B3F767941CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */,
 				B30555961CE34295006E5546 /* Item.cpp in Sources */,
-				B3F0A3411CE2081E006E152B /* LevelBundle.cpp in Sources */,
 				B3F0A3431CE2081E006E152B /* BinaryReader.cpp in Sources */,
 				D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */,
 				B30555CE1CE3454D006E5546 /* Exit.cpp in Sources */,
@@ -908,6 +897,7 @@
 				B3F310641CF700B900B9EC92 /* LevelScene.cpp in Sources */,
 				B30555871CE333E2006E5546 /* Inventory.cpp in Sources */,
 				B3F0A3491CE2081E006E152B /* HashAlgorithm.cpp in Sources */,
+				D4626CA81D903227003C812E /* LevelPack.cpp in Sources */,
 				B3BBF9341CF5E6A000A76097 /* PacksScene.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				B30555DC1CE3454D006E5546 /* Socket.cpp in Sources */,
@@ -933,7 +923,6 @@
 				B3BBF9351CF5E6A000A76097 /* PacksScene.cpp in Sources */,
 				B3F7678D1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */,
 				B3F7678F1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */,
-				B3F0A3421CE2081E006E152B /* LevelBundle.cpp in Sources */,
 				B30555C11CE3454D006E5546 /* BlueWall.cpp in Sources */,
 				B3F767911CF2FE9E00F03CCE /* TiledSoundEnvironment.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
@@ -961,7 +950,6 @@
 				B305558D1CE339DC006E5546 /* Creature.cpp in Sources */,
 				B3F3106A1CF7417900B9EC92 /* SmartControlLayer.cpp in Sources */,
 				B3F0A34C1CE2081E006E152B /* HttpUtility.cpp in Sources */,
-				B3F0A3401CE2081E006E152B /* LevelData.cpp in Sources */,
 				B30555881CE333E2006E5546 /* Inventory.cpp in Sources */,
 				B3F0A3251CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */,
 				B3F767931CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */,

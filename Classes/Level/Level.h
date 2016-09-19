@@ -3,23 +3,26 @@
 
 #include <cocos2d.h>
 #include <vector>
-#include <LevelData/TileType.h>
 
-class LevelData;
-class TiledPhysicsWorld;
-class TiledSoundEnvironment;
-class TiledProjector;
-class Inventory;
-class LevelObject;
-class Item;
-class Creature;
+#include <Tiled/Direction.h>
+#include <Tiled/TiledPhysicsWorld.h>
+#include <Tiled/TiledProjector.h>
+#include <Tiled/TiledSoundEnvironment.h>
+#include <Tiled/TileSoundEmitter.h>
+
+#include "TileType.h"
+#include "LevelConfig.h"
+#include "Inventory.h"
+#include "LevelObject.h"
+#include "Creature.h"
+#include "Item.h"
+
 class IPlayerControl;
-struct LevelWire;
 
 class Level : public cocos2d::Ref
 {
 private:
-    LevelData* _levelData;
+    LevelConfig* _config;
     Inventory* _inventory;
     
     cocos2d::Node* _stage;
@@ -53,8 +56,8 @@ public:
     Level(cocos2d::Node* stage);
     ~Level();
     
-    LevelData* getLevelData() const;
-    void start(LevelData* levelData);
+    LevelConfig* getConfig() const;
+    void start(LevelConfig* config);
     void restart();
     void makeTurn(float dt);
     

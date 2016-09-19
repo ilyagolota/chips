@@ -3,7 +3,7 @@
 
 #include <cocos2d.h>
 #include "AudioEngine.h"
-#include "LevelData/TileType.h"
+#include <Level/TileType.h>
 #include "LevelObject.h"
 
 class Door : public LevelObject

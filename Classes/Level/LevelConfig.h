@@ -1,5 +1,5 @@
-#ifndef  _CHIPS_CHALLENGE_LEVEL_DATA_H_
-#define  _CHIPS_CHALLENGE_LEVEL_DATA_H_
+#ifndef  _CHIPS_CHALLENGE_LEVEL_CONFIG_H_
+#define  _CHIPS_CHALLENGE_LEVEL_CONFIG_H_
 
 #include <string>
 #include <vector>
@@ -12,24 +12,14 @@ struct LevelWire
     cocos2d::Vec2 endCoordinate;
 };
 
-class LevelData : public cocos2d::Ref
+class LevelConfig : public cocos2d::Ref
 {
-protected:
-    std::string _title;
-    std::string _hint;
-    std::string _password;
-    int _number;
-    int _time;
-    int _chipsRequired;
-    std::vector<std::vector<TileType>> _layers;
-    std::vector<LevelWire> _wires;
-    
 public:
     static const int LAYER_SIZE;
     
-    static LevelData* create();
+    static LevelConfig* create();
     
-    LevelData();
+    LevelConfig();
     const size_t getWidth() const { return 32; }
     const size_t getHeight() const { return 32; }
     const std::string& getTitle() const;
@@ -47,6 +37,16 @@ public:
     std::vector<std::vector<TileType>>& getLayers();
     std::vector<LevelWire>& getWires();
     const std::vector<LevelWire>& getWires() const;
+    
+protected:
+    std::string _title;
+    std::string _hint;
+    std::string _password;
+    int _number;
+    int _time;
+    int _chipsRequired;
+    std::vector<std::vector<TileType>> _layers;
+    std::vector<LevelWire> _wires;
 };
 
 #endif
