@@ -10,9 +10,9 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>ball-stay.png</string>
-				<string>ball-walk-0002.png</string>
-				<string>ball-walk-0003.png</string>
+				<string>ball-stay-east.png</string>
+				<string>ball-walk-east-0002.png</string>
+				<string>ball-walk-east-0003.png</string>
 			</array>
 		</dict>
 		<key>ball-walk-west</key>
@@ -21,9 +21,9 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>ball-walk-0003.png</string>
-				<string>ball-walk-0002.png</string>
-				<string>ball-stay.png</string>
+				<string>ball-walk-east-0003.png</string>
+				<string>ball-walk-east-0002.png</string>
+				<string>ball-stay-east.png</string>
 			</array>
 		</dict>
 		<key>blob-walk-east</key>
@@ -32,10 +32,10 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>blob-walk-0001.png</string>
-				<string>blob-walk-0002.png</string>
-				<string>blob-walk-0003.png</string>
-				<string>blob-walk-0004.png</string>
+				<string>blob-stay-east-0001.png</string>
+				<string>blob-stay-east-0002.png</string>
+				<string>blob-stay-east-0003.png</string>
+				<string>blob-stay-east-0004.png</string>
 			</array>
 		</dict>
 		<key>paramecium-walk-east</key>
@@ -44,9 +44,9 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>paramecium-stay.png</string>
-				<string>paramecium-walk-0002.png</string>
-				<string>paramecium-walk-0003.png</string>
+				<string>paramecium-stay-east.png</string>
+				<string>paramecium-walk-east-0002.png</string>
+				<string>paramecium-walk-east-0003.png</string>
 			</array>
 		</dict>
 		<key>bug-walk-west</key>
@@ -133,7 +133,7 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>teeth-walk-west-0001.png</string>
+				<string>teeth-stay-west.png</string>
 				<string>teeth-walk-west-0002.png</string>
 				<string>teeth-walk-west-0003.png</string>
 				<string>teeth-walk-west-0002.png</string>
@@ -145,7 +145,7 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>teeth-walk-east-0001.png</string>
+				<string>teeth-stay-east.png</string>
 				<string>teeth-walk-east-0002.png</string>
 				<string>teeth-walk-east-0003.png</string>
 				<string>teeth-walk-east-0002.png</string>
@@ -157,9 +157,9 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>walker-stay.png</string>
-				<string>walker-walk-0002.png</string>
-				<string>walker-walk-0003.png</string>
+				<string>walker-stay-east.png</string>
+				<string>walker-walk-east-0002.png</string>
+				<string>walker-walk-east-0003.png</string>
 			</array>
 		</dict>
 		<key>walker-walk-west</key>
@@ -168,9 +168,9 @@
 			<real>0.12</real>
 			<key>frames</key>
 			<array>
-				<string>walker-walk-0003.png</string>
-				<string>walker-walk-0002.png</string>
-				<string>walker-stay.png</string>
+				<string>walker-walk-east-0003.png</string>
+				<string>walker-walk-east-0002.png</string>
+				<string>walker-stay-east.png</string>
 			</array>
 		</dict>
 		<key>chip-stay-east</key>

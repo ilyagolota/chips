@@ -563,6 +563,15 @@ void Creature::_applyAnimationParams()
         _animatedMoving = (_turnsToNextMove > 0);
     }
     
+    // Balls and walkers
+    if (!_animatedMoving)
+    {
+        if (_type == CreatureType::BALL || _type == CreatureType::WALKER)
+        {
+            _animatedDirection = Direction::EAST;
+        }
+    }
+    
     if (_state == CreatureState::SLIDING)
     {
         // Sliding creature doesn't move the legs.
@@ -606,8 +615,7 @@ void Creature::_updateAnimation()
         
         if (hasStaticAnimation)
         {
-            // Take the first frame from move animation.
-            auto spriteFrameName = std::to_string(_type) + "-walk-" + std::to_string(_animatedDirection) + "-0001.png";
+            auto spriteFrameName = std::to_string(_type) + "-stay-" + std::to_string(_animatedDirection) + ".png";
             auto spriteFrame = cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFrameName);
             _sprite->setSpriteFrame(spriteFrame);
         }

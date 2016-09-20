@@ -58,17 +58,7 @@ void LevelListScene::_build()
         int levelIndex =_startLevelIndex + i;
         /*LevelStat* stat = (levelStats.size() > _packIndex && levelStats[_packIndex].size() > levelIndex) ? &levelStats[_packIndex][levelIndex] : nullptr;*/
         
-        cocos2d::Sprite* itemSprite;
-        if (prevLevelTried)
-        {
-            itemSprite = cocos2d::Sprite::create("btn-level-1.png");
-        }
-        else
-        {
-            itemSprite = cocos2d::Sprite::create("btn-level-0.png");
-        }
-        
-        auto button = cocos2d::ui::Button::create("tank-walk-east-0001.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+        auto button = cocos2d::ui::Button::create("slide-north-0001.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
         button->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         button->setPosition(menuRect.origin + point + cocos2d::Vec2(cellSize) * 0.5f - cocos2d::Vec2(0, 100));
         button->setScale(0);
