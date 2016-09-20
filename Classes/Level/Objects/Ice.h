@@ -2,8 +2,8 @@
 #define _CHIPS_CHALLENGE_ICE_H_
 
 #include <cocos2d.h>
+#include <Level/TileType.h>
 #include "LevelObject.h"
-#include "TileType.h"
 
 class Ice : public LevelObject
 {

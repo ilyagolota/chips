@@ -18,8 +18,6 @@
 
 #include "Cocos2dRenderer.h"
 #include "AppDelegate.h"
-#include "CCGLViewImpl-winrt.h"
-#include "CCApplication.h"
 #include "cocos2d.h"
 #include "renderer/CCTextureCache.h"
 

@@ -98,15 +98,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileSoundEmitter.cpp">
       <Filter>Classes\Tiled</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelBundle.cpp">
-      <Filter>Classes\LevelData</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelData.cpp">
-      <Filter>Classes\LevelData</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LoadLevelListTask.cpp">
-      <Filter>Classes\LevelData</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene.cpp">
       <Filter>Classes\Views</Filter>
     </ClCompile>
@@ -143,6 +134,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Common\Highscores.cpp">
       <Filter>Classes\Common</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\InventoryPanel.cpp">
+      <Filter>Classes\Views\LevelScene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\Extensions\TransitionAnimation.cpp">
+      <Filter>Classes\Views\Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelListScene.cpp">
+      <Filter>Classes\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelConfig.cpp">
+      <Filter>Classes\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelPack.cpp">
+      <Filter>Classes\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml" />
@@ -160,9 +166,6 @@
     <Filter Include="Classes\Tiled">
       <UniqueIdentifier>{354a1482-0c67-4c40-aeca-19bb0aa9e991}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\LevelData">
-      <UniqueIdentifier>{ccb00ae2-e489-4391-afb2-661aa0278179}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Views">
       <UniqueIdentifier>{59c7cb2f-bc4d-4d54-b871-3ce681c9d763}</UniqueIdentifier>
     </Filter>
@@ -177,6 +180,9 @@
     </Filter>
     <Filter Include="Classes\Common">
       <UniqueIdentifier>{398eb54d-4995-4086-8dd4-5d22e51a0ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Views\Extensions">
+      <UniqueIdentifier>{c475378b-493b-4ce2-910e-dc6dcc4a2e81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,18 +282,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Tiled\TileSoundEmitter.h">
       <Filter>Classes\Tiled</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelBundle.h">
-      <Filter>Classes\LevelData</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LevelData.h">
-      <Filter>Classes\LevelData</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\LoadLevelListTask.h">
-      <Filter>Classes\LevelData</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\LevelData\TileType.h">
-      <Filter>Classes\LevelData</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene.h">
       <Filter>Classes\Views</Filter>
     </ClInclude>
@@ -329,6 +323,24 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Common\Highscores.h">
       <Filter>Classes\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\InventoryPanel.h">
+      <Filter>Classes\Views\LevelScene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\Extensions\TransitionAnimation.h">
+      <Filter>Classes\Views\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelListScene.h">
+      <Filter>Classes\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelConfig.h">
+      <Filter>Classes\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelPack.h">
+      <Filter>Classes\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\TileType.h">
+      <Filter>Classes\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,3 +21,9 @@ Thumbs.db
 xcuserdata/
 
 cocos2d/*
+
+*/Debug/*
+*/ipch/*
+*.sdf
+*.opensdf
+proj.win8.1-universal/App.Windows/Generated Files/*
