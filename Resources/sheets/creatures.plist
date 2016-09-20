@@ -242,7 +242,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>tank-walk-west-0003.png</key>
+      <key>tank-stay-west.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{138,126}</string>
@@ -337,7 +337,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>tank-walk-east-0001.png</key>
+      <key>tank-stay-east.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{138,119}</string>
@@ -356,7 +356,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>walker-walk-0001.png</key>
+      <key>walker-stay-east.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{118,102}</string>
@@ -375,7 +375,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>walker-walk-0002.png</key>
+      <key>walker-walk-east-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{118,102}</string>
@@ -394,7 +394,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>walker-walk-0003.png</key>
+      <key>walker-walk-east-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{118,102}</string>
@@ -413,7 +413,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>glider-walk-east-0001.png</key>
+      <key>glider-stay-east.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{114,93}</string>
@@ -432,7 +432,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>ball-walk-0001.png</key>
+      <key>ball-stay-east.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{103,102}</string>
@@ -451,7 +451,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>ball-walk-0002.png</key>
+      <key>ball-walk-east-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{103,102}</string>
@@ -470,7 +470,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>ball-walk-0003.png</key>
+      <key>ball-walk-east-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{103,102}</string>
@@ -508,7 +508,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>glider-walk-west-0001.png</key>
+      <key>glider-stay-west.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{114,83}</string>
@@ -546,7 +546,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>teeth-walk-east-0001.png</key>
+      <key>teeth-stay-east.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{81,110}</string>
@@ -793,7 +793,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-stay-0003.png</key>
+      <key>paramecium-stay-east-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{98,78}</string>
@@ -869,7 +869,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-stay-0002.png</key>
+      <key>paramecium-stay-east-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{97,78}</string>
@@ -888,7 +888,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-stay-0001.png</key>
+      <key>paramecium-stay-east-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{97,78}</string>
@@ -1040,7 +1040,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>teeth-walk-west-0001.png</key>
+      <key>teeth-stay-west.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{73,98}</string>
@@ -1116,7 +1116,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>blob-walk-0001.png</key>
+      <key>blob-stay-east-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{97,72}</string>
@@ -1249,7 +1249,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>blob-walk-0002.png</key>
+      <key>blob-stay-east-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{91,75}</string>
@@ -1344,7 +1344,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>blob-walk-0003.png</key>
+      <key>blob-stay-east-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{85,75}</string>
@@ -1363,7 +1363,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>blob-walk-0004.png</key>
+      <key>blob-stay-east-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{82,77}</string>
