@@ -6,14 +6,19 @@
 
 class Socket : public LevelObject
 {
-private:
-    bool _open;
-    
 public:
 	static Socket* create(Level* level, const cocos2d::Vec2& coordinate);
     
 	Socket(Level* level, const cocos2d::Vec2& coordinate);
     bool isOpenableBy(const Creature* creature, Direction direction) const override;
+    void reset();
+    void beforeEnter(Creature* creature);
+    
+private:
+    bool _open;
+    cocos2d::Sprite* _floor;
+    cocos2d::Sprite* _wall;
+    cocos2d::Sprite* _cover;
 };
 
 #endif

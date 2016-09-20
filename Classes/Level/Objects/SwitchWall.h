@@ -6,17 +6,22 @@
 
 class SwitchWall : public LevelObject
 {
-private:
-    bool _initiallyOpen;
-    bool _open;
-    
 public:
 	static SwitchWall* create(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
     
 	SwitchWall(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
+    void reset() override;
     bool isOpen();
     void open();
     void close();
+    
+private:
+    bool _initiallyOpen;
+    bool _open;
+    
+    cocos2d::Sprite* _floor;
+    cocos2d::Sprite* _wall;
+    cocos2d::Sprite* _cover;
 };
 
 #endif
