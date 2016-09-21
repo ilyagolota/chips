@@ -13,9 +13,9 @@
 #include "TileType.h"
 #include "LevelConfig.h"
 #include "Inventory.h"
-#include "LevelObject.h"
 #include "Creature.h"
 #include "Item.h"
+#include "Objects/LevelObject.h"
 
 class IPlayerControl;
 

@@ -25,13 +25,13 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
         _backWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north.png");
 		_backWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
 		_backWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backWall);
         
 		_frontWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-east.png");
 		_frontWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
 		_frontWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontWall);
     }
@@ -39,7 +39,7 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
 		_frontWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-south-east.png");
 		_frontWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
 		_frontWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontWall);
     }
@@ -47,7 +47,7 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
 		_backWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north-west.png");
 		_backWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
 		_backWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backWall);
     }
@@ -55,49 +55,40 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
 		_backWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-west.png");
 		_backWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
 		_backWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backWall);
         
 		_frontWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-south.png");
 		_frontWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
 		_frontWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontWall);
     }
-}
 
-bool Ice::isEnterableBy(const Creature* creature, Direction direction) const
-{
+	TileBody body;
 	switch (_type)
 	{
-		case TileType::ICE_WALL_NORTH_EAST:
-			return direction == Direction::SOUTH || direction == Direction::WEST;
-		case TileType::ICE_WALL_SOUTH_EAST:
-			return direction == Direction::NORTH || direction == Direction::WEST;
-		case TileType::ICE_WALL_NORTH_WEST:
-			return direction == Direction::SOUTH || direction == Direction::EAST;
-		case TileType::ICE_WALL_SOUTH_WEST:
-			return direction == Direction::NORTH || direction == Direction::EAST;
-		default:
-			return true;
+	case TileType::ICE_WALL_NORTH_EAST:
+		body = TileBody::INNER_SOUTH_SIDE | TileBody::INNER_WEST_SIDE | TileBody::OUTER_NORTH_SIDE | TileBody::OUTER_EAST_SIDE;
+		break;
+	case TileType::ICE_WALL_SOUTH_EAST:
+		body = TileBody::INNER_NORTH_SIDE | TileBody::INNER_WEST_SIDE | TileBody::OUTER_SOUTH_SIDE | TileBody::OUTER_EAST_SIDE;
+		break;
+	case TileType::ICE_WALL_NORTH_WEST:
+		body = TileBody::INNER_SOUTH_SIDE | TileBody::INNER_EAST_SIDE | TileBody::OUTER_NORTH_SIDE | TileBody::OUTER_WEST_SIDE;
+		break;
+	case TileType::ICE_WALL_SOUTH_WEST:
+		body = TileBody::INNER_NORTH_SIDE | TileBody::INNER_EAST_SIDE | TileBody::OUTER_SOUTH_SIDE | TileBody::OUTER_WEST_SIDE;
+		break;
+	default:
+		body = TileBody::EMPTY;
+		break;
 	}
-}
 
-bool Ice::isEscapableBy(const Creature* creature, Direction direction) const
-{
-	switch (_type)
+	if (body != TileBody::EMPTY)
 	{
-		case TileType::ICE_WALL_NORTH_EAST:
-			return direction == Direction::NORTH || direction == Direction::EAST;
-		case TileType::ICE_WALL_SOUTH_EAST:
-			return direction == Direction::SOUTH || direction == Direction::EAST;
-		case TileType::ICE_WALL_NORTH_WEST:
-			return direction == Direction::NORTH || direction == Direction::WEST;
-		case TileType::ICE_WALL_SOUTH_WEST:
-			return direction == Direction::SOUTH || direction == Direction::WEST;
-		default:
-			return true;
+		_level->getPhysicsWorld()->setBody(_coordinate, body, 7);
 	}
 }
 
@@ -129,7 +120,7 @@ void Ice::afterEnter(Creature* creature)
 {
     if (creature->getType() != CreatureType::CHIP || _level->getInventory()->getItemCount(TileType::BOOTS_ICE) <= 0)
     {
-        Direction direction;
+		Direction direction;
         switch (_type)
         {
             case TileType::ICE:

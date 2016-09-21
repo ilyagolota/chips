@@ -25,18 +25,23 @@ Button::Button(Level* level, const cocos2d::Vec2& coordinate, TileType type) : L
     _button->setAnchorPoint(cocos2d::Vec2::ZERO);
     _button->setPosition(cocos2d::Vec2::ZERO);
     _floor->addChild(_button);
+
+	_pressCount = 0;
 }
 
 void Button::beforeEnter(Creature *creature)
 {
-    auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
-    _button->runAction(cocos2d::Sequence::create(
-        cocos2d::DelayTime::create(0.75f * duration),
-        cocos2d::CallFunc::create([this]() {
-            _button->setSpriteFrame("button-" + getColorName() + "-on.png");
-        }),
-        nullptr
-    ));
+	if (_pressCount == 0) {
+		auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
+			_button->runAction(cocos2d::Sequence::create(
+				cocos2d::DelayTime::create(0.55f * duration),
+				cocos2d::CallFunc::create([this]() {
+				_button->setSpriteFrame("button-" + getColorName() + "-on.png");
+			}),
+			nullptr
+		));
+	}
+	_pressCount += 1;
 }
 
 void Button::afterEnter(Creature* creature)
@@ -85,41 +90,43 @@ void Button::afterEnter(Creature* creature)
 
 void Button::beforeEscape(Creature* creature)
 {
-    auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
-    _button->runAction(cocos2d::Sequence::create(
-        cocos2d::DelayTime::create(0.25f * duration),
-        cocos2d::CallFunc::create([this]() {
-            _button->setSpriteFrame("button-" + getColorName() + ".png");
-        }),
-        nullptr
-    ));
-    
-    CC_UNUSED_PARAM(creature);
-    
-    if (_type == TileType::BUTTON_BROWN)
-    {
-        const LevelWire* thisWire = nullptr;
-        for (auto& wire : _level->getConfig()->getWires())
-        {
-            if (wire.startCoordinate == _coordinate)
-            {
-                thisWire = &wire;
-            }
-        }
-        
-        if (thisWire != nullptr)
-        {
-            auto beartrap = dynamic_cast<Beartrap*>(_level->getObjectAt(thisWire->endCoordinate));
-            if (beartrap != nullptr)
-            {
-                beartrap->setOpen(false);
-            }
-        }
-    }
+	_pressCount -= 1;
+	if (_pressCount == 0) {
+		auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
+			_button->runAction(cocos2d::Sequence::create(
+				cocos2d::DelayTime::create(0.45f * duration),
+				cocos2d::CallFunc::create([this]() {
+				_button->setSpriteFrame("button-" + getColorName() + ".png");
+			}),
+			nullptr
+		));
+
+		if (_type == TileType::BUTTON_BROWN)
+		{
+			const LevelWire* thisWire = nullptr;
+			for (auto& wire : _level->getConfig()->getWires())
+			{
+				if (wire.startCoordinate == _coordinate)
+				{
+					thisWire = &wire;
+				}
+			}
+
+			if (thisWire != nullptr)
+			{
+				auto beartrap = dynamic_cast<Beartrap*>(_level->getObjectAt(thisWire->endCoordinate));
+				if (beartrap != nullptr)
+				{
+					beartrap->setOpen(false);
+				}
+			}
+		}
+	}
 }
 
 void Button::reset()
 {
+	_pressCount = 0;
     _button->stopAllActions();
     _button->setSpriteFrame("button-" + getColorName() + ".png");
 }

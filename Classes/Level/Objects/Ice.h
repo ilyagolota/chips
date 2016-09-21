@@ -11,8 +11,6 @@ public:
 	static Ice* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
 	Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type);
-	bool isEnterableBy(const Creature* creature, Direction direction) const override;
-	bool isEscapableBy(const Creature* creature, Direction direction) const override;
     void beforeEnter(Creature* creature) override;
     void afterEnter(Creature* creature) override;
     void beforeEscape(Creature* creature) override;

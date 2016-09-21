@@ -815,17 +815,17 @@
       <key>button-brown-on.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{53,37}</string>
+        <string>{53,34}</string>
         <key>spriteOffset</key>
-        <string>{0.5,10.5}</string>
+        <string>{0.5,9}</string>
         <key>spriteSourceSize</key>
         <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{64,41},{53,37}}</string>
+        <string>{{64,44},{53,34}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{0,945},{53,37}}</string>
+        <string>{{0,945},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -834,17 +834,17 @@
       <key>button-blue-on.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{53,37}</string>
+        <string>{53,34}</string>
         <key>spriteOffset</key>
-        <string>{0.5,10.5}</string>
+        <string>{0.5,9}</string>
         <key>spriteSourceSize</key>
         <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{64,41},{53,37}}</string>
+        <string>{{64,44},{53,34}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{0,983},{53,37}}</string>
+        <string>{{0,980},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -853,17 +853,17 @@
       <key>button-green-on.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{53,37}</string>
+        <string>{53,34}</string>
         <key>spriteOffset</key>
-        <string>{0.5,10.5}</string>
+        <string>{0.5,9}</string>
         <key>spriteSourceSize</key>
         <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{64,41},{53,37}}</string>
+        <string>{{64,44},{53,34}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{54,945},{53,37}}</string>
+        <string>{{54,945},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -872,17 +872,17 @@
       <key>button-red-on.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{53,37}</string>
+        <string>{53,34}</string>
         <key>spriteOffset</key>
-        <string>{0.5,10.5}</string>
+        <string>{0.5,9}</string>
         <key>spriteSourceSize</key>
         <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{64,41},{53,37}}</string>
+        <string>{{64,44},{53,34}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{54,983},{53,37}}</string>
+        <string>{{54,980},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>

@@ -28,6 +28,7 @@ protected:
     
     cocos2d::Sprite* _floor;
     cocos2d::Sprite* _button;
+	size_t _pressCount;
 };
 
 #endif
