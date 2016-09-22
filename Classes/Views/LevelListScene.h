@@ -2,6 +2,7 @@
 #define  _CHIPS_CHALLENGE_LEVELS_SCENE_H_
 
 #include <cocos2d.h>
+#include <ui/CocosGUI.h>
 #include <ChipsChallengeGame.h>
 
 class LevelListScene : public cocos2d::Scene

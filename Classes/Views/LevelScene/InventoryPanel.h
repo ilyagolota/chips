@@ -2,6 +2,7 @@
 #define _CHIPS_CHALLENGE_SMART_INVENTORY_PANEL_H_
 
 #include <cocos2d.h>
+#include <ui/CocosGUI.h>
 
 #include <Level/TileType.h>
 #include <Level/Inventory.h>

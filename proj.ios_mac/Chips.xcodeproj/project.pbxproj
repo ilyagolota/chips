@@ -147,6 +147,8 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		D42E84CB1D9418A900C655D6 /* PauseMenuWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */; };
+		D42E84CC1D9418A900C655D6 /* PauseMenuWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */; };
 		D431917F1D8AD79700EA0D9A /* InventoryPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D431917D1D8AD79700EA0D9A /* InventoryPanel.cpp */; };
 		D431B61F1D75A1880090FBAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D431B61E1D75A1880090FBAF /* CoreText.framework */; };
 		D431B6231D75A2B00090FBAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D431B61E1D75A1880090FBAF /* CoreText.framework */; };
@@ -342,6 +344,8 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PauseMenuWindow.cpp; sourceTree = "<group>"; };
+		D42E84CA1D9418A900C655D6 /* PauseMenuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuWindow.h; sourceTree = "<group>"; };
 		D431917D1D8AD79700EA0D9A /* InventoryPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InventoryPanel.cpp; sourceTree = "<group>"; };
 		D431917E1D8AD79700EA0D9A /* InventoryPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InventoryPanel.h; sourceTree = "<group>"; };
 		D431B61E1D75A1880090FBAF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = ../../../../iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -661,6 +665,8 @@
 				D431917E1D8AD79700EA0D9A /* InventoryPanel.h */,
 				B3F310671CF7417900B9EC92 /* SmartControlLayer.cpp */,
 				B3F310681CF7417900B9EC92 /* SmartControlLayer.h */,
+				D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */,
+				D42E84CA1D9418A900C655D6 /* PauseMenuWindow.h */,
 			);
 			name = LevelScene;
 			path = ../../../chips/Classes/Views/LevelScene;
@@ -892,6 +898,7 @@
 				B30555BE1CE3454D006E5546 /* Beartrap.cpp in Sources */,
 				B305558C1CE339DC006E5546 /* Creature.cpp in Sources */,
 				B3F7678C1CF2FE9E00F03CCE /* TiledPhysicsWorld.cpp in Sources */,
+				D42E84CB1D9418A900C655D6 /* PauseMenuWindow.cpp in Sources */,
 				B30555C01CE3454D006E5546 /* BlueWall.cpp in Sources */,
 				B30555D61CE3454D006E5546 /* Ice.cpp in Sources */,
 				B3F7678E1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */,
@@ -982,6 +989,7 @@
 				B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */,
 				B30555931CE3418C006E5546 /* LevelObject.cpp in Sources */,
 				B30555CD1CE3454D006E5546 /* Door.cpp in Sources */,
+				D42E84CC1D9418A900C655D6 /* PauseMenuWindow.cpp in Sources */,
 				B3F310651CF700B900B9EC92 /* LevelScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

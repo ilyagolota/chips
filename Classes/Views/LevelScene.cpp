@@ -28,22 +28,46 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
 
 	_level = Level::create(_stage, this);
 	_level->retain();
+    
+    _controlLayer = SmartControlLayer::create(_level);
+    addChild(_controlLayer);
+    _level->setPlayerControl(_controlLayer);
 
-	_topNode = cocos2d::Node::create();
-	addChild(_topNode);
+    auto uiLayer = cocos2d::Node::create();
+    addChild(uiLayer);
     
 	_inventoryPanel = InventoryPanel::create(_level->getInventory());
 	_inventoryPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
 	_inventoryPanel->setPosition(cocos2d::Vec2(0.5f * winSize.width, 8));
-	addChild(_inventoryPanel);
+	uiLayer->addChild(_inventoryPanel);
+    
+    auto menuButton = cocos2d::ui::Button::create("ui-inventory-cell.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+    menuButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    menuButton->setPosition(cocos2d::Vec2(winSize) + cocos2d::Vec2(-50, -50));
+    menuButton->addTouchEventListener([this](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type)
+    {
+        if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+        {
+            pauseLevel();
+            _topLayer->addChild(PauseMenuWindow::create(this));
+        }
+    });
+    uiLayer->addChild(menuButton);
+    
+    auto restartButton = cocos2d::ui::Button::create("ui-inventory-cell.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+    restartButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    restartButton->setPosition(cocos2d::Vec2(winSize) + cocos2d::Vec2(-150, -50));
+    restartButton->addTouchEventListener([this](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type)
+    {
+        if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+        {
+            restartLevel();
+        }
+    });
+    uiLayer->addChild(restartButton);
 
-    _controlLayer = SmartControlLayer::create(_level);
-    addChild(_controlLayer);
-	_level->setPlayerControl(_controlLayer);
-	
-	_level->makeTurn(0);
-	director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(Level::makeTurn), _level, _level->getTurnDuration(), CC_REPEAT_FOREVER, 0, false);
-    director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), this, 0, CC_REPEAT_FOREVER, 0, false);
+    _topLayer = cocos2d::Node::create();
+    addChild(_topLayer);
     
     _preloaderLayer = cocos2d::LayerColor::create(cocos2d::Color4B(128, 192, 255, 255), winSize.width, winSize.height);
     _preloaderLayer->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -55,6 +79,10 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     _fadeLayer->setPosition(cocos2d::Vec2::ZERO);
     _fadeLayer->setVisible(false);
     addChild(_fadeLayer);
+    
+    _level->makeTurn(0);
+    director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(Level::makeTurn), _level, _level->getTurnDuration(), CC_REPEAT_FOREVER, 0, false);
+    director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), this, 0, CC_REPEAT_FOREVER, 0, false);
     
 	/*
 	
@@ -83,7 +111,7 @@ LevelScene::~LevelScene()
 void LevelScene::onEnter()
 {
 	cocos2d::Scene::onEnter();
-	_loadLevel();
+	gotoLevel(_levelIndex);
 }
 
 void LevelScene::update(float dt)
@@ -137,7 +165,7 @@ void LevelScene::onLevelFail(const std::string& message)
         }),
         nullptr
     ));
-    _topNode->addChild(messagePanel);
+    _topLayer->addChild(messagePanel);
     
     messageLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     messageLabel->setPosition(cocos2d::Vec2(messagePanel->getContentSize()) * 0.5f);
@@ -158,6 +186,69 @@ void LevelScene::onLevelFail(const std::string& message)
         }),
         nullptr
     ));
+}
+
+void LevelScene::pauseLevel()
+{
+    if (!_paused)
+    {
+        _paused = true;
+        
+        auto director = cocos2d::Director::getInstance();
+        director->getScheduler()->pauseTarget(_level);
+        
+        _pauseRecursive(this);
+    }
+}
+
+void LevelScene::resumeLevel()
+{
+    if (_paused)
+    {
+        _paused = false;
+        
+        auto director = cocos2d::Director::getInstance();
+        director->getScheduler()->resumeTarget(_level);
+        
+        _resumeRecursive(this);
+    }
+}
+
+void LevelScene::restartLevel()
+{
+    if (_paused)
+    {
+        resumeLevel();
+    }
+    
+    _level->restart();
+    _onLevelStart();
+}
+
+void LevelScene::gotoLevel(size_t levelIndex)
+{
+    if (_paused)
+    {
+        resumeLevel();
+    }
+    
+    _levelIndex = levelIndex;
+    
+    _preloaderLayer->setVisible(true);
+    cocos2d::Director::getInstance()->drawScene();
+    
+    try
+    {
+        auto levelConfig = _game->getLevelPack(_packIndex)->readLevelConfig(_levelIndex);
+        _level->start(levelConfig);
+    }
+    catch (...)
+    {
+        // show error
+    }
+    
+    _preloaderLayer->setVisible(false);
+    _onLevelStart();
 }
 
 void LevelScene::_onLevelStart()
@@ -186,7 +277,7 @@ void LevelScene::_onLevelStart()
     titleLabel->setPosition(cocos2d::Vec2(titlePanel->getContentSize()) * 0.5f);
     titlePanel->addChild(titleLabel);
     
-    _topNode->addChild(titlePanel);
+    _topLayer->addChild(titlePanel);
     
     titlePanel->runAction(cocos2d::Sequence::create(
         cocos2d::DelayTime::create(0.7f),
@@ -199,113 +290,26 @@ void LevelScene::_onLevelStart()
     ));
 }
 
-void LevelScene::_loadLevel()
+void LevelScene::_pauseRecursive(cocos2d::Node* node)
 {
-    _preloaderLayer->setVisible(true);
-    cocos2d::Director::getInstance()->drawScene();
-    
-    try
+    node->pause();
+    for (auto child : node->getChildren())
     {
-        auto levelConfig = _game->getLevelPack(_packIndex)->readLevelConfig(_levelIndex);
-        _level->start(levelConfig);
+        _pauseRecursive(child);
     }
-    catch (...)
+}
+
+void LevelScene::_resumeRecursive(cocos2d::Node* node)
+{
+    node->resume();
+    for (auto child : node->getChildren())
     {
-        // show error
+        _resumeRecursive(child);
     }
-    
-    _preloaderLayer->setVisible(false);
-    
-    _onLevelStart();
 }
 
-    /*
-     void LevelScene::showPauseMenu()
-{
-	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
-
-	auto menuBox = cocos2d::ui::Scale9Sprite::create("panel-transparent.png");
-	menuBox->setContentSize(cocos2d::Size(320, 400));
-	menuBox->setPosition(cocos2d::Vec2(winSize) * 0.5);
-
-	auto menu = cocos2d::Menu::create();
-	menu->setPosition(cocos2d::Vec2::ZERO);
-	menu->setAnchorPoint(cocos2d::Vec2::ZERO);
-
-	auto restartButton = cocos2d::MenuItemSprite::create(cocos2d::Sprite::create("bomb.png"), nullptr, CC_CALLBACK_1(LevelScene::_restartCallback, this));
-	restartButton->setPosition(cocos2d::Vec2(0.5f * menuBox->getContentSize().width, 250));
-	restartButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	menu->addChild(restartButton);
-
-	auto restartButtonLabel = cocos2d::Label::createWithBMFont("main_font.fnt", "Restart");
-	restartButtonLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	restartButtonLabel->setPosition(0.5f * cocos2d::Vec2(restartButton->getContentSize()));
-	restartButton->addChild(restartButtonLabel);
-
-	auto exitButton = cocos2d::MenuItemSprite::create(cocos2d::Sprite::create("bomb.png"), nullptr, CC_CALLBACK_1(LevelScene::_exitCallback, this));
-	exitButton->setPosition(cocos2d::Vec2(0.5f * menuBox->getContentSize().width, 150));
-	exitButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	menu->addChild(exitButton);
-
-	auto exitButtonLabel = cocos2d::Label::createWithBMFont("main_font.fnt", "Exit");
-	exitButtonLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	exitButtonLabel->setPosition(0.5f * cocos2d::Vec2(exitButton->getContentSize()));
-	exitButton->addChild(exitButtonLabel);
-
-	auto closeButton = cocos2d::MenuItemSprite::create(cocos2d::Sprite::create("bomb.png"), nullptr, CC_CALLBACK_1(LevelScene::_resumeCallback, this));
-	closeButton->setPosition(cocos2d::Vec2(0.5f * menuBox->getContentSize().width, 50));
-	closeButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	menu->addChild(closeButton);
-
-	auto closeButtonLabel = cocos2d::Label::createWithBMFont("main_font.fnt", "Close");
-	closeButtonLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	closeButtonLabel->setPosition(0.5f * cocos2d::Vec2(closeButton->getContentSize()));
-	closeButton->addChild(closeButtonLabel);
-
-	menuBox->addChild(menu);
-	show(menuBox);
-}
-
-void LevelScene::showLevelTitle(const std::string& title)
-{
-	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
-
-	auto label = cocos2d::Label::createWithBMFont("main_font.fnt", title, cocos2d::TextHAlignment::CENTER, 360 - 46);
-
-	auto titleBox = cocos2d::extension::Scale9Sprite::create("panel-transparent.png");
-	titleBox->setContentSize(cocos2d::Size(360, label->getContentSize().height + 46));
-	titleBox->setPosition(cocos2d::Vec2(winSize) * 0.5f);
-
-	label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	label->setPosition(cocos2d::Vec2(titleBox->getContentSize()) * 0.5f);
-	titleBox->addChild(label);
-
-	auto delay = cocos2d::DelayTime::create(0.5f);
-	auto fadeOut = cocos2d::FadeOut::create(0.5f);
-	auto destroy = cocos2d::CallFunc::create(CC_CALLBACK_0(LevelScene::clear, this));
-	titleBox->runAction(cocos2d::Sequence::create(delay, fadeOut, destroy, nullptr));
-
-	show(titleBox);
-}
-
-void LevelScene::showAlert(const std::string& message)
-{
-	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
-
-	auto label = cocos2d::Label::createWithBMFont("main_font.fnt", message, cocos2d::TextHAlignment::CENTER, 512 - 46);
-
-	auto alertBox = cocos2d::extension::Scale9Sprite::create("panel-transparent.png");
-	alertBox->setContentSize(cocos2d::Size(512, label->getContentSize().height + 46));
-	alertBox->setPosition(cocos2d::Vec2(winSize) * 0.5f);
-
-	label->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	label->setPosition(cocos2d::Vec2(alertBox->getContentSize()) * 0.5f);
-	alertBox->addChild(label);
-
-	show(alertBox);
-}
-
-void LevelScene::showHint(const std::string &hint)
+/*
+ void LevelScene::showHint(const std::string &hint)
 {
 	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
 
@@ -363,84 +367,6 @@ void LevelScene::levelFailed(const std::string& message)
 	auto restartLevelAction = cocos2d::CallFunc::create(std::bind(&LevelScene::_start, this));
 
 	label->runAction(cocos2d::Sequence::create(delayAction, fadeOutAction, restartLevelAction, nullptr));
-}
-
-void LevelScene::_loadAndStart()
-{
-	_preloaderLayer->setVisible(true);
-
-	auto director = cocos2d::Director::getInstance();
-	director->drawScene();
-
-	try
-	{
-		auto levelData = App::getCurrent()->getLevelBundle()->readLevelData(_packIndex, _levelIndex);
-		_level->setLevelData(levelData);
-	}
-	catch (std::runtime_error error)
-	{
-		// show error
-	}
-	
-	_preloaderLayer->setVisible(false);
-
-	_fadeLayer->setVisible(true);
-	_fadeLayer->setOpacity(255);
-
-	_start();
-}
-
-void LevelScene::_start()
-{
-	_fadeLayer->stopAllActions();
-	_fadeLayer->setVisible(true);
-
-	if (_fadeLayer->getOpacity() == 255)
-	{
-		_isActive = true;
-		_level->start();
-
-		float duration = 0.2f * _fadeLayer->getOpacity() / 255.0f;
-		auto fadeOutAction = cocos2d::FadeTo::create(duration, 0);
-		auto hideFadeLayerAction = cocos2d::CallFunc::create([this]() -> void {
-			_fadeLayer->setVisible(false);
-		});
-
-		_fadeLayer->runAction(cocos2d::Sequence::createWithTwoActions(fadeOutAction, hideFadeLayerAction));
-	}
-	else
-	{
-		float duration = 0.4f * (255.f - _fadeLayer->getOpacity()) / 255.0f;
-		auto fadeInAction = cocos2d::FadeTo::create(duration, 255);
-		auto startGameAction = cocos2d::CallFunc::create([this]() -> void {
-			_isActive = true;
-			_level->start();
-		});
-		auto fadeOutAction = cocos2d::FadeTo::create(0.2f, 0);
-		auto hideFadeLayerAction = cocos2d::CallFunc::create([this]() -> void {
-			_fadeLayer->setVisible(false);
-		});
-
-		_fadeLayer->runAction(cocos2d::Sequence::create(fadeInAction, startGameAction, fadeOutAction, hideFadeLayerAction, nullptr));
-	}
-}
-
-void LevelScene::_pauseNodeRecursive(cocos2d::Node* node)
-{
-	node->pauseSchedulerAndActions();
-	for (auto child : node->getChildren())
-	{
-		_pauseNodeRecursive(child);
-	}
-}
-
-void LevelScene::_resumeNodeRecursive(cocos2d::Node* node)
-{
-	node->resumeSchedulerAndActions();
-	for (auto child : node->getChildren())
-	{
-		_resumeNodeRecursive(child);
-	}
 }
 
 void LevelScene::_build()
@@ -514,73 +440,6 @@ void LevelScene::_build()
 	addChild(_fadeLayer);
 }
 
-void LevelScene::_buildBar()
-{
-	auto winSize = cocos2d::Director::getInstance()->getWinSize();
-
-	auto bar = cocos2d::extension::Scale9Sprite::create("panel-transparent.png");
-	bar->setContentSize(cocos2d::Size(180, 50));
-	bar->setAnchorPoint(cocos2d::Vec2(0, 1));
-	bar->setPosition(cocos2d::Vec2(10, winSize.height - 10));
-	addChild(bar);
-
-	auto chipSprite = cocos2d::Sprite::create("icchip.png");
-	chipSprite->setPosition(cocos2d::Vec2(30, bar->getContentSize().height * 0.5f));
-	chipSprite->setRotation(10);
-	chipSprite->setScale(0.6f);
-	bar->addChild(chipSprite);
-
-	_chipsLabel = cocos2d::Label::createWithBMFont("main_font.fnt", "0/0", cocos2d::TextHAlignment::LEFT);
-	_chipsLabel->setPosition(cocos2d::Vec2(50, bar->getContentSize().height * 0.5f));
-	_chipsLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-	bar->addChild(_chipsLabel);
-
-	auto bar2 = cocos2d::extension::Scale9Sprite::create("panel-transparent.png");
-	bar2->setContentSize(cocos2d::Size(280, 50));
-	bar2->setPosition(cocos2d::Vec2(200, winSize.height - 10));
-	bar2->setAnchorPoint(cocos2d::Vec2(0, 1));
-	addChild(bar2);
-
-	auto blueKeySprite = cocos2d::Sprite::create("key-blue.png");
-	blueKeySprite->setTag(static_cast<int>(Tile::KEY_BLUE));
-	bar2->addChild(blueKeySprite);
-
-	auto redKeySprite = cocos2d::Sprite::create("key-red.png");
-	redKeySprite->setTag(static_cast<int>(Tile::KEY_RED));
-	bar2->addChild(redKeySprite);
-
-	auto greenKeySprite = cocos2d::Sprite::create("key-green.png");
-	greenKeySprite->setTag(static_cast<int>(Tile::KEY_GREEN));
-	bar2->addChild(greenKeySprite);
-
-	auto yellowKeySprite = cocos2d::Sprite::create("key-yellow.png");
-	yellowKeySprite->setTag(static_cast<int>(Tile::KEY_YELLOW));
-	bar2->addChild(yellowKeySprite);
-
-	auto fireBootsSprite = cocos2d::Sprite::create("boots-fire.png");
-	fireBootsSprite->setTag(static_cast<int>(Tile::BOOTS_FIRE));
-	bar2->addChild(fireBootsSprite);
-
-	auto waterBootsSprite = cocos2d::Sprite::create("boots-water.png");
-	waterBootsSprite->setTag(static_cast<int>(Tile::BOOTS_WATER));
-	bar2->addChild(waterBootsSprite);
-
-	auto iceBootsSprite = cocos2d::Sprite::create("boots-ice.png");
-	iceBootsSprite->setTag(static_cast<int>(Tile::BOOTS_ICE));
-	bar2->addChild(iceBootsSprite);
-
-	auto slideBootsSprite = cocos2d::Sprite::create("boots-slide.png");
-	slideBootsSprite->setTag(static_cast<int>(Tile::BOOTS_SLIDE));
-	bar2->addChild(slideBootsSprite);
-
-	for (auto itemSprite : bar2->getChildren())
-	{
-		itemSprite->setScale(0.6f);
-		itemSprite->setPosition(cocos2d::Vec2(0, 0.5f * bar2->getContentSize().height));
-	}
-
-	_inventoryNode = bar2;
-}
 
 void LevelScene::_updateBar()
 {
