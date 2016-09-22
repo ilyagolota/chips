@@ -16,28 +16,12 @@
 #include "Creature.h"
 #include "Item.h"
 #include "Objects/LevelObject.h"
+#include "LevelHandler.h"
 
 class IPlayerControl;
 
 class Level : public cocos2d::Ref
 {
-private:
-    LevelConfig* _config;
-    Inventory* _inventory;
-    
-    cocos2d::Node* _stage;
-    TiledPhysicsWorld* _physicsWorld;
-    TiledSoundEnvironment* _soundEnvironment;
-    TiledProjector* _projector;
-	IPlayerControl* _playerControl;
-    
-    float _timeMultiplier;
-    
-    std::vector<LevelObject*> _objects;
-    std::vector<Item*> _items;
-    cocos2d::Vector<Creature*> _creatures;
-    Creature* _playerCreature;
-    
 public:
     enum
     {
@@ -51,14 +35,15 @@ public:
         FRONT_Z_ORDER,
     };
     
-    static Level* create(cocos2d::Node* stage);
+    static Level* create(cocos2d::Node* stage, LevelHandler* handler);
     
-    Level(cocos2d::Node* stage);
+    Level(cocos2d::Node* stage, LevelHandler* handler);
     ~Level();
     
     LevelConfig* getConfig() const;
     void start(LevelConfig* config);
     void restart();
+    void fail(const std::string& message);
     void makeTurn(float dt);
     
     cocos2d::Node* getStage() const;
@@ -79,7 +64,7 @@ public:
     const cocos2d::Vector<Creature*>& getCreatures() const;
     Creature* getCreatureAt(const cocos2d::Vec2& coordinate) const;
 	Creature* getPlayerCreature() const;
-
+    
 	int getWallShape(const cocos2d::Vec2& coordinate) const;
 
 protected:
@@ -91,6 +76,26 @@ protected:
 	void _buildWall(const cocos2d::Vec2& coordinate);
 	void _buildGravel(const cocos2d::Vec2& coordinate);
     size_t _coordinateToIndex(const cocos2d::Vec2& coordinate) const;
+    
+private:
+    LevelConfig* _config;
+    Inventory* _inventory;
+    
+    cocos2d::Node* _stage;
+    TiledPhysicsWorld* _physicsWorld;
+    TiledSoundEnvironment* _soundEnvironment;
+    TiledProjector* _projector;
+    IPlayerControl* _playerControl;
+    
+    float _timeMultiplier;
+    
+    std::vector<LevelObject*> _objects;
+    std::vector<Item*> _items;
+    cocos2d::Vector<Creature*> _creatures;
+    cocos2d::Vector<Creature*> _removedCreatures;
+    Creature* _playerCreature;
+    
+    LevelHandler* _handler;
 };
 
 #endif

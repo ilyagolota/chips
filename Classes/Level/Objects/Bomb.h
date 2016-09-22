@@ -13,6 +13,9 @@ public:
 	static Bomb* create(Level* level, const cocos2d::Vec2& coordinate);
     
 	Bomb(Level* level, const cocos2d::Vec2& coordinate);
+    
+    void reset() override;
+    void afterEnter(Creature* creature) override;
 };
 
 #endif

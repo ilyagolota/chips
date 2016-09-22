@@ -1,4 +1,5 @@
 #include "Bomb.h"
+#include <Level/Level.h>
 
 Bomb* Bomb::create(Level* level, const cocos2d::Vec2& coordinate)
 {
@@ -9,5 +10,23 @@ Bomb* Bomb::create(Level* level, const cocos2d::Vec2& coordinate)
 
 Bomb::Bomb(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
-	_exploded = false;
+	reset();
+}
+
+void Bomb::reset()
+{
+    _exploded = false;
+}
+
+void Bomb::afterEnter(Creature *creature)
+{
+    if (!_exploded)
+    {
+        _exploded = true;
+        _level->removeCreature(creature);
+        if (creature->getType() == CreatureType::CHIP)
+        {
+            _level->fail("Ooops! Don't touch the bombs!");
+        }
+    }
 }

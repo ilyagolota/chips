@@ -41,9 +41,9 @@ public:
     static const int ANIMATE_ACTION_TAG = 2006;
     static const int CHANGE_STATE_ACTION_TAG = 2007;
     
-    static Creature* create(CreatureType type);
+    static Creature* create(Level* level, CreatureType type);
     
-    Creature(CreatureType type);
+    Creature(Level* level, CreatureType type);
     ~Creature();
     void move(Direction direction);
     bool isMoving() const;
@@ -60,8 +60,11 @@ public:
     CreatureState getState() const;
     void setState(CreatureState state);
     Level* getLevel() const;
-    void setLevel(Level* level);
+    
     void onTurn(float dt);
+    void onAdd();
+    void onRemove();
+    
     void update(float dt);
     void touch(Direction direction);
     bool canMove(Direction direction) const;

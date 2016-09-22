@@ -1,9 +1,6 @@
-#include "LevelScene.h"
 #include <cocos2d.h>
-#include <ChipsChallengeGame.h>
-#include <Tiled/TiledProjector.h>
-#include <Level/Level.h>
-#include <Level/Creature.h>
+
+#include "LevelScene.h"
 #include "PacksScene.h"
 
 LevelScene* LevelScene::create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex)
@@ -29,13 +26,12 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     _stage = cocos2d::Node::create();
     addChild(_stage);
 
-	_level = Level::create(_stage);
+	_level = Level::create(_stage, this);
 	_level->retain();
 
 	_topNode = cocos2d::Node::create();
 	addChild(_topNode);
     
-  
 	_inventoryPanel = InventoryPanel::create(_level->getInventory());
 	_inventoryPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
 	_inventoryPanel->setPosition(cocos2d::Vec2(0.5f * winSize.width, 8));
@@ -49,17 +45,24 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
 	director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(Level::makeTurn), _level, _level->getTurnDuration(), CC_REPEAT_FOREVER, 0, false);
     director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), this, 0, CC_REPEAT_FOREVER, 0, false);
     
-	/*_build();
+    _preloaderLayer = cocos2d::LayerColor::create(cocos2d::Color4B(128, 192, 255, 255), winSize.width, winSize.height);
+    _preloaderLayer->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _preloaderLayer->setPosition(cocos2d::Vec2::ZERO);
+    addChild(_preloaderLayer);
+    
+    _fadeLayer = cocos2d::LayerColor::create(cocos2d::Color4B::WHITE, winSize.width, winSize.height);
+    _fadeLayer->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _fadeLayer->setPosition(cocos2d::Vec2::ZERO);
+    _fadeLayer->setVisible(false);
+    addChild(_fadeLayer);
+    
+	/*
 	
 	_keyboardListener = cocos2d::EventListenerKeyboard::create();
 	_keyboardListener->retain();
 	_keyboardListener->onKeyPressed = CC_CALLBACK_2(LevelScene::_keyPressedCallback, this);
 	_keyboardListener->onKeyReleased = CC_CALLBACK_2(LevelScene::_keyReleasedCallback, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
-
-	auto center = cocos2d::NotificationCenter::getInstance();
-	center->addObserver(this, CC_CALLFUNCO_SELECTOR(LevelScene::_playerStateChangedCallback), PlayerState::CHIPS_COLLECTED_CHANGED, _level->getPlayerState());
-	center->addObserver(this, CC_CALLFUNCO_SELECTOR(LevelScene::_playerStateChangedCallback), PlayerState::RESOURCE_CHANGED, _level->getPlayerState());*/
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);;*/
 }
 
 LevelScene::~LevelScene()
@@ -110,42 +113,114 @@ void LevelScene::update(float dt)
 	}*/
 }
 
+void LevelScene::onLevelWin()
+{
+    
+}
+
+void LevelScene::onLevelFail(const std::string& message)
+{
+    cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
+    
+    auto messageLabel = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 18, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
+    
+    auto messagePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
+    messagePanel->setContentSize(cocos2d::Size(360, messageLabel->getContentSize().height + 46));
+    messagePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
+    messagePanel->setOpacity(0);
+    messagePanel->runAction(cocos2d::Sequence::create(
+        cocos2d::FadeIn::create(0.5f),
+        cocos2d::DelayTime::create(1.0f),
+        cocos2d::CallFuncN::create([](cocos2d::Node* messagePanel)
+        {
+             messagePanel->removeFromParentAndCleanup(true);
+        }),
+        nullptr
+    ));
+    _topNode->addChild(messagePanel);
+    
+    messageLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    messageLabel->setPosition(cocos2d::Vec2(messagePanel->getContentSize()) * 0.5f);
+    messageLabel->setOpacity(0);
+    messageLabel->runAction(cocos2d::FadeIn::create(0.5f));
+    messagePanel->addChild(messageLabel);
+    
+    _fadeLayer->stopAllActions();
+    _fadeLayer->setVisible(true);
+    _fadeLayer->setOpacity(0);
+    _fadeLayer->runAction(cocos2d::Sequence::create(
+        cocos2d::DelayTime::create(1.0f),
+        cocos2d::FadeOut::create(0.5f),
+        cocos2d::CallFunc::create([this]()
+        {
+            _level->restart();
+            _onLevelStart();
+        }),
+        nullptr
+    ));
+}
+
+void LevelScene::_onLevelStart()
+{
+    cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
+    
+    _fadeLayer->stopAllActions();
+    _fadeLayer->setVisible(true);
+    _fadeLayer->setOpacity(255);
+    _fadeLayer->runAction(cocos2d::Sequence::create(
+        cocos2d::FadeOut::create(0.5f),
+        cocos2d::CallFuncN::create([](cocos2d::Node* fadeLayer)
+        {
+            fadeLayer->setVisible(false);
+        }),
+        nullptr
+    ));
+
+    auto titleLabel = cocos2d::Label::createWithTTF(_level->getConfig()->getTitle(), "fonts/Marker Felt.ttf", 18, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
+    
+    auto titlePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
+    titlePanel->setContentSize(cocos2d::Size(360, titleLabel->getContentSize().height + 46));
+    titlePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
+    
+    titleLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    titleLabel->setPosition(cocos2d::Vec2(titlePanel->getContentSize()) * 0.5f);
+    titlePanel->addChild(titleLabel);
+    
+    _topNode->addChild(titlePanel);
+    
+    titlePanel->runAction(cocos2d::Sequence::create(
+        cocos2d::DelayTime::create(0.7f),
+        cocos2d::FadeOut::create(0.5f),
+        cocos2d::CallFuncN::create([](cocos2d::Node* titlePanel)
+        {
+            titlePanel->removeFromParentAndCleanup(true);
+        }),
+        nullptr
+    ));
+}
+
 void LevelScene::_loadLevel()
 {
-    auto levelConfig = _game->getLevelPack(_packIndex)->readLevelConfig(_levelIndex);
-    _level->start(levelConfig);
-	_showTitle();
+    _preloaderLayer->setVisible(true);
+    cocos2d::Director::getInstance()->drawScene();
+    
+    try
+    {
+        auto levelConfig = _game->getLevelPack(_packIndex)->readLevelConfig(_levelIndex);
+        _level->start(levelConfig);
+    }
+    catch (...)
+    {
+        // show error
+    }
+    
+    _preloaderLayer->setVisible(false);
+    
+    _onLevelStart();
 }
 
-void LevelScene::_showTitle()
-{
-	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
-
-	auto titleLabel = cocos2d::Label::createWithTTF(_level->getConfig()->getTitle(), "fonts/Marker Felt.ttf", 16, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
-
-    auto titlePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
-	titlePanel->setContentSize(cocos2d::Size(360, titleLabel->getContentSize().height + 46));
-	titlePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
-
-	titleLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	titleLabel->setPosition(cocos2d::Vec2(titlePanel->getContentSize()) * 0.5f);
-	titlePanel->addChild(titleLabel);
-
-	_topNode->addChild(titlePanel);
-
-	titlePanel->runAction(cocos2d::Sequence::create(
-		cocos2d::DelayTime::create(0.5f),
-		cocos2d::FadeOut::create(0.5f),
-		cocos2d::CallFuncN::create([](cocos2d::Node* titlePanel)
-		{
-			titlePanel->removeFromParentAndCleanup(true);
-		}),
-		nullptr
-	));
-}
-
-/*
-void LevelScene::showPauseMenu()
+    /*
+     void LevelScene::showPauseMenu()
 {
 	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
 

@@ -359,6 +359,7 @@
 		D4626CAC1D903D61003C812E /* TransitionAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransitionAnimation.h; path = Extensions/TransitionAnimation.h; sourceTree = "<group>"; };
 		D4626CAF1D903E07003C812E /* LevelListScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelListScene.cpp; sourceTree = "<group>"; };
 		D4626CB01D903E07003C812E /* LevelListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelListScene.h; sourceTree = "<group>"; };
+		D46337ED1D92E5B0008FF471 /* LevelHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelHandler.h; sourceTree = "<group>"; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -648,6 +649,7 @@
 				B3F0A3531CE2376E006E152B /* Level.h */,
 				B30555941CE34295006E5546 /* Item.cpp */,
 				B30555951CE34295006E5546 /* Item.h */,
+				D46337ED1D92E5B0008FF471 /* LevelHandler.h */,
 			);
 			path = Level;
 			sourceTree = "<group>";

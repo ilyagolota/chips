@@ -1,6 +1,4 @@
 #include "Water.h"
-#include <Tiled/TiledProjector.h>
-#include <Tiled/TiledSoundEnvironment.h>
 #include <Level/Level.h>
 
 Water* Water::create(Level* level, const cocos2d::Vec2& coordinate)
@@ -28,6 +26,25 @@ Water::Water(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level,
 
 Water::~Water()
 {
+}
+
+void Water::afterEnter(Creature *creature)
+{
+    if (creature->getType() == CreatureType::GLIDER)
+    {
+        return;
+    }
+    
+    if (creature->getType() == CreatureType::CHIP && _level->getInventory()->getItemCount(TileType::BOOTS_WATER) > 0)
+    {
+        return;
+    }
+    
+    _level->removeCreature(creature);
+    if (creature->getType() == CreatureType::CHIP)
+    {
+        _level->fail("Ooops! Chip can't swim without flippers!");
+    }
 }
 
 bool Water::hasDrawnBlock() const

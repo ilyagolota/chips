@@ -12,6 +12,8 @@ public:
     Water(Level* level, const cocos2d::Vec2& coordinate);
     virtual ~Water();
     
+    void afterEnter(Creature *creature) override;
+    
     bool hasDrawnBlock() const;
 
 private:

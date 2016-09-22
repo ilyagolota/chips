@@ -4,11 +4,10 @@
 #include <cocos2d.h>
 #include "LevelScene/InventoryPanel.h"
 #include "LevelScene/SmartControlLayer.h"
+#include <Level/Level.h>
+#include <ChipsChallengeGame.h>
 
-class ChipsChallengeGame;
-class Level;
-
-class LevelScene : public cocos2d::Scene
+class LevelScene : public cocos2d::Scene, LevelHandler
 {
 public:
 	static LevelScene* create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
@@ -19,11 +18,13 @@ public:
 	void onEnter() override;
 	void update(float dt) override;
 
+    void onLevelWin() override;
+    void onLevelFail(const std::string& message) override;
+    
 protected:
-	void _loadLevel();
-
-	void _showTitle();
-
+    void _onLevelStart();
+    void _loadLevel();
+    
     ChipsChallengeGame* _game;
     Level *_level;
     size_t _packIndex;
@@ -63,30 +64,6 @@ protected:
 
 	void levelCompleted(int score, int duration);
 	void levelFailed(const std::string& message);*/
-
-private:
-	/*
-	void _start();
-
-	void _pauseNodeRecursive(cocos2d::Node* node);
-	void _resumeNodeRecursive(cocos2d::Node* node);
-	
-	void _build();
-	void _buildBar();
-	void _updateBar();
-
-	void _scheduledLoadLevelCallback(float dt);
-	void _updateCallback(float dt);
-	void _pauseCallback(cocos2d::Ref* sender);
-	void _restartCallback(cocos2d::Ref* sender);
-	void _exitCallback(cocos2d::Ref* sender);
-	void _resumeCallback(cocos2d::Ref* sender);
-    void _cheatCallback(cocos2d::Ref* sender);
-
-	void _keyPressedCallback(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* e);
-	void _keyReleasedCallback(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* e);
-
-	void _playerStateChangedCallback(cocos2d::Ref* sender);*/
 };
 
 #endif

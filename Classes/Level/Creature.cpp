@@ -29,16 +29,16 @@ namespace std
 	}
 }
 
-Creature* Creature::create(CreatureType type)
+Creature* Creature::create(Level* level, CreatureType type)
 {
-    auto instance = new Creature(type);
+    auto instance = new Creature(level, type);
     instance->autorelease();
     return instance;
 }
 
-Creature::Creature(CreatureType type)
+Creature::Creature(Level* level, CreatureType type)
 {
-    _level = nullptr;
+    _level = level;
     _type = type;
     
     _direction = Direction::NORTH;
@@ -176,55 +176,6 @@ Level* Creature::getLevel() const
     return _level;
 }
 
-void Creature::setLevel(Level* level)
-{
-    if (_level != level)
-    {
-        if (_level != nullptr)
-        {
-            _level->getStage()->removeChild(_sprite);
-            
-            if (_soundEmitter != nullptr)
-            {
-                _level->getSoundEnvironment()->removeEmitter(_soundEmitter);
-            }
-        }
-        _level = level;
-        if (_level != nullptr)
-        {
-            _updatePosition();
-            _level->getStage()->addChild(_sprite);
-            
-            _applyAnimationParams();
-            _updateAnimation();
-            _updateFlip();
-            
-            if (_soundEmitter != nullptr)
-            {
-                _level->getSoundEnvironment()->addEmitter(_soundEmitter);
-            }
-            
-            auto escapedObject = _level->getObjectAt(_coordinate - toVec2(_direction));
-            if (escapedObject != nullptr)
-            {
-                escapedObject->afterEscape(this);
-            }
-            
-            auto object = _level->getObjectAt(_coordinate);
-            if (object != nullptr)
-            {
-                object->afterEnter(this);
-            }
-            
-            auto item = _level->getItemAt(_coordinate);
-            if (item != nullptr)
-            {
-                item->pick(this);
-            }
-        }
-    }
-}
-
 void Creature::onTurn(float dt)
 {
     if (_turnsToNextMove > 0)
@@ -251,18 +202,20 @@ void Creature::onTurn(float dt)
     
     if (_type == CreatureType::CHIP)
     {
-        auto metCreature = _level->getCreatureAt(_coordinate);
-        if (metCreature != nullptr && metCreature != this)
+        for (auto creature : _level->getCreatures())
         {
-            if (metCreature->_type != CreatureType::BLOCK)
+            if (creature->getCoordinate() == _coordinate && creature != this)
             {
-                //_level->fail("Ooops! Look out for creatures!");
+                _level->removeCreature(this);
+                if (creature->_type == CreatureType::BLOCK)
+                {
+                    _level->fail("Ooops! Watch out for moving blocks!");
+                }
+                else
+                {
+                    _level->fail("Ooops! Look out for creatures!");
+                }
             }
-            else
-            {
-                //_level->fail("Ooops! Watch out for moving blocks!");
-            }
-            //_game->playSound("bummer");
         }
     }
     
@@ -273,6 +226,55 @@ void Creature::onTurn(float dt)
     }
     
     updateAnimation();
+}
+
+void Creature::onAdd()
+{
+    _level->getStage()->addChild(_sprite);
+     _updatePosition();
+    
+    _applyAnimationParams();
+    _updateAnimation();
+    _updateFlip();
+    
+    if (_soundEmitter != nullptr)
+    {
+        _level->getSoundEnvironment()->addEmitter(_soundEmitter);
+    }
+    
+    //auto escapedObject = _level->getObjectAt(_coordinate - toVec2(_direction));
+    //if (escapedObject != nullptr)
+    //{
+    //    escapedObject->afterEscape(this);
+    //}
+    
+    auto object = _level->getObjectAt(_coordinate);
+    if (object != nullptr)
+    {
+        object->afterEnter(this);
+    }
+    
+    auto item = _level->getItemAt(_coordinate);
+    if (item != nullptr)
+    {
+        item->pick(this);
+    }
+}
+
+void Creature::onRemove()
+{
+    auto object = _level->getObjectAt(_coordinate);
+    if (object != nullptr)
+    {
+        object->afterEscape(this);
+    }
+    
+    _level->getStage()->removeChild(_sprite);
+    
+    if (_soundEmitter != nullptr)
+    {
+        _level->getSoundEnvironment()->removeEmitter(_soundEmitter);
+    }
 }
 
 bool Creature::canMove(Direction direction) const

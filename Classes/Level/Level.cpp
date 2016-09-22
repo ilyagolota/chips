@@ -23,16 +23,18 @@
 #include "Objects/Water.h"
 #include "Item.h"
 
-Level* Level::create(cocos2d::Node* stage)
+Level* Level::create(cocos2d::Node* stage, LevelHandler* handler)
 {
-    auto instance = new Level(stage);
+    auto instance = new Level(stage, handler);
     instance->autorelease();
     return instance;
 }
 
-Level::Level(cocos2d::Node* stage)
+Level::Level(cocos2d::Node* stage, LevelHandler* handler)
 {
     _stage = stage;
+    _handler = handler;
+    
     _config = nullptr;
     _timeMultiplier = 1.5f;
     
@@ -91,11 +93,25 @@ void Level::restart()
     _reset();
 }
 
+void Level::fail(const std::string& message)
+{
+    _handler->onLevelFail(message);
+}
+
 void Level::makeTurn(float dt)
 {
     if (_playerCreature != nullptr)
     {
         _playerCreature->onTurn(dt);
+    }
+    
+    if (!_removedCreatures.empty())
+    {
+        for (auto removedCreature : _removedCreatures)
+        {
+            _creatures.eraseObject(removedCreature);
+        }
+        _removedCreatures.clear();
     }
     
     for (auto creature : _creatures)
@@ -215,23 +231,28 @@ Item* Level::getItemAt(const cocos2d::Vec2& coordinate) const
 void Level::addCreature(Creature* creature)
 {
     _creatures.pushBack(creature);
-    creature->setLevel(this);
     if (creature->getType() == CreatureType::CHIP)
     {
         _playerCreature = creature;
     }
+    creature->onAdd();
 }
 
 void Level::removeCreature(Creature* creature)
 {
-    _creatures.eraseObject(creature);
-    creature->setLevel(nullptr);
-    if (creature->getType() == CreatureType::CHIP)
+    if (_creatures.find(creature) != _creatures.end())
     {
-        _playerCreature = nullptr;
+        creature->onRemove();
+        if (_removedCreatures.find(creature) == _removedCreatures.end())
+        {
+            _removedCreatures.pushBack(creature);
+        }
+        if (creature == _playerCreature)
+        {
+            _playerCreature = nullptr;
+        }
     }
 }
-
 
 const cocos2d::Vector<Creature*>& Level::getCreatures() const
 {
@@ -358,8 +379,14 @@ void Level::_reset()
     size_t tileCount = width * _config->getHeight();
     cocos2d::Vec2 coordinate;
     
+    _removedCreatures.clear();
+    for (auto creature : _creatures)
+    {
+        creature->onRemove();
+    }
     _creatures.clear();
     _playerCreature = nullptr;
+    
     for (size_t i = 0; i < tileCount; i++)
     {
         for (auto& layer : layers)
@@ -580,32 +607,32 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
             return false;
             
         case TileType::BLOCK:
-            creature = Creature::create(CreatureType::BLOCK);
+            creature = Creature::create(this, CreatureType::BLOCK);
             break;
             
         case TileType::BLOCK_NORTH:
         case TileType::BLOCK_WEST:
         case TileType::BLOCK_SOUTH:
         case TileType::BLOCK_EAST:
-            creature = Creature::create(CreatureType::BLOCK);
+            creature = Creature::create(this, CreatureType::BLOCK);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::BLOCK_NORTH)));
             break;
                         
         case TileType::DROWNED_CHIP:
         case TileType::BURNED_CHIP:
         case TileType::BOMBED_CHIP:
-            creature = Creature::create(CreatureType::CHIP);
+            creature = Creature::create(this, CreatureType::CHIP);
             break;
         
         case TileType::EXITED_CHIP:
-            creature = Creature::create(CreatureType::CHIP);
+            creature = Creature::create(this, CreatureType::CHIP);
             break;
         
         case TileType::SWIMMING_CHIP_NORTH:
         case TileType::SWIMMING_CHIP_WEST:
         case TileType::SWIMMING_CHIP_SOUTH:
         case TileType::SWIMMING_CHIP_EAST:
-            creature = Creature::create(CreatureType::CHIP);
+            creature = Creature::create(this, CreatureType::CHIP);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::SWIMMING_CHIP_NORTH)));
             break;
                     
@@ -613,7 +640,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::BUG_WEST:
         case TileType::BUG_SOUTH:
         case TileType::BUG_EAST:
-            creature = Creature::create(CreatureType::BUG);
+            creature = Creature::create(this, CreatureType::BUG);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::BUG_NORTH)));
             break;
                                 
@@ -621,7 +648,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::FIREBALL_WEST:
         case TileType::FIREBALL_SOUTH:
         case TileType::FIREBALL_EAST:
-            creature = Creature::create(CreatureType::FIREBALL);
+            creature = Creature::create(this, CreatureType::FIREBALL);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::FIREBALL_NORTH)));
             break;
 
@@ -629,7 +656,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::BALL_WEST:
         case TileType::BALL_SOUTH:
         case TileType::BALL_EAST:
-            creature = Creature::create(CreatureType::BALL);
+            creature = Creature::create(this, CreatureType::BALL);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::BALL_NORTH)));
             break;
 
@@ -637,7 +664,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::TANK_WEST:
         case TileType::TANK_SOUTH:
         case TileType::TANK_EAST:
-            creature = Creature::create(CreatureType::TANK);
+            creature = Creature::create(this, CreatureType::TANK);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::TANK_NORTH)));
             break;
 
@@ -645,7 +672,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::GLIDER_WEST:
         case TileType::GLIDER_SOUTH:
         case TileType::GLIDER_EAST:
-            creature = Creature::create(CreatureType::GLIDER);
+            creature = Creature::create(this, CreatureType::GLIDER);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::GLIDER_NORTH)));
             break;
 
@@ -653,7 +680,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::TEETH_WEST:
         case TileType::TEETH_SOUTH:
         case TileType::TEETH_EAST:
-            creature = Creature::create(CreatureType::TEETH);
+            creature = Creature::create(this, CreatureType::TEETH);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::TEETH_NORTH)));
             break;
 
@@ -661,7 +688,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::WALKER_WEST:
         case TileType::WALKER_SOUTH:
         case TileType::WALKER_EAST:
-            creature = Creature::create(CreatureType::WALKER);
+            creature = Creature::create(this, CreatureType::WALKER);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::WALKER_NORTH)));
             break;
 
@@ -669,7 +696,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::BLOB_WEST:
         case TileType::BLOB_SOUTH:
         case TileType::BLOB_EAST:
-            creature = Creature::create(CreatureType::BLOB);
+            creature = Creature::create(this, CreatureType::BLOB);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::BLOB_NORTH)));
             break;
 
@@ -677,7 +704,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::PARAMECIUM_WEST:
         case TileType::PARAMECIUM_SOUTH:
         case TileType::PARAMECIUM_EAST:
-            creature = Creature::create(CreatureType::PARAMECIUM);
+            creature = Creature::create(this, CreatureType::PARAMECIUM);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::PARAMECIUM_NORTH)));
             break;
             
@@ -685,7 +712,7 @@ bool Level::_tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate
         case TileType::CHIP_WEST:
         case TileType::CHIP_SOUTH:
         case TileType::CHIP_EAST:
-            creature = Creature::create(CreatureType::CHIP);
+            creature = Creature::create(this, CreatureType::CHIP);
             creature->setDirection(static_cast<Direction>(static_cast<int>(tileType) - static_cast<int>(TileType::CHIP_NORTH)));
             break;
             

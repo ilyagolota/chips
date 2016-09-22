@@ -34,7 +34,7 @@ void CloneMachine::beforeEscape(Creature* creature)
 {
     _working = false;
 
-    auto clonedCreature = Creature::create(creature->getType());
+    auto clonedCreature = Creature::create(creature->getLevel(), creature->getType());
     clonedCreature->setDirection(creature->getDirection());
 	clonedCreature->setCoordinate(_coordinate);
     _level->addCreature(clonedCreature);
