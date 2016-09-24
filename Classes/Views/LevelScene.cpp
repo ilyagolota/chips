@@ -150,7 +150,7 @@ void LevelScene::onLevelFail(const std::string& message)
 {
     cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
     
-    auto messageLabel = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 18, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
+    auto messageLabel = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 24, cocos2d::Size(512, 0), cocos2d::TextHAlignment::CENTER);
     
     auto messagePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
     messagePanel->setContentSize(cocos2d::Size(360, messageLabel->getContentSize().height + 46));
@@ -170,6 +170,7 @@ void LevelScene::onLevelFail(const std::string& message)
     messageLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     messageLabel->setPosition(cocos2d::Vec2(messagePanel->getContentSize()) * 0.5f);
     messageLabel->setOpacity(0);
+	messageLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
     messageLabel->runAction(cocos2d::FadeIn::create(0.5f));
     messagePanel->addChild(messageLabel);
     
@@ -267,8 +268,9 @@ void LevelScene::_onLevelStart()
         nullptr
     ));
 
-    auto titleLabel = cocos2d::Label::createWithTTF(_level->getConfig()->getTitle(), "fonts/Marker Felt.ttf", 18, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
-    
+    auto titleLabel = cocos2d::Label::createWithTTF(_level->getConfig()->getTitle(), "fonts/Marker Felt.ttf", 24, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
+	titleLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
+
     auto titlePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
     titlePanel->setContentSize(cocos2d::Size(360, titleLabel->getContentSize().height + 46));
     titlePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
@@ -279,6 +281,12 @@ void LevelScene::_onLevelStart()
     
     _topLayer->addChild(titlePanel);
     
+	titleLabel->runAction(cocos2d::Sequence::create(
+		cocos2d::DelayTime::create(0.7f),
+		cocos2d::FadeOut::create(0.5f),
+		nullptr
+	));
+
     titlePanel->runAction(cocos2d::Sequence::create(
         cocos2d::DelayTime::create(0.7f),
         cocos2d::FadeOut::create(0.5f),
