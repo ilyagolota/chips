@@ -103,7 +103,8 @@ LevelConfig* LevelPack::readLevelConfig(size_t entryIndex)
     int fieldCount = reader.readUInt16();
     CC_UNUSED_PARAM(fieldCount);
     
-    for (int fieldIndex = 0; fieldIndex < fieldCount; fieldIndex++)
+	const int LAYER_COUNT = 2;
+	for (int fieldIndex = 0; fieldIndex < LAYER_COUNT; fieldIndex++)
     {
         std::vector<TileType> layer(LevelConfig::LAYER_SIZE);
         short size = reader.readInt16();
@@ -148,7 +149,7 @@ LevelConfig* LevelPack::readLevelConfig(size_t entryIndex)
         }
         else if (fieldType == 3)
         {
-            std::string title(fieldSize, '\0');
+            std::string title(fieldSize - 1, '\0');
             reader.read(&title[0], fieldSize);
             levelConfig->setTitle(title);
         }
