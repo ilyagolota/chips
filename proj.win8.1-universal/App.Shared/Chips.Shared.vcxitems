@@ -60,6 +60,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelListScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\InventoryPanel.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\PauseMenuWindow.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\SmartControlLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LoadingScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\PacksScene.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Item.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Level.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelConfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelHandler.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelPack.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\Beartrap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\Objects\BlueWall.h" />
@@ -119,6 +121,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelListScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\InventoryPanel.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\PauseMenuWindow.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\SmartControlLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LoadingScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\PacksScene.h" />

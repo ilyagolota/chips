@@ -318,28 +318,22 @@ bool Creature::canMove(Direction direction) const
 	auto frontCreature = _level->getCreatureAt(targetCoordinate);
     if (frontCreature != nullptr)
     {
-        if (frontCreature->_type == CreatureType::BLOCK)
-        {
-            if (_type == CreatureType::CHIP)
-            {
-                return frontCreature->canMove(direction);
-            }
-        }
-        else if (frontCreature->_type == CreatureType::CHIP)
-        {
-            if (_type != CreatureType::CHIP)
-            {
-                return true;
-            }
-        }
-        else if (frontCreature->_type == CreatureType::TEETH)
-        {
-            return false;
-        }
-        else
-        {
-            return _type == CreatureType::TEETH;
-        }
+		if (_type == CreatureType::CHIP)
+		{
+			return (frontCreature->_type != CreatureType::BLOCK) || frontCreature->canMove(direction);
+		}
+		else if (_type == CreatureType::BLOCK)
+		{
+			return (frontCreature->_type != CreatureType::BLOCK);
+		}
+		else if (_type == CreatureType::TEETH)
+		{
+			return (frontCreature->_type != CreatureType::BLOCK && frontCreature->_type != CreatureType::TEETH);
+		}
+		else
+		{
+			return (frontCreature->_type == CreatureType::CHIP);
+		}
     }
     
     return true;
@@ -373,6 +367,8 @@ void Creature::_tryMoveNext()
 			}
 		}
     }
+	else if (_type == CreatureType::BLOCK)
+	{ }
     else if (_type == CreatureType::TEETH)
     {
 		auto playerCreature = _level->getPlayerCreature();
@@ -510,6 +506,20 @@ void Creature::_move(Direction direction)
 	if (frontObject != nullptr)
 	{
 		frontObject->beforeEnter(this);
+	}
+
+	if (_type == CreatureType::CHIP)
+	{
+		for (auto creature : _level->getCreatures())
+		{
+			if (creature->_type == CreatureType::BLOCK && creature->_coordinate == _coordinate)
+			{
+				creature->_move(_direction);
+			
+				// Increase _turnsToNextMove to let skip update on current turn
+				creature->_turnsToNextMove += 1;
+			}
+		}
 	}
 }
 

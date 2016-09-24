@@ -149,6 +149,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelPack.cpp">
       <Filter>Classes\Level</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\PauseMenuWindow.cpp">
+      <Filter>Classes\Views\LevelScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml" />
@@ -340,6 +343,12 @@
       <Filter>Classes\Level</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\TileType.h">
+      <Filter>Classes\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Views\LevelScene\PauseMenuWindow.h">
+      <Filter>Classes\Views\LevelScene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\..\Classes\Level\LevelHandler.h">
       <Filter>Classes\Level</Filter>
     </ClInclude>
   </ItemGroup>
