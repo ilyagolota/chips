@@ -14,7 +14,8 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
 {
     auto director = cocos2d::Director::getInstance();
 	auto winSize = director->getWinSize();
-    
+	cocos2d::Rect screenBounds(director->getVisibleOrigin(), director->getVisibleSize());
+
     _game = game;
     _game->retain();
     
@@ -38,12 +39,12 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     
 	_inventoryPanel = InventoryPanel::create(_level->getInventory());
 	_inventoryPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-	_inventoryPanel->setPosition(cocos2d::Vec2(0.5f * winSize.width, 8));
+	_inventoryPanel->setPosition(screenBounds.origin + cocos2d::Vec2(0.5f * screenBounds.size.width, 8));
 	uiLayer->addChild(_inventoryPanel);
     
-    auto menuButton = cocos2d::ui::Button::create("ui-inventory-cell.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+    auto menuButton = cocos2d::ui::Button::create("ui-button-pause.png", "ui-button-pause-on.png", "", cocos2d::ui::Widget::TextureResType::PLIST);
     menuButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    menuButton->setPosition(cocos2d::Vec2(winSize) + cocos2d::Vec2(-50, -50));
+	menuButton->setPosition(screenBounds.origin + screenBounds.size + cocos2d::Vec2(-31, -32));
     menuButton->addTouchEventListener([this](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type)
     {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
@@ -54,9 +55,9 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     });
     uiLayer->addChild(menuButton);
     
-    auto restartButton = cocos2d::ui::Button::create("ui-inventory-cell.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+	auto restartButton = cocos2d::ui::Button::create("ui-button-restart.png", "ui-button-restart-on.png", "", cocos2d::ui::Widget::TextureResType::PLIST);
     restartButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    restartButton->setPosition(cocos2d::Vec2(winSize) + cocos2d::Vec2(-150, -50));
+	restartButton->setPosition(screenBounds.origin + screenBounds.size + cocos2d::Vec2(-85, -32));
     restartButton->addTouchEventListener([this](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type)
     {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
@@ -66,9 +67,6 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     });
     uiLayer->addChild(restartButton);
 
-    _topLayer = cocos2d::Node::create();
-    addChild(_topLayer);
-    
     _preloaderLayer = cocos2d::LayerColor::create(cocos2d::Color4B(128, 192, 255, 255), winSize.width, winSize.height);
     _preloaderLayer->setAnchorPoint(cocos2d::Vec2::ZERO);
     _preloaderLayer->setPosition(cocos2d::Vec2::ZERO);
@@ -79,6 +77,9 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     _fadeLayer->setPosition(cocos2d::Vec2::ZERO);
     _fadeLayer->setVisible(false);
     addChild(_fadeLayer);
+
+	_topLayer = cocos2d::Node::create();
+	addChild(_topLayer);
     
     _level->makeTurn(0);
     director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(Level::makeTurn), _level, _level->getTurnDuration(), CC_REPEAT_FOREVER, 0, false);
@@ -150,10 +151,10 @@ void LevelScene::onLevelFail(const std::string& message)
 {
     cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
     
-    auto messageLabel = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 24, cocos2d::Size(512, 0), cocos2d::TextHAlignment::CENTER);
+    auto messageLabel = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 24, cocos2d::Size(460, 0), cocos2d::TextHAlignment::CENTER);
     
-    auto messagePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
-    messagePanel->setContentSize(cocos2d::Size(360, messageLabel->getContentSize().height + 46));
+    auto messagePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-transparent.png");
+    messagePanel->setContentSize(cocos2d::Size(512, messageLabel->getContentSize().height + 46));
     messagePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
     messagePanel->setOpacity(0);
     messagePanel->runAction(cocos2d::Sequence::create(
@@ -271,7 +272,7 @@ void LevelScene::_onLevelStart()
     auto titleLabel = cocos2d::Label::createWithTTF(_level->getConfig()->getTitle(), "fonts/Marker Felt.ttf", 24, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
 	titleLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
 
-    auto titlePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
+    auto titlePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-transparent.png");
     titlePanel->setContentSize(cocos2d::Size(360, titleLabel->getContentSize().height + 46));
     titlePanel->setPosition(cocos2d::Vec2(winSize) * 0.5f);
     

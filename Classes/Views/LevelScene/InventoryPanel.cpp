@@ -34,21 +34,21 @@ InventoryPanel::~InventoryPanel()
 
 void InventoryPanel::_build()
 {
-	cocos2d::Size cellSize(70, 68);
+	cocos2d::Size cellSize(54, 48);
 
-	setContentSize(cocos2d::Size(cellSize.width * 8 + 8, cellSize.height + 8));
+	setContentSize(cocos2d::Size(cellSize.width * 8 + 8, cellSize.height + 16));
 
-	_background = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-black-transparent.png");
+	_background = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-transparent.png");
 	_background->setContentSize(getContentSize());
 	_background->setAnchorPoint(cocos2d::Vec2::ZERO);
 	addChild(_background);
 
-	float x = 4;
+	float x = 8;
 	for (size_t i = 0; i < 8; i++)
 	{
 		auto cell = cocos2d::Sprite::createWithSpriteFrameName("ui-inventory-cell.png");
 		cell->setAnchorPoint(cocos2d::Vec2::ZERO);
-		cell->setPosition(cocos2d::Vec2(x, 4));
+		cell->setPosition(cocos2d::Vec2(x, 8));
 		_background->addChild(cell);
 
 		x += cellSize.width;

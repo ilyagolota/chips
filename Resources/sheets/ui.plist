@@ -14,20 +14,20 @@
     </dict>
     <key>frames</key>
     <dict>
-      <key>ui-panel-black-transparent.png</key>
+      <key>ui-panel-transparent.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{71,71}</string>
+        <string>{90,90}</string>
         <key>spriteOffset</key>
         <string>{0,0}</string>
         <key>spriteSourceSize</key>
-        <string>{71,71}</string>
+        <string>{90,90}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{0,0},{71,71}}</string>
+        <string>{{0,0},{90,90}}</string>
         <key>spriteTrimmed</key>
         <false />
         <key>textureRect</key>
-        <string>{{0,0},{71,71}}</string>
+        <string>{{0,0},{90,90}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -36,17 +36,93 @@
       <key>ui-inventory-cell.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{70,68}</string>
+        <string>{50,47}</string>
         <key>spriteOffset</key>
-        <string>{0,0}</string>
+        <string>{0,-0.5}</string>
         <key>spriteSourceSize</key>
-        <string>{70,68}</string>
+        <string>{50,48}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{0,0},{70,68}}</string>
+        <string>{{0,1},{50,47}}</string>
         <key>spriteTrimmed</key>
-        <false />
+        <true />
         <key>textureRect</key>
-        <string>{{72,0},{70,68}}</string>
+        <string>{{91,0},{50,47}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>ui-button-pause.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{46,47}</string>
+        <key>spriteOffset</key>
+        <string>{0,-0.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{46,48}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,1},{46,47}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{142,0},{46,47}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>ui-button-pause-on.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{46,47}</string>
+        <key>spriteOffset</key>
+        <string>{0,-0.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{46,48}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,1},{46,47}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{189,0},{46,47}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>ui-button-restart.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{46,47}</string>
+        <key>spriteOffset</key>
+        <string>{0,-0.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{46,48}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,1},{46,47}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{236,0},{46,47}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>ui-button-restart-on.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{46,47}</string>
+        <key>spriteOffset</key>
+        <string>{0,-0.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{46,48}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,1},{46,47}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{283,0},{46,47}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>

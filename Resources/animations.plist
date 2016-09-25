@@ -258,6 +258,22 @@
 				<string>water-0009.png</string>
 			</array>
 		</dict>
+		<key>splash</key>
+		<dict>
+			<key>delay</key>
+			<real>0.08</real>
+			<key>frames</key>
+			<array>
+				<string>splash-0001.png</string>
+				<string>splash-0002.png</string>
+				<string>splash-0003.png</string>
+				<string>splash-0004.png</string>
+				<string>splash-0005.png</string>
+				<string>splash-0006.png</string>
+				<string>splash-0007.png</string>
+				<string>splash-0008.png</string>
+			</array>
+		</dict>
 		<key>slide-north</key>
 		<dict>
 			<key>delay</key>
