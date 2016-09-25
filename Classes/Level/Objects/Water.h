@@ -12,12 +12,14 @@ public:
     Water(Level* level, const cocos2d::Vec2& coordinate);
     virtual ~Water();
     
+	void reset() override;
     void afterEnter(Creature *creature) override;
     
     bool hasDrawnBlock() const;
 
 private:
 	cocos2d::Sprite* _sprite;
+	cocos2d::Sprite* _splash;
 };
 
 #endif

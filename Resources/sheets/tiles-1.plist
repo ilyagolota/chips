@@ -14,7 +14,7 @@
     </dict>
     <key>frames</key>
     <dict>
-      <key>slide-east-0002.png</key>
+      <key>slide-west-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -33,7 +33,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-east-0004.png</key>
+      <key>slide-north-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -52,7 +52,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-east-0003.png</key>
+      <key>slide-north-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -71,7 +71,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-east-0001.png</key>
+      <key>slide-north-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -90,7 +90,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-west-0004.png</key>
+      <key>slide-north-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -109,7 +109,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-west-0003.png</key>
+      <key>slide-south-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -128,7 +128,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-west-0002.png</key>
+      <key>slide-south-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -166,7 +166,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-south-0004.png</key>
+      <key>slide-south-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -185,7 +185,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-south-0003.png</key>
+      <key>slide-west-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -204,7 +204,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-south-0002.png</key>
+      <key>slide-west-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -223,7 +223,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-south-0001.png</key>
+      <key>slide-east-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -242,7 +242,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-north-0001.png</key>
+      <key>slide-east-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -261,7 +261,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-north-0002.png</key>
+      <key>slide-east-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -280,7 +280,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-north-0003.png</key>
+      <key>slide-east-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -299,7 +299,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>slide-north-0004.png</key>
+      <key>slide-south-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,144}</string>
@@ -318,7 +318,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>floor.png</key>
+      <key>hole.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,140}</string>
@@ -337,7 +337,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>hole.png</key>
+      <key>floor.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,140}</string>
@@ -413,7 +413,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0009.png</key>
+      <key>water-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -432,7 +432,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0008.png</key>
+      <key>water-0009.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -451,7 +451,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0006.png</key>
+      <key>water-0008.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -470,7 +470,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0005.png</key>
+      <key>water-0007.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -489,7 +489,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0004.png</key>
+      <key>water-0006.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -508,7 +508,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0003.png</key>
+      <key>water-0001.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -527,7 +527,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0002.png</key>
+      <key>water-0005.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -546,7 +546,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0007.png</key>
+      <key>water-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -565,7 +565,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>water-0001.png</key>
+      <key>water-0004.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{180,128}</string>
@@ -660,6 +660,120 @@
         <key>aliases</key>
         <array />
       </dict>
+      <key>splash-0008.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{120,85}</string>
+        <key>spriteOffset</key>
+        <string>{0,-1.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{30,29},{120,85}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{543,760},{120,85}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>splash-0003.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{111,87}</string>
+        <key>spriteOffset</key>
+        <string>{-2.5,14.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{32,12},{111,87}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{905,0},{111,87}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>splash-0007.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{116,80}</string>
+        <key>spriteOffset</key>
+        <string>{-2,0}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{30,30},{116,80}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{905,145},{116,80}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>splash-0006.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{116,76}</string>
+        <key>spriteOffset</key>
+        <string>{-3,-1}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{29,33},{116,76}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{905,290},{116,76}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>splash-0002.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{106,82}</string>
+        <key>spriteOffset</key>
+        <string>{1,16}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{38,13},{106,82}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{905,425},{106,82}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>splash-0005.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{111,75}</string>
+        <key>spriteOffset</key>
+        <string>{-4.5,7.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{30,25},{111,75}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{905,554},{111,75}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
       <key>teleport-0001.png</key>
       <dict>
         <key>spriteSize</key>
@@ -673,45 +787,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,0},{102,83}}</string>
-        <key>textureRotated</key>
-        <false />
-        <key>aliases</key>
-        <array />
-      </dict>
-      <key>teleport-0003.png</key>
-      <dict>
-        <key>spriteSize</key>
-        <string>{101,83}</string>
-        <key>spriteOffset</key>
-        <string>{-0.5,-6.5}</string>
-        <key>spriteSourceSize</key>
-        <string>{180,128}</string>
-        <key>spriteSourceColorRect</key>
-        <string>{{39,29},{101,83}}</string>
-        <key>spriteTrimmed</key>
-        <true />
-        <key>textureRect</key>
-        <string>{{905,145},{101,83}}</string>
-        <key>textureRotated</key>
-        <false />
-        <key>aliases</key>
-        <array />
-      </dict>
-      <key>teleport-0002.png</key>
-      <dict>
-        <key>spriteSize</key>
-        <string>{101,83}</string>
-        <key>spriteOffset</key>
-        <string>{-0.5,-6.5}</string>
-        <key>spriteSourceSize</key>
-        <string>{180,128}</string>
-        <key>spriteSourceColorRect</key>
-        <string>{{39,29},{101,83}}</string>
-        <key>spriteTrimmed</key>
-        <true />
-        <key>textureRect</key>
-        <string>{{905,290},{101,83}}</string>
+        <string>{{543,846},{102,83}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -730,7 +806,64 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,425},{101,83}}</string>
+        <string>{{543,930},{101,83}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>teleport-0003.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{101,83}</string>
+        <key>spriteOffset</key>
+        <string>{-0.5,-6.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,128}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{39,29},{101,83}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{709,733},{101,83}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>teleport-0002.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{101,83}</string>
+        <key>spriteOffset</key>
+        <string>{-0.5,-6.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,128}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{39,29},{101,83}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{709,817},{101,83}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>splash-0004.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{101,82}</string>
+        <key>spriteOffset</key>
+        <string>{-2.5,12}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{37,17},{101,82}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{709,901},{101,82}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -749,7 +882,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,554},{96,68}}</string>
+        <string>{{811,733},{96,68}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -768,7 +901,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{543,760},{75,82}}</string>
+        <string>{{811,802},{75,82}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -787,7 +920,26 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{619,760},{75,81}}</string>
+        <string>{{887,802},{75,81}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>splash-0001.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{84,65}</string>
+        <key>spriteOffset</key>
+        <string>{3,10.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{180,140}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{51,27},{84,65}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{908,733},{84,65}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -806,7 +958,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{543,843},{63,78}}</string>
+        <string>{{645,930},{63,78}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -825,7 +977,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,84},{75,59}}</string>
+        <string>{{905,226},{75,59}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -844,7 +996,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{607,843},{66,68}}</string>
+        <string>{{811,885},{66,68}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -863,7 +1015,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,229},{74,59}}</string>
+        <string>{{878,885},{74,59}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -882,7 +1034,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,374},{62,46}}</string>
+        <string>{{905,88},{62,46}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -901,7 +1053,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,509},{57,40}}</string>
+        <string>{{905,367},{57,40}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -920,7 +1072,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{963,509},{57,40}}</string>
+        <string>{{963,367},{57,40}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -939,7 +1091,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{905,623},{57,40}}</string>
+        <string>{{905,508},{57,40}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -958,7 +1110,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{963,623},{57,40}}</string>
+        <string>{{963,508},{57,40}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -977,7 +1129,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{981,84},{42,52}}</string>
+        <string>{{968,88},{42,52}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -996,7 +1148,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{980,229},{42,52}}</string>
+        <string>{{981,226},{42,52}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>

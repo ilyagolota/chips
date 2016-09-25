@@ -109,6 +109,7 @@ void Level::makeTurn(float dt)
     {
         for (auto removedCreature : _removedCreatures)
         {
+			removedCreature->onRemove();
             _creatures.eraseObject(removedCreature);
         }
         _removedCreatures.clear();
