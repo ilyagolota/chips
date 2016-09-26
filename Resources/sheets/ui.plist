@@ -14,6 +14,25 @@
     </dict>
     <key>frames</key>
     <dict>
+      <key>ui-button-default.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{200,47}</string>
+        <key>spriteOffset</key>
+        <string>{0,-0.5}</string>
+        <key>spriteSourceSize</key>
+        <string>{200,48}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,1},{200,47}}</string>
+        <key>spriteTrimmed</key>
+        <true />
+        <key>textureRect</key>
+        <string>{{0,0},{200,47}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
       <key>ui-panel-transparent.png</key>
       <dict>
         <key>spriteSize</key>
@@ -27,7 +46,7 @@
         <key>spriteTrimmed</key>
         <false />
         <key>textureRect</key>
-        <string>{{0,0},{90,90}}</string>
+        <string>{{0,48},{90,90}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -46,7 +65,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{91,0},{50,47}}</string>
+        <string>{{201,0},{50,47}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -65,7 +84,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{142,0},{46,47}}</string>
+        <string>{{252,0},{46,47}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -84,7 +103,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{189,0},{46,47}}</string>
+        <string>{{299,0},{46,47}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -103,7 +122,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{236,0},{46,47}}</string>
+        <string>{{346,0},{46,47}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -122,7 +141,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{283,0},{46,47}}</string>
+        <string>{{393,0},{46,47}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>

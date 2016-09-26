@@ -7,11 +7,7 @@
 class Level;
 
 class Beartrap : public LevelObject
-{
-private:
-    bool _open;
-    cocos2d::Sprite* _sprite;
-    
+{   
 public:
     static Beartrap* create(Level* level, const cocos2d::Vec2& coordinate);
     
@@ -20,10 +16,18 @@ public:
     bool isOpen() const;
     void setOpen(bool open);
     
+	void reset() override;
     bool isEscapableBy(const Creature* creature, Direction direction) const override;
-    
+	void beforeEnter(Creature* creature) override;
     void afterEnter(Creature* creature) override;
-    void reset() override;
+
+private:
+	static cocos2d::Vec2 BOTTOM_POSITION;
+
+	bool _open;
+	cocos2d::Sprite* _floor;
+	cocos2d::Sprite* _front;
+	cocos2d::Sprite* _piston;
 };
 
 #endif

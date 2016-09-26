@@ -72,7 +72,7 @@ void Item::setLevel(Level* level)
 
 bool Item::isPickableBy(const Creature* creature) const
 {
-    return _type == TileType::KEY_BLUE || creature->getType() == CreatureType::CHIP;
+    return _picked || _type == TileType::KEY_BLUE || creature->getType() == CreatureType::CHIP;
 }
 
 void Item::pick(Creature* creature)
