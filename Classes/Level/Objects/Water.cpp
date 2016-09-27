@@ -20,6 +20,7 @@ Water::Water(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level,
 	_sprite->runAction(cocos2d::RepeatForever::create(cocos2d::Animate::create(animation)));
 
 	_splash = nullptr;
+	_block = nullptr;
 
 	/*auto emitter = TileSoundEmitter::create("water.mp3");
 	emitter->setCoordinate(_coordinate);
@@ -37,43 +38,91 @@ void Water::reset()
 		_splash->stopAllActions();
 		_splash->setVisible(false);
 	}
+	if (_block != nullptr)
+	{
+		_block->stopAllActions();
+		_block->setVisible(false);
+	}
+	_state = WATER_STATE;
+}
+
+bool Water::isEnterableBy(const Creature *creature, Direction /*direction*/) const
+{
+	if (_state == DIRT_STATE)
+	{
+		return creature->getType() == CreatureType::CHIP;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+void Water::beforeEnter(Creature* creature)
+{
+	if (_state == DIRT_STATE)
+	{
+		_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+		_block->runAction(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("block-drawn")));
+		_state = FLOOR_STATE;
+	}
 }
 
 void Water::afterEnter(Creature *creature)
 {
-    if (creature->getType() == CreatureType::GLIDER)
-    {
-        return;
-    }
-    
-    if (creature->getType() == CreatureType::CHIP && _level->getInventory()->getItemCount(TileType::BOOTS_WATER) > 0)
-    {
-        return;
-    }
-    
-    _level->removeCreature(creature);
-	if (_splash == nullptr)
+	if (_state == WATER_STATE)
 	{
-		_splash = cocos2d::Sprite::create();
-		_splash->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_splash->setPosition(cocos2d::Vec2::ZERO);
-		_sprite->addChild(_splash);
+		if (creature->getType() == CreatureType::GLIDER)
+		{
+			return;
+		}
+
+		if (creature->getType() == CreatureType::CHIP && _level->getInventory()->getItemCount(TileType::BOOTS_WATER) > 0)
+		{
+			return;
+		}
+
+		_level->removeCreature(creature);
+		if (creature->getType() == CreatureType::BLOCK)
+		{
+			if (_block == nullptr)
+			{
+				_block = cocos2d::Sprite::create();
+				_block->setAnchorPoint(cocos2d::Vec2::ZERO);
+				_block->setPosition(cocos2d::Vec2(0, 2));
+				_sprite->addChild(_block);
+			}
+			_block->setVisible(true);
+			_block->runAction(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("block-drawn-half")));
+			_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+			_state = DIRT_STATE;
+		}
+		else
+		{
+			if (_splash == nullptr)
+			{
+				_splash = cocos2d::Sprite::create();
+				_splash->setAnchorPoint(cocos2d::Vec2::ZERO);
+				_splash->setPosition(cocos2d::Vec2::ZERO);
+				_sprite->addChild(_splash);
+			}
+
+			_splash->setVisible(true);
+			_splash->stopAllActions();
+			_splash->runAction(cocos2d::Sequence::create(
+				cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("splash")),
+				cocos2d::CallFuncN::create([](cocos2d::Node* splash) {
+					splash->setVisible(false);
+				}),
+				nullptr
+			));
+
+			if (creature->getType() == CreatureType::CHIP)
+			{
+				_level->fail("Ooops! Chip can't swim without flippers!");
+			}
+		}
 	}
-
-	_splash->setVisible(true);
-	_splash->stopAllActions();
-	_splash->runAction(cocos2d::Sequence::create(
-		cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("splash")),
-		cocos2d::CallFuncN::create([](cocos2d::Node* splash) {
-			splash->setVisible(false);
-		}),
-		nullptr
-	));
-
-    if (creature->getType() == CreatureType::CHIP)
-    {
-        _level->fail("Ooops! Chip can't swim without flippers!");
-    }
 }
 
 bool Water::hasDrawnBlock() const

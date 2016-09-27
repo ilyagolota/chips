@@ -36,13 +36,16 @@ void PopupWall::reset()
 {
 	_open = true;
 	_piston->setPosition(BOTTOM_POSITION);
-	_level->getPhysicsWorld()->setBody(_coordinate, TileBody::EMPTY, 7);
+	
+	_level->getPhysicsWorld()->setBody(_coordinate, TileBody::OUTER_BOX, 2 | 4);
+	_level->getPhysicsWorld()->setBody(_coordinate, TileBody::EMPTY, 1);
+
 	_floor->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 }
 
 void PopupWall::afterEnter(Creature* /*creature*/)
 {
-	_level->getPhysicsWorld()->setBody(_coordinate, TileBody::OUTER_BOX, 7);
+	_level->getPhysicsWorld()->setBody(_coordinate, TileBody::OUTER_BOX, 1);
 }
 
 void PopupWall::beforeEscape(Creature* /*creature*/)

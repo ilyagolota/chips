@@ -274,6 +274,28 @@
 				<string>splash-0008.png</string>
 			</array>
 		</dict>
+		<key>block-drawn-half</key>
+		<dict>
+			<key>delay</key>
+			<real>0.08</real>
+			<key>frames</key>
+			<array>
+				<string>block-stay-east.png</string>
+				<string>block-drawn-0001.png</string>
+				<string>block-drawn-0002.png</string>
+			</array>
+		</dict>
+		<key>block-drawn</key>
+		<dict>
+			<key>delay</key>
+			<real>0.08</real>
+			<key>frames</key>
+			<array>
+				<string>block-drawn-0002.png</string>
+				<string>block-drawn-0003.png</string>
+				<string>block-drawn-0004.png</string>
+			</array>
+		</dict>
 		<key>slide-north</key>
 		<dict>
 			<key>delay</key>

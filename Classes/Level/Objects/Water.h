@@ -13,6 +13,8 @@ public:
     virtual ~Water();
     
 	void reset() override;
+	bool isEnterableBy(const Creature *creature, Direction direction) const override;
+	void beforeEnter(Creature* creature) override;
     void afterEnter(Creature *creature) override;
     
     bool hasDrawnBlock() const;
@@ -20,6 +22,13 @@ public:
 private:
 	cocos2d::Sprite* _sprite;
 	cocos2d::Sprite* _splash;
+	cocos2d::Sprite* _block;
+
+	enum {
+		WATER_STATE,
+		DIRT_STATE,
+		FLOOR_STATE
+	} _state;
 };
 
 #endif

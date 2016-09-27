@@ -6,12 +6,6 @@
 
 class Teleport : public LevelObject
 {
-private:
-    static const cocos2d::Vec2 BOTTOM_POSITION;
-
-	cocos2d::Sprite* _backPart;
-	cocos2d::Sprite* _frontPart;
-
 public:
 	static Teleport* create(Level* level, const cocos2d::Vec2& coordinate);
     
@@ -21,10 +15,14 @@ public:
     void beforeEscape(Creature* creature) override;
     void reset() override;
     
-protected:
-    Teleport* _findTargetTeleport(Creature* creature);
-	void _setDrawAsTwoParts();
-	void _setDrawAsSinglePart();
+private:
+	static const cocos2d::Vec2 BOTTOM_POSITION;
+
+	Teleport* _findTargetTeleport(Creature* creature);
+	
+	cocos2d::Sprite* _floor;
+	cocos2d::Sprite* _abuse;
+	cocos2d::Sprite* _front;
 };
 
 #endif

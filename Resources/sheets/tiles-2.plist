@@ -796,17 +796,17 @@
       <key>teleport-0001.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{102,83}</string>
+        <string>{126,97}</string>
         <key>spriteOffset</key>
-        <string>{0,-6.5}</string>
+        <string>{-1,-1.5}</string>
         <key>spriteSourceSize</key>
-        <string>{180,128}</string>
+        <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{39,29},{102,83}}</string>
+        <string>{{26,23},{126,97}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{0,865},{102,83}}</string>
+        <string>{{0,865},{126,97}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -815,17 +815,17 @@
       <key>teleport-0002.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{101,83}</string>
+        <string>{126,97}</string>
         <key>spriteOffset</key>
-        <string>{-0.5,-6.5}</string>
+        <string>{-1,-1.5}</string>
         <key>spriteSourceSize</key>
-        <string>{180,128}</string>
+        <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{39,29},{101,83}}</string>
+        <string>{{26,23},{126,97}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{131,865},{101,83}}</string>
+        <string>{{131,865},{126,97}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -834,17 +834,17 @@
       <key>teleport-0004.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{101,83}</string>
+        <string>{126,97}</string>
         <key>spriteOffset</key>
-        <string>{-0.5,-6.5}</string>
+        <string>{-1,-1.5}</string>
         <key>spriteSourceSize</key>
-        <string>{180,128}</string>
+        <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{39,29},{101,83}}</string>
+        <string>{{26,23},{126,97}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{262,939},{101,83}}</string>
+        <string>{{886,322},{126,97}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -853,17 +853,17 @@
       <key>teleport-0003.png</key>
       <dict>
         <key>spriteSize</key>
-        <string>{101,83}</string>
+        <string>{126,97}</string>
         <key>spriteOffset</key>
-        <string>{-0.5,-6.5}</string>
+        <string>{-1,-1.5}</string>
         <key>spriteSourceSize</key>
-        <string>{180,128}</string>
+        <string>{180,140}</string>
         <key>spriteSourceColorRect</key>
-        <string>{{39,29},{101,83}}</string>
+        <string>{{26,23},{126,97}}</string>
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{886,322},{101,83}}</string>
+        <string>{{883,556},{126,97}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -882,7 +882,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{0,949},{54,39}}</string>
+        <string>{{0,963},{54,39}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -901,7 +901,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{55,949},{54,39}}</string>
+        <string>{{55,963},{54,39}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -920,7 +920,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{131,949},{54,39}}</string>
+        <string>{{131,963},{54,39}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -939,7 +939,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{186,949},{54,39}}</string>
+        <string>{{186,963},{54,39}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -958,7 +958,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{0,989},{53,34}}</string>
+        <string>{{786,265},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -977,7 +977,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{55,989},{53,34}}</string>
+        <string>{{840,265},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -996,7 +996,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{131,989},{53,34}}</string>
+        <string>{{942,141},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
@@ -1015,7 +1015,7 @@
         <key>spriteTrimmed</key>
         <true />
         <key>textureRect</key>
-        <string>{{186,989},{53,34}}</string>
+        <string>{{942,176},{53,34}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
