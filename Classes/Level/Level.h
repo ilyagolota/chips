@@ -92,7 +92,7 @@ private:
     std::vector<LevelObject*> _objects;
     std::vector<Item*> _items;
     cocos2d::Vector<Creature*> _creatures;
-    cocos2d::Vector<Creature*> _removedCreatures;
+
     Creature* _playerCreature;
     
     LevelHandler* _handler;

@@ -6,9 +6,6 @@
 
 class CloneMachine : public LevelObject
 {
-private:
-    bool _working;
-    
 public:
 	static CloneMachine* create(Level* level, const cocos2d::Vec2& coordinate);
     
@@ -21,6 +18,11 @@ public:
     
     void beforeEscape(Creature* creature) override;
     void reset() override;
+    
+private:
+    bool _working;
+    cocos2d::Sprite* _floor;
+    cocos2d::Sprite* _front;
 };
 
 #endif

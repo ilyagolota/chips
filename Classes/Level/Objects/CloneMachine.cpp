@@ -12,6 +12,18 @@ CloneMachine* CloneMachine::create(Level* level, const cocos2d::Vec2& coordinate
 CloneMachine::CloneMachine(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
     _working = false;
+    
+    _floor = cocos2d::Sprite::createWithSpriteFrameName("trap.png");
+    _floor->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _floor->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+    _floor->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _level->getStage()->addChild(_floor);
+    
+    _front = cocos2d::Sprite::createWithSpriteFrameName("trap-front.png");
+    _front->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _front->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _front->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+    _level->getStage()->addChild(_front);
 }
 
 void CloneMachine::performCloning()
@@ -34,16 +46,21 @@ void CloneMachine::beforeEscape(Creature* creature)
 {
     _working = false;
 
-    /*auto clonedCreature = Creature::create(creature->getLevel(), creature->getType());
+    auto clonedCreature = Creature::create(creature->getLevel(), creature->getType());
     clonedCreature->setDirection(creature->getDirection());
 	clonedCreature->setCoordinate(_coordinate);
-    _level->addCreature(clonedCreature);*/
+    _level->addCreature(clonedCreature);
     
-    //_sprites[0]->runAction();
-    
-    //clonedCreature->setLocalZOrder();
-    //clonedCreature->getSprite()->runAction();
-    //TODO: animation
+    auto sprite = clonedCreature->getSprite();
+    sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -88));
+    sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+    sprite->runAction(cocos2d::Sequence::create(
+        cocos2d::MoveTo::create(_level->getTurnDuration(), _level->getProjector()->coordinateToPoint(_coordinate)),
+        cocos2d::CallFuncN::create([this, creature](cocos2d::Node* sprite) {
+            sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + creature->getZOrderDelta());
+        }),
+        nullptr
+    ));
 }
 
 void CloneMachine::reset()

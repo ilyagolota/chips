@@ -105,17 +105,8 @@ void Level::makeTurn(float dt)
         _playerCreature->onTurn(dt);
     }
     
-    if (!_removedCreatures.empty())
-    {
-        for (auto removedCreature : _removedCreatures)
-        {
-			removedCreature->onRemove();
-            _creatures.eraseObject(removedCreature);
-        }
-        _removedCreatures.clear();
-    }
-    
-    for (auto creature : _creatures)
+    cocos2d::Vector<Creature*> creatures(_creatures);
+    for (auto creature : creatures)
     {
         if (creature != _playerCreature)
         {
@@ -231,12 +222,15 @@ Item* Level::getItemAt(const cocos2d::Vec2& coordinate) const
 
 void Level::addCreature(Creature* creature)
 {
-    _creatures.pushBack(creature);
-    if (creature->getType() == CreatureType::CHIP)
+    if (_creatures.find(creature) == _creatures.end())
     {
-        _playerCreature = creature;
+        _creatures.pushBack(creature);
+        if (creature->getType() == CreatureType::CHIP)
+        {
+            _playerCreature = creature;
+        }
+        creature->onAdd();
     }
-    creature->onAdd();
 }
 
 void Level::removeCreature(Creature* creature)
@@ -244,10 +238,7 @@ void Level::removeCreature(Creature* creature)
     if (_creatures.find(creature) != _creatures.end())
     {
         creature->onRemove();
-        if (_removedCreatures.find(creature) == _removedCreatures.end())
-        {
-            _removedCreatures.pushBack(creature);
-        }
+        _creatures.eraseObject(creature);
         if (creature == _playerCreature)
         {
             _playerCreature = nullptr;
@@ -380,7 +371,6 @@ void Level::_reset()
     size_t tileCount = width * _config->getHeight();
     cocos2d::Vec2 coordinate;
     
-    _removedCreatures.clear();
     for (auto creature : _creatures)
     {
         creature->onRemove();
