@@ -13,13 +13,13 @@ CloneMachine::CloneMachine(Level* level, const cocos2d::Vec2& coordinate) : Leve
 {
     _working = false;
     
-    _floor = cocos2d::Sprite::createWithSpriteFrameName("trap.png");
+    _floor = cocos2d::Sprite::createWithSpriteFrameName("trap2.png");
     _floor->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
     _floor->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
     _floor->setAnchorPoint(cocos2d::Vec2::ZERO);
     _level->getStage()->addChild(_floor);
     
-    _front = cocos2d::Sprite::createWithSpriteFrameName("trap-front.png");
+    _front = cocos2d::Sprite::createWithSpriteFrameName("trap2-front.png");
     _front->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
     _front->setAnchorPoint(cocos2d::Vec2::ZERO);
     _front->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
