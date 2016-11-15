@@ -30,6 +30,8 @@ public:
     void gotoLevel(size_t levelIndex);
     
 protected:
+    static size_t __tilesetIndex;
+    
     void _onLevelStart();
     void _pauseRecursive(cocos2d::Node* node);
     void _resumeRecursive(cocos2d::Node* node);

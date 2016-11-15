@@ -22,7 +22,7 @@ CloneMachine::CloneMachine(Level* level, const cocos2d::Vec2& coordinate) : Leve
     _front = cocos2d::Sprite::createWithSpriteFrameName("trap2-front.png");
     _front->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
     _front->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _front->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+    _front->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::ITEM_Z_ORDER);
     _level->getStage()->addChild(_front);
 }
 
@@ -55,7 +55,7 @@ void CloneMachine::beforeEscape(Creature* creature)
     sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -88));
     sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
     sprite->runAction(cocos2d::Sequence::create(
-        cocos2d::MoveTo::create(_level->getTurnDuration(), _level->getProjector()->coordinateToPoint(_coordinate)),
+        cocos2d::MoveTo::create(_level->getTurnDuration() * 0.9f, _level->getProjector()->coordinateToPoint(_coordinate)),
         cocos2d::CallFuncN::create([this, creature](cocos2d::Node* sprite) {
             sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + creature->getZOrderDelta());
         }),

@@ -85,7 +85,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloader->addTask(_loadSpriteSheet("sheets/tiles-1.plist"));
 	preloader->addTask(_loadSpriteSheet("sheets/tiles-2.plist"));
 	preloader->addTask(_loadSpriteSheet("sheets/tiles-3.plist"));
-	preloader->addTask(_loadSpriteSheet("sheets/walls-01.plist"));
     preloader->addTask(_loadAnimations("animations.plist"));
     preloader->addTask(_loadSound("sounds/door.mp3"));
 	preloader->addTask(_loadSound("sounds/water.mp3"));

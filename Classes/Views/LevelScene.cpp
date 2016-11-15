@@ -1,7 +1,10 @@
 #include <cocos2d.h>
+#include <limits>
 
 #include "LevelScene.h"
 #include "PacksScene.h"
+
+size_t LevelScene::__tilesetIndex = 0;
 
 LevelScene* LevelScene::create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex)
 {
@@ -112,7 +115,7 @@ LevelScene::~LevelScene()
 void LevelScene::onEnter()
 {
 	cocos2d::Scene::onEnter();
-	gotoLevel(_levelIndex);
+    gotoLevel(_levelIndex);
 }
 
 void LevelScene::update(float dt)
@@ -238,6 +241,24 @@ void LevelScene::gotoLevel(size_t levelIndex)
     
     _preloaderLayer->setVisible(true);
     cocos2d::Director::getInstance()->drawScene();
+    
+    size_t tilesetIndex = (_levelIndex % 2) + 1;
+    if (tilesetIndex != __tilesetIndex)
+    {
+        if (__tilesetIndex != 0)
+        {
+            std::string oldSheetFile = cocos2d::StringUtils::format("sheets/walls-%02ld.plist", __tilesetIndex);
+            cocos2d::SpriteFrameCache::getInstance()->removeSpriteFramesFromFile(oldSheetFile);
+            
+            std::string oldTextureFile = cocos2d::StringUtils::format("sheets/walls-%02ld.png", __tilesetIndex);
+            cocos2d::Director::getInstance()->getTextureCache()->removeTextureForKey(oldTextureFile);
+        }
+        
+        __tilesetIndex = tilesetIndex;
+        
+        std::string sheetFile = cocos2d::StringUtils::format("sheets/walls-%02ld.plist", __tilesetIndex);
+        cocos2d::SpriteFrameCache::getInstance()->addSpriteFramesWithFile(sheetFile);
+    }
     
     try
     {
