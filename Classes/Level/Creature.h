@@ -83,6 +83,7 @@ private:
     Direction _direction;
     CreatureState _state;
     int _turnsToNextMove;
+    bool _hasDelayedMove;
     CreatureType _type;
     cocos2d::Sprite* _sprite;
     TileSoundEmitter* _soundEmitter;

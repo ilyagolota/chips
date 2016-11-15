@@ -100,16 +100,21 @@ void Level::fail(const std::string& message)
 
 void Level::makeTurn(float dt)
 {
+    if (_playerCreature != nullptr)
+    {
+        _playerCreature->onTurn(dt);
+        _soundEnvironment->getMicrophone()->setCoordinate(_playerCreature->getCoordinate());
+    }
+    
     cocos2d::Vector<Creature*> creatures(_creatures);
     for (auto creature : creatures)
     {
-        creature->onTurn(dt);
+        if (creature != _playerCreature)
+        {
+            creature->onTurn(dt);
+        }
     }
 
-	if (_playerCreature != nullptr)
-	{
-		_soundEnvironment->getMicrophone()->setCoordinate(_playerCreature->getCoordinate());
-	}
 	_soundEnvironment->update(dt);
 }
 

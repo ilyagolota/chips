@@ -45,6 +45,7 @@ Creature::Creature(Level* level, CreatureType type)
     _state = CreatureState::NORMAL;
     _coordinate = cocos2d::Vec2::ZERO;
     _turnsToNextMove = 0;
+    _hasDelayedMove = false;
     
     _sprite = cocos2d::Sprite::create();
     _sprite->setAnchorPoint(cocos2d::Point::ZERO);
@@ -60,10 +61,8 @@ Creature::~Creature()
 
 void Creature::move(Direction direction)
 {
-    if (canMove(direction))
-    {
-        _move(direction);
-    }
+    _direction = direction;
+    _hasDelayedMove = true;
 }
 
 bool Creature::isMoving() const
@@ -356,9 +355,16 @@ void Creature::updateAnimation()
 
 void Creature::_tryMoveNext()
 {
-    if (_type == CreatureType::CHIP || _type == CreatureType::BLOCK)
-	{ }
-    else if (_type == CreatureType::TEETH)
+    if (_hasDelayedMove)
+    {
+        if (canMove(_direction))
+        {
+            _move(_direction);
+        }
+        _hasDelayedMove = false;
+    }
+    
+    if (_type == CreatureType::TEETH)
     {
 		auto playerCreature = _level->getPlayerCreature();
 		if (playerCreature != nullptr)
@@ -503,10 +509,7 @@ void Creature::_move(Direction direction)
 		{
 			if (creature->_type == CreatureType::BLOCK && creature->_coordinate == _coordinate)
 			{
-				creature->_move(_direction);
-			
-				// Increase _turnsToNextMove to let skip update on current turn
-				creature->_turnsToNextMove += 1;
+				creature->move(_direction);
 			}
 		}
 	}
