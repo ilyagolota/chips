@@ -27,11 +27,6 @@ SmartControlLayer::SmartControlLayer(Level* level)
     _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
 
-SmartControlLayer::~SmartControlLayer()
-{
-    _eventDispatcher->resumeEventListenersForTarget(this);
-}
-
 bool SmartControlLayer::isPressed()
 {
     if (!_hasTarget)

@@ -6,7 +6,7 @@
 
 #include "LevelScene/InventoryPanel.h"
 #include "LevelScene/PauseMenuWindow.h"
-#include "LevelScene/SmartControlLayer.h"
+#include "LevelScene/IPlayerControl.h"
 #include <Level/Level.h>
 #include <ChipsChallengeGame.h>
 
@@ -20,6 +20,7 @@ public:
 
 	void onEnter() override;
 	void update(float dt) override;
+    void updatePerTurn(float dt);
 
     void onLevelWin() override;
     void onLevelFail(const std::string& message) override;
@@ -43,7 +44,7 @@ protected:
     bool _paused;
 
     cocos2d::Node* _stage;
-    SmartControlLayer* _controlLayer;
+    std::vector<IPlayerControl*> _controlLayers;
     cocos2d::Node *_topLayer;
     cocos2d::Layer *_preloaderLayer;
     cocos2d::Layer *_fadeLayer;

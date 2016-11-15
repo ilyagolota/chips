@@ -6,8 +6,9 @@
 class IPlayerControl
 {
 public:
-	virtual bool isPressed() = 0;
-	virtual Direction getSelectedDirection() = 0;
+    virtual ~IPlayerControl() { }
+    virtual bool isPressed() = 0;
+    virtual Direction getSelectedDirection() = 0;
 };
 
 #endif

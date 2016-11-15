@@ -2,8 +2,7 @@
 #define _CHIPS_CHALLENGE_SMART_CONTROL_LAYER_H_
 
 #include <cocos2d.h>
-#include <Tiled/Direction.h>
-#include <Level/IPlayerControl.h>
+#include "IPlayerControl.h"
 #include <Level/Level.h>
 
 class SmartControlLayer : public cocos2d::Layer, public IPlayerControl
@@ -19,7 +18,6 @@ private:
 public:
 	static SmartControlLayer* create(Level* level);
 	SmartControlLayer(Level* level);
-    virtual ~SmartControlLayer();
 
 	bool isPressed() override;
     Direction getSelectedDirection() override;

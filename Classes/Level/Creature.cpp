@@ -356,18 +356,7 @@ void Creature::updateAnimation()
 
 void Creature::_tryMoveNext()
 {
-    if (_type == CreatureType::CHIP)
-    {
-		if (_level->getPlayerControl()->isPressed())
-		{
-			auto direction = _level->getPlayerControl()->getSelectedDirection();
-			if (canMove(direction))
-			{
-				_move(direction);
-			}
-		}
-    }
-	else if (_type == CreatureType::BLOCK)
+    if (_type == CreatureType::CHIP || _type == CreatureType::BLOCK)
 	{ }
     else if (_type == CreatureType::TEETH)
     {

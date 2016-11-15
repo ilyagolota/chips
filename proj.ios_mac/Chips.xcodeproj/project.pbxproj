@@ -156,6 +156,10 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */; };
+		D45E83041DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45E83021DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp */; };
+		D45E83051DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45E83021DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp */; };
+		D45E83081DDB56540008F7B4 /* ButtonControlLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45E83061DDB56540008F7B4 /* ButtonControlLayer.cpp */; };
+		D45E83091DDB56540008F7B4 /* ButtonControlLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45E83061DDB56540008F7B4 /* ButtonControlLayer.cpp */; };
 		D4626CA71D903227003C812E /* LevelConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CA21D903227003C812E /* LevelConfig.cpp */; };
 		D4626CA81D903227003C812E /* LevelPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CA41D903227003C812E /* LevelPack.cpp */; };
 		D4626CAD1D903D61003C812E /* TransitionAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAB1D903D61003C812E /* TransitionAnimation.cpp */; };
@@ -338,7 +342,6 @@
 		B3F767991CF3453D00F03CCE /* Preloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preloader.h; sourceTree = "<group>"; };
 		B3F767AE1CF34FF700F03CCE /* LoadingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
 		B3F767AF1CF34FF700F03CCE /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
-		B3F9E5601CFC4DB000BF2D5D /* IPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPlayerControl.h; sourceTree = "<group>"; };
 		B3FCB0911CF59CC4003B3C9E /* sheets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sheets; path = ../../chips/Resources/sheets; sourceTree = "<group>"; };
 		B3FCB0981CF5B51A003B3C9E /* animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = animations.plist; path = ../../chips/Resources/animations.plist; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -354,6 +357,11 @@
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Highscores.cpp; path = Common/Highscores.cpp; sourceTree = "<group>"; };
 		D4559F9E1D7D7A16008FCEF7 /* Highscores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Highscores.h; path = Common/Highscores.h; sourceTree = "<group>"; };
+		D45E83001DDB4E7B0008F7B4 /* IPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPlayerControl.h; sourceTree = "<group>"; };
+		D45E83021DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardControlLayer.cpp; sourceTree = "<group>"; };
+		D45E83031DDB4F6F0008F7B4 /* KeyboardControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardControlLayer.h; sourceTree = "<group>"; };
+		D45E83061DDB56540008F7B4 /* ButtonControlLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonControlLayer.cpp; sourceTree = "<group>"; };
+		D45E83071DDB56540008F7B4 /* ButtonControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonControlLayer.h; sourceTree = "<group>"; };
 		D4626CA21D903227003C812E /* LevelConfig.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelConfig.cpp; sourceTree = "<group>"; };
 		D4626CA31D903227003C812E /* LevelConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelConfig.h; sourceTree = "<group>"; };
 		D4626CA41D903227003C812E /* LevelPack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelPack.cpp; sourceTree = "<group>"; };
@@ -644,7 +652,6 @@
 				D4626CA41D903227003C812E /* LevelPack.cpp */,
 				D4626CA51D903227003C812E /* LevelPack.h */,
 				D4626CA61D903227003C812E /* TileType.h */,
-				B3F9E5601CFC4DB000BF2D5D /* IPlayerControl.h */,
 				B305558A1CE339DC006E5546 /* Creature.cpp */,
 				B305558B1CE339DC006E5546 /* Creature.h */,
 				B30555851CE333E2006E5546 /* Inventory.cpp */,
@@ -667,6 +674,11 @@
 				B3F310681CF7417900B9EC92 /* SmartControlLayer.h */,
 				D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */,
 				D42E84CA1D9418A900C655D6 /* PauseMenuWindow.h */,
+				D45E83001DDB4E7B0008F7B4 /* IPlayerControl.h */,
+				D45E83021DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp */,
+				D45E83031DDB4F6F0008F7B4 /* KeyboardControlLayer.h */,
+				D45E83061DDB56540008F7B4 /* ButtonControlLayer.cpp */,
+				D45E83071DDB56540008F7B4 /* ButtonControlLayer.h */,
 			);
 			name = LevelScene;
 			path = ../../../chips/Classes/Views/LevelScene;
@@ -892,6 +904,7 @@
 				D431917F1D8AD79700EA0D9A /* InventoryPanel.cpp in Sources */,
 				B30555CC1CE3454D006E5546 /* Door.cpp in Sources */,
 				B30555D41CE3454D006E5546 /* HintButton.cpp in Sources */,
+				D45E83041DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp in Sources */,
 				B3F0A34B1CE2081E006E152B /* HttpUtility.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				B30555DE1CE3454D006E5546 /* SwitchWall.cpp in Sources */,
@@ -902,6 +915,7 @@
 				B30555C01CE3454D006E5546 /* BlueWall.cpp in Sources */,
 				B30555D61CE3454D006E5546 /* Ice.cpp in Sources */,
 				B3F7678E1CF2FE9E00F03CCE /* TiledProjector.cpp in Sources */,
+				D45E83081DDB56540008F7B4 /* ButtonControlLayer.cpp in Sources */,
 				B30555C21CE3454D006E5546 /* Bomb.cpp in Sources */,
 				B3F767A31CF3453D00F03CCE /* Preloader.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
@@ -981,11 +995,13 @@
 				B3F767951CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */,
 				B305558D1CE339DC006E5546 /* Creature.cpp in Sources */,
 				B3F3106A1CF7417900B9EC92 /* SmartControlLayer.cpp in Sources */,
+				D45E83091DDB56540008F7B4 /* ButtonControlLayer.cpp in Sources */,
 				B3F0A34C1CE2081E006E152B /* HttpUtility.cpp in Sources */,
 				B30555881CE333E2006E5546 /* Inventory.cpp in Sources */,
 				D4626CB21D903E07003C812E /* LevelListScene.cpp in Sources */,
 				B3F0A3251CE1F202006E152B /* ChipsChallengeGame.cpp in Sources */,
 				B3F767931CF2FE9E00F03CCE /* TileMicrophone.cpp in Sources */,
+				D45E83051DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp in Sources */,
 				B3F767B11CF34FF700F03CCE /* LoadingScene.cpp in Sources */,
 				B30555931CE3418C006E5546 /* LevelObject.cpp in Sources */,
 				B30555CD1CE3454D006E5546 /* Door.cpp in Sources */,
