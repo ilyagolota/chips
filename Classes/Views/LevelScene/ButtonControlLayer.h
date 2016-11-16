@@ -2,19 +2,20 @@
 #define _CHIPS_CHALLENGE_BUTTON_CONTROL_LAYER_H_
 
 #include <cocos2d.h>
-#include "IPlayerControl.h"
+#include "ControlLayer.h"
+#include <Level/Level.h>
 
-class ButtonControlLayer : public cocos2d::Layer, public IPlayerControl
+class ButtonControlLayer : public ControlLayer
 {
 public:
-    static ButtonControlLayer* create();
-    ButtonControlLayer();
+    static ButtonControlLayer* create(Level* level);
+    ButtonControlLayer(Level* level);
     
-    bool isPressed() override;
-    Direction getSelectedDirection() override;
+    void onLevelTurn() override;
     
 protected:
     cocos2d::Menu* _menu;
+    Level* _level;
 };
 
 #endif

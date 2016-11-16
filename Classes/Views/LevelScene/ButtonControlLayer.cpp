@@ -1,15 +1,17 @@
 #include "ButtonControlLayer.h"
 
-ButtonControlLayer* ButtonControlLayer::create()
+ButtonControlLayer* ButtonControlLayer::create(Level* level)
 {
-    auto instance = new ButtonControlLayer();
+    auto instance = new ButtonControlLayer(level);
     instance->autorelease();
     return instance;
 }
 
-ButtonControlLayer::ButtonControlLayer()
+ButtonControlLayer::ButtonControlLayer(Level* level)
 {
     Layer::init();
+    
+    _level = level;
     
     auto director = cocos2d::Director::getInstance();
     auto winSize = director->getWinSize();
@@ -20,61 +22,53 @@ ButtonControlLayer::ButtonControlLayer()
     _menu->setPosition(cocos2d::Vec2::ZERO);
     addChild(_menu);
     
-    auto southItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"));
+    auto southItem = cocos2d::MenuItemImage::create("glider-stay-east.png", "glider-stay-east.png");
     southItem->setScale(-1, 1);
     southItem->setTag(static_cast<int>(Direction::SOUTH));
     southItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     southItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + 95, screenBounds.origin.y + 100));
     _menu->addChild(southItem);
     
-    auto westItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"));
+    auto westItem = cocos2d::MenuItemImage::create("glider-stay-west.png", "glider-stay-west.png");
     westItem->setTag(static_cast<int>(Direction::WEST));
     westItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     westItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + 95, screenBounds.origin.y + 228));
     _menu->addChild(westItem);
     
-    auto northItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"));
+    auto northItem = cocos2d::MenuItemImage::create("glider-stay-west.png", "glider-stay-west.png");
     northItem->setScale(-1, 1);
     northItem->setTag(static_cast<int>(Direction::SOUTH));
     northItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     northItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + screenBounds.size.width - 95, screenBounds.origin.y + 228));
     _menu->addChild(northItem);
     
-    auto eastItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"));
+    auto eastItem = cocos2d::MenuItemImage::create("glider-stay-west.png", "glider-stay-west.png");
     eastItem->setTag(static_cast<int>(Direction::EAST));
     eastItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     eastItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + screenBounds.size.width - 95, screenBounds.origin.y + 100));
     _menu->addChild(eastItem);
 }
 
-bool ButtonControlLayer::isPressed()
+void ButtonControlLayer::onLevelTurn()
 {
-    for (auto child : _menu->getChildren())
+    auto playerCreature = _level->getPlayerCreature();
+    if (playerCreature != nullptr)
     {
-        auto menuItem = dynamic_cast<cocos2d::MenuItem*>(child);
-        if (menuItem != nullptr)
+        for (auto child : _menu->getChildren())
         {
-            if (menuItem->isSelected())
+            auto menuItem = dynamic_cast<cocos2d::MenuItem*>(child);
+            if (menuItem != nullptr)
             {
-                return true;
+                if (menuItem->isSelected())
+                {
+                    auto direction = static_cast<Direction>(menuItem->getTag());
+                    if (playerCreature->canMove(direction))
+                    {
+                        playerCreature->move(direction);
+                    }
+                    break;
+                }
             }
         }
     }
-    return false;
-}
-
-Direction ButtonControlLayer::getSelectedDirection()
-{
-    for (auto child : _menu->getChildren())
-    {
-        auto menuItem = dynamic_cast<cocos2d::MenuItem*>(child);
-        if (menuItem != nullptr)
-        {
-            if (menuItem->isSelected())
-            {
-                return static_cast<Direction>(menuItem->getTag());
-            }
-        }
-    }
-    return Direction::NORTH;
 }

@@ -27,78 +27,7 @@ SmartControlLayer::SmartControlLayer(Level* level)
     _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
 
-bool SmartControlLayer::isPressed()
-{
-    if (!_hasTarget)
-    {
-        return false;
-    }
-
-    auto playerCreature = _level->getPlayerCreature();
-    if (playerCreature != nullptr)
-    {
-        if (_playerCoordinate != playerCreature->getCoordinate())
-        {
-            _update();
-        }
-        
-        if (!_hasTarget)
-        {
-            return false;
-        }
-        
-        auto nextCoordinate = _playerCoordinate + toVec2(_selectedDirection);
-        for (auto creature : _level->getCreatures())
-        {
-            if (creature->isMoving() && creature->getCoordinate() == nextCoordinate)
-            {
-                return false;
-            }
-        }
-    }
-    
-    return _hasTarget;
-}
-
-Direction SmartControlLayer::getSelectedDirection()
-{
-    auto playerCreature = _level->getPlayerCreature();
-    if (playerCreature != nullptr)
-    {
-        if (_playerCoordinate != playerCreature->getCoordinate())
-        {
-            _update();
-        }
-    }
-    return _selectedDirection;
-}
-
-bool SmartControlLayer::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
-{
-    return true;
-}
-
-void SmartControlLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
-{ }
-
-void SmartControlLayer::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
-{
-    auto point = touch->getLocation() - _level->getStage()->getPosition();
-    _targetCoordinate = _level->getProjector()->pointToCoordinate(point);
-
-    auto playerCreature = _level->getPlayerCreature();
-    if (playerCreature != nullptr)
-    {
-        _startCoordinate = _playerCoordinate = playerCreature->getCoordinate();
-        _hasTarget = true;
-        _update();
-    }
-}
-
-void SmartControlLayer::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event)
-{ }
-
-void SmartControlLayer::_update()
+void SmartControlLayer::onLevelTurn()
 {
     auto playerCreature = _level->getPlayerCreature();
     if (playerCreature != nullptr)
@@ -110,22 +39,22 @@ void SmartControlLayer::_update()
             _hasTarget = false;
             return;
         }
-
-		cocos2d::Vec2 northWest;
-		northWest.x = std::min(_startCoordinate.x, _targetCoordinate.x);
-		northWest.y = std::min(_startCoordinate.y, _targetCoordinate.y);
-		cocos2d::Vec2 southEast;
-		southEast.x = std::max(_startCoordinate.x, _targetCoordinate.x);
-		southEast.y = std::max(_startCoordinate.y, _targetCoordinate.y);
-		if (_playerCoordinate.x < northWest.x || _playerCoordinate.y < northWest.y || _playerCoordinate.x > southEast.x || _playerCoordinate.y > southEast.y)
-		{
-			_hasTarget = false;
-			return;
-		}
+        
+        cocos2d::Vec2 northWest;
+        northWest.x = std::min(_startCoordinate.x, _targetCoordinate.x);
+        northWest.y = std::min(_startCoordinate.y, _targetCoordinate.y);
+        cocos2d::Vec2 southEast;
+        southEast.x = std::max(_startCoordinate.x, _targetCoordinate.x);
+        southEast.y = std::max(_startCoordinate.y, _targetCoordinate.y);
+        if (_playerCoordinate.x < northWest.x || _playerCoordinate.y < northWest.y || _playerCoordinate.x > southEast.x || _playerCoordinate.y > southEast.y)
+        {
+            _hasTarget = false;
+            return;
+        }
         
         Direction allowedDirections[2];
         size_t directionCount = 0;
-
+        
         if (_playerCoordinate.y != _targetCoordinate.y)
         {
             auto dir = (_playerCoordinate.y > _targetCoordinate.y) ? Direction::NORTH : Direction::SOUTH;
@@ -149,7 +78,7 @@ void SmartControlLayer::_update()
         }
         else if (directionCount == 1)
         {
-            _selectedDirection = allowedDirections[0];
+            playerCreature->move(allowedDirections[0]);
         }
         else
         {
@@ -195,7 +124,33 @@ void SmartControlLayer::_update()
                 }
             }
             
-            _selectedDirection = allowedDirections[(priorities[1] > priorities[0]) ? 1 : 0];
+            playerCreature->move(allowedDirections[(priorities[1] > priorities[0]) ? 1 : 0]);
         }
     }
 }
+
+bool SmartControlLayer::onTouchBegan(cocos2d::Touch *touch, cocos2d::Event *event)
+{
+    return true;
+}
+
+void SmartControlLayer::onTouchMoved(cocos2d::Touch *touch, cocos2d::Event *event)
+{ }
+
+void SmartControlLayer::onTouchEnded(cocos2d::Touch *touch, cocos2d::Event *event)
+{
+    auto point = touch->getLocation() - _level->getStage()->getPosition();
+    _targetCoordinate = _level->getProjector()->pointToCoordinate(point);
+
+    auto playerCreature = _level->getPlayerCreature();
+    if (playerCreature != nullptr)
+    {
+        _startCoordinate = _playerCoordinate = playerCreature->getCoordinate();
+        _hasTarget = true;
+    }
+    
+    onLevelTurn();
+}
+
+void SmartControlLayer::onTouchCancelled(cocos2d::Touch *touch, cocos2d::Event *event)
+{ }

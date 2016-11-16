@@ -3,7 +3,6 @@
 #include <cocos2d.h>
 
 #include "Level.h"
-#include "IPlayerControl.h"
 #include "Item.h"
 #include "Objects/LevelObject.h"
 

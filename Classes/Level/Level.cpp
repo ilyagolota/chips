@@ -1,6 +1,4 @@
 #include "Level.h"
-
-#include "IPlayerControl.h"
 #include "Objects/LevelObject.h"
 #include "Objects/Beartrap.h"
 #include "Objects/BlueWall.h"
@@ -52,8 +50,6 @@ Level::Level(cocos2d::Node* stage, LevelHandler* handler)
     
     _projector = TiledProjector::create(cocos2d::Size(180, 128), levelSize, Z_ORDER_PER_TILE, _physicsWorld);
     _projector->retain();
-
-	_playerControl = nullptr;
     
     _objects.resize(levelSize.width * levelSize.height);
     _items.resize(levelSize.width * levelSize.height);
@@ -146,16 +142,6 @@ Inventory* Level::getInventory() const
 float Level::getTurnDuration()
 {
     return 0.2f * _timeMultiplier;
-}
-
-IPlayerControl* Level::getPlayerControl()
-{
-	return _playerControl;
-}
-
-void Level::setPlayerControl(IPlayerControl* playerControl)
-{
-	_playerControl = playerControl;
 }
 
 void Level::addObject(LevelObject* object)

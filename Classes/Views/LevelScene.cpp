@@ -40,11 +40,11 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     addChild(smartControlLayer);
     _controlLayers.push_back(smartControlLayer);
 
-    auto buttonControlLayer = ButtonControlLayer::create();
+    auto buttonControlLayer = ButtonControlLayer::create(_level);
     addChild(buttonControlLayer);
     _controlLayers.push_back(buttonControlLayer);
     
-    auto keyboardControlLayer = KeyboardControlLayer::create();
+    auto keyboardControlLayer = KeyboardControlLayer::create(_level);
     addChild(keyboardControlLayer);
     _controlLayers.push_back(keyboardControlLayer);
     
@@ -138,24 +138,9 @@ void LevelScene::update(float dt)
 
 void LevelScene::updatePerTurn(float dt)
 {
-    auto playerCreature = _level->getPlayerCreature();
-    if (playerCreature != nullptr)
+    for (auto controlLayer : _controlLayers)
     {
-        if (!playerCreature->isMoving())
-        {
-            for (auto controlLayer : _controlLayers)
-            {
-                if (controlLayer->isPressed())
-                {
-                    auto direction = controlLayer->getSelectedDirection();
-                    if (playerCreature->canMove(direction))
-                    {
-                        playerCreature->move(direction);
-                    }
-                    break;
-                }
-            }
-        }
+        controlLayer->onLevelTurn();
     }
     
     _level->makeTurn(dt);

@@ -52,8 +52,6 @@ public:
     TiledProjector* getProjector() const;
     Inventory* getInventory() const;
     float getTurnDuration();
-	IPlayerControl* getPlayerControl();
-	void setPlayerControl(IPlayerControl* playerControl);
     
     void addObject(LevelObject* object);
     LevelObject* getObjectAt(const cocos2d::Vec2& coordinate) const;
@@ -85,7 +83,6 @@ private:
     TiledPhysicsWorld* _physicsWorld;
     TiledSoundEnvironment* _soundEnvironment;
     TiledProjector* _projector;
-    IPlayerControl* _playerControl;
     
     float _timeMultiplier;
     

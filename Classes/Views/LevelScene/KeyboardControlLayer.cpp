@@ -1,15 +1,17 @@
 #include "KeyboardControlLayer.h"
 
-KeyboardControlLayer* KeyboardControlLayer::create()
+KeyboardControlLayer* KeyboardControlLayer::create(Level* level)
 {
-    auto instance = new KeyboardControlLayer();
+    auto instance = new KeyboardControlLayer(level);
     instance->autorelease();
     return instance;
 }
 
-KeyboardControlLayer::KeyboardControlLayer()
+KeyboardControlLayer::KeyboardControlLayer(Level* level)
 {
     Layer::init();
+    
+    _level = level;
     
     auto eventListener = cocos2d::EventListenerKeyboard::create();
     eventListener->onKeyPressed = CC_CALLBACK_2(KeyboardControlLayer::_onKeyPressed, this);
@@ -17,21 +19,23 @@ KeyboardControlLayer::KeyboardControlLayer()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(eventListener, this);
 }
 
-bool KeyboardControlLayer::isPressed()
+void KeyboardControlLayer::onLevelTurn()
 {
-    return _directions.any();
-}
-
-Direction KeyboardControlLayer::getSelectedDirection()
-{
-    for (size_t i = 0; i < 4; i++)
+    auto playerCreature = _level->getPlayerCreature();
+    if (playerCreature)
     {
-        if (_directions[i])
+        for (size_t i = 0; i < 4; i++)
         {
-            return static_cast<Direction>(i);
+            if (_directions[i])
+            {
+                if (playerCreature->canMove(static_cast<Direction>(i)))
+                {
+                    playerCreature->move(static_cast<Direction>(i));
+                    break;
+                }
+            }
         }
     }
-    return Direction::NORTH;
 }
 
 void KeyboardControlLayer::_onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -61,6 +65,8 @@ void KeyboardControlLayer::_onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode
     default:
         break;
     }
+    
+    onLevelTurn();
 }
 
 void KeyboardControlLayer::_onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)

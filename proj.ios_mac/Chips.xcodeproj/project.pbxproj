@@ -357,7 +357,7 @@
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D4559F9D1D7D7A16008FCEF7 /* Highscores.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Highscores.cpp; path = Common/Highscores.cpp; sourceTree = "<group>"; };
 		D4559F9E1D7D7A16008FCEF7 /* Highscores.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Highscores.h; path = Common/Highscores.h; sourceTree = "<group>"; };
-		D45E83001DDB4E7B0008F7B4 /* IPlayerControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPlayerControl.h; sourceTree = "<group>"; };
+		D45E83001DDB4E7B0008F7B4 /* ControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlLayer.h; sourceTree = "<group>"; };
 		D45E83021DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardControlLayer.cpp; sourceTree = "<group>"; };
 		D45E83031DDB4F6F0008F7B4 /* KeyboardControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardControlLayer.h; sourceTree = "<group>"; };
 		D45E83061DDB56540008F7B4 /* ButtonControlLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonControlLayer.cpp; sourceTree = "<group>"; };
@@ -674,7 +674,7 @@
 				B3F310681CF7417900B9EC92 /* SmartControlLayer.h */,
 				D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */,
 				D42E84CA1D9418A900C655D6 /* PauseMenuWindow.h */,
-				D45E83001DDB4E7B0008F7B4 /* IPlayerControl.h */,
+				D45E83001DDB4E7B0008F7B4 /* ControlLayer.h */,
 				D45E83021DDB4F6F0008F7B4 /* KeyboardControlLayer.cpp */,
 				D45E83031DDB4F6F0008F7B4 /* KeyboardControlLayer.h */,
 				D45E83061DDB56540008F7B4 /* ButtonControlLayer.cpp */,

@@ -3,21 +3,22 @@
 
 #include <cocos2d.h>
 #include <bitset>
-#include "IPlayerControl.h"
+#include <Level/Level.h>
+#include "ControlLayer.h"
 
-class KeyboardControlLayer : public cocos2d::Layer, public IPlayerControl
+class KeyboardControlLayer : public ControlLayer
 {
 public:
-    static KeyboardControlLayer* create();
-    KeyboardControlLayer();
+    static KeyboardControlLayer* create(Level* level);
+    KeyboardControlLayer(Level* level);
     
-    bool isPressed() override;
-    Direction getSelectedDirection() override;
+    void onLevelTurn() override;
     
 protected:
     void _onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     void _onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     
+    Level* _level;
     std::bitset<4> _directions;
 };
 
