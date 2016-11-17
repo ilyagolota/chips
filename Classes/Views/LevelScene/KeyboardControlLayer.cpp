@@ -21,79 +21,86 @@ KeyboardControlLayer::KeyboardControlLayer(Level* level)
 
 void KeyboardControlLayer::onLevelTurn()
 {
-    auto playerCreature = _level->getPlayerCreature();
-    if (playerCreature)
+    for (auto& pair : _states)
     {
-        for (size_t i = 0; i < 4; i++)
+        bool handled = true;
+        
+        auto playerCreature = _level->getPlayerCreature();
+        if (playerCreature != nullptr)
         {
-            if (_directions[i])
+            switch (pair.first)
             {
-                if (playerCreature->canMove(static_cast<Direction>(i)))
+            case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
+            case cocos2d::EventKeyboard::KeyCode::KEY_W:
+                if (playerCreature->canMove(Direction::NORTH))
                 {
-                    playerCreature->move(static_cast<Direction>(i));
-                    break;
+                    playerCreature->move(Direction::NORTH);
                 }
+                break;
+                    
+            case cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+            case cocos2d::EventKeyboard::KeyCode::KEY_S:
+                if (playerCreature->canMove(Direction::SOUTH))
+                {
+                    playerCreature->move(Direction::SOUTH);
+                }
+                break;
+                
+            case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+            case cocos2d::EventKeyboard::KeyCode::KEY_A:
+                if (playerCreature->canMove(Direction::WEST))
+                {
+                    playerCreature->move(Direction::EAST);
+                }
+                break;
+                
+            case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+            case cocos2d::EventKeyboard::KeyCode::KEY_D:
+                if (playerCreature->canMove(Direction::EAST))
+                {
+                    playerCreature->move(Direction::WEST);
+                }
+                break;
+                
+            default:
+                handled = false;
+                break;
             }
+        }
+        
+        if (pair.second == PRESSED)
+        {
+            _states[pair.first] = APPLIED_IN_TURN;
+        }
+        else if (pair.second == RELEASED_BEFORE_TURN)
+        {
+            _states.erase(pair.first);
+        }
+        
+        if (handled)
+        {
+            break;
         }
     }
 }
 
 void KeyboardControlLayer::_onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    switch (keyCode)
-    {
-    case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-    case cocos2d::EventKeyboard::KeyCode::KEY_A:
-        _directions[static_cast<size_t>(Direction::EAST)] = true;
-        break;
-        
-    case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-    case cocos2d::EventKeyboard::KeyCode::KEY_D:
-        _directions[static_cast<size_t>(Direction::WEST)] = true;
-        break;
-            
-    case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-    case cocos2d::EventKeyboard::KeyCode::KEY_W:
-        _directions[static_cast<size_t>(Direction::NORTH)] = true;
-        break;
-            
-    case cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-    case cocos2d::EventKeyboard::KeyCode::KEY_S:
-        _directions[static_cast<size_t>(Direction::SOUTH)] = true;
-        break;
-            
-    default:
-        break;
-    }
-    
-    onLevelTurn();
+    _states[keyCode] = PRESSED;
 }
 
 void KeyboardControlLayer::_onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-    switch (keyCode)
+    auto iter = _states.find(keyCode);
+    if (iter != _states.end())
     {
-        case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-        case cocos2d::EventKeyboard::KeyCode::KEY_A:
-            _directions[static_cast<size_t>(Direction::EAST)] = false;
-            break;
-            
-        case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-        case cocos2d::EventKeyboard::KeyCode::KEY_D:
-            _directions[static_cast<size_t>(Direction::WEST)] = false;
-            break;
-            
-        case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
-        case cocos2d::EventKeyboard::KeyCode::KEY_W:
-            _directions[static_cast<size_t>(Direction::NORTH)] = false;
-            break;
-            
-        case cocos2d::EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-        case cocos2d::EventKeyboard::KeyCode::KEY_S:
-            _directions[static_cast<size_t>(Direction::SOUTH)] = false;
-            break;
-            
-        default:
-            break;
+        if (iter->second == PRESSED)
+        {
+            _states[keyCode] = RELEASED_BEFORE_TURN;
+        }
+        else
+        {
+            _states.erase(keyCode);
+        }
     }
 }

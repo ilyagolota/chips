@@ -360,10 +360,11 @@ void Creature::_tryMoveNext()
         {
             _move(_direction);
         }
-        _hasDelayedMove = false;
     }
     
-    if (_type == CreatureType::TEETH)
+    if (_type == CreatureType::BLOCK || _type == CreatureType::CHIP)
+    { }
+    else if (_type == CreatureType::TEETH)
     {
 		auto playerCreature = _level->getPlayerCreature();
 		if (playerCreature != nullptr)
@@ -474,6 +475,8 @@ void Creature::_tryMoveNext()
 
 void Creature::_move(Direction direction)
 {
+    _hasDelayedMove = false;
+    
     _turnsToNextMove = getTurnsPerMove();
     _direction = direction;
     _coordinate += toVec2(direction);

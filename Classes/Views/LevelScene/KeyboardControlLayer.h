@@ -2,7 +2,7 @@
 #define _CHIPS_CHALLENGE_KEYBOARD_CONTROL_LAYER_H_
 
 #include <cocos2d.h>
-#include <bitset>
+#include <map>
 #include <Level/Level.h>
 #include "ControlLayer.h"
 
@@ -15,11 +15,19 @@ public:
     void onLevelTurn() override;
     
 protected:
+    enum KeyState
+    {
+        NONE,
+        PRESSED,
+        RELEASED_BEFORE_TURN,
+        APPLIED_IN_TURN
+    };
+    
     void _onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     void _onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
     
     Level* _level;
-    std::bitset<4> _directions;
+    std::map<cocos2d::EventKeyboard::KeyCode, KeyState> _states;
 };
 
 #endif

@@ -35,10 +35,6 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
 
 	_level = Level::create(_stage, this);
 	_level->retain();
-    
-    auto smartControlLayer = SmartControlLayer::create(_level);
-    addChild(smartControlLayer);
-    _controlLayers.push_back(smartControlLayer);
 
     auto buttonControlLayer = ButtonControlLayer::create(_level);
     addChild(buttonControlLayer);

@@ -13,9 +13,28 @@ public:
     
     void onLevelTurn() override;
     
+    bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event) override;
+    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event) override;
+    void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event) override;
+    void onExit() override;
+    
 protected:
-    cocos2d::Menu* _menu;
+    void onButtonPressed(int directionTag);
+    void onButtonReleased(int directionTag);
+    cocos2d::MenuItem* getItemForTouch(cocos2d::Touch *touch, const cocos2d::Camera *camera);
+    
+    enum ButtonState
+    {
+        NONE,
+        PRESSED,
+        RELEASED_BEFORE_TURN,
+        APPLIED_IN_TURN
+    };
+    
     Level* _level;
+    cocos2d::MenuItem* _selectedItem;
+    const cocos2d::Camera* _selectedWithCamera;
+    ButtonState _states[4];
 };
 
 #endif
