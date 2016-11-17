@@ -20,30 +20,31 @@ ButtonControlLayer::ButtonControlLayer(Level* level)
     auto winSize = director->getWinSize();
     cocos2d::Rect screenBounds(director->getVisibleOrigin(), director->getVisibleSize());
     
-    auto southItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"));
-    southItem->setScale(-1, 1);
+	auto southItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("ui-button-control.png"), cocos2d::Sprite::createWithSpriteFrameName("ui-button-control-on.png"));
+    southItem->setScale(1, -1);
     southItem->setTag(static_cast<int>(Direction::SOUTH));
     southItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    southItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + 95, screenBounds.origin.y + 100));
+	southItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + 61.5f, screenBounds.origin.y + 94.5f));
     addChild(southItem);
     
-    auto westItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"));
+	auto westItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("ui-button-control.png"), cocos2d::Sprite::createWithSpriteFrameName("ui-button-control-on.png"));
     westItem->setTag(static_cast<int>(Direction::WEST));
     westItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    westItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + 95, screenBounds.origin.y + 228));
+	westItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + 61.5f, screenBounds.origin.y + 202.5f));
     addChild(westItem);
     
-    auto northItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-west.png"));
+	auto northItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("ui-button-control.png"), cocos2d::Sprite::createWithSpriteFrameName("ui-button-control-on.png"));
     northItem->setScale(-1, 1);
     northItem->setTag(static_cast<int>(Direction::NORTH));
     northItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    northItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + screenBounds.size.width - 95, screenBounds.origin.y + 228));
+	northItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + screenBounds.size.width - 61.5f, screenBounds.origin.y + 202.5f));
     addChild(northItem);
     
-    auto eastItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"), cocos2d::Sprite::createWithSpriteFrameName("glider-stay-east.png"));
-    eastItem->setTag(static_cast<int>(Direction::EAST));
+	auto eastItem = cocos2d::MenuItemSprite::create(cocos2d::Sprite::createWithSpriteFrameName("ui-button-control.png"), cocos2d::Sprite::createWithSpriteFrameName("ui-button-control-on.png"));
+	eastItem->setScale(-1, -1);
+	eastItem->setTag(static_cast<int>(Direction::EAST));
     eastItem->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-    eastItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + screenBounds.size.width - 95, screenBounds.origin.y + 100));
+	eastItem->setPosition(cocos2d::Vec2(screenBounds.origin.x + screenBounds.size.width - 61.5f, screenBounds.origin.y + 94.5f));
     addChild(eastItem);
     
     auto touchListener = cocos2d::EventListenerTouchOneByOne::create();

@@ -33,6 +33,44 @@
         <key>aliases</key>
         <array />
       </dict>
+      <key>ui-button-control.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{93,93}</string>
+        <key>spriteOffset</key>
+        <string>{0,0}</string>
+        <key>spriteSourceSize</key>
+        <string>{93,93}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{93,93}}</string>
+        <key>spriteTrimmed</key>
+        <false />
+        <key>textureRect</key>
+        <string>{{0,48},{93,93}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
+      <key>ui-button-control-on.png</key>
+      <dict>
+        <key>spriteSize</key>
+        <string>{93,93}</string>
+        <key>spriteOffset</key>
+        <string>{0,0}</string>
+        <key>spriteSourceSize</key>
+        <string>{93,93}</string>
+        <key>spriteSourceColorRect</key>
+        <string>{{0,0},{93,93}}</string>
+        <key>spriteTrimmed</key>
+        <false />
+        <key>textureRect</key>
+        <string>{{0,142},{93,93}}</string>
+        <key>textureRotated</key>
+        <false />
+        <key>aliases</key>
+        <array />
+      </dict>
       <key>ui-panel-transparent.png</key>
       <dict>
         <key>spriteSize</key>
@@ -46,7 +84,7 @@
         <key>spriteTrimmed</key>
         <false />
         <key>textureRect</key>
-        <string>{{0,48},{90,90}}</string>
+        <string>{{0,236},{90,90}}</string>
         <key>textureRotated</key>
         <false />
         <key>aliases</key>
