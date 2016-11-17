@@ -66,7 +66,7 @@ void ButtonControlLayer::onLevelTurn()
             {
                 if (playerCreature->canMove(static_cast<Direction>(i)))
                 {
-                    playerCreature->move(static_cast<Direction>(i));
+                    playerCreature->queueMove(static_cast<Direction>(i));
                 }
             }
             

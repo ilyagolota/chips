@@ -73,6 +73,20 @@ void Slide::beforeEnter(Creature *creature)
 
 void Slide::afterEnter(Creature* creature)
 {
+	if (creature->getType() == CreatureType::CHIP && _level->getInventory()->getItemCount(TileType::BOOTS_SLIDE) > 0)
+	{
+		return;
+	}
+
+	if (creature->hasQueuedMove())
+	{
+		auto prevCoordinate = creature->getCoordinate() + toVec2(inverse(creature->getDirection()));
+		if (dynamic_cast<Slide*>(_level->getObjectAt(prevCoordinate)) != nullptr)
+		{
+			return;
+		}
+	}
+
 	Direction direction;
 	switch (_type)
 	{
@@ -98,7 +112,7 @@ void Slide::afterEnter(Creature* creature)
 
 	if (creature->canMove(direction))
 	{
-		creature->move(direction);
+		creature->queueMove(direction);
 	}
 }
 

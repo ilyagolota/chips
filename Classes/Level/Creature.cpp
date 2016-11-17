@@ -35,17 +35,16 @@ Creature* Creature::create(Level* level, CreatureType type)
     return instance;
 }
 
-Creature::Creature(Level* level, CreatureType type)
+Creature::Creature(Level* level, CreatureType type):
+	_level(level),
+	_type(type),
+	_direction(Direction::NORTH),
+	_state(CreatureState::NORMAL),
+	_coordinate(cocos2d::Vec2::ZERO),
+	_turnsToNextMove(0),
+	_queuedMove(false),
+	_queuedDirection(Direction::NORTH)
 {
-    _level = level;
-    _type = type;
-    
-    _direction = Direction::NORTH;
-    _state = CreatureState::NORMAL;
-    _coordinate = cocos2d::Vec2::ZERO;
-    _turnsToNextMove = 0;
-    _hasDelayedMove = false;
-    
     _sprite = cocos2d::Sprite::create();
     _sprite->setAnchorPoint(cocos2d::Point::ZERO);
     _sprite->retain();
@@ -58,10 +57,15 @@ Creature::~Creature()
     _sprite->release();
 }
 
-void Creature::move(Direction direction)
+void Creature::queueMove(Direction direction)
 {
-    _direction = direction;
-    _hasDelayedMove = true;
+	_queuedMove = true;
+	_queuedDirection = direction;
+}
+
+bool Creature::hasQueuedMove()
+{
+	return _queuedMove;
 }
 
 bool Creature::isMoving() const
@@ -217,12 +221,7 @@ void Creature::onTurn(float dt)
         }
     }
     
-    // Creature can be moved by LevelObject in `afterEnter` method.
-    if (!isMoving())
-    {
-        _tryMoveNext();
-    }
-    
+    _tryMoveNext();
     updateAnimation();
 }
 
@@ -354,11 +353,12 @@ void Creature::updateAnimation()
 
 void Creature::_tryMoveNext()
 {
-    if (_hasDelayedMove)
+    if (_queuedMove)
     {
-        if (canMove(_direction))
+        if (canMove(_queuedDirection))
         {
-            _move(_direction);
+			_move(_queuedDirection);
+			return;
         }
     }
     
@@ -475,8 +475,8 @@ void Creature::_tryMoveNext()
 
 void Creature::_move(Direction direction)
 {
-    _hasDelayedMove = false;
-    
+	_queuedMove = false;
+
     _turnsToNextMove = getTurnsPerMove();
     _direction = direction;
     _coordinate += toVec2(direction);
@@ -511,7 +511,7 @@ void Creature::_move(Direction direction)
 		{
 			if (creature->_type == CreatureType::BLOCK && creature->_coordinate == _coordinate)
 			{
-				creature->move(_direction);
+				creature->queueMove(_direction);
 			}
 		}
 	}

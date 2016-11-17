@@ -78,7 +78,7 @@ void SmartControlLayer::onLevelTurn()
         }
         else if (directionCount == 1)
         {
-            playerCreature->move(allowedDirections[0]);
+			playerCreature->queueMove(allowedDirections[0]);
         }
         else
         {
@@ -124,7 +124,7 @@ void SmartControlLayer::onLevelTurn()
                 }
             }
             
-            playerCreature->move(allowedDirections[(priorities[1] > priorities[0]) ? 1 : 0]);
+			playerCreature->queueMove(allowedDirections[(priorities[1] > priorities[0]) ? 1 : 0]);
         }
     }
 }

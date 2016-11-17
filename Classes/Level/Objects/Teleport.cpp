@@ -78,7 +78,7 @@ void Teleport::afterEnter(Creature* creature)
     if (targetTeleport != nullptr)
     {
         creature->setCoordinate(targetTeleport->getCoordinate());
-        creature->move(creature->getDirection());
+		creature->queueMove(creature->getDirection());
     }
     
     auto creatureSprite = creature->getSprite();

@@ -45,7 +45,8 @@ public:
     
     Creature(Level* level, CreatureType type);
     ~Creature();
-    void move(Direction direction);
+    void queueMove(Direction direction);
+	bool hasQueuedMove();
     bool isMoving() const;
     int getTurnsToNextMove() const;
     int getTurnsPerMove() const;
@@ -83,11 +84,11 @@ private:
     Direction _direction;
     CreatureState _state;
     int _turnsToNextMove;
-    bool _hasDelayedMove;
+	bool _queuedMove;
+	Direction _queuedDirection;
     CreatureType _type;
     cocos2d::Sprite* _sprite;
     TileSoundEmitter* _soundEmitter;
-    
     Direction _animatedDirection;
     CreatureState _animatedState;
     bool _animatedMoving;

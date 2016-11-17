@@ -25,13 +25,13 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
         _backWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north.png");
 		_backWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
+		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
 		_backWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backWall);
         
 		_frontWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-east.png");
 		_frontWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
+		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
 		_frontWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontWall);
     }
@@ -39,7 +39,7 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
 		_frontWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-south-east.png");
 		_frontWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
+		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
 		_frontWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontWall);
     }
@@ -47,7 +47,7 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
 		_backWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north-west.png");
 		_backWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
+		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
 		_backWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backWall);
     }
@@ -55,13 +55,13 @@ Ice::Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelOb
     {
 		_backWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-west.png");
 		_backWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
+		_backWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
 		_backWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backWall);
         
 		_frontWall = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-south.png");
 		_frontWall->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -0));
+		_frontWall->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
 		_frontWall->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontWall);
     }
@@ -144,14 +144,14 @@ void Ice::afterEnter(Creature* creature)
         
         if (creature->canMove(direction))
         {
-            creature->move(direction);
+			creature->queueMove(direction);
         }
         else
         {
             Direction back = inverse(creature->getDirection());
             if (creature->canMove(back))
             {
-                creature->move(back);
+                creature->queueMove(back);
             }
         }
     }
