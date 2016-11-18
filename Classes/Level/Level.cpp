@@ -102,15 +102,26 @@ void Level::makeTurn(float dt)
         _soundEnvironment->getMicrophone()->setCoordinate(_playerCreature->getCoordinate());
     }
     
-    cocos2d::Vector<Creature*> creatures(_creatures);
-    for (auto creature : creatures)
+    for (auto creature : _creatures)
     {
         if (creature != _playerCreature)
         {
             creature->onTurn(dt);
         }
     }
-
+    
+    for (auto iter = _creatures.begin(); iter != _creatures.end(); )
+    {
+        if ((*iter)->isDead())
+        {
+            removeCreature(*iter);
+        }
+        else
+        {
+            iter++;
+        }
+    }
+    
 	_soundEnvironment->update(dt);
 }
 

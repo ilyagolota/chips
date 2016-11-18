@@ -61,23 +61,22 @@ public:
     CreatureState getState() const;
     void setState(CreatureState state);
     Level* getLevel() const;
-    
+    void die();
+    bool isDead();
     void onTurn(float dt);
     void onAdd();
     void onRemove();
-    
     void update(float dt);
-    void touch(Direction direction);
     bool canMove(Direction direction) const;
     void updateAnimation();
     
 private:
-    void _tryMoveNext();
-    void _move(Direction direction);
-    void _updatePosition();
-    void _applyAnimationParams();
-    void _updateAnimation();
-    void _updateFlip();
+    void chooseNextMove();
+    void move(Direction direction);
+    void updatePosition();
+    void applyAnimationParams();
+    void updateAnimationInternal();
+    void updateFlip();
 
     Level* _level;
     cocos2d::Vec2 _coordinate;
@@ -85,6 +84,7 @@ private:
     CreatureState _state;
     int _turnsToNextMove;
 	bool _queuedMove;
+    bool _dead;
 	Direction _queuedDirection;
     CreatureType _type;
     cocos2d::Sprite* _sprite;

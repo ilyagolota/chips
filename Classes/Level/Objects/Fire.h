@@ -15,6 +15,9 @@ public:
     
     bool isEnterableBy(const Creature* creature, Direction direction) const override;
     void afterEnter(Creature* creature) override;
+    
+private:
+    cocos2d::Sprite* _smokeSprite;
 };
 
 #endif

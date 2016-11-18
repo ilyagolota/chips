@@ -29,7 +29,8 @@ void Fire::afterEnter(Creature *creature)
         return;
     }
     
-    _level->removeCreature(creature);
+    creature->die();
+    
     if (creature->getType() == CreatureType::CHIP)
     {
         _level->fail("Ooops! Don't step in the fire without fire boots!");

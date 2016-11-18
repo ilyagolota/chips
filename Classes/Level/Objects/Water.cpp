@@ -82,7 +82,8 @@ void Water::afterEnter(Creature *creature)
 			return;
 		}
 
-		_level->removeCreature(creature);
+        creature->die();
+
 		if (creature->getType() == CreatureType::BLOCK)
 		{
 			if (_block == nullptr)

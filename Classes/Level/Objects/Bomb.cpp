@@ -23,7 +23,7 @@ void Bomb::afterEnter(Creature *creature)
     if (!_exploded)
     {
         _exploded = true;
-        _level->removeCreature(creature);
+        creature->die();
         if (creature->getType() == CreatureType::CHIP)
         {
             _level->fail("Ooops! Don't touch the bombs!");

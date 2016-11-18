@@ -43,7 +43,8 @@ Creature::Creature(Level* level, CreatureType type):
 	_coordinate(cocos2d::Vec2::ZERO),
 	_turnsToNextMove(0),
 	_queuedMove(false),
-	_queuedDirection(Direction::NORTH)
+	_queuedDirection(Direction::NORTH),
+    _dead(false)
 {
     _sprite = cocos2d::Sprite::create();
     _sprite->setAnchorPoint(cocos2d::Point::ZERO);
@@ -143,7 +144,7 @@ void Creature::setCoordinate(const cocos2d::Vec2 &coordinate)
     _turnsToNextMove = 0;
     if (_level != nullptr)
     {
-        _updatePosition();
+        updatePosition();
     }
 }
 
@@ -178,6 +179,16 @@ Level* Creature::getLevel() const
     return _level;
 }
 
+void Creature::die()
+{
+    _dead = true;
+}
+
+bool Creature::isDead()
+{
+    return _dead;
+}
+
 void Creature::onTurn(float dt)
 {
     if (_turnsToNextMove > 0)
@@ -186,7 +197,7 @@ void Creature::onTurn(float dt)
         if (_turnsToNextMove == 0)
         {
             _sprite->stopAllActionsByTag(MOVE_ACTION_TAG);
-            _updatePosition();
+            updatePosition();
             
             auto object = _level->getObjectAt(_coordinate);
             if (object != nullptr)
@@ -202,13 +213,18 @@ void Creature::onTurn(float dt)
         }
     }
     
+    if (_dead)
+    {
+        return;
+    }
+    
     if (_type == CreatureType::CHIP)
     {
         for (auto creature : _level->getCreatures())
         {
             if (creature->getCoordinate() == _coordinate && creature != this)
             {
-                _level->removeCreature(this);
+                die();
                 if (creature->_type == CreatureType::BLOCK)
                 {
                     _level->fail("Ooops! Watch out for moving blocks!");
@@ -217,22 +233,35 @@ void Creature::onTurn(float dt)
                 {
                     _level->fail("Ooops! Look out for creatures!");
                 }
+                return;
             }
         }
     }
     
-    _tryMoveNext();
+    if (_queuedMove)
+    {
+        if (canMove(_queuedDirection))
+        {
+            move(_queuedDirection);
+        }
+    }
+    else
+    {
+        chooseNextMove();
+    }
+
     updateAnimation();
+    updateFlip();
 }
 
 void Creature::onAdd()
 {
     _level->getStage()->addChild(_sprite);
-     _updatePosition();
+    updatePosition();
     
-    _applyAnimationParams();
-    _updateAnimation();
-    _updateFlip();
+    applyAnimationParams();
+    updateAnimationInternal();
+    updateFlip();
     
     if (_soundEmitter != nullptr)
     {
@@ -313,7 +342,7 @@ bool Creature::canMove(Direction direction) const
     }
     
 	auto frontCreature = _level->getCreatureAt(targetCoordinate);
-    if (frontCreature != nullptr)
+    if (frontCreature != nullptr && !frontCreature->_dead)
     {
 		if (_type == CreatureType::CHIP)
 		{
@@ -342,26 +371,17 @@ void Creature::updateAnimation()
     CreatureState wasAnimatedState = _animatedState;
     bool wasAnimatedMoving = _animatedMoving;
     
-    _applyAnimationParams();
+    applyAnimationParams();
     if (_animatedDirection != wasAnimatedDirection || _animatedState != wasAnimatedState || _animatedMoving != wasAnimatedMoving)
     {
-        _updateAnimation();
+        updateAnimationInternal();
     }
     
-    _updateFlip();
+    updateFlip();
 }
 
-void Creature::_tryMoveNext()
+void Creature::chooseNextMove()
 {
-    if (_queuedMove)
-    {
-        if (canMove(_queuedDirection))
-        {
-			_move(_queuedDirection);
-			return;
-        }
-    }
-    
     if (_type == CreatureType::BLOCK || _type == CreatureType::CHIP)
     { }
     else if (_type == CreatureType::TEETH)
@@ -390,7 +410,7 @@ void Creature::_tryMoveNext()
 			{
 				if (canMove(dirs[i]))
 				{
-					_move(dirs[i]);
+					move(dirs[i]);
 					break;
 				}
 			}
@@ -400,7 +420,7 @@ void Creature::_tryMoveNext()
     {
         if (_type == CreatureType::WALKER && canMove(_direction))
         {
-            _move(_direction);
+            move(_direction);
         }
         else
         {
@@ -418,7 +438,7 @@ void Creature::_tryMoveNext()
             
             if (dirCount > 0)
             {
-                _move(dirs[std::rand() % dirCount]);
+                move(dirs[std::rand() % dirCount]);
             }
         }
     }
@@ -436,7 +456,7 @@ void Creature::_tryMoveNext()
         
 		if (canMove(direction))
 		{
-			_move(direction);
+			move(direction);
 		}
 		else
 		{
@@ -465,7 +485,7 @@ void Creature::_tryMoveNext()
                 
                 if (canMove(direction))
                 {
-                    _move(direction);
+                    move(direction);
                     break;
                 }
             }
@@ -473,7 +493,7 @@ void Creature::_tryMoveNext()
     }
 }
 
-void Creature::_move(Direction direction)
+void Creature::move(Direction direction)
 {
 	_queuedMove = false;
 
@@ -517,7 +537,7 @@ void Creature::_move(Direction direction)
 	}
 }
 
-void Creature::_updatePosition()
+void Creature::updatePosition()
 {
     _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
     
@@ -530,7 +550,7 @@ void Creature::_updatePosition()
     }
 }
 
-void Creature::_applyAnimationParams()
+void Creature::applyAnimationParams()
 {
     if (_type == CreatureType::BLOCK || _type == CreatureType::BLOB)
     {
@@ -570,12 +590,9 @@ void Creature::_applyAnimationParams()
     }
     
     // Balls and walkers
-    if (!_animatedMoving)
+    if (_type == CreatureType::BALL || _type == CreatureType::WALKER)
     {
-        if (_type == CreatureType::BALL || _type == CreatureType::WALKER)
-        {
-            _animatedDirection = Direction::EAST;
-        }
+        _animatedDirection = Direction::EAST;
     }
     
     if (_state == CreatureState::SLIDING)
@@ -598,7 +615,7 @@ void Creature::_applyAnimationParams()
     }
 }
 
-void Creature::_updateAnimation()
+void Creature::updateAnimationInternal()
 {
     if (_animatedMoving)
     {
@@ -617,7 +634,8 @@ void Creature::_updateAnimation()
            || _type == CreatureType::PARAMECIUM
            || _type == CreatureType::BALL
            || _type == CreatureType::WALKER
-           || _type == CreatureType::TANK);
+           || _type == CreatureType::TANK
+           || _type == CreatureType::TEETH);
         
         if (hasStaticAnimation)
         {
@@ -637,7 +655,7 @@ void Creature::_updateAnimation()
     }
 }
 
-void Creature::_updateFlip()
+void Creature::updateFlip()
 {
     if (_animatedFlipped)
     {
