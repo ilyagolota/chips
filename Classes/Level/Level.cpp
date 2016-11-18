@@ -160,16 +160,15 @@ void Level::addObject(LevelObject* object)
     size_t index = _coordinateToIndex(object->getCoordinate());
     if (index < _items.size())
     {
-        auto existingObject = _objects[index];
-        if (existingObject != object)
+        if (_objects[index] != nullptr)
         {
-            if (existingObject != nullptr)
-            {
-                existingObject->release();
-            }
-            _objects[index] = object;
-            object->retain();
+            throw std::runtime_error("Two objects in the same cell");
         }
+        
+        _objects[index] = object;
+        object->retain();
+        
+        object->onAdd();
     }
 }
 

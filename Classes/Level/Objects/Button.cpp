@@ -14,29 +14,38 @@ Button* Button::create(Level* level, const cocos2d::Vec2& coordinate, TileType t
 Button::Button(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelObject(level, coordinate)
 {
 	_type = type;
-    
-    _floor = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
-    _floor->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _floor->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-    _floor->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
-    _level->getStage()->addChild(_floor);
-    
-    _button = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
-    _button->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _button->setPosition(cocos2d::Vec2::ZERO);
-    _floor->addChild(_button);
+    _pressCount = 0;
+}
 
-	_pressCount = 0;
+void Button::onAdd()
+{
+    _rootNode = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
+    _rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
+    _level->getStage()->addChild(_rootNode);
+    
+    _buttonNode = cocos2d::Sprite::create();
+    _buttonNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _buttonNode->setPosition(cocos2d::Vec2::ZERO);
+    _rootNode->addChild(_buttonNode);
+}
+
+void Button::reset()
+{
+    _pressCount = 0;
+    _buttonNode->stopAllActions();
+    _buttonNode->setSpriteFrame("button-" + getColorName() + ".png");
 }
 
 void Button::beforeEnter(Creature *creature)
 {
 	if (_pressCount == 0) {
 		auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
-			_button->runAction(cocos2d::Sequence::create(
-				cocos2d::DelayTime::create(0.55f * duration),
-				cocos2d::CallFunc::create([this]() {
-				_button->setSpriteFrame("button-" + getColorName() + "-on.png");
+        _buttonNode->runAction(cocos2d::Sequence::create(
+            cocos2d::DelayTime::create(0.55f * duration),
+            cocos2d::CallFunc::create([this]() {
+				_buttonNode->setSpriteFrame("button-" + getColorName() + "-on.png");
 			}),
 			nullptr
 		));
@@ -48,11 +57,11 @@ void Button::afterEnter(Creature* creature)
 {
     if (_type == TileType::BUTTON_GREEN)
     {
-        _toggleSwitchWalls();
+        toggleSwitchWalls();
     }
     else if (_type == TileType::BUTTON_BLUE)
     {
-        _turnTanks();
+        turnTanks();
     }
     else
     {
@@ -93,13 +102,13 @@ void Button::beforeEscape(Creature* creature)
 	_pressCount -= 1;
 	if (_pressCount == 0) {
 		auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
-			_button->runAction(cocos2d::Sequence::create(
-				cocos2d::DelayTime::create(0.45f * duration),
-				cocos2d::CallFunc::create([this]() {
-				_button->setSpriteFrame("button-" + getColorName() + ".png");
-			}),
-			nullptr
-		));
+        _buttonNode->runAction(cocos2d::Sequence::create(
+            cocos2d::DelayTime::create(0.45f * duration),
+            cocos2d::CallFunc::create([this]() {
+                _buttonNode->setSpriteFrame("button-" + getColorName() + ".png");
+            }),
+            nullptr
+        ));
 
 		if (_type == TileType::BUTTON_BROWN)
 		{
@@ -124,13 +133,6 @@ void Button::beforeEscape(Creature* creature)
 	}
 }
 
-void Button::reset()
-{
-	_pressCount = 0;
-    _button->stopAllActions();
-    _button->setSpriteFrame("button-" + getColorName() + ".png");
-}
-
 std::string& Button::getColorName()
 {
     static std::string names[] = { "green", "red", "brown", "blue" };
@@ -152,7 +154,7 @@ std::string& Button::getColorName()
     }
 }
 
-void Button::_toggleSwitchWalls()
+void Button::toggleSwitchWalls()
 {
     for (int x = 0, width = _level->getConfig()->getWidth(), height = _level->getConfig()->getHeight(); x < width; x++)
     {
@@ -176,7 +178,7 @@ void Button::_toggleSwitchWalls()
     cocos2d::experimental::AudioEngine::play2d("sounds/door.mp3");
 }
 
-void Button::_turnTanks()
+void Button::turnTanks()
 {
     for (auto creature : _level->getCreatures())
     {

@@ -18,6 +18,12 @@ Level* LevelObject::getLevel() const
     return _level;
 }
 
+void LevelObject::onAdd()
+{ }
+
+void LevelObject::reset()
+{ }
+
 bool LevelObject::isOpenableBy(const Creature *creature, Direction direction) const
 {
     return false;
@@ -52,6 +58,3 @@ void LevelObject::afterEscape(Creature* creature)
 {
     CC_UNUSED_PARAM(creature);
 }
-
-void LevelObject::reset()
-{ }

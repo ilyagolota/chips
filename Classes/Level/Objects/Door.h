@@ -13,22 +13,23 @@ public:
     
 	Door(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
+    void onAdd() override;
+    void reset() override;
+    
     bool isOpenableBy(const Creature *creature, Direction direction) const override;
     
     void beforeEnter(Creature* creature) override;
     
     void setOpen(bool open);
-    void reset() override;
-    
 	TileType getKeyType() const;
 	std::string& getColorName() const;
 
 private:
 	bool _open;
 	TileType _type;
-	cocos2d::Sprite* _floor;
-	cocos2d::Sprite* _door;
-	cocos2d::Sprite* _cover;
+	cocos2d::Sprite* _rootNode;
+	cocos2d::Sprite* _doorNode;
+	cocos2d::Sprite* _frontNode;
 };
 
 #endif

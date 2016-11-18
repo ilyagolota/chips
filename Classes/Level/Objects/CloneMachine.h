@@ -10,19 +10,20 @@ public:
 	static CloneMachine* create(Level* level, const cocos2d::Vec2& coordinate);
     
 	CloneMachine(Level* level, const cocos2d::Vec2& coordinate);
-    
     void performCloning();
+    
+    void onAdd() override;
+    void reset() override;
     
     bool isEnterableBy(const Creature* creature, Direction direction) const override;
     bool isEscapableBy(const Creature* creature, Direction direction) const override;
     
     void beforeEscape(Creature* creature) override;
-    void reset() override;
-    
+
 private:
     bool _working;
-    cocos2d::Sprite* _floor;
-    cocos2d::Sprite* _front;
+    cocos2d::Sprite* _rootNode;
+    cocos2d::Sprite* _frontNode;
 };
 
 #endif

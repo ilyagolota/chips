@@ -12,24 +12,7 @@ Beartrap* Beartrap::create(Level* level, const cocos2d::Vec2& coordinate)
 
 Beartrap::Beartrap(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
-    _floor = cocos2d::Sprite::createWithSpriteFrameName("trap.png");
-	_floor->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	_floor->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
-	_floor->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_level->getStage()->addChild(_floor);
-
-	_piston = cocos2d::Sprite::createWithSpriteFrameName("trap-piston.png");
-	_piston->setPosition(cocos2d::Vec2::ZERO);
-	_piston->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_floor->addChild(_piston);
-
-	_front = cocos2d::Sprite::createWithSpriteFrameName("trap-front.png");
-	_front->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	_front->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_front->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
-	_level->getStage()->addChild(_front);
-
-	reset();
+    _open = false;
 }
 
 bool Beartrap::isOpen() const
@@ -39,32 +22,52 @@ bool Beartrap::isOpen() const
 
 void Beartrap::setOpen(bool open)
 {
-	if (_open != open)
-	{
-		_open = open;
-	
-		auto duration = _level->getTurnDuration();
-		_piston->stopAllActions();
-		_piston->runAction(cocos2d::MoveTo::create(0.5f * duration, _open ? cocos2d::Vec2::ZERO : BOTTOM_POSITION));
-
-		auto creaturePosition = _level->getProjector()->coordinateToPoint(_coordinate) + (_open ? cocos2d::Vec2::ZERO : BOTTOM_POSITION);
-		for (auto creature : _level->getCreatures())
-		{
-			if (creature->getCoordinate() == _coordinate)
-			{
-				auto action = cocos2d::MoveTo::create(duration, creaturePosition);
-				action->setTag(90);
-				creature->getSprite()->stopAllActionsByTag(90);
-				creature->getSprite()->runAction(action);
-			}
-		}
-	}
+    if (_open != open)
+    {
+        _open = open;
+        
+        auto duration = _level->getTurnDuration();
+        _pistonNode->stopAllActions();
+        _pistonNode->runAction(cocos2d::MoveTo::create(0.5f * duration, _open ? cocos2d::Vec2::ZERO : BOTTOM_POSITION));
+        
+        auto creaturePosition = _level->getProjector()->coordinateToPoint(_coordinate) + (_open ? cocos2d::Vec2::ZERO : BOTTOM_POSITION);
+        for (auto creature : _level->getCreatures())
+        {
+            if (creature->getCoordinate() == _coordinate)
+            {
+                auto action = cocos2d::MoveTo::create(duration, creaturePosition);
+                action->setTag(90);
+                creature->getSprite()->stopAllActionsByTag(90);
+                creature->getSprite()->runAction(action);
+            }
+        }
+    }
 }
 
 void Beartrap::reset()
 {
-	_open = false;
-	_piston->setPosition(BOTTOM_POSITION);
+    _open = false;
+    _pistonNode->setPosition(BOTTOM_POSITION);
+}
+
+void Beartrap::onAdd()
+{
+    _rootNode = cocos2d::Sprite::createWithSpriteFrameName("trap.png");
+	_rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+	_rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+	_rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_level->getStage()->addChild(_rootNode);
+
+	_pistonNode = cocos2d::Sprite::createWithSpriteFrameName("trap-piston.png");
+	_pistonNode->setPosition(BOTTOM_POSITION);
+	_pistonNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_rootNode->addChild(_pistonNode);
+
+	_frontNode = cocos2d::Sprite::createWithSpriteFrameName("trap-front.png");
+	_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+	_frontNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_frontNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+	_level->getStage()->addChild(_frontNode);
 }
 
 bool Beartrap::isEscapableBy(const Creature* creature, Direction direction) const

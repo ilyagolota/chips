@@ -16,6 +16,9 @@ public:
     cocos2d::Vec2 getCoordinate() const;
     Level* getLevel() const;
 
+    virtual void onAdd();
+    virtual void reset();
+    
     virtual bool isOpenableBy(const Creature* creature, Direction direction) const;
     virtual bool isEnterableBy(const Creature* creature, Direction direction) const;
     virtual bool isEscapableBy(const Creature* creature, Direction direction) const;
@@ -24,8 +27,7 @@ public:
     virtual void afterEnter(Creature* creature);
     virtual void beforeEscape(Creature* creature);
     virtual void afterEscape(Creature* creature);
-    virtual void reset();
-
+    
 protected:
 	Level* _level;
 	cocos2d::Vec2 _coordinate;

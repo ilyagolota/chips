@@ -10,23 +10,56 @@ Bomb* Bomb::create(Level* level, const cocos2d::Vec2& coordinate)
 
 Bomb::Bomb(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
-	reset();
+	_exploded = false;
+}
+
+void Bomb::onAdd()
+{
+    _rootNode = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
+    _rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
+    _level->getStage()->addChild(_rootNode);
+    
+    _bombNode = cocos2d::Sprite::createWithSpriteFrameName("button-red.png");
+    _bombNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _bombNode->setPosition(cocos2d::Vec2::ZERO);
+    _rootNode->addChild(_bombNode);
 }
 
 void Bomb::reset()
 {
     _exploded = false;
+    _bombNode->setVisible(true);
 }
 
 void Bomb::afterEnter(Creature *creature)
 {
-    if (!_exploded)
+    if (_exploded)
     {
-        _exploded = true;
-        creature->die();
-        if (creature->getType() == CreatureType::CHIP)
-        {
-            _level->fail("Ooops! Don't touch the bombs!");
-        }
+        return;
+    }
+    
+    _bombNode->setVisible(false);
+    
+    auto explosionNode = cocos2d::Sprite::create();
+    explosionNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+    explosionNode->setPosition(cocos2d::Vec2::ZERO);
+    explosionNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate));
+    explosionNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+    _level->getStage()->addChild(explosionNode);
+    
+    explosionNode->runAction(cocos2d::Sequence::create(
+        cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("splash")),
+        cocos2d::CallFuncN::create([](cocos2d::Node* node) {
+            node->removeFromParent();
+        })
+    ));
+    
+    _exploded = true;
+    creature->die();
+    if (creature->getType() == CreatureType::CHIP)
+    {
+        _level->fail("Ooops! Don't touch the bombs!");
     }
 }

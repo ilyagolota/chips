@@ -15,19 +15,21 @@ public:
     
 	Button(Level* level, const cocos2d::Vec2& coordinate, TileType type);
 
+    void onAdd() override;
+    void reset() override;
+    
     void beforeEnter(Creature* creature) override;
     void afterEnter(Creature* creature) override;
     void beforeEscape(Creature* creature) override;
-    void reset() override;
     
     std::string& getColorName();
     
 protected:
-    void _toggleSwitchWalls();
-    void _turnTanks();
+    void toggleSwitchWalls();
+    void turnTanks();
     
-    cocos2d::Sprite* _floor;
-    cocos2d::Sprite* _button;
+    cocos2d::Sprite* _rootNode;
+    cocos2d::Sprite* _buttonNode;
 	size_t _pressCount;
 };
 

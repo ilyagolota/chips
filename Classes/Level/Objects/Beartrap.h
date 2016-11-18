@@ -16,7 +16,9 @@ public:
     bool isOpen() const;
     void setOpen(bool open);
     
-	void reset() override;
+    void onAdd() override;
+    void reset() override;
+    
     bool isEscapableBy(const Creature* creature, Direction direction) const override;
 	void beforeEnter(Creature* creature) override;
     void afterEnter(Creature* creature) override;
@@ -25,9 +27,9 @@ private:
 	static cocos2d::Vec2 BOTTOM_POSITION;
 
 	bool _open;
-	cocos2d::Sprite* _floor;
-	cocos2d::Sprite* _front;
-	cocos2d::Sprite* _piston;
+	cocos2d::Sprite* _rootNode;
+	cocos2d::Sprite* _frontNode;
+	cocos2d::Sprite* _pistonNode;
 };
 
 #endif
