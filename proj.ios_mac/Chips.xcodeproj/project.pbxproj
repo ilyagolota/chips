@@ -64,8 +64,6 @@
 		B305558D1CE339DC006E5546 /* Creature.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B305558A1CE339DC006E5546 /* Creature.cpp */; };
 		B30555921CE3418C006E5546 /* LevelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555901CE3418C006E5546 /* LevelObject.cpp */; };
 		B30555931CE3418C006E5546 /* LevelObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555901CE3418C006E5546 /* LevelObject.cpp */; };
-		B30555961CE34295006E5546 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555941CE34295006E5546 /* Item.cpp */; };
-		B30555971CE34295006E5546 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555941CE34295006E5546 /* Item.cpp */; };
 		B30555BE1CE3454D006E5546 /* Beartrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555981CE3454D006E5546 /* Beartrap.cpp */; };
 		B30555BF1CE3454D006E5546 /* Beartrap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B30555981CE3454D006E5546 /* Beartrap.cpp */; };
 		B30555C01CE3454D006E5546 /* BlueWall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B305559A1CE3454D006E5546 /* BlueWall.cpp */; };
@@ -166,6 +164,8 @@
 		D4626CAE1D903D61003C812E /* TransitionAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAB1D903D61003C812E /* TransitionAnimation.cpp */; };
 		D4626CB11D903E07003C812E /* LevelListScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAF1D903E07003C812E /* LevelListScene.cpp */; };
 		D4626CB21D903E07003C812E /* LevelListScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4626CAF1D903E07003C812E /* LevelListScene.cpp */; };
+		D4B784EC1DDF58D9007B3320 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4B784EA1DDF58D9007B3320 /* Item.cpp */; };
+		D4B784ED1DDF58D9007B3320 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4B784EA1DDF58D9007B3320 /* Item.cpp */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
@@ -265,8 +265,6 @@
 		B305558B1CE339DC006E5546 /* Creature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Creature.h; sourceTree = "<group>"; };
 		B30555901CE3418C006E5546 /* LevelObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelObject.cpp; sourceTree = "<group>"; };
 		B30555911CE3418C006E5546 /* LevelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelObject.h; sourceTree = "<group>"; };
-		B30555941CE34295006E5546 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
-		B30555951CE34295006E5546 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		B30555981CE3454D006E5546 /* Beartrap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Beartrap.cpp; sourceTree = "<group>"; };
 		B30555991CE3454D006E5546 /* Beartrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Beartrap.h; sourceTree = "<group>"; };
 		B305559A1CE3454D006E5546 /* BlueWall.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlueWall.cpp; sourceTree = "<group>"; };
@@ -372,6 +370,8 @@
 		D4626CAF1D903E07003C812E /* LevelListScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelListScene.cpp; sourceTree = "<group>"; };
 		D4626CB01D903E07003C812E /* LevelListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelListScene.h; sourceTree = "<group>"; };
 		D46337ED1D92E5B0008FF471 /* LevelHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelHandler.h; sourceTree = "<group>"; };
+		D4B784EA1DDF58D9007B3320 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		D4B784EB1DDF58D9007B3320 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
@@ -621,6 +621,8 @@
 				B30555BD1CE3454D006E5546 /* Water.h */,
 				B30555901CE3418C006E5546 /* LevelObject.cpp */,
 				B30555911CE3418C006E5546 /* LevelObject.h */,
+				D4B784EA1DDF58D9007B3320 /* Item.cpp */,
+				D4B784EB1DDF58D9007B3320 /* Item.h */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -658,8 +660,6 @@
 				B30555861CE333E2006E5546 /* Inventory.h */,
 				B3F0A3521CE2376E006E152B /* Level.cpp */,
 				B3F0A3531CE2376E006E152B /* Level.h */,
-				B30555941CE34295006E5546 /* Item.cpp */,
-				B30555951CE34295006E5546 /* Item.h */,
 				D46337ED1D92E5B0008FF471 /* LevelHandler.h */,
 			);
 			path = Level;
@@ -900,6 +900,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B784EC1DDF58D9007B3320 /* Item.cpp in Sources */,
 				B30555D81CE3454D006E5546 /* PopupWall.cpp in Sources */,
 				D431917F1D8AD79700EA0D9A /* InventoryPanel.cpp in Sources */,
 				B30555CC1CE3454D006E5546 /* Door.cpp in Sources */,
@@ -931,7 +932,6 @@
 				B30555E21CE3454D006E5546 /* Water.cpp in Sources */,
 				B3F767941CF2FE9E00F03CCE /* TileSoundEmitter.cpp in Sources */,
 				D4626CAD1D903D61003C812E /* TransitionAnimation.cpp in Sources */,
-				B30555961CE34295006E5546 /* Item.cpp in Sources */,
 				B3F0A3431CE2081E006E152B /* BinaryReader.cpp in Sources */,
 				D4559F9F1D7D7A16008FCEF7 /* Highscores.cpp in Sources */,
 				B30555CE1CE3454D006E5546 /* Exit.cpp in Sources */,
@@ -977,13 +977,13 @@
 				B30555DB1CE3454D006E5546 /* Slide.cpp in Sources */,
 				B30555C71CE3454D006E5546 /* Button.cpp in Sources */,
 				B30555D31CE3454D006E5546 /* HiddenWall.cpp in Sources */,
-				B30555971CE34295006E5546 /* Item.cpp in Sources */,
 				B30555D91CE3454D006E5546 /* PopupWall.cpp in Sources */,
 				B30555C31CE3454D006E5546 /* Bomb.cpp in Sources */,
 				B30555CB1CE3454D006E5546 /* Dirt.cpp in Sources */,
 				B3F0A34A1CE2081E006E152B /* HashAlgorithm.cpp in Sources */,
 				B30555D51CE3454D006E5546 /* HintButton.cpp in Sources */,
 				B30555E11CE3454D006E5546 /* Teleport.cpp in Sources */,
+				D4B784ED1DDF58D9007B3320 /* Item.cpp in Sources */,
 				B3F0A34E1CE2081E006E152B /* MD5.cpp in Sources */,
 				B30555DD1CE3454D006E5546 /* Socket.cpp in Sources */,
 				B3F767A41CF3453D00F03CCE /* Preloader.cpp in Sources */,

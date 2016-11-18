@@ -208,7 +208,7 @@ void Creature::onTurn(float dt)
             auto item = _level->getItemAt(_coordinate);
             if (item != nullptr)
             {
-                item->pick(this);
+                item->afterEnter(this);
             }
         }
     }
@@ -283,7 +283,7 @@ void Creature::onAdd()
     auto item = _level->getItemAt(_coordinate);
     if (item != nullptr)
     {
-        item->pick(this);
+        item->afterEnter(this);
     }
 }
 
@@ -336,7 +336,7 @@ bool Creature::canMove(Direction direction) const
 	}
     
 	auto targetItem = _level->getItemAt(targetCoordinate);
-    if (targetItem != nullptr && !targetItem->isPickableBy(this))
+    if (targetItem != nullptr && !targetItem->isEnterableBy(this, direction))
     {
         return false;
     }

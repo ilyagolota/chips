@@ -162,9 +162,11 @@ float Level::getTurnDuration()
 
 void Level::addObject(LevelObject* object)
 {
-    size_t index = _coordinateToIndex(object->getCoordinate());
-    if (index < _items.size())
+    auto coordinate = object->getCoordinate();
+    if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _config->getWidth() && coordinate.y < _config->getHeight())
     {
+        size_t index = _coordinateToIndex(coordinate);
+        
         if (_objects[index] != nullptr)
         {
             throw std::runtime_error("Two objects in the same cell");
@@ -179,15 +181,12 @@ void Level::addObject(LevelObject* object)
 
 LevelObject* Level::getObjectAt(const cocos2d::Vec2& coordinate) const
 {
-    size_t index = _coordinateToIndex(coordinate);
-    if (index >= _objects.size())
+    if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _config->getWidth() && coordinate.y < _config->getHeight())
     {
-        return nullptr;
-    }
-    else
-    {
+        size_t index = _coordinateToIndex(coordinate);
         return _objects[index];
     }
+    return nullptr;
 }
 
 void Level::addItem(Item* item)
@@ -196,15 +195,16 @@ void Level::addItem(Item* item)
     if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _config->getWidth() && coordinate.y < _config->getHeight())
     {
         size_t index = _coordinateToIndex(coordinate);
-        auto existingItem = _items[index];
-        if (existingItem != nullptr)
+        
+        if (_items[index] != nullptr)
         {
-            existingItem->release();
+            throw std::runtime_error("Two items in the same cell");
         }
         
         _items[index] = item;
-		item->setLevel(this);
         item->retain();
+        
+        item->onAdd();
     }
 }
 
@@ -385,7 +385,7 @@ void Level::_reset()
         
         if (_items[i] != nullptr)
         {
-            //_items[i]->reset();
+            _items[i]->reset();
         }
         
         if (_objects[i] != nullptr)
@@ -428,7 +428,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::IC_CHIP:
-            addItem(Item::create(coordinate, tileType));
+            addItem(Item::create(this, coordinate, tileType));
             return false;
             break;
             
@@ -577,7 +577,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
         case TileType::BOOTS_FIRE:
         case TileType::BOOTS_ICE:
         case TileType::BOOTS_SLIDE:
-            addItem(Item::create(coordinate, tileType));
+            addItem(Item::create(this, coordinate, tileType));
             return false;
             
         default:

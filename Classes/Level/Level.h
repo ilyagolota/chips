@@ -14,8 +14,8 @@
 #include "LevelConfig.h"
 #include "Inventory.h"
 #include "Creature.h"
-#include "Item.h"
 #include "Objects/LevelObject.h"
+#include "Objects/Item.h"
 #include "LevelHandler.h"
 
 class IPlayerControl;
