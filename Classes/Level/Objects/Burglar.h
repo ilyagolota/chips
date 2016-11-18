@@ -20,7 +20,7 @@ public:
     void afterEnter(Creature* creature) override;
     
 protected:
-    cocos2d::Sprite* _rootNode;
+    cocos2d::Sprite* _node;
     cocos2d::Sprite* _burglarNode;
 };
 

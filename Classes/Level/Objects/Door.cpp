@@ -20,21 +20,21 @@ void Door::onAdd()
 	bool ew = ((shape >> 3) & 1) + ((shape >> 1) & 1) > ((shape >> 2) & 1) + (shape & 1);
 	std::string shapeName = ew ? "-ew" : "-ns";
 
-	_rootNode = cocos2d::Sprite::createWithSpriteFrameName("way-" + getColorName() + shapeName + ".png");
-	_rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	_rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
-	_level->getStage()->addChild(_rootNode);
+	_node = cocos2d::Sprite::createWithSpriteFrameName("way-" + getColorName() + shapeName + ".png");
+	_node->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+	_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+	_level->getStage()->addChild(_node);
 
 	_doorNode = cocos2d::Sprite::createWithSpriteFrameName("door-" + getColorName() + shapeName + ".png");
 	_doorNode->setAnchorPoint(cocos2d::Vec2::ZERO);
 	_doorNode->setPosition(cocos2d::Vec2(0, 12));
-	_rootNode->addChild(_doorNode);
+	_node->addChild(_doorNode);
 
 	_frontNode = cocos2d::Sprite::createWithSpriteFrameName("way-" + getColorName() + "-front" + shapeName + ".png");
 	_frontNode->setAnchorPoint(cocos2d::Vec2::ZERO);
 	_frontNode->setPosition(cocos2d::Vec2::ZERO);
-	_rootNode->addChild(_frontNode);
+	_node->addChild(_frontNode);
     
     _level->getPhysicsWorld()->setBody(_coordinate, TileBody::OUTER_BOX, 7);
 }
@@ -82,7 +82,7 @@ void Door::beforeEnter(Creature* creature)
             }
         }
 
-		_rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+		_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 
 		float duration = _level->getTurnDuration();
 		_doorNode->runAction(cocos2d::Sequence::create(

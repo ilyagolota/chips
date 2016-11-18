@@ -15,26 +15,31 @@ Dirt::Dirt(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, c
 
 void Dirt::onAdd()
 {
-    _rootNode = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
-    _rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-    _rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
-    _level->getStage()->addChild(_rootNode);
+    _node = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
+    _node->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+    _level->getStage()->addChild(_node);
     
     _dirtNode = cocos2d::Sprite::createWithSpriteFrameName("button-brown.png");
     _dirtNode->setAnchorPoint(cocos2d::Vec2::ZERO);
     _dirtNode->setPosition(cocos2d::Vec2::ZERO);
-    _rootNode->addChild(_dirtNode);
+    _node->addChild(_dirtNode);
 }
 
 void Dirt::reset()
 {
     _removed = false;
     
-    _rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
     
     _dirtNode->setVisible(true);
     _dirtNode->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName("button-brown.png"));
+}
+
+bool Dirt::isEnterableBy(const Creature* creature, Direction /*direction*/) const
+{
+    return _removed || (creature->getType() == CreatureType::CHIP);
 }
 
 void Dirt::afterEnter(Creature *creature)
@@ -44,7 +49,7 @@ void Dirt::afterEnter(Creature *creature)
         return;
     }
     
-    _rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
     
     _dirtNode->runAction(cocos2d::Sequence::create(
         cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("splash")),

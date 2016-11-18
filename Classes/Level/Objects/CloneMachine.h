@@ -22,7 +22,7 @@ public:
 
 private:
     bool _working;
-    cocos2d::Sprite* _rootNode;
+    cocos2d::Sprite* _node;
     cocos2d::Sprite* _frontNode;
 };
 

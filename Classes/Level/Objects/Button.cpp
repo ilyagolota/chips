@@ -19,16 +19,16 @@ Button::Button(Level* level, const cocos2d::Vec2& coordinate, TileType type) : L
 
 void Button::onAdd()
 {
-    _rootNode = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
-    _rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-    _rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
-    _level->getStage()->addChild(_rootNode);
+    _node = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
+    _node->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
+    _level->getStage()->addChild(_node);
     
     _buttonNode = cocos2d::Sprite::create();
     _buttonNode->setAnchorPoint(cocos2d::Vec2::ZERO);
     _buttonNode->setPosition(cocos2d::Vec2::ZERO);
-    _rootNode->addChild(_buttonNode);
+    _node->addChild(_buttonNode);
 }
 
 void Button::reset()

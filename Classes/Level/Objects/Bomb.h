@@ -18,7 +18,7 @@ public:
     
 protected:
     bool _exploded;
-    cocos2d::Sprite* _rootNode;
+    cocos2d::Sprite* _node;
     cocos2d::Sprite* _bombNode;
 };
 

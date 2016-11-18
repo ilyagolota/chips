@@ -12,25 +12,29 @@ Teleport* Teleport::create(Level* level, const cocos2d::Vec2& coordinate)
 
 Teleport::Teleport(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
-	_floor = cocos2d::Sprite::createWithSpriteFrameName("trap2.png");
-	_floor->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	_floor->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
-	_floor->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_level->getStage()->addChild(_floor);
+}
 
-	_abuse = cocos2d::Sprite::create();
-	_abuse->setPosition(cocos2d::Vec2(0, 0));
-	_abuse->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_abuse->runAction(cocos2d::RepeatForever::create(
+void Teleport::onAdd()
+{
+	_node = cocos2d::Sprite::createWithSpriteFrameName("trap2.png");
+	_node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+	_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+	_node->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_level->getStage()->addChild(_node);
+
+	_abuseNode = cocos2d::Sprite::create();
+	_abuseNode->setPosition(cocos2d::Vec2(0, 0));
+	_abuseNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_abuseNode->runAction(cocos2d::RepeatForever::create(
 		cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("teleport"))
 	));
-	_floor->addChild(_abuse);
+	_node->addChild(_abuseNode);
 
-	_front = cocos2d::Sprite::createWithSpriteFrameName("trap2-front.png");
-	_front->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	_front->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_front->setZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
-	_level->getStage()->addChild(_front);
+	_frontNode = cocos2d::Sprite::createWithSpriteFrameName("trap2-front.png");
+	_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+	_frontNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_frontNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+	_level->getStage()->addChild(_frontNode);
 }
 
 void Teleport::beforeEnter(Creature* creature)
@@ -74,7 +78,7 @@ void Teleport::beforeEnter(Creature* creature)
 
 void Teleport::afterEnter(Creature* creature)
 {
-    auto targetTeleport = _findTargetTeleport(creature);
+    auto targetTeleport = findTargetTeleport(creature);
     if (targetTeleport != nullptr)
     {
         creature->setCoordinate(targetTeleport->getCoordinate());
@@ -125,11 +129,7 @@ void Teleport::beforeEscape(Creature* creature)
     creatureSprite->runAction(action);
 }
 
-void Teleport::reset()
-{
-}
-
-Teleport* Teleport::_findTargetTeleport(Creature* creature)
+Teleport* Teleport::findTargetTeleport(Creature* creature)
 {
     Teleport* targetTeleport = nullptr;
     long x = _coordinate.x;

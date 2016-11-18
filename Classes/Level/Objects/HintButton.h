@@ -12,8 +12,13 @@ public:
 	static HintButton* create(Level* level, const cocos2d::Vec2& coordinate);
 	HintButton(Level* level, const cocos2d::Vec2& coordinate);
 
+    void onAdd() override;
+    
+    void beforeEnter(Creature *creature) override;
+    void beforeEscape(Creature *creature) override;
+    
 private:
-	cocos2d::Sprite* _floor;
+	cocos2d::Sprite* _node;
 };
 
 #endif

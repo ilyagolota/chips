@@ -15,16 +15,16 @@ Bomb::Bomb(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, c
 
 void Bomb::onAdd()
 {
-    _rootNode = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
-    _rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-    _rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
-    _level->getStage()->addChild(_rootNode);
+    _node = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
+    _node->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate));
+    _level->getStage()->addChild(_node);
     
     _bombNode = cocos2d::Sprite::createWithSpriteFrameName("button-red.png");
     _bombNode->setAnchorPoint(cocos2d::Vec2::ZERO);
     _bombNode->setPosition(cocos2d::Vec2::ZERO);
-    _rootNode->addChild(_bombNode);
+    _node->addChild(_bombNode);
 }
 
 void Bomb::reset()
@@ -53,7 +53,8 @@ void Bomb::afterEnter(Creature *creature)
         cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("splash")),
         cocos2d::CallFuncN::create([](cocos2d::Node* node) {
             node->removeFromParent();
-        })
+        }),
+        nullptr
     ));
     
     _exploded = true;

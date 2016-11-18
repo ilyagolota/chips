@@ -10,7 +10,6 @@ public:
 	static Water* create(Level* level, const cocos2d::Vec2& coordinate);
     
     Water(Level* level, const cocos2d::Vec2& coordinate);
-    virtual ~Water();
     
     void onAdd() override;
 	void reset() override;
@@ -22,10 +21,10 @@ public:
     bool hasDrawnBlock() const;
 
 private:
-	cocos2d::Sprite* _sprite;
-	cocos2d::Sprite* _splash;
-	cocos2d::Sprite* _block;
-
+	cocos2d::Sprite* _node;
+	cocos2d::Sprite* _blockNode;
+    cocos2d::Sprite* _splash;
+    
 	enum {
 		WATER_STATE,
 		DIRT_STATE,

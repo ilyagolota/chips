@@ -10,19 +10,21 @@ public:
 	static Teleport* create(Level* level, const cocos2d::Vec2& coordinate);
     
 	Teleport(Level* level, const cocos2d::Vec2& coordinate);
+    
+    void onAdd() override;
+    
     void beforeEnter(Creature* creature) override;
     void afterEnter(Creature* creature) override;
     void beforeEscape(Creature* creature) override;
-    void reset() override;
     
 private:
 	static const cocos2d::Vec2 BOTTOM_POSITION;
 
-	Teleport* _findTargetTeleport(Creature* creature);
+	Teleport* findTargetTeleport(Creature* creature);
 	
-	cocos2d::Sprite* _floor;
-	cocos2d::Sprite* _abuse;
-	cocos2d::Sprite* _front;
+	cocos2d::Sprite* _node;
+	cocos2d::Sprite* _abuseNode;
+	cocos2d::Sprite* _frontNode;
 };
 
 #endif

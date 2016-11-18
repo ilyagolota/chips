@@ -10,15 +10,19 @@ public:
 	static Socket* create(Level* level, const cocos2d::Vec2& coordinate);
     
 	Socket(Level* level, const cocos2d::Vec2& coordinate);
+    
+    void onAdd() override;
+    void reset() override;
+    
     bool isOpenableBy(const Creature* creature, Direction direction) const override;
-    void reset();
-    void beforeEnter(Creature* creature);
+    
+    void beforeEnter(Creature* creature) override;
     
 private:
     bool _open;
-    cocos2d::Sprite* _floor;
-    cocos2d::Sprite* _wall;
-    cocos2d::Sprite* _cover;
+    cocos2d::Sprite* _node;
+    cocos2d::Sprite* _wallNode;
+    cocos2d::Sprite* _frontNode;
 };
 
 #endif

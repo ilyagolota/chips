@@ -43,6 +43,7 @@ public:
     LevelConfig* getConfig() const;
     void start(LevelConfig* config);
     void restart();
+    void win();
     void fail(const std::string& message);
     void makeTurn(float dt);
     

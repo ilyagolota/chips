@@ -14,11 +14,13 @@ public:
     void onAdd() override;
     void reset() override;
     
+    bool isEnterableBy(const Creature* creature, Direction direction) const override;
+    
     void afterEnter(Creature* creature) override;
     
 protected:
     bool _removed;
-    cocos2d::Sprite* _rootNode;
+    cocos2d::Sprite* _node;
     cocos2d::Sprite* _dirtNode;
 };
 

@@ -27,7 +27,7 @@ public:
 private:
 	bool _open;
 	TileType _type;
-	cocos2d::Sprite* _rootNode;
+	cocos2d::Sprite* _node;
 	cocos2d::Sprite* _doorNode;
 	cocos2d::Sprite* _frontNode;
 };

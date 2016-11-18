@@ -27,7 +27,7 @@ private:
 	static cocos2d::Vec2 BOTTOM_POSITION;
 
 	bool _open;
-	cocos2d::Sprite* _rootNode;
+	cocos2d::Sprite* _node;
 	cocos2d::Sprite* _frontNode;
 	cocos2d::Sprite* _pistonNode;
 };

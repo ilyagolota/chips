@@ -13,11 +13,17 @@ public:
     
 	Fire(Level* level, const cocos2d::Vec2& coordinate);
     
+    void onAdd() override;
+    
     bool isEnterableBy(const Creature* creature, Direction direction) const override;
+    
     void afterEnter(Creature* creature) override;
     
 private:
-    cocos2d::Sprite* _smokeSprite;
+    cocos2d::Sprite* _node;
+    cocos2d::Sprite* _fire1Node;
+    cocos2d::Sprite* _fire2Node;
+    cocos2d::Sprite* _fire3Node;
 };
 
 #endif

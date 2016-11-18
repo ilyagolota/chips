@@ -89,6 +89,11 @@ void Level::restart()
     _reset();
 }
 
+void Level::win()
+{
+    _handler->onLevelWin();
+}
+
 void Level::fail(const std::string& message)
 {
     _handler->onLevelFail(message);

@@ -28,7 +28,7 @@ protected:
     void toggleSwitchWalls();
     void turnTanks();
     
-    cocos2d::Sprite* _rootNode;
+    cocos2d::Sprite* _node;
     cocos2d::Sprite* _buttonNode;
 	size_t _pressCount;
 };

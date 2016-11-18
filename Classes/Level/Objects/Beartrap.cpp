@@ -52,16 +52,16 @@ void Beartrap::reset()
 
 void Beartrap::onAdd()
 {
-    _rootNode = cocos2d::Sprite::createWithSpriteFrameName("trap.png");
-	_rootNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	_rootNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
-	_rootNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_level->getStage()->addChild(_rootNode);
+    _node = cocos2d::Sprite::createWithSpriteFrameName("trap.png");
+	_node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+	_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+	_node->setAnchorPoint(cocos2d::Vec2::ZERO);
+	_level->getStage()->addChild(_node);
 
 	_pistonNode = cocos2d::Sprite::createWithSpriteFrameName("trap-piston.png");
 	_pistonNode->setPosition(BOTTOM_POSITION);
 	_pistonNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_rootNode->addChild(_pistonNode);
+	_node->addChild(_pistonNode);
 
 	_frontNode = cocos2d::Sprite::createWithSpriteFrameName("trap-front.png");
 	_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));

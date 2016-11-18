@@ -11,23 +11,19 @@ Water* Water::create(Level* level, const cocos2d::Vec2& coordinate)
 Water::Water(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, coordinate)
 {
 	_splash = nullptr;
-	_block = nullptr;
-}
-
-Water::~Water()
-{
+	_blockNode = nullptr;
 }
 
 void Water::onAdd()
 {
-    _sprite = cocos2d::Sprite::create();
-    _sprite->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _sprite->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-    _sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
-    _level->getStage()->addChild(_sprite);
+    _node = cocos2d::Sprite::create();
+    _node->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+    _level->getStage()->addChild(_node);
     
     auto animation = cocos2d::AnimationCache::getInstance()->getAnimation("water");
-    _sprite->runAction(cocos2d::RepeatForever::create(cocos2d::Animate::create(animation)));
+    _node->runAction(cocos2d::RepeatForever::create(cocos2d::Animate::create(animation)));
     
     //    auto emitter = TileSoundEmitter::create("water.mp3");
     //    emitter->setCoordinate(_coordinate);
@@ -38,15 +34,16 @@ void Water::reset()
 {
     _state = WATER_STATE;
     
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 	if (_splash != nullptr)
 	{
 		_splash->stopAllActions();
 		_splash->setVisible(false);
 	}
-	if (_block != nullptr)
+	if (_blockNode != nullptr)
 	{
-		_block->stopAllActions();
-		_block->setVisible(false);
+		_blockNode->stopAllActions();
+		_blockNode->setVisible(false);
 	}
 }
 
@@ -66,8 +63,8 @@ void Water::beforeEnter(Creature* creature)
 {
 	if (_state == DIRT_STATE)
 	{
-		_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
-		_block->runAction(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("block-drawn")));
+		_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+		_blockNode->runAction(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("block-drawn")));
 		_state = FLOOR_STATE;
 	}
 }
@@ -90,16 +87,16 @@ void Water::afterEnter(Creature *creature)
 
 		if (creature->getType() == CreatureType::BLOCK)
 		{
-			if (_block == nullptr)
+			if (_blockNode == nullptr)
 			{
-				_block = cocos2d::Sprite::create();
-				_block->setAnchorPoint(cocos2d::Vec2::ZERO);
-				_block->setPosition(cocos2d::Vec2(0, 2));
-				_sprite->addChild(_block);
+				_blockNode = cocos2d::Sprite::create();
+				_blockNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+				_blockNode->setPosition(cocos2d::Vec2(0, 2));
+				_node->addChild(_blockNode);
 			}
-			_block->setVisible(true);
-			_block->runAction(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("block-drawn-half")));
-			_sprite->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+			_blockNode->setVisible(true);
+			_blockNode->runAction(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("block-drawn-half")));
+			_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
 			_state = DIRT_STATE;
 		}
 		else
@@ -109,7 +106,7 @@ void Water::afterEnter(Creature *creature)
 				_splash = cocos2d::Sprite::create();
 				_splash->setAnchorPoint(cocos2d::Vec2::ZERO);
 				_splash->setPosition(cocos2d::Vec2::ZERO);
-				_sprite->addChild(_splash);
+				_node->addChild(_node);
 			}
 
 			_splash->setVisible(true);

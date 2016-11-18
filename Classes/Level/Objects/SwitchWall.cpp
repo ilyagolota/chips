@@ -11,44 +11,46 @@ SwitchWall* SwitchWall::create(Level* level, const cocos2d::Vec2& coordinate, bo
 SwitchWall::SwitchWall(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen) : LevelObject(level, coordinate)
 {
     _initiallyOpen = initiallyOpen;
+    _open = _initiallyOpen;
+}
 
+void SwitchWall::onAdd()
+{
     int shape = _level->getWallShape(_coordinate);
     bool ew = ((shape >> 3) & 1) + ((shape >> 1) & 1) > ((shape >> 2) & 1) + (shape & 1);
-    
     std::string shapeName = ew ? "-ew" : "-ns";
     
-    _floor = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall-floor" + shapeName + ".png");
-    _floor->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _floor->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-    _floor->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
-    _level->getStage()->addChild(_floor);
+    _node = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall-floor" + shapeName + ".png");
+    _node->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+    _level->getStage()->addChild(_node);
     
-    _wall = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall" + shapeName + ".png");
-    _wall->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _floor->addChild(_wall);
+    _wallNode = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall" + shapeName + ".png");
+    _wallNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _wallNode->setVisible(!_open);
+    _node->addChild(_wallNode);
     
-    _cover = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall-floor-front" + shapeName + ".png");
-    _cover->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _cover->setPosition(cocos2d::Vec2::ZERO);
-    _floor->addChild(_cover);
-    
-    reset();
+    _frontNode = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall-floor-front" + shapeName + ".png");
+    _frontNode->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _frontNode->setPosition(cocos2d::Vec2::ZERO);
+    _node->addChild(_frontNode);
 }
 
 void SwitchWall::reset()
 {
     _open = _initiallyOpen;
 
-    _wall->stopAllActions();
-    _wall->setVisible(!_open);
+    _wallNode->stopAllActions();
+    _wallNode->setVisible(!_open);
     if (_open)
     {
-        _wall->setPosition(cocos2d::Vec2(0, -78));
+        _wallNode->setPosition(cocos2d::Vec2(0, -78));
         _level->getPhysicsWorld()->setBody(_coordinate, TileBody::EMPTY, 7);
     }
     else
     {
-        _wall->setPosition(cocos2d::Vec2(0, 12));
+        _wallNode->setPosition(cocos2d::Vec2(0, 12));
         _level->getPhysicsWorld()->setBody(_coordinate, TileBody::OUTER_BOX, 7);
     }
 }
@@ -66,13 +68,13 @@ void SwitchWall::open()
         _level->getPhysicsWorld()->setBody(_coordinate, TileBody::EMPTY, 7);
         
         auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate);
-        _floor->setLocalZOrder(zOrder + Level::BACK_Z_ORDER);
+        _node->setLocalZOrder(zOrder + Level::BACK_Z_ORDER);
         
         float duration = _level->getTurnDuration();
-        _wall->runAction(cocos2d::Sequence::create(
+        _wallNode->runAction(cocos2d::Sequence::create(
             cocos2d::MoveTo::create(duration, cocos2d::Vec2(0, -78)),
-            cocos2d::CallFuncN::create([](cocos2d::Node* wall) {
-                wall->setVisible(false);
+            cocos2d::CallFuncN::create([](cocos2d::Node* wallNode) {
+                wallNode->setVisible(false);
             }),
             nullptr
         ));
@@ -87,10 +89,10 @@ void SwitchWall::close()
         _level->getPhysicsWorld()->setBody(_coordinate, TileBody::OUTER_BOX, 7);
         
         auto zOrder = _level->getProjector()->coordinateToZOrder(_coordinate);
-        _floor->setLocalZOrder(zOrder + Level::WALL_Z_ORDER);
+        _node->setLocalZOrder(zOrder + Level::WALL_Z_ORDER);
         
         float duration = _level->getTurnDuration();
-        _wall->setVisible(true);
-        _wall->runAction(cocos2d::MoveTo::create(duration, cocos2d::Vec2(0, 12)));
+        _wallNode->setVisible(true);
+        _wallNode->runAction(cocos2d::MoveTo::create(duration, cocos2d::Vec2(0, 12)));
     }
 }
