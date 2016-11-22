@@ -93,9 +93,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloader->addTask(_loadLevelPack(game, "levels/cclp3.dat", std::vector<char>(hash3, hash3 + 16)));
     
     std::vector<char> highscoreSecret(hash3, hash3 + 16);
-    preloader->addTask([game, highscoreSecret]() {
+	preloader->addTask(std::function<void()>([game, highscoreSecret]() {
         game->setHighscores(HighscoreStorage::create("highscores.sav", highscoreSecret));
-    });
+    }));
     
     auto loadingScene = LoadingScene::create(game, preloader);
     director->runWithScene(loadingScene);

@@ -103,7 +103,7 @@ void HighscoreStorage::load()
 					std::vector<HighscoreRecord> records;
 					records.reserve(levelCount);
 
-					for (int j = 0; j < levelCount; i++)
+					for (int j = 0; j < levelCount; j++)
 					{
 						HighscoreRecord record;
                         record.completed = (reader.readInt8() != 0);

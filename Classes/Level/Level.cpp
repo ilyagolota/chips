@@ -19,7 +19,6 @@
 #include "Objects/SwitchWall.h"
 #include "Objects/Teleport.h"
 #include "Objects/Water.h"
-#include "Item.h"
 
 Level* Level::create(cocos2d::Node* stage, LevelHandler* handler)
 {

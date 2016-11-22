@@ -344,6 +344,48 @@
 				<string>slide-west-0004.png</string>
 			</array>
 		</dict>
+		<key>fire1</key>
+		<dict>
+			<key>delay</key>
+			<real>0.08</real>
+			<key>frames</key>
+			<array>
+				<string>fire-0001.png</string>
+				<string>fire-0002.png</string>
+				<string>fire-0003.png</string>
+				<string>fire-0004.png</string>
+				<string>fire-0005.png</string>
+				<string>fire-0006.png</string>
+			</array>
+		</dict>
+		<key>fire2</key>
+		<dict>
+			<key>delay</key>
+			<real>0.08</real>
+			<key>frames</key>
+			<array>
+				<string>fire-0003.png</string>
+				<string>fire-0004.png</string>
+				<string>fire-0005.png</string>
+				<string>fire-0006.png</string>
+				<string>fire-0001.png</string>
+				<string>fire-0002.png</string>
+			</array>
+		</dict>
+		<key>fire3</key>
+		<dict>
+			<key>delay</key>
+			<real>0.08</real>
+			<key>frames</key>
+			<array>
+				<string>fire-0005.png</string>
+				<string>fire-0006.png</string>
+				<string>fire-0001.png</string>
+				<string>fire-0002.png</string>
+				<string>fire-0003.png</string>
+				<string>fire-0004.png</string>
+			</array>
+		</dict>
 	</dict>
 </dict>
 </plist>

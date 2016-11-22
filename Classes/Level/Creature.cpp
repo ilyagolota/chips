@@ -3,8 +3,8 @@
 #include <cocos2d.h>
 
 #include "Level.h"
-#include "Item.h"
 #include "Objects/LevelObject.h"
+#include "Objects/Item.h"
 
 namespace std
 {
