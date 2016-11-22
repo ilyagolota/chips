@@ -67,6 +67,29 @@ void Water::beforeEnter(Creature* creature)
 		_blockNode->runAction(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("block-drawn")));
 		_state = FLOOR_STATE;
 	}
+	else if (_state == WATER_STATE)
+	{
+		if (creature->getType() == CreatureType::CHIP && _level->getInventory()->getItemCount(TileType::BOOTS_WATER) > 0)
+		{
+			creature->getSprite()->stopAllActionsByTag(Creature::CHANGE_STATE_ACTION_TAG);
+
+			if (creature->getState() != CreatureState::SWIMMING)
+			{
+				auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
+				auto action = cocos2d::Sequence::create(
+					cocos2d::DelayTime::create(0.5f * duration),
+					cocos2d::CallFunc::create([this, creature]()
+					{
+						creature->setState(CreatureState::SWIMMING);
+						creature->updateAnimation();
+					}),
+					nullptr
+				);
+				action->setTag(Creature::CHANGE_STATE_ACTION_TAG);
+				creature->getSprite()->runAction(action);
+			}
+		}
+	}
 }
 
 void Water::afterEnter(Creature *creature)
@@ -124,6 +147,25 @@ void Water::afterEnter(Creature *creature)
 				_level->fail("Ooops! Chip can't swim without flippers!");
 			}
 		}
+	}
+}
+
+void Water::beforeEscape(Creature *creature)
+{
+	if (creature->getState() == CreatureState::SWIMMING)
+	{
+		auto duration = _level->getTurnDuration() * creature->getTurnsPerMove();
+		auto action = cocos2d::Sequence::create(
+			cocos2d::DelayTime::create(0.5f * duration),
+			cocos2d::CallFunc::create([this, creature]()
+			{
+				creature->setState(CreatureState::NORMAL);
+				creature->updateAnimation();
+			}),
+			nullptr
+		);
+		action->setTag(Creature::CHANGE_STATE_ACTION_TAG);
+		creature->getSprite()->runAction(action);
 	}
 }
 

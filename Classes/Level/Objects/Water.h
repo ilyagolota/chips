@@ -16,7 +16,8 @@ public:
     
 	bool isEnterableBy(const Creature *creature, Direction direction) const override;
 	void beforeEnter(Creature* creature) override;
-    void afterEnter(Creature *creature) override;
+	void afterEnter(Creature *creature) override;
+	void beforeEscape(Creature *creature) override;
     
     bool hasDrawnBlock() const;
 

@@ -201,6 +201,20 @@
 				<string>chip-walk-east-0006.png</string>
 			</array>
 		</dict>
+		<key>chip-swim-east</key>
+		<dict>
+			<key>delay</key>
+			<real>0.24</real>
+			<key>frames</key>
+			<array>
+				<string>chip-swim-east-0001.png</string>
+				<string>chip-swim-east-0002.png</string>
+				<string>chip-swim-east-0003.png</string>
+				<string>chip-swim-east-0004.png</string>
+				<string>chip-swim-east-0003.png</string>
+				<string>chip-swim-east-0002.png</string>
+			</array>
+		</dict>
 		<key>chip-stay-west</key>
 		<dict>
 			<key>delay</key>
@@ -227,6 +241,20 @@
 				<string>chip-walk-west-0004.png</string>
 				<string>chip-walk-west-0005.png</string>
 				<string>chip-walk-west-0006.png</string>
+			</array>
+		</dict>
+		<key>chip-swim-west</key>
+		<dict>
+			<key>delay</key>
+			<real>0.24</real>
+			<key>frames</key>
+			<array>
+				<string>chip-swim-west-0001.png</string>
+				<string>chip-swim-west-0002.png</string>
+				<string>chip-swim-west-0003.png</string>
+				<string>chip-swim-west-0004.png</string>
+				<string>chip-swim-west-0003.png</string>
+				<string>chip-swim-west-0002.png</string>
 			</array>
 		</dict>
 		<key>teleport</key>
