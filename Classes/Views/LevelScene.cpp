@@ -16,19 +16,19 @@ LevelScene* LevelScene::create(ChipsChallengeGame* game, size_t packIndex, size_
     return instance;
 }
 
-LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex)
+LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex):
+    _game(game),
+    _packIndex(packIndex),
+    _levelIndex(levelIndex),
+    _paused(false),
+    _lastUnpauseTime(0.0),
+    _elapsedTimeBeforeLastPause(0.0)
 {
     auto director = cocos2d::Director::getInstance();
 	auto winSize = director->getWinSize();
 	cocos2d::Rect screenBounds(director->getVisibleOrigin(), director->getVisibleSize());
 
-    _game = game;
     _game->retain();
-    
-    _packIndex = packIndex;
-    _levelIndex = levelIndex;
-    
-    _paused = false;
 
     _stage = cocos2d::Node::create();
     addChild(_stage);
@@ -144,11 +144,45 @@ void LevelScene::updatePerTurn(float dt)
 
 void LevelScene::onLevelWin()
 {
+    double time = _elapsedTimeBeforeLastPause + (cocos2d::utils::gettime() - _lastUnpauseTime);
     
+    auto& record = _game->getHighscores()->getRecord(_packIndex, _levelIndex);
+    
+    int levelBonus = static_cast<int>(500 * (_levelIndex + 1) * std::round(std::pow(0.8f, record.deathCount)));
+    if (levelBonus < 500)
+    {
+        levelBonus = 500;
+    }
+    
+    int timeBonus = 10 * (_level->getConfig()->getTime() - static_cast<int>(time / _level->getTimeMultiplier()));
+    if (timeBonus < 0)
+    {
+        timeBonus = 0;
+    }
+    
+    HighscoreRecord newRecord;
+    newRecord.completed = true;
+    newRecord.deathCount = 0;
+    newRecord.minDeathCount = record.deathCount;
+    newRecord.minTime = time;
+    newRecord.maxScore = timeBonus + levelBonus;
+    
+    if (record.completed)
+    {
+        newRecord.minDeathCount = std::min(newRecord.minDeathCount, record.minDeathCount);
+        newRecord.minTime = std::min(newRecord.minTime, record.minTime);
+        newRecord.maxScore = std::max(newRecord.maxScore, record.maxScore);
+    }
+    
+    _game->getHighscores()->saveRecord(_packIndex, _levelIndex, newRecord);
 }
 
 void LevelScene::onLevelFail(const std::string& message)
 {
+    auto record = _game->getHighscores()->getRecord(_packIndex, _levelIndex);
+    record.deathCount += 1;
+    _game->getHighscores()->saveRecord(_packIndex, _levelIndex, record);
+    
     cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
     
     auto messageLabel = cocos2d::Label::createWithTTF(message, "fonts/Marker Felt.ttf", 24, cocos2d::Size(460, 0), cocos2d::TextHAlignment::CENTER);
@@ -184,7 +218,7 @@ void LevelScene::onLevelFail(const std::string& message)
         cocos2d::CallFunc::create([this]()
         {
             _level->restart();
-            _onLevelStart();
+            onLevelStart();
         }),
         nullptr
     ));
@@ -197,9 +231,11 @@ void LevelScene::pauseLevel()
         _paused = true;
         
         auto director = cocos2d::Director::getInstance();
-        director->getScheduler()->pauseTarget(_level);
+        director->getScheduler()->pauseTarget(this);
         
-        _pauseRecursive(this);
+        pauseRecursive(this);
+        
+        _elapsedTimeBeforeLastPause += cocos2d::utils::gettime() - _lastUnpauseTime;
     }
 }
 
@@ -210,9 +246,11 @@ void LevelScene::resumeLevel()
         _paused = false;
         
         auto director = cocos2d::Director::getInstance();
-        director->getScheduler()->resumeTarget(_level);
+        director->getScheduler()->resumeTarget(this);
         
-        _resumeRecursive(this);
+        resumeRecursive(this);
+        
+        _lastUnpauseTime = cocos2d::utils::gettime();
     }
 }
 
@@ -224,7 +262,7 @@ void LevelScene::restartLevel()
     }
     
     _level->restart();
-    _onLevelStart();
+    onLevelStart();
 }
 
 void LevelScene::gotoLevel(size_t levelIndex)
@@ -267,11 +305,18 @@ void LevelScene::gotoLevel(size_t levelIndex)
         // show error
     }
     
+    auto record = _game->getHighscores()->getRecord(_packIndex, _levelIndex);
+    if (!record.tried)
+    {
+        record.tried = true;
+        _game->getHighscores()->saveRecord(_packIndex, _levelIndex, record);
+    }
+    
     _preloaderLayer->setVisible(false);
-    _onLevelStart();
+    onLevelStart();
 }
 
-void LevelScene::_onLevelStart()
+void LevelScene::onLevelStart()
 {
     cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
     
@@ -315,22 +360,25 @@ void LevelScene::_onLevelStart()
         }),
         nullptr
     ));
+    
+    _elapsedTimeBeforeLastPause = 0.0;
+    _lastUnpauseTime = cocos2d::utils::gettime();
 }
 
-void LevelScene::_pauseRecursive(cocos2d::Node* node)
+void LevelScene::pauseRecursive(cocos2d::Node* node)
 {
     node->pause();
     for (auto child : node->getChildren())
     {
-        _pauseRecursive(child);
+        pauseRecursive(child);
     }
 }
 
-void LevelScene::_resumeRecursive(cocos2d::Node* node)
+void LevelScene::resumeRecursive(cocos2d::Node* node)
 {
     node->resume();
     for (auto child : node->getChildren())
     {
-        _resumeRecursive(child);
+        resumeRecursive(child);
     }
 }

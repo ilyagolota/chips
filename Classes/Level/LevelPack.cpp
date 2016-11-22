@@ -83,7 +83,7 @@ LevelConfig* LevelPack::readLevelConfig(size_t entryIndex)
     std::fstream stream(path, std::ios::binary | std::ios::in);
     
     utils::MD5 md5;
-    md5.update(&stream);
+    md5.update(stream);
     
     if (md5.getDigest() != _hash)
     {

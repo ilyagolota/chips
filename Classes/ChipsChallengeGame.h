@@ -3,6 +3,7 @@
 
 #include <cocos2d.h>
 #include <Level/LevelPack.h>
+#include <Common/HighscoreStorage.h>
 
 class ChipsChallengeGame : public cocos2d::Ref
 {
@@ -15,8 +16,12 @@ public:
     cocos2d::Vector<LevelPack*>& getLevelPacks();
     LevelPack* getLevelPack(size_t i);
     
+    HighscoreStorage* getHighscores();
+    void setHighscores(HighscoreStorage* highscores);
+    
 private:
     cocos2d::Vector<LevelPack*> _levelPacks;
+    HighscoreStorage* _highscores;
 };
 
 #endif

@@ -33,7 +33,8 @@ void LevelListScene::onExit()
 
 void LevelListScene::_build()
 {
-    cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
+    cocos2d::Vec2 visibleOrigin = cocos2d::Director::getInstance()->getVisibleOrigin();
+    cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
     
     //auto background = cocos2d::Sprite::create("background.png");
     //background->setAnchorPoint(cocos2d::Vec2::ZERO);
@@ -45,29 +46,23 @@ void LevelListScene::_build()
     auto levelPack = _game->getLevelPack(_packIndex);
     const std::vector<LevelPackEntry>& entries = levelPack->getEntries();
     
-    //auto& levelStats = App::getCurrent()->getSaveGame()->getLevelStats();
-    
-    cocos2d::Rect menuRect(100, 100, winSize.width - 200, winSize.height - 140);
+    cocos2d::Rect menuRect(visibleOrigin.x + 100, visibleOrigin.y + 100, visibleSize.width - 200, visibleSize.height - 140);
     cocos2d::Size cellSize(menuRect.size.width / 5, menuRect.size.height / 5);
-    cocos2d::Point point(0, menuRect.size.height - cellSize.height);
+    cocos2d::Vec2 point(0, menuRect.size.height - cellSize.height);
     
-    bool prevLevelTried = true;
+    bool prevLevelCompleted = true;
     for (size_t i = 0; i + _startLevelIndex < entries.size() && i < 25; i++)
     {
         int levelIndex =_startLevelIndex + i;
-        /*LevelStat* stat = (levelStats.size() > _packIndex && levelStats[_packIndex].size() > levelIndex) ? &levelStats[_packIndex][levelIndex] : nullptr;*/
         
-        auto button = cocos2d::ui::Button::create("slide-north-0001.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
+        auto& record = _game->getHighscores()->getRecord(_packIndex, levelIndex);
+        bool canStart = prevLevelCompleted || record.tried;
+        
+        auto button = cocos2d::ui::Button::create(canStart ? "slide-north-0001.png" : "floor.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
         button->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         button->setPosition(menuRect.origin + point + cocos2d::Vec2(cellSize) * 0.5f - cocos2d::Vec2(0, 100));
         button->setScale(0);
-        
-        auto buttonLabel = cocos2d::Label::createWithTTF(std::to_string(i + 1), "fonts/Marker Felt.ttf", 24);
-        buttonLabel->setPosition(cocos2d::Vec2(button->getContentSize()) * 0.5f);
-        buttonLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-        buttonLabel->enableOutline(cocos2d::Color4B::BLACK, 2);
-        button->addChild(buttonLabel);
-        
+        button->setEnabled(canStart);
         button->addTouchEventListener([this, levelIndex](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type)
         {
             if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
@@ -77,14 +72,23 @@ void LevelListScene::_build()
             }
         });
         
+        if (canStart)
+        {
+            auto buttonLabel = cocos2d::Label::createWithTTF(std::to_string(i + 1), "fonts/Marker Felt.ttf", 24);
+            buttonLabel->setPosition(cocos2d::Vec2(button->getContentSize()) * 0.5f);
+            buttonLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+            buttonLabel->enableOutline(cocos2d::Color4B::BLACK, 2);
+            button->addChild(buttonLabel);
+        }
+        
         addChild(button);
         
-        /*if (stat && stat->maxScore)
+        if (record.completed)
         {
-            auto star = cocos2d::Sprite::create("star.png");
-            star->setPosition(cocos2d::Vec2(item->getContentSize().width - 10, 11));
-            item->addChild(star);
-        }*/
+            auto star = cocos2d::Sprite::createWithSpriteFrameName("ic-chip.png");
+            star->setPosition(cocos2d::Vec2(button->getContentSize().width - 10, 11));
+            button->addChild(star);
+        }
         
         if (i % 5 != 4)
         {
@@ -106,7 +110,7 @@ void LevelListScene::_build()
             nullptr
         ));
         
-        //prevLevelTried = (stat && stat->minTryCount);
+        prevLevelCompleted = record.completed;
     }
     
     /*auto backButton = cocos2d::MenuItemSprite::create(cocos2d::Sprite::create("boots-ice.png"), nullptr, CC_CALLBACK_1(LevelsScene::_backCallback, this));

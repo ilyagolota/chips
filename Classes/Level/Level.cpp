@@ -28,15 +28,14 @@ Level* Level::create(cocos2d::Node* stage, LevelHandler* handler)
     return instance;
 }
 
-Level::Level(cocos2d::Node* stage, LevelHandler* handler)
+Level::Level(cocos2d::Node* stage, LevelHandler* handler):
+    _config(nullptr),
+    _inventory(Inventory::create()),
+    _stage(stage),
+    _timeMultiplier(1.5f),
+    _playerCreature(nullptr),
+    _handler(handler)
 {
-    _stage = stage;
-    _handler = handler;
-    
-    _config = nullptr;
-    _timeMultiplier = 1.5f;
-    
-    _inventory = Inventory::create();
     _inventory->retain();
     
     auto levelSize = cocos2d::Size(32, 32);
@@ -53,7 +52,6 @@ Level::Level(cocos2d::Node* stage, LevelHandler* handler)
     
     _objects.resize(levelSize.width * levelSize.height);
     _items.resize(levelSize.width * levelSize.height);
-    _playerCreature = nullptr;
 }
 
 Level::~Level()
@@ -158,6 +156,11 @@ Inventory* Level::getInventory() const
 float Level::getTurnDuration()
 {
     return 0.2f * _timeMultiplier;
+}
+
+float Level::getTimeMultiplier()
+{
+    return _timeMultiplier;
 }
 
 void Level::addObject(LevelObject* object)

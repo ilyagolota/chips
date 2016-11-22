@@ -53,6 +53,7 @@ public:
     TiledProjector* getProjector() const;
     Inventory* getInventory() const;
     float getTurnDuration();
+    float getTimeMultiplier();
     
     void addObject(LevelObject* object);
     LevelObject* getObjectAt(const cocos2d::Vec2& coordinate) const;

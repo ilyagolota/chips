@@ -17,8 +17,9 @@ namespace utils
     public:
         HashAlgorithm();
         int getHashSize();
-        void update(std::istream* inputStream);
-        void update(std::string& string);
+        void update(std::istream& inputStream);
+        void update(const std::string& string);
+        void update(const std::vector<char>& buffer);
         void update(const char* buffer, int length);
         std::vector<char> getDigest();
         

@@ -33,15 +33,18 @@ public:
 protected:
     static size_t __tilesetIndex;
     
-    void _onLevelStart();
-    void _pauseRecursive(cocos2d::Node* node);
-    void _resumeRecursive(cocos2d::Node* node);
+    void onLevelStart();
+    void pauseRecursive(cocos2d::Node* node);
+    void resumeRecursive(cocos2d::Node* node);
     
     ChipsChallengeGame* _game;
     Level *_level;
     size_t _packIndex;
     size_t _levelIndex;
     bool _paused;
+    
+    double _lastUnpauseTime;
+    double _elapsedTimeBeforeLastPause;
 
     cocos2d::Node* _stage;
     std::vector<ControlLayer*> _controlLayers;
@@ -55,18 +58,6 @@ protected:
     cocos2d::Menu *_controlsMenu;
     cocos2d::Menu *_levelMenu;
     cocos2d::Menu *_mainMenu;
-    
-    //cocos2d::EventListenerKeyboard *_keyboardListener;
-    //char _keys[256];
-    
-    /*TiledMap* getTiledMap();
-    Direction getSelectedDirection();
-	void showPauseMenu();
-	void showLevelTitle(const std::string &title);
-	void showAlert(const std::string& message);
-	void showHint(const std::string& hint);
-    void show(cocos2d::Node* node);
-    void clear();*/
 };
 
 #endif
