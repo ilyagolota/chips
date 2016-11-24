@@ -491,7 +491,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             
         case TileType::BLUE_WALL_FAKE:
         case TileType::BLUE_WALL_REAL:
-			addObject(BlueWall::create(this, coordinate, (tileType == TileType::BLUE_WALL_REAL)));
+			addObject(BlueWall::create(this, coordinate, (tileType == TileType::BLUE_WALL_FAKE)));
             break;
             
         case TileType::OVERLAY_BUFFER:

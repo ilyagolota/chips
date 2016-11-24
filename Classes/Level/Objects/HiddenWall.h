@@ -15,9 +15,10 @@ public:
     void afterEnter(Creature* creature) override;
     
 private:
+	const std::string& getFloorFrameName(int shape);
+
 	bool _permanent;
 	bool _known;
-    
     cocos2d::Sprite* _floor;
     cocos2d::Sprite* _wall;
 };

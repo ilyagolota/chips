@@ -60,10 +60,7 @@ void HiddenWall::beforeEnter(Creature* creature)
     ));
     
     int shape = _level->getWallShape(_coordinate);
-    char spriteFrameName[14];
-    sprintf(spriteFrameName, "wall-%04d.png", shape + 1);
-    
-    auto wallSprite = cocos2d::Sprite::createWithSpriteFrameName(spriteFrameName);
+	auto wallSprite = cocos2d::Sprite::createWithSpriteFrameName(getFloorFrameName(shape));
     wallSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
     wallSprite->setPosition(cocos2d::Vec2(0, 0));
     wallSprite->setOpacity(0);
@@ -88,4 +85,42 @@ void HiddenWall::afterEnter(Creature* creature)
     {
         prevObject->afterEnter(creature);
     }
+}
+
+const std::string& HiddenWall::getFloorFrameName(int shape)
+{
+	static std::string frameNames[] =
+	{
+		"blue-floor-0001.png",
+		"blue-floor-0002.png",
+		"blue-floor-0003.png",
+		"blue-floor-0004.png",
+		"blue-floor-0005.png",
+		"blue-floor-0006.png"
+	};
+
+	if (shape == 0x0c)
+	{
+		return frameNames[2];
+	}
+	else if (shape == 0x03)
+	{
+		return frameNames[3];
+	}
+	else if (shape == 0x06)
+	{
+		return frameNames[4];
+	}
+	else if (shape == 0x09)
+	{
+		return frameNames[5];
+	}
+	else if (((shape >> 3) & 1) + ((shape >> 1) & 1) > ((shape >> 2) & 1) + (shape & 1))
+	{
+		return frameNames[1];
+	}
+	else
+	{
+		return frameNames[0];
+	}
 }
