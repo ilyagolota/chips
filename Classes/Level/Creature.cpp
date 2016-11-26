@@ -432,7 +432,7 @@ void Creature::chooseNextMove()
                 Direction direction = static_cast<Direction>(dirIndex);
                 if (canMove(direction))
                 {
-                    dirs[dirCount++] = _direction;
+                    dirs[dirCount++] = direction;
                 }
             }
             
