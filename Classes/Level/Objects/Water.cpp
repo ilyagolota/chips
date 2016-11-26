@@ -129,7 +129,7 @@ void Water::afterEnter(Creature *creature)
 				_splash = cocos2d::Sprite::create();
 				_splash->setAnchorPoint(cocos2d::Vec2::ZERO);
 				_splash->setPosition(cocos2d::Vec2::ZERO);
-				_node->addChild(_node);
+				_node->addChild(_splash);
 			}
 
 			_splash->setVisible(true);

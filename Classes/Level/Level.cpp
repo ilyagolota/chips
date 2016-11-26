@@ -104,26 +104,24 @@ void Level::makeTurn(float dt)
         _soundEnvironment->getMicrophone()->setCoordinate(_playerCreature->getCoordinate());
     }
     
-    for (auto creature : _creatures)
-    {
-        if (creature != _playerCreature)
-        {
-            creature->onTurn(dt);
-        }
-    }
-    
-    for (auto iter = _creatures.begin(); iter != _creatures.end(); )
-    {
-        if ((*iter)->isDead())
-        {
-            removeCreature(*iter);
-        }
-        else
-        {
-            iter++;
-        }
-    }
-    
+	for (size_t i = 0; i < _creatures.size(); )
+	{
+		auto creature = _creatures.at(i);
+		if (creature != _playerCreature)
+		{
+			creature->onTurn(dt);
+		}
+
+		if (creature->isDead())
+		{
+			removeCreature(creature);
+		}
+		else
+		{
+			i++;
+		}
+	}
+
 	_soundEnvironment->update(dt);
 }
 
