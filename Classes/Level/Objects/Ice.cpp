@@ -28,13 +28,13 @@ void Ice::onAdd()
     {
         _backNode = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north.png");
 		_backNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
+		_backNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -6));
 		_backNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backNode);
         
 		_frontNode = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-east.png");
 		_frontNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
+		_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -6));
 		_frontNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontNode);
     }
@@ -42,7 +42,7 @@ void Ice::onAdd()
     {
 		_frontNode = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-south-east.png");
 		_frontNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
+		_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -6));
 		_frontNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontNode);
     }
@@ -50,7 +50,7 @@ void Ice::onAdd()
     {
 		_backNode = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-north-west.png");
 		_backNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
+		_backNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -6));
 		_backNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backNode);
     }
@@ -58,13 +58,13 @@ void Ice::onAdd()
     {
 		_backNode = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-west.png");
 		_backNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_backNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
+		_backNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -6));
 		_backNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
 		_level->getStage()->addChild(_backNode);
         
 		_frontNode = cocos2d::Sprite::createWithSpriteFrameName("ice-wall-south.png");
 		_frontNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-		_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -4));
+		_frontNode->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -6));
 		_frontNode->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::FRONT_Z_ORDER);
 		_level->getStage()->addChild(_frontNode);
     }
