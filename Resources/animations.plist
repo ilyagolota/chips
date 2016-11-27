@@ -26,7 +26,7 @@
 				<string>ball-stay-east.png</string>
 			</array>
 		</dict>
-		<key>blob-walk-east</key>
+		<key>blob-stay-east</key>
 		<dict>
 			<key>delay</key>
 			<real>0.12</real>
@@ -412,6 +412,22 @@
 				<string>fire-0002.png</string>
 				<string>fire-0003.png</string>
 				<string>fire-0004.png</string>
+			</array>
+		</dict>
+		<key>explosion</key>
+		<dict>
+			<key>delay</key>
+			<real>0.06</real>
+			<key>frames</key>
+			<array>
+				<string>explosion-0001.png</string>
+				<string>explosion-0002.png</string>
+				<string>explosion-0003.png</string>
+				<string>explosion-0004.png</string>
+				<string>explosion-0005.png</string>
+				<string>explosion-0006.png</string>
+				<string>explosion-0007.png</string>
+				<string>explosion-0008.png</string>
 			</array>
 		</dict>
 	</dict>

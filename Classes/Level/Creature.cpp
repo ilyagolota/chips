@@ -191,67 +191,68 @@ bool Creature::isDead()
 
 void Creature::onTurn(float dt)
 {
-    if (_turnsToNextMove > 0)
-    {
-        _turnsToNextMove -= 1;
-        if (_turnsToNextMove == 0)
-        {
-            _sprite->stopAllActionsByTag(MOVE_ACTION_TAG);
-            updatePosition();
-            
-            auto object = _level->getObjectAt(_coordinate);
-            if (object != nullptr)
-            {
-                object->afterEnter(this);
-            }
-            
-            auto item = _level->getItemAt(_coordinate);
-            if (item != nullptr)
-            {
-                item->afterEnter(this);
-            }
-        }
-    }
-    
-    if (_dead)
-    {
-        return;
-    }
-    
-    if (_type == CreatureType::CHIP)
-    {
-        for (auto creature : _level->getCreatures())
-        {
-            if (creature->getCoordinate() == _coordinate && creature != this)
-            {
-                die();
-                if (creature->_type == CreatureType::BLOCK)
-                {
-                    _level->fail("Ooops! Watch out for moving blocks!");
-                }
-                else
-                {
-                    _level->fail("Ooops! Look out for creatures!");
-                }
-                return;
-            }
-        }
-    }
-    
-    if (_queuedMove)
-    {
-        if (canMove(_queuedDirection))
-        {
-            move(_queuedDirection);
-        }
-    }
-    else
-    {
-        chooseNextMove();
-    }
+	if (_turnsToNextMove > 0)
+	{
+		_turnsToNextMove -= 1;
+	}
 
-    updateAnimation();
-    updateFlip();
+	if (_turnsToNextMove == 0)
+	{
+		_sprite->stopAllActionsByTag(MOVE_ACTION_TAG);
+		updatePosition();
+
+		auto object = _level->getObjectAt(_coordinate);
+		if (object != nullptr)
+		{
+			object->afterEnter(this);
+		}
+
+		auto item = _level->getItemAt(_coordinate);
+		if (item != nullptr)
+		{
+			item->afterEnter(this);
+		}
+
+		if (_dead)
+		{
+			return;
+		}
+
+		if (_type == CreatureType::CHIP)
+		{
+			for (auto creature : _level->getCreatures())
+			{
+				if (creature->getCoordinate() == _coordinate && creature != this)
+				{
+					die();
+					if (creature->_type == CreatureType::BLOCK)
+					{
+						_level->fail("Ooops! Watch out for moving blocks!");
+					}
+					else
+					{
+						_level->fail("Ooops! Look out for creatures!");
+					}
+					return;
+				}
+			}
+		}
+
+		if (_queuedMove)
+		{
+			if (canMove(_queuedDirection))
+			{
+				move(_queuedDirection);
+			}
+		}
+		else
+		{
+			chooseNextMove();
+		}
+
+		updateAnimation();
+		updateFlip();
+	}
 }
 
 void Creature::onAdd()

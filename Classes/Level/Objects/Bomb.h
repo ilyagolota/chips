@@ -20,6 +20,7 @@ protected:
     bool _exploded;
     cocos2d::Sprite* _node;
     cocos2d::Sprite* _bombNode;
+	cocos2d::Sprite* _explosionNode;
 };
 
 #endif
