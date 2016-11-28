@@ -430,6 +430,18 @@
 				<string>explosion-0008.png</string>
 			</array>
 		</dict>
+		<key>dirt</key>
+		<dict>
+			<key>delay</key>
+			<real>0.06</real>
+			<key>frames</key>
+			<array>
+				<string>dirt-0002.png</string>
+				<string>dirt-0003.png</string>
+				<string>dirt-0004.png</string>
+				<string>dirt-0005.png</string>
+			</array>
+		</dict>
 	</dict>
 </dict>
 </plist>

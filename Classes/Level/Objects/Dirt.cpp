@@ -15,15 +15,15 @@ Dirt::Dirt(Level* level, const cocos2d::Vec2& coordinate) : LevelObject(level, c
 
 void Dirt::onAdd()
 {
-    _node = cocos2d::Sprite::createWithSpriteFrameName("button-floor.png");
+    _node = cocos2d::Sprite::createWithSpriteFrameName("floor.png");
     _node->setAnchorPoint(cocos2d::Vec2::ZERO);
     _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
     _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
     _level->getStage()->addChild(_node);
     
-    _dirtNode = cocos2d::Sprite::createWithSpriteFrameName("button-brown.png");
+    _dirtNode = cocos2d::Sprite::createWithSpriteFrameName("dirt-0001.png");
     _dirtNode->setAnchorPoint(cocos2d::Vec2::ZERO);
-    _dirtNode->setPosition(cocos2d::Vec2::ZERO);
+    _dirtNode->setPosition(cocos2d::Vec2(0, 12));
     _node->addChild(_dirtNode);
 }
 
@@ -34,7 +34,7 @@ void Dirt::reset()
     _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
     
     _dirtNode->setVisible(true);
-    _dirtNode->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName("button-brown.png"));
+	_dirtNode->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName("dirt-0001.png"));
 }
 
 bool Dirt::isEnterableBy(const Creature* creature, Direction /*direction*/) const
@@ -42,7 +42,7 @@ bool Dirt::isEnterableBy(const Creature* creature, Direction /*direction*/) cons
     return _removed || (creature->getType() == CreatureType::CHIP);
 }
 
-void Dirt::afterEnter(Creature *creature)
+void Dirt::beforeEnter(Creature *creature)
 {
     if (_removed)
     {
@@ -52,7 +52,7 @@ void Dirt::afterEnter(Creature *creature)
     _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
     
     _dirtNode->runAction(cocos2d::Sequence::create(
-        cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("splash")),
+        cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("dirt")),
         cocos2d::CallFuncN::create([](cocos2d::Node* node) {
             node->setVisible(false);
         }),

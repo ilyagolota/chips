@@ -831,7 +831,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-stay-east-0003.png</key>
+      <key>paramecium-walk-east-0003.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{98,78}</string>
@@ -869,7 +869,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-stay-east-0002.png</key>
+      <key>paramecium-walk-east-0002.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{97,78}</string>
@@ -888,7 +888,7 @@
         <key>aliases</key>
         <array />
       </dict>
-      <key>paramecium-stay-east-0001.png</key>
+      <key>paramecium-stay-east.png</key>
       <dict>
         <key>spriteSize</key>
         <string>{97,78}</string>
