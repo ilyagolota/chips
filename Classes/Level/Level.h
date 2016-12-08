@@ -65,6 +65,9 @@ public:
     Creature* getCreatureAt(const cocos2d::Vec2& coordinate) const;
 	Creature* getPlayerCreature() const;
     
+    void showHint(const std::string& hint, const cocos2d::Vec2& position);
+    void hideHint(const cocos2d::Vec2& position);
+    
 	int getWallShape(const cocos2d::Vec2& coordinate) const;
 
 protected:

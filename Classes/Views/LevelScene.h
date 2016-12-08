@@ -24,6 +24,8 @@ public:
 
     void onLevelWin() override;
     void onLevelFail(const std::string& message) override;
+    void showHint(const std::string& hint, const cocos2d::Vec2& position) override;
+    void hideHint(const cocos2d::Vec2& position) override;
     
     void pauseLevel();
     void resumeLevel();
@@ -31,6 +33,7 @@ public:
     void gotoLevel(size_t levelIndex);
     
 protected:
+    static const int HINT_TAG = 1997;
     static size_t __tilesetIndex;
     
     void onLevelStart();

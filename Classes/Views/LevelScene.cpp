@@ -224,6 +224,69 @@ void LevelScene::onLevelFail(const std::string& message)
     ));
 }
 
+void LevelScene::showHint(const std::string &hint, const cocos2d::Vec2 &position)
+{
+    auto director = cocos2d::Director::getInstance();
+    auto screenOrigin = director->getVisibleOrigin();
+    auto screenSize = director->getVisibleSize();
+    
+    auto existingPanel = _topLayer->getChildByTag(HINT_TAG);
+    if (existingPanel != nullptr) {
+        _topLayer->removeChild(existingPanel);
+    }
+    
+    auto hintLabel = cocos2d::Label::createWithTTF(hint, "fonts/Marker Felt.ttf", 24, cocos2d::Size(480, 0), cocos2d::TextHAlignment::CENTER);
+    hintLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
+    hintLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    hintLabel->setOpacity(0);
+    
+    auto hintPanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-transparent.png");
+    hintPanel->setContentSize(cocos2d::Size(520, hintLabel->getContentSize().height + 40.0f));
+    hintPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
+    hintPanel->setPosition(position);
+    hintPanel->setScale(0.2f);
+    hintPanel->setOpacity(0);
+    
+    hintLabel->setPosition(cocos2d::Vec2(hintPanel->getContentSize()) * 0.5f);
+    hintPanel->addChild(hintLabel);
+    
+    float duration = _level->getTurnDuration();
+    hintPanel->runAction(cocos2d::Spawn::create(
+        cocos2d::MoveTo::create(duration, cocos2d::Vec2(screenOrigin.x + 0.5f * screenSize.width, screenOrigin.y + 0.3f * screenSize.height)),
+        cocos2d::ScaleTo::create(duration, 1.0f),
+        cocos2d::FadeTo::create(duration, 255),
+        nullptr
+    ));
+    
+    hintLabel->runAction(cocos2d::FadeTo::create(duration, 255));
+    
+    hintPanel->setTag(HINT_TAG);
+    _topLayer->addChild(hintPanel);
+}
+
+void LevelScene::hideHint(const cocos2d::Vec2 &position)
+{
+    auto hintPanel = _topLayer->getChildByTag(HINT_TAG);
+    if (hintPanel != nullptr) {
+        float duration = _level->getTurnDuration();
+        hintPanel->runAction(cocos2d::Sequence::create(
+            cocos2d::Spawn::create(
+                cocos2d::MoveTo::create(duration, position),
+                cocos2d::ScaleTo::create(duration, 0.2f),
+                cocos2d::FadeTo::create(duration, 0),
+                nullptr
+            ),
+            cocos2d::RemoveSelf::create(),
+            nullptr
+        ));
+        
+        if (!hintPanel->getChildren().empty()) {
+            auto hintLabel = hintPanel->getChildren().front();
+            hintLabel->runAction(cocos2d::FadeTo::create(duration, 0));
+        }
+    }
+}
+
 void LevelScene::pauseLevel()
 {
     if (!_paused)

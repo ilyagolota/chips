@@ -26,7 +26,10 @@ void HintButton::beforeEnter(Creature *creature)
 {
     if (creature->getType() == CreatureType::CHIP)
     {
-        
+        auto position = _level->getProjector()->coordinateToPoint(_coordinate + toVec2(inverse(creature->getDirection())));
+        position += _level->getProjector()->getTileSize() * 0.5;
+        position = _level->getStage()->convertToWorldSpace(position);
+        _level->showHint(_level->getConfig()->getHint(), position);
     }
 }
 
@@ -34,6 +37,9 @@ void HintButton::beforeEscape(Creature *creature)
 {
     if (creature->getType() == CreatureType::CHIP)
     {
-        
+        auto position = _level->getProjector()->coordinateToPoint(_coordinate + toVec2(inverse(creature->getDirection())));
+        position += _level->getProjector()->getTileSize() * 0.5;
+        position = _level->getStage()->convertToWorldSpace(position);
+        _level->hideHint(position);
     }
 }

@@ -266,6 +266,16 @@ Creature* Level::getPlayerCreature() const
 	return _playerCreature;
 }
 
+void Level::showHint(const std::string& hint, const cocos2d::Vec2& position)
+{
+    _handler->showHint(hint, position);
+}
+
+void Level::hideHint(const cocos2d::Vec2& position)
+{
+    _handler->hideHint(position);
+}
+
 int Level::getWallShape(const cocos2d::Vec2& coordinate) const
 {
 	int mask = 0;
