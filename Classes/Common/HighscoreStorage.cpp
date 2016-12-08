@@ -1,6 +1,5 @@
 #include "HighscoreStorage.h"
 #include <fstream>
-#include <utils/BinaryReader.h>
 #include <Utils/MD5.h>
 
 HighscoreStorage* HighscoreStorage::create(const std::string& filename, const std::vector<char>& secret)
@@ -70,35 +69,39 @@ void HighscoreStorage::load()
 		stream.open(fullpath, std::ios::in);
 		if (stream)
 		{
-			utils::BinaryReader reader(&stream);
-
-			short signature = reader.readInt16();
+            auto buf = stream.rdbuf();
+            
+			short signature;
+            buf->sgetn((char*)&signature, 2);
 			CC_UNUSED_PARAM(signature);
 
-			short version = reader.readInt16();
+			short version;
+            buf->sgetn((char*)&version, 2);
 			CC_UNUSED_PARAM(version);
 
 			std::vector<char> storedHash;
 			storedHash.resize(16);
-			reader.read(&storedHash[0], 16);
+			buf->sgetn(&storedHash[0], 16);
 			
-			size_t position = reader.getBaseStream().tellg();
+            size_t position = buf->pubseekoff(0, std::ios::cur);
 			
 			utils::MD5 md5;
-			md5.update(reader.getBaseStream());
+			md5.update(stream);
 			md5.update(_secret);
 			std::vector<char> computedHash = md5.getDigest();
 
 			if (computedHash == storedHash)
 			{
-				reader.getBaseStream().seekg(position, std::ios::beg);
+                buf->pubseekoff(position, std::ios::beg);
 
-				int packCount = reader.readInt32();
+                int packCount;
+                buf->sgetn((char*)&packCount, 4);
                 _recordPacks.reserve(packCount);
                 
 				for (int i = 0; i < packCount; i++)
 				{
-					int levelCount = reader.readInt32();
+                    int levelCount;
+                    buf->sgetn((char*)&levelCount, 4);
 
 					std::vector<HighscoreRecord> records;
 					records.reserve(levelCount);
@@ -106,12 +109,12 @@ void HighscoreStorage::load()
 					for (int j = 0; j < levelCount; j++)
 					{
 						HighscoreRecord record;
-                        record.completed = (reader.readInt8() != 0);
-                        record.tried = (reader.readInt8() != 0);
-						record.minTime = reader.readInt16();
-						record.minDeathCount = reader.readInt16();
-						record.maxScore = reader.readInt32();
-						record.deathCount = reader.readInt16();
+                        buf->sgetn((char*)&record.completed, 1);
+                        buf->sgetn((char*)&record.tried, 1);
+						buf->sgetn((char*)&record.minTime, 2);
+						buf->sgetn((char*)&record.minDeathCount, 2);
+						buf->sgetn((char*)&record.maxScore, 4);
+						buf->sgetn((char*)&record.deathCount, 2);
 						records.push_back(record);
 					}
 
@@ -127,22 +130,24 @@ void HighscoreStorage::save()
 {
     std::stringstream stream;
     
+    auto buf = stream.rdbuf();
+    
     int packCount = _recordPacks.size();
-    stream.write((const char*)&packCount, 4);
+    buf->sputn((const char*)&packCount, 4);
     
     for (auto& records : _recordPacks)
     {
         int recordCount = records.size();
-        stream.write((const char*)&recordCount, 4);
+        buf->sputn((const char*)&recordCount, 4);
         
         for (auto& record : records)
         {
-            stream.write((const char*)&record.completed, 1);
-            stream.write((const char*)&record.tried, 1);
-            stream.write((const char*)&record.minTime, 2);
-            stream.write((const char*)&record.minDeathCount, 2);
-            stream.write((const char*)&record.maxScore, 4);
-            stream.write((const char*)&record.deathCount, 2);
+            buf->sputn((const char*)&record.completed, 1);
+            buf->sputn((const char*)&record.tried, 1);
+            buf->sputn((const char*)&record.minTime, 2);
+            buf->sputn((const char*)&record.minDeathCount, 2);
+            buf->sputn((const char*)&record.maxScore, 4);
+            buf->sputn((const char*)&record.deathCount, 2);
         }
     }
     
