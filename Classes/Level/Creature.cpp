@@ -50,12 +50,33 @@ Creature::Creature(Level* level, CreatureType type):
     _sprite->setAnchorPoint(cocos2d::Point::ZERO);
     _sprite->retain();
     
-    _soundEmitter = nullptr;
+    switch (_type)
+    {
+    case CreatureType::FIREBALL:
+            _soundEmitter = nullptr;//TileSoundEmitter::create("sounds/glider.wav");
+        break;
+            
+    case CreatureType::GLIDER:
+        _soundEmitter = TileSoundEmitter::create("sounds/glider.wav");
+        break;
+        
+    default:
+        _soundEmitter = nullptr;
+    }
+    
+    if (_soundEmitter != nullptr)
+    {
+        _soundEmitter->retain();
+    }
 }
 
 Creature::~Creature()
 {
     _sprite->release();
+    if (_soundEmitter != nullptr)
+    {
+        _soundEmitter->release();
+    }
 }
 
 void Creature::queueMove(Direction direction)

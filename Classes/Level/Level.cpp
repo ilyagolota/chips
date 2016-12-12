@@ -44,6 +44,7 @@ Level::Level(cocos2d::Node* stage, LevelHandler* handler):
     
     _soundEnvironment = TiledSoundEnvironment::create(_physicsWorld);
     _soundEnvironment->setPhysicsLayerMask(1);
+    _soundEnvironment->getMicrophone()->setMaxDistance(10);
     _soundEnvironment->retain();
     
     _projector = TiledProjector::create(cocos2d::Size(180, 128), levelSize, Z_ORDER_PER_TILE, _physicsWorld);

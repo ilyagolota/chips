@@ -145,6 +145,7 @@
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		D42E45461DFC4D1500F85615 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = D42E45451DFC4D1500F85615 /* sounds */; };
 		D42E84CB1D9418A900C655D6 /* PauseMenuWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */; };
 		D42E84CC1D9418A900C655D6 /* PauseMenuWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */; };
 		D431917F1D8AD79700EA0D9A /* InventoryPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D431917D1D8AD79700EA0D9A /* InventoryPanel.cpp */; };
@@ -345,6 +346,7 @@
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D42E45451DFC4D1500F85615 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		D42E84C91D9418A900C655D6 /* PauseMenuWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PauseMenuWindow.cpp; sourceTree = "<group>"; };
 		D42E84CA1D9418A900C655D6 /* PauseMenuWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuWindow.h; sourceTree = "<group>"; };
 		D431917D1D8AD79700EA0D9A /* InventoryPanel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InventoryPanel.cpp; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D42E45451DFC4D1500F85615 /* sounds */,
 				B3FCB0911CF59CC4003B3C9E /* sheets */,
 				B3F0A31F1CE1F1B7006E152B /* levels */,
 				521A8EA819F11F5000D177D7 /* fonts */,
@@ -862,6 +865,7 @@
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
+				D42E45461DFC4D1500F85615 /* sounds in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,

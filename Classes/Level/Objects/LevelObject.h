@@ -4,6 +4,7 @@
 #include <cocos2d.h>
 #include <Tiled/Direction.h>
 #include <Tiled/TiledPhysicsWorld.h>
+#include <Tiled/TiledSoundEnvironment.h>
 
 class Level;
 class Creature;
@@ -31,7 +32,7 @@ public:
 protected:
 	Level* _level;
 	cocos2d::Vec2 _coordinate;
-
+    TileSoundEmitter* _soundEmitter;
 };
 
 #endif

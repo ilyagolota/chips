@@ -136,7 +136,7 @@ std::unordered_map<std::string, float> TiledSoundEnvironment::_aggregateVolumes(
     auto maxDistance = _microphone->getMaxDistance();
     auto microphoneCoordinate = _microphone->getCoordinate();
     int startX = microphoneCoordinate.x - maxDistance;
-    int startY = microphoneCoordinate.x - maxDistance;
+    int startY = microphoneCoordinate.y - maxDistance;
     int endX = microphoneCoordinate.x + maxDistance + 1;
     int endY = microphoneCoordinate.y + maxDistance + 1;
     
@@ -156,7 +156,7 @@ std::unordered_map<std::string, float> TiledSoundEnvironment::_aggregateVolumes(
             continue;
         }
         
-        auto volume = 0.6f * (maxDistance - distance + 1) / (maxDistance + 1);
+        auto volume = static_cast<float>(maxDistance - distance + 1) / (maxDistance + 1);
         
         auto volumeIter = volumes.find(emitter->getSoundName());
         if (volumeIter == volumes.end())
@@ -181,7 +181,14 @@ void TiledSoundEnvironment::_setSoundVolumes(const std::unordered_map<std::strin
             auto state = cocos2d::experimental::AudioEngine::getState(soundPair.second);
             if (state == cocos2d::experimental::AudioEngine::AudioState::PLAYING)
             {
-                cocos2d::experimental::AudioEngine::pause(soundPair.second);
+                if (cocos2d::experimental::AudioEngine::isLoop(soundPair.second))
+                {
+                    cocos2d::experimental::AudioEngine::setLoop(soundPair.second, false);
+                    cocos2d::experimental::AudioEngine::setFinishCallback(soundPair.second, [this](int audioId, const std::string& soundName)
+                    {
+                        _playingSounds.erase(soundName);
+                    });
+                }
             }
         }
     }
@@ -201,16 +208,16 @@ void TiledSoundEnvironment::_setSoundVolumes(const std::unordered_map<std::strin
             else
             {
                 auto soundId = soundIter->second;
+                if (!cocos2d::experimental::AudioEngine::isLoop(soundId))
+                {
+                    cocos2d::experimental::AudioEngine::setLoop(soundId, true);
+                    cocos2d::experimental::AudioEngine::setFinishCallback(soundId, nullptr);
+                }
+                
                 float wasVolume = cocos2d::experimental::AudioEngine::getVolume(soundId);
                 if (volume != wasVolume)
                 {
                     cocos2d::experimental::AudioEngine::setVolume(soundId, volume);
-                }
-                
-                auto state = cocos2d::experimental::AudioEngine::getState(soundId);
-                if (state == cocos2d::experimental::AudioEngine::AudioState::PAUSED)
-                {
-                    cocos2d::experimental::AudioEngine::resume(soundId);
                 }
             }
         }

@@ -39,6 +39,9 @@ void Fire::onAdd()
     _fire3Node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
 	_fire3Node->runAction(cocos2d::RepeatForever::create(cocos2d::Animate::create(cocos2d::AnimationCache::getInstance()->getAnimation("fire3"))));
     _level->getStage()->addChild(_fire3Node);
+    
+    _soundEmitter = TileSoundEmitter::create("sounds/fire.mp3");
+    _level->getSoundEnvironment()->addEmitter(_soundEmitter);
 }
 
 bool Fire::isEnterableBy(const Creature *creature, Direction direction) const

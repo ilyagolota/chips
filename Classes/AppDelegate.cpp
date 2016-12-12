@@ -88,6 +88,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloader->addTask(_loadAnimations("animations.plist"));
     preloader->addTask(_loadSound("sounds/door.mp3"));
 	preloader->addTask(_loadSound("sounds/water.mp3"));
+    preloader->addTask(_loadSound("sounds/fire.mp3"));
+    preloader->addTask(_loadSound("sounds/glider.wav"));
     preloader->addTask(_loadLevelPack(game, "levels/cclp1.dat", std::vector<char>(hash1, hash1 + 16)));
     preloader->addTask(_loadLevelPack(game, "levels/cclp2.dat", std::vector<char>(hash2, hash2 + 16)));
     preloader->addTask(_loadLevelPack(game, "levels/cclp3.dat", std::vector<char>(hash3, hash3 + 16)));
