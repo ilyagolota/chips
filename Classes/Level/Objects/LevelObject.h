@@ -30,8 +30,8 @@ public:
     virtual void afterEscape(Creature* creature);
     
 protected:
-	Level* _level;
-	cocos2d::Vec2 _coordinate;
+    Level* _level;
+    cocos2d::Vec2 _coordinate;
     TileSoundEmitter* _soundEmitter;
 };
 

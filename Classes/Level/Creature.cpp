@@ -8,24 +8,24 @@
 
 namespace std
 {
-	string& to_string(CreatureType type)
-	{
-		static string names[] =
-		{
-			"block",
-			"bug",
-			"fireball",
-			"ball",
-			"tank",
-			"glider",
-			"teeth",
-			"walker",
-			"blob",
-			"paramecium",
-			"chip"
-		};
-		return names[static_cast<size_t>(type)];
-	}
+    string& to_string(CreatureType type)
+    {
+        static string names[] =
+        {
+            "block",
+            "bug",
+            "fireball",
+            "ball",
+            "tank",
+            "glider",
+            "teeth",
+            "walker",
+            "blob",
+            "paramecium",
+            "chip"
+        };
+        return names[static_cast<size_t>(type)];
+    }
 }
 
 Creature* Creature::create(Level* level, CreatureType type)
@@ -36,14 +36,14 @@ Creature* Creature::create(Level* level, CreatureType type)
 }
 
 Creature::Creature(Level* level, CreatureType type):
-	_level(level),
-	_type(type),
-	_direction(Direction::NORTH),
-	_state(CreatureState::NORMAL),
-	_coordinate(cocos2d::Vec2::ZERO),
-	_turnsToNextMove(0),
-	_queuedMove(false),
-	_queuedDirection(Direction::NORTH),
+    _level(level),
+    _type(type),
+    _direction(Direction::NORTH),
+    _state(CreatureState::NORMAL),
+    _coordinate(cocos2d::Vec2::ZERO),
+    _turnsToNextMove(0),
+    _queuedMove(false),
+    _queuedDirection(Direction::NORTH),
     _dead(false)
 {
     _sprite = cocos2d::Sprite::create();
@@ -81,13 +81,13 @@ Creature::~Creature()
 
 void Creature::queueMove(Direction direction)
 {
-	_queuedMove = true;
-	_queuedDirection = direction;
+    _queuedMove = true;
+    _queuedDirection = direction;
 }
 
 bool Creature::hasQueuedMove()
 {
-	return _queuedMove;
+    return _queuedMove;
 }
 
 bool Creature::isMoving() const
@@ -178,7 +178,7 @@ void Creature::setDirection(Direction value)
 {
     if (_direction != value)
     {
-		_direction = value;
+        _direction = value;
     }
 }
 
@@ -212,68 +212,68 @@ bool Creature::isDead()
 
 void Creature::onTurn(float dt)
 {
-	if (_turnsToNextMove > 0)
-	{
-		_turnsToNextMove -= 1;
-	}
+    if (_turnsToNextMove > 0)
+    {
+        _turnsToNextMove -= 1;
+    }
 
-	if (_turnsToNextMove == 0)
-	{
-		_sprite->stopAllActionsByTag(MOVE_ACTION_TAG);
-		updatePosition();
+    if (_turnsToNextMove == 0)
+    {
+        _sprite->stopAllActionsByTag(MOVE_ACTION_TAG);
+        updatePosition();
 
-		auto object = _level->getObjectAt(_coordinate);
-		if (object != nullptr)
-		{
-			object->afterEnter(this);
-		}
+        auto object = _level->getObjectAt(_coordinate);
+        if (object != nullptr)
+        {
+            object->afterEnter(this);
+        }
 
-		auto item = _level->getItemAt(_coordinate);
-		if (item != nullptr)
-		{
-			item->afterEnter(this);
-		}
+        auto item = _level->getItemAt(_coordinate);
+        if (item != nullptr)
+        {
+            item->afterEnter(this);
+        }
 
-		if (_dead)
-		{
-			return;
-		}
+        if (_dead)
+        {
+            return;
+        }
 
-		if (_type == CreatureType::CHIP)
-		{
-			for (auto creature : _level->getCreatures())
-			{
-				if (creature->getCoordinate() == _coordinate && creature != this)
-				{
-					die();
-					if (creature->_type == CreatureType::BLOCK)
-					{
-						_level->fail("Ooops! Watch out for moving blocks!");
-					}
-					else
-					{
-						_level->fail("Ooops! Look out for creatures!");
-					}
-					return;
-				}
-			}
-		}
+        if (_type == CreatureType::CHIP)
+        {
+            for (auto creature : _level->getCreatures())
+            {
+                if (creature->getCoordinate() == _coordinate && creature != this)
+                {
+                    die();
+                    if (creature->_type == CreatureType::BLOCK)
+                    {
+                        _level->fail("Ooops! Watch out for moving blocks!");
+                    }
+                    else
+                    {
+                        _level->fail("Ooops! Look out for creatures!");
+                    }
+                    return;
+                }
+            }
+        }
 
-		if (_queuedMove)
-		{
-			if (canMove(_queuedDirection))
-			{
-				move(_queuedDirection);
-			}
-		}
-		else
-		{
-			chooseNextMove();
-		}
+        if (_queuedMove)
+        {
+            if (canMove(_queuedDirection))
+            {
+                move(_queuedDirection);
+            }
+        }
+        else
+        {
+            chooseNextMove();
+        }
 
-		updateAnimation();
-		updateFlip();
-	}
+        updateAnimation();
+        updateFlip();
+    }
 }
 
 void Creature::onAdd()
@@ -327,61 +327,61 @@ void Creature::onRemove()
 
 bool Creature::canMove(Direction direction) const
 {
-	int mask = getPhysicsLayerMask();
-	auto physicsWorld = _level->getPhysicsWorld();
-	
-	if ((physicsWorld->getBody(_coordinate, mask) & (TileBody::INNER_NORTH_SIDE << direction)) != TileBody::EMPTY)
-	{
-		return false;
-	}
-	auto currentObject = _level->getObjectAt(_coordinate);
-	if (currentObject != nullptr && !currentObject->isEscapableBy(this, direction))
-	{
-		return false;
-	}
-
-	auto targetCoordinate = _coordinate + toVec2(direction);
-	auto frontObject = _level->getObjectAt(targetCoordinate);
-	if ((physicsWorld->getBody(targetCoordinate, mask) & (TileBody::OUTER_NORTH_SIDE << direction)) != TileBody::EMPTY)
-	{
-		if (frontObject == nullptr || !frontObject->isOpenableBy(this, direction))
-		{
-			return false;
-		}
-	}
-	else
-	{
-		if (frontObject != nullptr && !frontObject->isEnterableBy(this, direction))
-		{
-			return false;
-		}
-	}
+    int mask = getPhysicsLayerMask();
+    auto physicsWorld = _level->getPhysicsWorld();
     
-	auto targetItem = _level->getItemAt(targetCoordinate);
+    if ((physicsWorld->getBody(_coordinate, mask) & (TileBody::INNER_NORTH_SIDE << direction)) != TileBody::EMPTY)
+    {
+        return false;
+    }
+    auto currentObject = _level->getObjectAt(_coordinate);
+    if (currentObject != nullptr && !currentObject->isEscapableBy(this, direction))
+    {
+        return false;
+    }
+
+    auto targetCoordinate = _coordinate + toVec2(direction);
+    auto frontObject = _level->getObjectAt(targetCoordinate);
+    if ((physicsWorld->getBody(targetCoordinate, mask) & (TileBody::OUTER_NORTH_SIDE << direction)) != TileBody::EMPTY)
+    {
+        if (frontObject == nullptr || !frontObject->isOpenableBy(this, direction))
+        {
+            return false;
+        }
+    }
+    else
+    {
+        if (frontObject != nullptr && !frontObject->isEnterableBy(this, direction))
+        {
+            return false;
+        }
+    }
+    
+    auto targetItem = _level->getItemAt(targetCoordinate);
     if (targetItem != nullptr && !targetItem->isEnterableBy(this, direction))
     {
         return false;
     }
     
-	auto frontCreature = _level->getCreatureAt(targetCoordinate);
+    auto frontCreature = _level->getCreatureAt(targetCoordinate);
     if (frontCreature != nullptr && !frontCreature->_dead)
     {
-		if (_type == CreatureType::CHIP)
-		{
-			return (frontCreature->_type != CreatureType::BLOCK) || frontCreature->canMove(direction);
-		}
-		else if (_type == CreatureType::BLOCK)
-		{
-			return (frontCreature->_type != CreatureType::BLOCK);
-		}
-		else if (_type == CreatureType::TEETH)
-		{
-			return (frontCreature->_type != CreatureType::BLOCK && frontCreature->_type != CreatureType::TEETH);
-		}
-		else
-		{
-			return (frontCreature->_type == CreatureType::CHIP);
-		}
+        if (_type == CreatureType::CHIP)
+        {
+            return (frontCreature->_type != CreatureType::BLOCK) || frontCreature->canMove(direction);
+        }
+        else if (_type == CreatureType::BLOCK)
+        {
+            return (frontCreature->_type != CreatureType::BLOCK);
+        }
+        else if (_type == CreatureType::TEETH)
+        {
+            return (frontCreature->_type != CreatureType::BLOCK && frontCreature->_type != CreatureType::TEETH);
+        }
+        else
+        {
+            return (frontCreature->_type == CreatureType::CHIP);
+        }
     }
     
     return true;
@@ -408,34 +408,34 @@ void Creature::chooseNextMove()
     { }
     else if (_type == CreatureType::TEETH)
     {
-		auto playerCreature = _level->getPlayerCreature();
-		if (playerCreature != nullptr)
-		{
-			auto targetCoordinate = playerCreature->getCoordinate();
-			Direction dirs[2];
-			size_t dirCount = 0;
-			if (_coordinate.y != targetCoordinate.y)
-			{
-				dirs[dirCount++] = (_coordinate.y > targetCoordinate.y) ? Direction::NORTH : Direction::SOUTH;
-			}
-			if (_coordinate.x != targetCoordinate.x)
-			{
-				dirs[dirCount++] = (_coordinate.x > targetCoordinate.x) ? Direction::WEST : Direction::EAST;
-			}
+        auto playerCreature = _level->getPlayerCreature();
+        if (playerCreature != nullptr)
+        {
+            auto targetCoordinate = playerCreature->getCoordinate();
+            Direction dirs[2];
+            size_t dirCount = 0;
+            if (_coordinate.y != targetCoordinate.y)
+            {
+                dirs[dirCount++] = (_coordinate.y > targetCoordinate.y) ? Direction::NORTH : Direction::SOUTH;
+            }
+            if (_coordinate.x != targetCoordinate.x)
+            {
+                dirs[dirCount++] = (_coordinate.x > targetCoordinate.x) ? Direction::WEST : Direction::EAST;
+            }
         
-			if (dirCount == 2 && fabsf(_coordinate.x - targetCoordinate.x) > fabsf(_coordinate.y - targetCoordinate.y))
-			{
-				std::swap(dirs[0], dirs[1]);
-			}
+            if (dirCount == 2 && fabsf(_coordinate.x - targetCoordinate.x) > fabsf(_coordinate.y - targetCoordinate.y))
+            {
+                std::swap(dirs[0], dirs[1]);
+            }
         
-			for (size_t i = 0; i < dirCount; i++)
-			{
-				if (canMove(dirs[i]))
-				{
-					move(dirs[i]);
-					break;
-				}
-			}
+            for (size_t i = 0; i < dirCount; i++)
+            {
+                if (canMove(dirs[i]))
+                {
+                    move(dirs[i]);
+                    break;
+                }
+            }
         }
     }
     else if (_type == CreatureType::WALKER || _type == CreatureType::BLOB)
@@ -476,12 +476,12 @@ void Creature::chooseNextMove()
             direction = turnRight(direction);
         }
         
-		if (canMove(direction))
-		{
-			move(direction);
-		}
-		else
-		{
+        if (canMove(direction))
+        {
+            move(direction);
+        }
+        else
+        {
             auto initialDirection = direction;
             for (;;)
             {
@@ -517,7 +517,7 @@ void Creature::chooseNextMove()
 
 void Creature::move(Direction direction)
 {
-	_queuedMove = false;
+    _queuedMove = false;
 
     _turnsToNextMove = getTurnsPerMove();
     _direction = direction;
@@ -535,28 +535,28 @@ void Creature::move(Direction direction)
     moveAction->setTag(MOVE_ACTION_TAG);
     _sprite->runAction(moveAction);
     
-	auto object = _level->getObjectAt(_coordinate - toVec2(direction));
-	if (object != nullptr)
-	{
-		object->beforeEscape(this);
-	}
+    auto object = _level->getObjectAt(_coordinate - toVec2(direction));
+    if (object != nullptr)
+    {
+        object->beforeEscape(this);
+    }
 
-	auto frontObject = _level->getObjectAt(_coordinate);
-	if (frontObject != nullptr)
-	{
-		frontObject->beforeEnter(this);
-	}
+    auto frontObject = _level->getObjectAt(_coordinate);
+    if (frontObject != nullptr)
+    {
+        frontObject->beforeEnter(this);
+    }
 
-	if (_type == CreatureType::CHIP)
-	{
-		for (auto creature : _level->getCreatures())
-		{
-			if (creature->_type == CreatureType::BLOCK && creature->_coordinate == _coordinate)
-			{
-				creature->queueMove(_direction);
-			}
-		}
-	}
+    if (_type == CreatureType::CHIP)
+    {
+        for (auto creature : _level->getCreatures())
+        {
+            if (creature->_type == CreatureType::BLOCK && creature->_coordinate == _coordinate)
+            {
+                creature->queueMove(_direction);
+            }
+        }
+    }
 }
 
 void Creature::updatePosition()

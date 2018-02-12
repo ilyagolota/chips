@@ -13,13 +13,13 @@
 class LevelScene : public cocos2d::Scene, LevelHandler
 {
 public:
-	static LevelScene* create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
+    static LevelScene* create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
 
-	LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
-	virtual ~LevelScene() override;
+    LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex);
+    virtual ~LevelScene() override;
 
-	void onEnter() override;
-	void update(float dt) override;
+    void onEnter() override;
+    void update(float dt) override;
     void updatePerTurn(float dt);
 
     void onLevelWin() override;

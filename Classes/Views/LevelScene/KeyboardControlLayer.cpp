@@ -42,7 +42,7 @@ void KeyboardControlLayer::onLevelTurn()
             case cocos2d::EventKeyboard::KeyCode::KEY_S:
                 if (playerCreature->canMove(Direction::SOUTH))
                 {
-					playerCreature->queueMove(Direction::SOUTH);
+                    playerCreature->queueMove(Direction::SOUTH);
                 }
                 break;
                 
@@ -50,7 +50,7 @@ void KeyboardControlLayer::onLevelTurn()
             case cocos2d::EventKeyboard::KeyCode::KEY_A:
                 if (playerCreature->canMove(Direction::WEST))
                 {
-					playerCreature->queueMove(Direction::EAST);
+                    playerCreature->queueMove(Direction::EAST);
                 }
                 break;
                 
@@ -58,7 +58,7 @@ void KeyboardControlLayer::onLevelTurn()
             case cocos2d::EventKeyboard::KeyCode::KEY_D:
                 if (playerCreature->canMove(Direction::EAST))
                 {
-					playerCreature->queueMove(Direction::WEST);
+                    playerCreature->queueMove(Direction::WEST);
                 }
                 break;
                 

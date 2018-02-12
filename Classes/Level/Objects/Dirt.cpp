@@ -34,7 +34,7 @@ void Dirt::reset()
     _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
     
     _dirtNode->setVisible(true);
-	_dirtNode->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName("dirt-0001.png"));
+    _dirtNode->setSpriteFrame(cocos2d::SpriteFrameCache::getInstance()->getSpriteFrameByName("dirt-0001.png"));
 }
 
 bool Dirt::isEnterableBy(const Creature* creature, Direction /*direction*/) const

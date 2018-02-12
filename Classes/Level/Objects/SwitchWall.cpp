@@ -23,14 +23,14 @@ void SwitchWall::onAdd()
     _node = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall-floor" + shapeName + ".png");
     _node->setAnchorPoint(cocos2d::Vec2::ZERO);
     _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	if (_open)
-	{
-		_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
-	}
-	else
-	{
-		_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
-	}
+    if (_open)
+    {
+        _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+    }
+    else
+    {
+        _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+    }
     _level->getStage()->addChild(_node);
     
     _wallNode = cocos2d::Sprite::createWithSpriteFrameName("toggle-wall" + shapeName + ".png");
@@ -53,13 +53,13 @@ void SwitchWall::reset()
     if (_open)
     {
         _wallNode->setPosition(cocos2d::Vec2(0, -78));
-		_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+        _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
         _level->getPhysicsWorld()->setBody(_coordinate, TileBody::EMPTY, 7);
     }
     else
     {
         _wallNode->setPosition(cocos2d::Vec2(0, 12));
-		_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
+        _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::WALL_Z_ORDER);
         _level->getPhysicsWorld()->setBody(_coordinate, TileBody::OUTER_BOX, 7);
     }
 }

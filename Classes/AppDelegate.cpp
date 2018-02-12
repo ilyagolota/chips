@@ -56,9 +56,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // Set the design resolution
-	glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
     /*Size frameSize = glview->getFrameSize();
-	if (frameSize.height > mediumResolutionSize.height)
+    if (frameSize.height > mediumResolutionSize.height)
     {
         director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height, largeResolutionSize.width / designResolutionSize.width));
     }
@@ -80,14 +80,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto game = ChipsChallengeGame::create();
     
     auto preloader = Preloader::create();
-	preloader->addTask(_loadSpriteSheet("sheets/ui.plist"));
+    preloader->addTask(_loadSpriteSheet("sheets/ui.plist"));
     preloader->addTask(_loadSpriteSheet("sheets/creatures.plist"));
     preloader->addTask(_loadSpriteSheet("sheets/tiles-1.plist"));
-	preloader->addTask(_loadSpriteSheet("sheets/tiles-2.plist"));
-	preloader->addTask(_loadSpriteSheet("sheets/tiles-3.plist"));
+    preloader->addTask(_loadSpriteSheet("sheets/tiles-2.plist"));
+    preloader->addTask(_loadSpriteSheet("sheets/tiles-3.plist"));
     preloader->addTask(_loadAnimations("animations.plist"));
     preloader->addTask(_loadSound("sounds/door.mp3"));
-	preloader->addTask(_loadSound("sounds/water.mp3"));
+    preloader->addTask(_loadSound("sounds/water.mp3"));
     preloader->addTask(_loadSound("sounds/fire.mp3"));
     preloader->addTask(_loadSound("sounds/glider.wav"));
     preloader->addTask(_loadLevelPack(game, "levels/cclp1.dat", std::vector<char>(hash1, hash1 + 16)));
@@ -95,7 +95,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     preloader->addTask(_loadLevelPack(game, "levels/cclp3.dat", std::vector<char>(hash3, hash3 + 16)));
     
     std::vector<char> highscoreSecret(hash3, hash3 + 16);
-	preloader->addTask(std::function<void()>([game, highscoreSecret]() {
+    preloader->addTask(std::function<void()>([game, highscoreSecret]() {
         game->setHighscores(HighscoreStorage::create("highscores.sav", highscoreSecret));
     }));
     
@@ -108,13 +108,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground()
 {
     Director::getInstance()->stopAnimation();
-	cocos2d::experimental::AudioEngine::pauseAll();
+    cocos2d::experimental::AudioEngine::pauseAll();
 }
 
 void AppDelegate::applicationWillEnterForeground()
 {
     Director::getInstance()->startAnimation();
-	cocos2d::experimental::AudioEngine::resumeAll();
+    cocos2d::experimental::AudioEngine::resumeAll();
 }
 
 std::function<void()> AppDelegate::_loadSpriteSheet(const std::string& filename)

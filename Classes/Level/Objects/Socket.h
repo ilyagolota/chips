@@ -7,9 +7,9 @@
 class Socket : public LevelObject
 {
 public:
-	static Socket* create(Level* level, const cocos2d::Vec2& coordinate);
+    static Socket* create(Level* level, const cocos2d::Vec2& coordinate);
     
-	Socket(Level* level, const cocos2d::Vec2& coordinate);
+    Socket(Level* level, const cocos2d::Vec2& coordinate);
     
     void onAdd() override;
     void reset() override;

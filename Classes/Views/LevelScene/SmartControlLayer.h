@@ -8,8 +8,8 @@
 class SmartControlLayer : public ControlLayer
 {
 public:
-	static SmartControlLayer* create(Level* level);
-	SmartControlLayer(Level* level);
+    static SmartControlLayer* create(Level* level);
+    SmartControlLayer(Level* level);
 
     void onLevelTurn() override;
     

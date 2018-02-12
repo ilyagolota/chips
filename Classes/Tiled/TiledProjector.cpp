@@ -15,7 +15,7 @@ TiledProjector::TiledProjector(const cocos2d::Size& tileSize, const cocos2d::Siz
 {
     _tileSize = tileSize;
     _mapSize = mapSize;
-	_tileDepth = tileDepth;
+    _tileDepth = tileDepth;
     _zOrderMap.resize(std::floor(_mapSize.width * _mapSize.height));
     
     _physicsWorld = physicsWorld;
@@ -40,7 +40,7 @@ cocos2d::Size TiledProjector::getMapSize() const
 
 cocos2d::Size TiledProjector::getTileSize() const
 {
-	return _tileSize;
+    return _tileSize;
 }
 
 void TiledProjector::clear()
@@ -107,7 +107,7 @@ int TiledProjector::coordinateToZOrder(const cocos2d::Vec2& coordinate)
             }
         }
         
-		_zOrderMap[index] = zOrder;
+        _zOrderMap[index] = zOrder;
     }
     return _zOrderMap[index] * _tileDepth;
 }

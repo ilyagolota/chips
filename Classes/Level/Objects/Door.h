@@ -9,9 +9,9 @@
 class Door : public LevelObject
 {
 public:
-	static Door* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
+    static Door* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
-	Door(Level* level, const cocos2d::Vec2& coordinate, TileType type);
+    Door(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
     void onAdd() override;
     void reset() override;
@@ -21,15 +21,15 @@ public:
     void beforeEnter(Creature* creature) override;
     
     void setOpen(bool open);
-	TileType getKeyType() const;
-	std::string& getColorName() const;
+    TileType getKeyType() const;
+    std::string& getColorName() const;
 
 private:
-	bool _open;
-	TileType _type;
-	cocos2d::Sprite* _node;
-	cocos2d::Sprite* _doorNode;
-	cocos2d::Sprite* _frontNode;
+    bool _open;
+    TileType _type;
+    cocos2d::Sprite* _node;
+    cocos2d::Sprite* _doorNode;
+    cocos2d::Sprite* _frontNode;
 };
 
 #endif

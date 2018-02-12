@@ -105,25 +105,25 @@ void Level::makeTurn(float dt)
         _soundEnvironment->getMicrophone()->setCoordinate(_playerCreature->getCoordinate());
     }
     
-	for (size_t i = 0; i < _creatures.size(); )
-	{
-		auto creature = _creatures.at(i);
-		if (creature != _playerCreature)
-		{
-			creature->onTurn(dt);
-		}
+    for (size_t i = 0; i < _creatures.size(); )
+    {
+        auto creature = _creatures.at(i);
+        if (creature != _playerCreature)
+        {
+            creature->onTurn(dt);
+        }
 
-		if (creature->isDead())
-		{
-			removeCreature(creature);
-		}
-		else
-		{
-			i++;
-		}
-	}
+        if (creature->isDead())
+        {
+            removeCreature(creature);
+        }
+        else
+        {
+            i++;
+        }
+    }
 
-	_soundEnvironment->update(dt);
+    _soundEnvironment->update(dt);
 }
 
 cocos2d::Node* Level::getStage() const
@@ -211,11 +211,11 @@ void Level::addItem(Item* item)
 
 Item* Level::getItemAt(const cocos2d::Vec2& coordinate) const
 {
-	if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _config->getWidth() && coordinate.y < _config->getHeight())
-	{
+    if (coordinate.x >= 0 && coordinate.y >= 0 && coordinate.x < _config->getWidth() && coordinate.y < _config->getHeight())
+    {
         size_t index = _coordinateToIndex(coordinate);
         return _items[index];
-	}
+    }
     return nullptr;
 }
 
@@ -264,7 +264,7 @@ Creature* Level::getCreatureAt(const cocos2d::Vec2& coordinate) const
 
 Creature* Level::getPlayerCreature() const
 {
-	return _playerCreature;
+    return _playerCreature;
 }
 
 void Level::showHint(const std::string& hint, const cocos2d::Vec2& position)
@@ -279,48 +279,48 @@ void Level::hideHint(const cocos2d::Vec2& position)
 
 int Level::getWallShape(const cocos2d::Vec2& coordinate) const
 {
-	int mask = 0;
-	for (int dirIndex = 0; dirIndex < 4; dirIndex++)
-	{
-		bool hasNeighborWall = false;
-		auto neighborCoordinate = coordinate + toVec2(static_cast<Direction>(dirIndex));
-		if (neighborCoordinate.x >= 0 && neighborCoordinate.y >= 0 && neighborCoordinate.x < _config->getWidth() && neighborCoordinate.y < _config->getHeight())
-		{
-			auto index = _coordinateToIndex(neighborCoordinate);
-			for (auto& layer : _config->getLayers())
-			{
-				switch (layer[index])
-				{
-				case TileType::WALL:
-				case TileType::DOOR_BLUE:
-				case TileType::DOOR_GREEN:
-				case TileType::DOOR_YELLOW:
-				case TileType::DOOR_RED:
-				case TileType::SWITCH_WALL_CLOSED:
-				case TileType::SWITCH_WALL_OPEN:
-				case TileType::BLUE_WALL_REAL:
-				case TileType::BLUE_WALL_FAKE:
-				case TileType::HIDDEN_WALL_TEMP:
-				case TileType::HIDDEN_WALL_PERM:
-				case TileType::HIDDEN_WALL_PERM_1:
-				case TileType::HIDDEN_WALL_PERM_2:
-				case TileType::HIDDEN_WALL_PERM_3:
-				case TileType::SOCKET:
-					hasNeighborWall = true;
-					break;
+    int mask = 0;
+    for (int dirIndex = 0; dirIndex < 4; dirIndex++)
+    {
+        bool hasNeighborWall = false;
+        auto neighborCoordinate = coordinate + toVec2(static_cast<Direction>(dirIndex));
+        if (neighborCoordinate.x >= 0 && neighborCoordinate.y >= 0 && neighborCoordinate.x < _config->getWidth() && neighborCoordinate.y < _config->getHeight())
+        {
+            auto index = _coordinateToIndex(neighborCoordinate);
+            for (auto& layer : _config->getLayers())
+            {
+                switch (layer[index])
+                {
+                case TileType::WALL:
+                case TileType::DOOR_BLUE:
+                case TileType::DOOR_GREEN:
+                case TileType::DOOR_YELLOW:
+                case TileType::DOOR_RED:
+                case TileType::SWITCH_WALL_CLOSED:
+                case TileType::SWITCH_WALL_OPEN:
+                case TileType::BLUE_WALL_REAL:
+                case TileType::BLUE_WALL_FAKE:
+                case TileType::HIDDEN_WALL_TEMP:
+                case TileType::HIDDEN_WALL_PERM:
+                case TileType::HIDDEN_WALL_PERM_1:
+                case TileType::HIDDEN_WALL_PERM_2:
+                case TileType::HIDDEN_WALL_PERM_3:
+                case TileType::SOCKET:
+                    hasNeighborWall = true;
+                    break;
 
-				default:
-					break;
-				}
-			}
+                default:
+                    break;
+                }
+            }
 
-			if (hasNeighborWall)
-			{
-				mask |= (1 << dirIndex);
-			}
-		}
-	}
-	return mask;
+            if (hasNeighborWall)
+            {
+                mask |= (1 << dirIndex);
+            }
+        }
+    }
+    return mask;
 }
 
 void Level::_rebuild()
@@ -448,11 +448,11 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::FIRE:
-			addObject(Fire::create(this, coordinate));
+            addObject(Fire::create(this, coordinate));
             break;
             
         case TileType::HIDDEN_WALL_PERM:
-			addObject(HiddenWall::create(this, coordinate, true));
+            addObject(HiddenWall::create(this, coordinate, true));
             break;
             
         case TileType::WALL_NORTH:
@@ -463,11 +463,11 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::DIRT:
-			addObject(Dirt::create(this, coordinate));
+            addObject(Dirt::create(this, coordinate));
             break;
             
         case TileType::ICE:
-			addObject(Ice::create(this, coordinate, tileType));
+            addObject(Ice::create(this, coordinate, tileType));
             break;
             
         case TileType::SLIDE_SOUTH:
@@ -481,7 +481,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::EXIT:
-			addObject(Exit::create(this, coordinate));
+            addObject(Exit::create(this, coordinate));
             break;
             
         case TileType::DOOR_BLUE:
@@ -495,54 +495,54 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
         case TileType::ICE_WALL_SOUTH_WEST:
         case TileType::ICE_WALL_NORTH_WEST:
         case TileType::ICE_WALL_NORTH_EAST:
-			addObject(Ice::create(this, coordinate, tileType));
+            addObject(Ice::create(this, coordinate, tileType));
             break;
             
         case TileType::BLUE_WALL_FAKE:
         case TileType::BLUE_WALL_REAL:
-			addObject(BlueWall::create(this, coordinate, (tileType == TileType::BLUE_WALL_FAKE)));
+            addObject(BlueWall::create(this, coordinate, (tileType == TileType::BLUE_WALL_FAKE)));
             break;
             
         case TileType::OVERLAY_BUFFER:
             return false;
             
         case TileType::BURGLAR:
-			addObject(Burglar::create(this, coordinate));
+            addObject(Burglar::create(this, coordinate));
             break;
             
         case TileType::SOCKET:
-			addObject(Socket::create(this, coordinate));
+            addObject(Socket::create(this, coordinate));
             break;
             
         case TileType::BUTTON_GREEN:
         case TileType::BUTTON_RED:
-			addObject(Button::create(this, coordinate, tileType));
+            addObject(Button::create(this, coordinate, tileType));
             break;
             
         case TileType::SWITCH_WALL_CLOSED:
         case TileType::SWITCH_WALL_OPEN:
-			addObject(SwitchWall::create(this, coordinate, (tileType == TileType::SWITCH_WALL_OPEN)));
+            addObject(SwitchWall::create(this, coordinate, (tileType == TileType::SWITCH_WALL_OPEN)));
             break;
             
         case TileType::BUTTON_BROWN:
         case TileType::BUTTON_BLUE:
-			addObject(Button::create(this, coordinate, tileType));
+            addObject(Button::create(this, coordinate, tileType));
             break;
             
         case TileType::TELEPORT:
-			addObject(Teleport::create(this, coordinate));
+            addObject(Teleport::create(this, coordinate));
             break;
             
         case TileType::BOMB:
-			addObject(Bomb::create(this, coordinate));
+            addObject(Bomb::create(this, coordinate));
             break;
             
         case TileType::BEARTRAP:
-			addObject(Beartrap::create(this, coordinate));
+            addObject(Beartrap::create(this, coordinate));
             break;
             
         case TileType::HIDDEN_WALL_TEMP:
-			addObject(HiddenWall::create(this, coordinate, false));
+            addObject(HiddenWall::create(this, coordinate, false));
             break;
             
         case TileType::GRAVEL:
@@ -550,7 +550,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::POPUP_WALL:
-			addObject(PopupWall::create(this, coordinate));
+            addObject(PopupWall::create(this, coordinate));
             break;
             
         case TileType::HINT_BUTTON:
@@ -562,7 +562,7 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
             break;
             
         case TileType::CLONE_MACHINE:
-			addObject(CloneMachine::create(this, coordinate));
+            addObject(CloneMachine::create(this, coordinate));
             break;
             
         case TileType::SLIDE_RANDOM:
@@ -572,12 +572,12 @@ bool Level::_tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate)
         case TileType::HIDDEN_WALL_PERM_1:
         case TileType::HIDDEN_WALL_PERM_2:
         case TileType::HIDDEN_WALL_PERM_3:
-			addObject(HiddenWall::create(this, coordinate, true));
+            addObject(HiddenWall::create(this, coordinate, true));
             break;
             
         case TileType::EXIT_EXTRA_1:
         case TileType::EXIT_EXTRA_2:
-			addObject(Exit::create(this, coordinate));
+            addObject(Exit::create(this, coordinate));
             break;
             
         case TileType::KEY_BLUE:
@@ -729,16 +729,16 @@ void Level::_buildFloor(const cocos2d::Vec2& coordinate)
 {
     auto floorSprite = cocos2d::Sprite::createWithSpriteFrameName("floor.png");
     floorSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
-	floorSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
+    floorSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
     floorSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate));
     _stage->addChild(floorSprite);
 }
 
 void Level::_buildWall(const cocos2d::Vec2& coordinate)
 {
-	_physicsWorld->setBody(coordinate, TileBody::OUTER_BOX, 7);
+    _physicsWorld->setBody(coordinate, TileBody::OUTER_BOX, 7);
 
-	int shape = getWallShape(coordinate);
+    int shape = getWallShape(coordinate);
     char spriteFrameName[14];
     sprintf(spriteFrameName, "wall-%04d.png", shape + 1);
     
@@ -751,13 +751,13 @@ void Level::_buildWall(const cocos2d::Vec2& coordinate)
 
 void Level::_buildGravel(const cocos2d::Vec2& coordinate)
 {
-	_physicsWorld->setBody(coordinate, TileBody::OUTER_BOX, 4);
+    _physicsWorld->setBody(coordinate, TileBody::OUTER_BOX, 4);
 
-	auto gravelSprite = cocos2d::Sprite::createWithSpriteFrameName("gravel.png");
-	gravelSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
-	gravelSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
-	gravelSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate));
-	_stage->addChild(gravelSprite);
+    auto gravelSprite = cocos2d::Sprite::createWithSpriteFrameName("gravel.png");
+    gravelSprite->setAnchorPoint(cocos2d::Vec2::ZERO);
+    gravelSprite->setPosition(_projector->coordinateToPoint(coordinate) - cocos2d::Vec2(0, 12));
+    gravelSprite->setLocalZOrder(_projector->coordinateToZOrder(coordinate));
+    _stage->addChild(gravelSprite);
 }
 
 size_t Level::_coordinateToIndex(const cocos2d::Vec2& coordinate) const

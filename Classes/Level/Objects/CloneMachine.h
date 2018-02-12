@@ -7,9 +7,9 @@
 class CloneMachine : public LevelObject
 {
 public:
-	static CloneMachine* create(Level* level, const cocos2d::Vec2& coordinate);
+    static CloneMachine* create(Level* level, const cocos2d::Vec2& coordinate);
     
-	CloneMachine(Level* level, const cocos2d::Vec2& coordinate);
+    CloneMachine(Level* level, const cocos2d::Vec2& coordinate);
     void performCloning();
     
     void onAdd() override;

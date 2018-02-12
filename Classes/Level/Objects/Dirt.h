@@ -16,7 +16,7 @@ public:
     
     bool isEnterableBy(const Creature* creature, Direction direction) const override;
     
-	void beforeEnter(Creature* creature) override;
+    void beforeEnter(Creature* creature) override;
     
 protected:
     bool _removed;

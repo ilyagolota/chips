@@ -34,23 +34,23 @@ inline Direction turnRight(Direction direction)
 
 inline Direction inverse(Direction direction)
 {
-	return static_cast<Direction>((static_cast<int>(direction)+2) % 4);
+    return static_cast<Direction>((static_cast<int>(direction)+2) % 4);
 }
 
 namespace std
 {
-	inline string& to_string(Direction direction)
-	{
-		static string __directionNames[] =
-		{
-			"none",
-			"north",
-			"west",
-			"south",
-			"east",
-		};
-		int order = static_cast<int>(direction)+1;
-		return __directionNames[(order >= 0 && order <= 4) ? order : 0];
-	}
+    inline string& to_string(Direction direction)
+    {
+        static string __directionNames[] =
+        {
+            "none",
+            "north",
+            "west",
+            "south",
+            "east",
+        };
+        int order = static_cast<int>(direction)+1;
+        return __directionNames[(order >= 0 && order <= 4) ? order : 0];
+    }
 }
 #endif

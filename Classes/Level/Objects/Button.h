@@ -8,12 +8,12 @@
 class Button : public LevelObject
 {
 private:
-	TileType _type;
+    TileType _type;
 
 public:
-	static Button* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
+    static Button* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
-	Button(Level* level, const cocos2d::Vec2& coordinate, TileType type);
+    Button(Level* level, const cocos2d::Vec2& coordinate, TileType type);
 
     void onAdd() override;
     void reset() override;
@@ -30,7 +30,7 @@ protected:
     
     cocos2d::Sprite* _node;
     cocos2d::Sprite* _buttonNode;
-	size_t _pressCount;
+    size_t _pressCount;
 };
 
 #endif

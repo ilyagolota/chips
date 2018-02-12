@@ -43,7 +43,7 @@ inline TileBody& operator &= (TileBody& bodyA, TileBody bodyB)
 
 inline TileBody operator << (TileBody body, Direction direction)
 {
-	return static_cast<TileBody>(static_cast<int>(body) << static_cast<int>(direction));
+    return static_cast<TileBody>(static_cast<int>(body) << static_cast<int>(direction));
 }
 
 class TiledPhysicsWorld : public cocos2d::Ref

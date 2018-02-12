@@ -5,9 +5,9 @@
 
 PacksScene* PacksScene::create(ChipsChallengeGame* game)
 {
-	auto instance = new (std::nothrow) PacksScene(game);
-	instance->autorelease();
-	return instance;
+    auto instance = new (std::nothrow) PacksScene(game);
+    instance->autorelease();
+    return instance;
 }
 
 PacksScene::PacksScene(ChipsChallengeGame* game)
@@ -23,25 +23,25 @@ PacksScene::~PacksScene()
 
 void PacksScene::onEnter()
 {
-	Scene::onEnter();
-	_build();
-	_animateEntering();
+    Scene::onEnter();
+    _build();
+    _animateEntering();
 }
 
 void PacksScene::onExitTransitionDidStart()
 {
-	Scene::onExitTransitionDidStart();
-	_animateExiting();
+    Scene::onExitTransitionDidStart();
+    _animateExiting();
 }
 
 void PacksScene::onExit()
 {
-	Scene::onExit();
+    Scene::onExit();
 }
 
 void PacksScene::_build()
 {
-	cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
+    cocos2d::Size winSize = cocos2d::Director::getInstance()->getWinSize();
 
     float buttonWidth = 200;
     
@@ -52,8 +52,8 @@ void PacksScene::_build()
     addChild(_buttonsNode);
     
     float x = 0.5f * (_buttonsNode->getContentSize().width - buttonWidth * (_game->getLevelPacks().size() - 1));
-	for (auto pack : _game->getLevelPacks())
-	{
+    for (auto pack : _game->getLevelPacks())
+    {
         auto button = cocos2d::ui::Button::create("CloseSelected.png");
         button->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
         button->setPosition(cocos2d::Vec2(x, 0.5f * _buttonsNode->getContentSize().height));
@@ -67,7 +67,7 @@ void PacksScene::_build()
         });
         x += buttonWidth;
         _buttonsNode->addChild(button);
-	}
+    }
 }
 
 void PacksScene::_animateEntering()

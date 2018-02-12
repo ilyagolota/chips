@@ -9,8 +9,8 @@ class HintButton : public LevelObject
 private:
     
 public:
-	static HintButton* create(Level* level, const cocos2d::Vec2& coordinate);
-	HintButton(Level* level, const cocos2d::Vec2& coordinate);
+    static HintButton* create(Level* level, const cocos2d::Vec2& coordinate);
+    HintButton(Level* level, const cocos2d::Vec2& coordinate);
 
     void onAdd() override;
     
@@ -18,7 +18,7 @@ public:
     void beforeEscape(Creature *creature) override;
     
 private:
-	cocos2d::Sprite* _node;
+    cocos2d::Sprite* _node;
 };
 
 #endif

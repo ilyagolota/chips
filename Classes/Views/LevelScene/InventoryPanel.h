@@ -10,18 +10,18 @@
 class InventoryPanel : public cocos2d::Node
 {
 public:
-	static InventoryPanel* create(Inventory* inventory);
-	InventoryPanel(Inventory* inventory);
-	virtual ~InventoryPanel();
+    static InventoryPanel* create(Inventory* inventory);
+    InventoryPanel(Inventory* inventory);
+    virtual ~InventoryPanel();
 
 private:
-	void _build();
-	void _update();
-	std::string& _getSpriteFrameName(TileType itemType) const;
+    void _build();
+    void _update();
+    std::string& _getSpriteFrameName(TileType itemType) const;
 
-	Inventory* _inventory;
-	cocos2d::Node* _background;
-	cocos2d::EventListenerCustom* _inventoryChangedListener;
+    Inventory* _inventory;
+    cocos2d::Node* _background;
+    cocos2d::EventListenerCustom* _inventoryChangedListener;
 };
     
 #endif

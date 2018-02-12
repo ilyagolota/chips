@@ -11,7 +11,7 @@ size_t LevelScene::__tilesetIndex = 0;
 
 LevelScene* LevelScene::create(ChipsChallengeGame* game, size_t packIndex, size_t levelIndex)
 {
-	auto instance = new (std::nothrow) LevelScene(game, packIndex, levelIndex);
+    auto instance = new (std::nothrow) LevelScene(game, packIndex, levelIndex);
     instance->autorelease();
     return instance;
 }
@@ -25,16 +25,16 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     _elapsedTimeBeforeLastPause(0.0)
 {
     auto director = cocos2d::Director::getInstance();
-	auto winSize = director->getWinSize();
-	cocos2d::Rect screenBounds(director->getVisibleOrigin(), director->getVisibleSize());
+    auto winSize = director->getWinSize();
+    cocos2d::Rect screenBounds(director->getVisibleOrigin(), director->getVisibleSize());
 
     _game->retain();
 
     _stage = cocos2d::Node::create();
     addChild(_stage);
 
-	_level = Level::create(_stage, this);
-	_level->retain();
+    _level = Level::create(_stage, this);
+    _level->retain();
 
     auto buttonControlLayer = ButtonControlLayer::create(_level);
     addChild(buttonControlLayer);
@@ -47,14 +47,14 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     auto uiLayer = cocos2d::Node::create();
     addChild(uiLayer);
     
-	_inventoryPanel = InventoryPanel::create(_level->getInventory());
-	_inventoryPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
-	_inventoryPanel->setPosition(screenBounds.origin + cocos2d::Vec2(0.5f * screenBounds.size.width, 8));
-	uiLayer->addChild(_inventoryPanel);
+    _inventoryPanel = InventoryPanel::create(_level->getInventory());
+    _inventoryPanel->setAnchorPoint(cocos2d::Vec2(0.5f, 0));
+    _inventoryPanel->setPosition(screenBounds.origin + cocos2d::Vec2(0.5f * screenBounds.size.width, 8));
+    uiLayer->addChild(_inventoryPanel);
     
     auto menuButton = cocos2d::ui::Button::create("ui-button-pause.png", "ui-button-pause-on.png", "", cocos2d::ui::Widget::TextureResType::PLIST);
     menuButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	menuButton->setPosition(screenBounds.origin + screenBounds.size + cocos2d::Vec2(-31, -32));
+    menuButton->setPosition(screenBounds.origin + screenBounds.size + cocos2d::Vec2(-31, -32));
     menuButton->addTouchEventListener([this](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type)
     {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
@@ -65,9 +65,9 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     });
     uiLayer->addChild(menuButton);
     
-	auto restartButton = cocos2d::ui::Button::create("ui-button-restart.png", "ui-button-restart-on.png", "", cocos2d::ui::Widget::TextureResType::PLIST);
+    auto restartButton = cocos2d::ui::Button::create("ui-button-restart.png", "ui-button-restart-on.png", "", cocos2d::ui::Widget::TextureResType::PLIST);
     restartButton->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	restartButton->setPosition(screenBounds.origin + screenBounds.size + cocos2d::Vec2(-85, -32));
+    restartButton->setPosition(screenBounds.origin + screenBounds.size + cocos2d::Vec2(-85, -32));
     restartButton->addTouchEventListener([this](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type)
     {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
@@ -88,8 +88,8 @@ LevelScene::LevelScene(ChipsChallengeGame* game, size_t packIndex, size_t levelI
     _fadeLayer->setVisible(false);
     addChild(_fadeLayer);
 
-	_topLayer = cocos2d::Node::create();
-	addChild(_topLayer);
+    _topLayer = cocos2d::Node::create();
+    addChild(_topLayer);
     
     _level->makeTurn(0);
     director->getScheduler()->schedule(CC_SCHEDULE_SELECTOR(LevelScene::updatePerTurn), this, _level->getTurnDuration(), CC_REPEAT_FOREVER, 0, false);
@@ -102,12 +102,12 @@ LevelScene::~LevelScene()
     director->getScheduler()->unscheduleAllForTarget(this);
     
     _game->release();
-	_level->release();
+    _level->release();
 }
 
 void LevelScene::onEnter()
 {
-	cocos2d::Scene::onEnter();
+    cocos2d::Scene::onEnter();
     gotoLevel(_levelIndex);
 }
 
@@ -205,7 +205,7 @@ void LevelScene::onLevelFail(const std::string& message)
     messageLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
     messageLabel->setPosition(cocos2d::Vec2(messagePanel->getContentSize()) * 0.5f);
     messageLabel->setOpacity(0);
-	messageLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
+    messageLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
     messageLabel->runAction(cocos2d::FadeIn::create(0.5f));
     messagePanel->addChild(messageLabel);
     
@@ -396,7 +396,7 @@ void LevelScene::onLevelStart()
     ));
 
     auto titleLabel = cocos2d::Label::createWithTTF(_level->getConfig()->getTitle(), "fonts/Marker Felt.ttf", 24, cocos2d::Size(314, 0), cocos2d::TextHAlignment::CENTER);
-	titleLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
+    titleLabel->enableOutline(cocos2d::Color4B::BLACK, 1);
 
     auto titlePanel = cocos2d::ui::Scale9Sprite::createWithSpriteFrameName("ui-panel-transparent.png");
     titlePanel->setContentSize(cocos2d::Size(360, titleLabel->getContentSize().height + 46));
@@ -408,11 +408,11 @@ void LevelScene::onLevelStart()
     
     _topLayer->addChild(titlePanel);
     
-	titleLabel->runAction(cocos2d::Sequence::create(
-		cocos2d::DelayTime::create(0.7f),
-		cocos2d::FadeOut::create(0.5f),
-		nullptr
-	));
+    titleLabel->runAction(cocos2d::Sequence::create(
+        cocos2d::DelayTime::create(0.7f),
+        cocos2d::FadeOut::create(0.5f),
+        nullptr
+    ));
 
     titlePanel->runAction(cocos2d::Sequence::create(
         cocos2d::DelayTime::create(0.7f),

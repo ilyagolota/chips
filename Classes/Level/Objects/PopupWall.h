@@ -7,24 +7,24 @@
 class PopupWall : public LevelObject
 {
 public:
-	static PopupWall* create(Level* level, const cocos2d::Vec2& coordinate);
+    static PopupWall* create(Level* level, const cocos2d::Vec2& coordinate);
     
-	PopupWall(Level* level, const cocos2d::Vec2& coordinate);
+    PopupWall(Level* level, const cocos2d::Vec2& coordinate);
 
     void onAdd() override;
-	void reset() override;
+    void reset() override;
     
-	void afterEnter(Creature* creature) override;
-	void beforeEscape(Creature* creature) override;
+    void afterEnter(Creature* creature) override;
+    void beforeEscape(Creature* creature) override;
 
 private:
-	static cocos2d::Vec2 BOTTOM_POSITION;
-	static cocos2d::Vec2 TOP_POSITION;
+    static cocos2d::Vec2 BOTTOM_POSITION;
+    static cocos2d::Vec2 TOP_POSITION;
 
-	bool _open;
-	cocos2d::Sprite* _node;
-	cocos2d::Sprite* _pistonNode;
-	cocos2d::Sprite* _frontNode;
+    bool _open;
+    cocos2d::Sprite* _node;
+    cocos2d::Sprite* _pistonNode;
+    cocos2d::Sprite* _frontNode;
 };
 
 #endif

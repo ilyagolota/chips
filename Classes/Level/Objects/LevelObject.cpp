@@ -4,7 +4,7 @@
 
 LevelObject::LevelObject(Level* level, const cocos2d::Vec2& coordinate)
 {
-	_level = level;
+    _level = level;
     _coordinate = coordinate;
 }
 

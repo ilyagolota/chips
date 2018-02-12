@@ -63,21 +63,21 @@ public:
     void removeCreature(Creature* creature);
     const cocos2d::Vector<Creature*>& getCreatures() const;
     Creature* getCreatureAt(const cocos2d::Vec2& coordinate) const;
-	Creature* getPlayerCreature() const;
+    Creature* getPlayerCreature() const;
     
     void showHint(const std::string& hint, const cocos2d::Vec2& position);
     void hideHint(const cocos2d::Vec2& position);
     
-	int getWallShape(const cocos2d::Vec2& coordinate) const;
+    int getWallShape(const cocos2d::Vec2& coordinate) const;
 
 protected:
     void _rebuild();
     void _reset();
-	bool _tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate);
-	bool _tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate);
+    bool _tryBuildTile(TileType tileType, const cocos2d::Vec2& coordinate);
+    bool _tryBuildCreature(TileType tileType, const cocos2d::Vec2& coordinate);
     void _buildFloor(const cocos2d::Vec2& coordinate);
-	void _buildWall(const cocos2d::Vec2& coordinate);
-	void _buildGravel(const cocos2d::Vec2& coordinate);
+    void _buildWall(const cocos2d::Vec2& coordinate);
+    void _buildGravel(const cocos2d::Vec2& coordinate);
     size_t _coordinateToIndex(const cocos2d::Vec2& coordinate) const;
     
 private:

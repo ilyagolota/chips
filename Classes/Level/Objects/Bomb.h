@@ -7,9 +7,9 @@
 class Bomb : public LevelObject
 {
 public:
-	static Bomb* create(Level* level, const cocos2d::Vec2& coordinate);
+    static Bomb* create(Level* level, const cocos2d::Vec2& coordinate);
     
-	Bomb(Level* level, const cocos2d::Vec2& coordinate);
+    Bomb(Level* level, const cocos2d::Vec2& coordinate);
     
     void onAdd() override;
     void reset() override;
@@ -20,7 +20,7 @@ protected:
     bool _exploded;
     cocos2d::Sprite* _node;
     cocos2d::Sprite* _bombNode;
-	cocos2d::Sprite* _explosionNode;
+    cocos2d::Sprite* _explosionNode;
 };
 
 #endif

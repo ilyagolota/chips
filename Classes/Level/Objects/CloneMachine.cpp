@@ -4,7 +4,7 @@
 
 CloneMachine* CloneMachine::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-	auto instance = new CloneMachine(level, coordinate);
+    auto instance = new CloneMachine(level, coordinate);
     instance->autorelease();
     return instance;
 }
@@ -56,7 +56,7 @@ void CloneMachine::beforeEscape(Creature* creature)
 
     auto clonedCreature = Creature::create(creature->getLevel(), creature->getType());
     clonedCreature->setDirection(creature->getDirection());
-	clonedCreature->setCoordinate(_coordinate);
+    clonedCreature->setCoordinate(_coordinate);
     _level->addCreature(clonedCreature);
     
     auto sprite = clonedCreature->getSprite();

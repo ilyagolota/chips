@@ -9,9 +9,9 @@ class Exit : public LevelObject
 private:
     
 public:
-	static Exit* create(Level* level, const cocos2d::Vec2& coordinate);
+    static Exit* create(Level* level, const cocos2d::Vec2& coordinate);
     
-	Exit(Level* level, const cocos2d::Vec2& coordinate);
+    Exit(Level* level, const cocos2d::Vec2& coordinate);
     
     void onAdd() override;
     

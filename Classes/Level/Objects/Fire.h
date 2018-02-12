@@ -9,9 +9,9 @@ class Fire : public LevelObject
 private:
     
 public:
-	static Fire* create(Level* level, const cocos2d::Vec2& coordinate);
+    static Fire* create(Level* level, const cocos2d::Vec2& coordinate);
     
-	Fire(Level* level, const cocos2d::Vec2& coordinate);
+    Fire(Level* level, const cocos2d::Vec2& coordinate);
     
     void onAdd() override;
     

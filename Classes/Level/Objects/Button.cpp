@@ -6,14 +6,14 @@
 
 Button* Button::create(Level* level, const cocos2d::Vec2& coordinate, TileType type)
 {
-	auto instance = new Button(level, coordinate, type);
+    auto instance = new Button(level, coordinate, type);
     instance->autorelease();
     return instance;
 }
 
 Button::Button(Level* level, const cocos2d::Vec2& coordinate, TileType type) : LevelObject(level, coordinate)
 {
-	_type = type;
+    _type = type;
     _pressCount = 0;
 }
 
@@ -40,17 +40,17 @@ void Button::reset()
 
 void Button::beforeEnter(Creature *creature)
 {
-	if (_pressCount == 0) {
-		auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
+    if (_pressCount == 0) {
+        auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
         _buttonNode->runAction(cocos2d::Sequence::create(
             cocos2d::DelayTime::create(0.55f * duration),
             cocos2d::CallFunc::create([this]() {
-				_buttonNode->setSpriteFrame("button-" + getColorName() + "-on.png");
-			}),
-			nullptr
-		));
-	}
-	_pressCount += 1;
+                _buttonNode->setSpriteFrame("button-" + getColorName() + "-on.png");
+            }),
+            nullptr
+        ));
+    }
+    _pressCount += 1;
 }
 
 void Button::afterEnter(Creature* creature)
@@ -99,9 +99,9 @@ void Button::afterEnter(Creature* creature)
 
 void Button::beforeEscape(Creature* creature)
 {
-	_pressCount -= 1;
-	if (_pressCount == 0) {
-		auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
+    _pressCount -= 1;
+    if (_pressCount == 0) {
+        auto duration = creature->getTurnsPerMove() * _level->getTurnDuration();
         _buttonNode->runAction(cocos2d::Sequence::create(
             cocos2d::DelayTime::create(0.45f * duration),
             cocos2d::CallFunc::create([this]() {
@@ -110,27 +110,27 @@ void Button::beforeEscape(Creature* creature)
             nullptr
         ));
 
-		if (_type == TileType::BUTTON_BROWN)
-		{
-			const LevelWire* thisWire = nullptr;
-			for (auto& wire : _level->getConfig()->getWires())
-			{
-				if (wire.startCoordinate == _coordinate)
-				{
-					thisWire = &wire;
-				}
-			}
+        if (_type == TileType::BUTTON_BROWN)
+        {
+            const LevelWire* thisWire = nullptr;
+            for (auto& wire : _level->getConfig()->getWires())
+            {
+                if (wire.startCoordinate == _coordinate)
+                {
+                    thisWire = &wire;
+                }
+            }
 
-			if (thisWire != nullptr)
-			{
-				auto beartrap = dynamic_cast<Beartrap*>(_level->getObjectAt(thisWire->endCoordinate));
-				if (beartrap != nullptr)
-				{
-					beartrap->setOpen(false);
-				}
-			}
-		}
-	}
+            if (thisWire != nullptr)
+            {
+                auto beartrap = dynamic_cast<Beartrap*>(_level->getObjectAt(thisWire->endCoordinate));
+                if (beartrap != nullptr)
+                {
+                    beartrap->setOpen(false);
+                }
+            }
+        }
+    }
 }
 
 std::string& Button::getColorName()

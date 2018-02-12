@@ -7,9 +7,9 @@
 class SwitchWall : public LevelObject
 {
 public:
-	static SwitchWall* create(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
+    static SwitchWall* create(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
     
-	SwitchWall(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
+    SwitchWall(Level* level, const cocos2d::Vec2& coordinate, bool initiallyOpen);
     
     void onAdd() override;
     void reset() override;

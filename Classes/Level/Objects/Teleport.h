@@ -7,9 +7,9 @@
 class Teleport : public LevelObject
 {
 public:
-	static Teleport* create(Level* level, const cocos2d::Vec2& coordinate);
+    static Teleport* create(Level* level, const cocos2d::Vec2& coordinate);
     
-	Teleport(Level* level, const cocos2d::Vec2& coordinate);
+    Teleport(Level* level, const cocos2d::Vec2& coordinate);
     
     void onAdd() override;
     
@@ -18,13 +18,13 @@ public:
     void beforeEscape(Creature* creature) override;
     
 private:
-	static const cocos2d::Vec2 BOTTOM_POSITION;
+    static const cocos2d::Vec2 BOTTOM_POSITION;
 
-	Teleport* findTargetTeleport(Creature* creature);
-	
-	cocos2d::Sprite* _node;
-	cocos2d::Sprite* _abuseNode;
-	cocos2d::Sprite* _frontNode;
+    Teleport* findTargetTeleport(Creature* creature);
+    
+    cocos2d::Sprite* _node;
+    cocos2d::Sprite* _abuseNode;
+    cocos2d::Sprite* _frontNode;
 };
 
 #endif

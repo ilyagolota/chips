@@ -3,7 +3,7 @@
 
 Exit* Exit::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-	auto instance = new Exit(level, coordinate);
+    auto instance = new Exit(level, coordinate);
     instance->autorelease();
     return instance;
 }

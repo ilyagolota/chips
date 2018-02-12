@@ -37,7 +37,7 @@ PauseMenuWindow::PauseMenuWindow(LevelScene* levelScene)
     auto resumeButtonLabel = cocos2d::Label::createWithTTF("Continue", "fonts/Marker Felt.ttf", 24);
     resumeButtonLabel->setPosition(cocos2d::Vec2(resumeButton->getContentSize()) * 0.5f);
     resumeButtonLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	resumeButtonLabel->enableOutline(cocos2d::Color4B(0xAD, 0x72, 0x14, 0xFF), 1);
+    resumeButtonLabel->enableOutline(cocos2d::Color4B(0xAD, 0x72, 0x14, 0xFF), 1);
     resumeButton->addChild(resumeButtonLabel);
     
     auto restartButton = cocos2d::ui::Button::create("ui-button-default.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);
@@ -56,7 +56,7 @@ PauseMenuWindow::PauseMenuWindow(LevelScene* levelScene)
     auto restartButtonLabel = cocos2d::Label::createWithTTF("Restart", "fonts/Marker Felt.ttf", 24);
     restartButtonLabel->setPosition(cocos2d::Vec2(restartButton->getContentSize()) * 0.5f);
     restartButtonLabel->setAnchorPoint(cocos2d::Vec2(0.5f, 0.5f));
-	restartButtonLabel->enableOutline(cocos2d::Color4B(0xAD, 0x72, 0x14, 0xFF), 1);
+    restartButtonLabel->enableOutline(cocos2d::Color4B(0xAD, 0x72, 0x14, 0xFF), 1);
     restartButton->addChild(restartButtonLabel);
     
     auto exitButton = cocos2d::ui::Button::create("ball-stay-east.png", "", "", cocos2d::ui::Widget::TextureResType::PLIST);

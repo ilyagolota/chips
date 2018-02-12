@@ -10,21 +10,21 @@ class Level;
 class BlueWall : public LevelObject
 {
 public:
-	static BlueWall* create(Level* level, const cocos2d::Vec2& coordinate, bool fake);
-	BlueWall(Level* level, const cocos2d::Vec2& coordinate, bool fake);
-	void onAdd() override;
-	void reset() override;
-	bool isOpenableBy(const Creature *creature, Direction direction) const override;
-	void beforeEnter(Creature* creature) override;
-	void afterEnter(Creature* creature) override;
+    static BlueWall* create(Level* level, const cocos2d::Vec2& coordinate, bool fake);
+    BlueWall(Level* level, const cocos2d::Vec2& coordinate, bool fake);
+    void onAdd() override;
+    void reset() override;
+    bool isOpenableBy(const Creature *creature, Direction direction) const override;
+    void beforeEnter(Creature* creature) override;
+    void afterEnter(Creature* creature) override;
 
 private:
-	const std::string& getFloorFrameName(int shape);
+    const std::string& getFloorFrameName(int shape);
 
-	bool _fake;
-	bool _known;
-	cocos2d::Sprite* _node;
-	cocos2d::Node* _unknownWallNode;
+    bool _fake;
+    bool _known;
+    cocos2d::Sprite* _node;
+    cocos2d::Node* _unknownWallNode;
 };
 
 #endif

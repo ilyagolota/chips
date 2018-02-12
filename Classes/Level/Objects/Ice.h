@@ -8,9 +8,9 @@
 class Ice : public LevelObject
 {
 public:
-	static Ice* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
+    static Ice* create(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
-	Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type);
+    Ice(Level* level, const cocos2d::Vec2& coordinate, TileType type);
     
     void onAdd() override;
     
@@ -20,9 +20,9 @@ public:
 
 private:
     TileType _type;
-	cocos2d::Sprite* _node;
-	cocos2d::Sprite* _frontNode;
-	cocos2d::Sprite* _backNode;
+    cocos2d::Sprite* _node;
+    cocos2d::Sprite* _frontNode;
+    cocos2d::Sprite* _backNode;
     
 };
 

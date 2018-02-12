@@ -31,7 +31,7 @@ enum class CreatureState
 
 namespace std
 {
-	string &to_string(CreatureType type);
+    string &to_string(CreatureType type);
 }
 
 class Creature : public cocos2d::Ref
@@ -46,7 +46,7 @@ public:
     Creature(Level* level, CreatureType type);
     ~Creature();
     void queueMove(Direction direction);
-	bool hasQueuedMove();
+    bool hasQueuedMove();
     bool isMoving() const;
     int getTurnsToNextMove() const;
     int getTurnsPerMove() const;
@@ -83,9 +83,9 @@ private:
     Direction _direction;
     CreatureState _state;
     int _turnsToNextMove;
-	bool _queuedMove;
+    bool _queuedMove;
     bool _dead;
-	Direction _queuedDirection;
+    Direction _queuedDirection;
     CreatureType _type;
     cocos2d::Sprite* _sprite;
     TileSoundEmitter* _soundEmitter;

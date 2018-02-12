@@ -4,7 +4,7 @@
 
 HintButton* HintButton::create(Level* level, const cocos2d::Vec2& coordinate)
 {
-	auto instance = new HintButton(level, coordinate);
+    auto instance = new HintButton(level, coordinate);
     instance->autorelease();
     return instance;
 }
@@ -15,11 +15,11 @@ HintButton::HintButton(Level* level, const cocos2d::Vec2& coordinate) : LevelObj
 
 void HintButton::onAdd()
 {
-	_node = cocos2d::Sprite::createWithSpriteFrameName("help.png");
-	_node->setAnchorPoint(cocos2d::Vec2::ZERO);
-	_node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
-	_node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
-	_level->getStage()->addChild(_node);
+    _node = cocos2d::Sprite::createWithSpriteFrameName("help.png");
+    _node->setAnchorPoint(cocos2d::Vec2::ZERO);
+    _node->setPosition(_level->getProjector()->coordinateToPoint(_coordinate) + cocos2d::Vec2(0, -12));
+    _node->setLocalZOrder(_level->getProjector()->coordinateToZOrder(_coordinate) + Level::BACK_Z_ORDER);
+    _level->getStage()->addChild(_node);
 }
 
 void HintButton::beforeEnter(Creature *creature)
